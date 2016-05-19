@@ -1,0 +1,50 @@
+<div class="pd-20">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 佣金结算 <span class="c-gray en">&gt;</span> 分销商佣金结算列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="r">共有数据：<strong></strong>${count} 条</span>
+        </div>
+		<div class="mt-20 dataTables_wrapper" id="item_data">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th width="10"><input name="" type="checkbox" value=""></th>
+						<th width="15">ID</th>
+						<th width="25">分销商名称</th>
+						<th width="35">分销商账号</th>
+						<th width="30">佣金总金额</th>
+                        <th width="30">结算金额</th>
+                        <th width="30">未结算金额</th>
+                        <th width="30">会员数</th>
+                        <th width="30">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+                    <?py for comm in data.result: ?>
+                        <tr class="text-c va-m" id="${comm.id}">
+                            <td><input name="" type="checkbox" value="${comm.id}"></td>
+                            <td>${comm.id}</td>
+                            <td>${comm.real_name}</td>
+                            <td>${comm.user_name}</td>
+                            <td>${handler.get_drp_total_comm_by_id(comm.id)}</td>
+                            <td>${handler.get_drp_total_comm_by_id(comm.id,1)}</td>
+                            <td>${handler.get_drp_total_comm_by_id(comm.id,0)}</td>
+                            <td>${handler.get_drpusers_by_id(comm.id)}</td>
+                            <td><a onClick="delivery_goods('结算确认','${handler.reverse_url('comm','clearing')}?drp_id=${comm.id}','','500')" title="结算">结算</a></td>
+                        </tr>
+                    <?py #endfor ?>
+				</tbody>
+			</table>
+               #{data.admin_pagination_html()}
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function show_order_items(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+/*发货-确认*/
+function delivery_goods(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+</script>

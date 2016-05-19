@@ -1,0 +1,26 @@
+ #easy_install pip
+ #pip install -r requirement
+
+sqlalchemy==0.9
+tornado==4.2
+tenjin==1.1.1
+raven==5.5.0
+ujson==1.33
+redis==2.10.3
+futures==3.0.3
+requests==2.4.1
+python-binary-memcached==0.24.5
+python-memcached==1.57
+lxml==3.4.4
+stringconvert==0.3.2
+
+#pytest six progressbar mock  python-dateutil logan enum34 cssutils
+
+
+yum install
+yum install mysql mysql-devel mysql-common mysql-libs gcc
+yum install python-devel
+yum install -y zlib-dev openssl-devel sqlite-devel bzip2-devel libxslt-devel libffi-devel
+yum install libxslt-devel libxml2-devel
+yum install freetype-devel libjpeg-devel libpng-devel
+

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="description" content="全球抢购">
+    <title>全球抢购</title>
+    <link rel="shoctcut icon" href="http://cdn.qqqg.com/mobile/images/qqqg.ico">
+<?py include('mobile/include/css.html') ?>
+    <link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/mobile/css/me.min.css">
+</head>
+<body>
+<div class="g-bd">
+    <div class="my my_head">
+        <div class="my_head_pic">
+            <img class="my_head_img" id="uinLogo" src="http://cdn.qqqg.com/mobile/images/app/applog.png">
+        </div>
+        <div class="my_head_info">
+            <h4 class="my_head_name " id="nickname"></h4>
+        </div>
+    </div>
+    <div class="my_body_box">
+        <ul class="me-list">
+            <li>
+                <a href="/app/order/orders.html">
+                 <div class="linklist">
+                    <div class="f-fl">
+                        <label class="lableName">我的订单</label>
+
+                    </div>
+                    <div class="f-fr">
+                        <span>查看全部订单</span><span class="u-icn17 meArrow" ></span>
+                    </div>
+                </div>
+                </a>
+            </li>
+            <li id="orderTab" class="last">
+                <div class="f-cb me-order">
+                    <div class="f-fl nav">
+                        <a class="payment.png" href="/app/order/orders.html?state=1">
+                            <i class="iconPayment"></i>
+                            <p>待付款</p>
+                        </a>
+                    </div>
+                    <div class="f-fl nav">
+                        <a class="ship.png" href="/app/order/orders.html?state=2">
+                            <i class="iconShip"></i>
+                            <p>待发货</p>
+                        </a>
+                    </div>
+                    <div class="f-fl nav">
+                        <a class="receiving.png" href="/app/order/orders.html?state=3">
+                            <i class="iconReceiving"></i>
+                            <p>待收货</p>
+                        </a>
+                    </div>
+                    <!--
+                    <div class="f-fl nav">
+                        <a class="evaluation.png">
+                            <i class="iconEvaluation"></i>
+                            <p>待评价</p>
+                            <span class="count">2</span>
+                        </a>
+                    </div>
+                    -->
+                </div>
+            </li>
+        </ul>
+        <ul class="me-list">
+            <li  class="last">
+                <a href="/app/member/address.html">
+                    <div class="linklist">
+                        <div class="f-fl">
+                            <label class="lableName">收货地址管理</label>
+
+                        </div>
+                        <div class="f-fr">
+                            <span></span><span class="u-icn17 meArrow" ></span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <ul class="me-list">
+            <li  class="last">
+                <a href="javascript:void(0)" id="meLogout">
+                    <div class="linklist">
+                        <div class="f-fl">
+                            <label class="lableName">退出登录</label>
+
+                        </div>
+                        <div class="f-fr">
+                            <span></span><span class="u-icn17 meArrow" ></span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="footPos"></div>
+    <div  id="appfootmenu" class="footMenu">
+        <div class="f-cb m-nav-fmenu">
+            <div class="f-fl f-tac nav">
+                <a href="/app/index.html"><i class="app-index icon"></i><br>全球抢购</a>
+            </div>
+            <div class="f-fl f-tac nav">
+                <a href="/app/member/cart.html"><i class="app-cart icon"></i><br>购物车</a>
+            </div>
+            <div class="f-fl f-tac nav">
+                <a href="/app/order/orders.html"><i class="app-order icon"></i><br>我的订单</a>
+            </div>
+            <div class="f-fl f-tac nav active">
+                <a href="/app/member/me.html"><i class="app-mcenter icon"></i><br>我</a></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var isApp=1;
+</script>
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript">
+    ht.me={
+        init:function(){
+            this.compileTempl();
+            this.getData();
+            this.logout();
+        },
+        compileTempl:function(){
+            var markTabs='<div class="f-cb me-order"><div class="f-fl nav"><a href=/app/order/orders.html?state=1 class=payment.png><i class=iconPayment></i><p>待付款</p>{{if waiting_pay>0}}<span class="count">{{if waiting_pay>99}}99+{{else}}{{= waiting_pay}}{{/if}}</span>{{/if}}</a></div><div class="f-fl nav"><a  href=/app/order/orders.html?state=2><i class=iconShip></i><p>待发货</p>{{if waiting_deliver>0}}<span class="count">{{if waiting_deliver>99}}99+{{else}}{{= waiting_deliver}}{{/if}}</span>{{/if}}</a></div><div class="f-fl nav"><a href=/app/order/orders.html?state=3><i class=iconReceiving></i><p>待收货</p>{{if waiting_recieve>0}}<span class="count">{{if waiting_recieve>99}}99+{{else}}}{{= waiting_recieve}}{{/if}}</span>{{/if}}</a></div></div>';
+            $.template( "orderTabsTemplate", markTabs );
+        },
+        getData:function(){
+            $.getJSON('/api/json/member/center',function(r){
+                //var r=JSON.parse(r);
+                if(r.stat==200){
+                    var dataResult=r.data;
+                    var objOrderTabs={
+                        waiting_pay:dataResult.waiting_pay,
+                        waiting_deliver:dataResult.waiting_deliver,
+                        waiting_assess:dataResult.waiting_assess,
+                        waiting_recieve:dataResult.waiting_recieve
+                    }
+                    $('#orderTab').empty();
+                    $.tmpl('orderTabsTemplate', objOrderTabs).appendTo('#orderTab');
+                }
+            });
+
+        },
+        logout:function(){
+            $('#meLogout').click(function(){
+                ht.core.cookies.set('loginuser','',-10,'.qqqg.com');
+                ht.core.cookies.set('loginuser','',-10);
+                window.location.href='/app/index.html';
+            });
+        }
+    }
+$(function(){
+    ht.me.init();
+});
+</script>
+</body>

@@ -1,0 +1,1 @@
+ALTER TABLE `refund_orders` ADD COLUMN `supply_user_id` int  DEFAULT 0 COMMENT '供应商id'

@@ -1,0 +1,226 @@
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-attributes-add">
+        
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>属性类目：</label>    
+            <div class="formControls col-5">
+                <input id="category_name" class="input-text" value="${attribute and handler.get_category_name(attribute.category_id) or ''}" readonly>
+                <input type="hidden" id="category_id" name="category_id" value="${attribute and attribute.category_id or ''}"/>
+            </div>
+            <a href="#" onclick="showMenu();" id="choice" >选择</a>    
+            <div class="col-4"> </div>
+        <div>
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>属性名称：</label>
+            <div class="formControls col-5">
+                <?py if attribute: ?>
+                    <input type="text" class="input-text" name="attribute_name" value="${attribute.attribute_name}" readonly />
+                <?py else: ?>
+                    <input type="text" class="input-text" name="attribute_name" value="" datatype="*" nullmsg="属性名称" />
+                <?py #endif ?>
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>是否搜索属性：</label>
+            
+                <?py if attribute and attribute.is_filter == 1: ?>
+                    <div class="radio-box">
+                        <input name="is_filter" type="radio" datatype="*" value="1" checked="checked" nullmsg="请选择"/>是
+                    </div>
+                    <div class="radio-box">
+                        <input name="is_filter" type="radio" datatype="*" value="0" nullmsg="请选择"/>否
+                    </div>
+                <?py else: ?>
+                    <div class="radio-box">
+                        <input name="is_filter" type="radio" datatype="*" value="1" nullmsg="请选择"/>是
+                    </div>
+                    <div class="radio-box">
+                        <input name="is_filter" type="radio" datatype="*" checked="checked" value="0" nullmsg="请选择"/>否
+                    </div>               
+                <?py #endif ?>      
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>是否SKU属性：</label>
+            <?py if attribute and attribute.is_sku==1: ?>
+                <div class="radio-box">
+                    <input name="is_sku" type="radio" datatype="*" checked="checked" value="1" nullmsg="请选择"/>是      
+                </div>
+                <div class="radio-box">
+                    <input name="is_sku" type="radio" datatype="*" value="0" nullmsg="请选择"/>否
+                </div>
+            <?py else: ?>
+                <div class="radio-box">
+                    <input name="is_sku" type="radio" datatype="*" value="1" nullmsg="请选择"/>是      
+                </div>
+                <div class="radio-box">
+                    <input name="is_sku" type="radio" datatype="*" checked="checked" value="0" nullmsg="请选择"/>否
+                </div>
+            <?py #endif?>
+        <div>
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>属性值：</label>
+            <div class="formControls col-5">
+                <?py if attribute: ?>
+                    <input type="text" style="width:400px" datatype="*" class="input-text" value="${attribute_values}" id="attribute_values" name="attribute_values" placeholder="批量添加时,属性值以空格隔开" readonly />    
+                <?py else: ?>
+                    <input type="text" style="width:400px" datatype="*" class="input-text" id="attribute_values" name="attribute_values" placeholder="批量添加时,属性值以空格隔开" />
+                <?py #endif ?>
+                 
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>状态：</label>
+            <?py if attribute and attribute.status==1: ?>
+                <div class="radio-box">
+                    <input name="status" type="radio" datatype="*"  checked="checked" value="1" nullmsg="请选择"/>开启
+                </div>
+                <div class="radio-box">
+                    <input name="status" type="radio" datatype="*"  value="0" nullmsg="请选择"/>关闭
+                </div>    
+            <?py else: ?>
+                <div class="radio-box">
+                    <input name="status" type="radio" datatype="*"  value="1" nullmsg="请选择"/>开启
+                </div>
+                <div class="radio-box">
+                    <input name="status" type="radio" datatype="*"  checked="checked" value="0" nullmsg="请选择"/>关闭
+                </div>
+            <?py #endif ?>
+        <div>
+        
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>排序：</label>
+            <div class="">
+                <input type="number" class="input-text" id="paixu" name="paixu" value="${attribute and attribute.paixu or ''}" nullmsg="排序不能为空" >
+            </div>
+            <div class="col-4"> </div>
+        <div>
+
+        <div class="row cl">
+			<label class="form-label col-3">描述：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" value="${attribute and attribute.attribute_desc or ''}" id="attribute_desc" name="attribute_desc">
+			</div>
+            <div class="col-4"> </div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+		<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+    		<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+		</div>
+	</form>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+    $("#form-attributes-add").Validform({
+        
+    });
+</script>
+
+
+<script type="text/javascript">
+var setting = {
+        async: {
+            enable: true,
+            url:"/admin/category/tree/",
+            autoParam:["id", "name=n", "level=lv"],
+            otherParam:{"otherParam":"zTreeAsyncTest"},
+            dataFilter: filter
+        },
+        view: {
+            dblClickExpand: false
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            beforeClick: beforeClick,
+            onClick: onClick
+        }
+    };
+
+
+
+    function filter(treeId, parentNode, childNodes) {
+        if (!childNodes) return null;
+        for (var i=0, l=childNodes.length; i<l; i++) {
+            childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+        }
+        return childNodes;
+    }
+    function beforeClick(treeId, treeNode) {
+        var check = (treeNode && !treeNode.isParent);
+        if (!check) alert("只能选择子节点...");
+        return check;
+    }
+
+    function onClick(e, treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                nodes = zTree.getSelectedNodes(),
+                v = "";
+        id = "";
+        nodes.sort(function compare(a,b){return a.id-b.id;});
+        for (var i=0, l=nodes.length; i<l; i++) {
+            v += nodes[i].name + ",";
+            id += nodes[i].id ;
+        }
+
+        if (v.length > 0 ) v = v.substring(0, v.length-1);
+        var CategoryNameObj = $("#category_name");
+        CategoryNameObj.attr("value", v);
+        var CategoryIdObj = $('#category_id');
+        CategoryIdObj.attr("value",id);
+    }
+
+    function showMenu() {
+        <?py if attribute: ?>
+            return false;
+        <?py #endif?>
+
+        var cityObj = $("#category_name");
+        var cityOffset = $("#category_name").offset();
+        $("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+
+        $("body").bind("mousedown", onBodyDown);
+    }
+    function hideMenu() {
+        $("#menuContent").fadeOut("fast");
+        $("body").unbind("mousedown", onBodyDown);
+    }
+    function onBodyDown(event) {
+        if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+            hideMenu();
+        }
+    }
+
+    $(document).ready(function(){
+        $.fn.zTree.init($("#treeDemo"), setting);
+        
+    });
+</script>
+
+
+
+
+
+
+
+
+

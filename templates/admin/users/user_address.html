@@ -1,0 +1,36 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员中心 <span class="c-gray en">&gt;</span>会员列表 <span class="c-gray en">&gt;</span>收货地址列表<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="r">
+                <a href="javascript:history.go(-1);" class="btn btn-danger radius">返回上一页</a>
+            </span>
+    </div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="30">ID</th>
+                <th width="30">收货人</th>
+                <th width="50">身份证号</th>
+                <th width="50">手机号码</th>
+                <th width="250">收货地址</th>
+                <th width="30">邮编</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?py for address in data: ?>
+                <tr class="text-c">
+                    <td>${address.id}</td>
+                    <td>${address.name}</td>
+                    <td>${address.card_num}</td>
+                    <td>${address.phone}</td>
+                    <td>${address.province} ${address.city} ${address.area} ${address.address}</td>
+                    <td>${address.zipcode}</td>
+                </tr>    
+            <?py #endfor?>
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>

@@ -1,0 +1,123 @@
+<div class="pd-20">
+    <h4>下单人信息</h4>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="30">用户名</th>
+                <th width="30">昵称</th>
+                <th width="30">联系电话</th>
+                <th width="30">分销商</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-c va-m">
+                <td>${user.user_name}</td>
+                <td>${user.nick}</td>
+                <td>${user.phone}</td>
+                <td>${handler.get_distributors_by_id(user.belong_id)}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>支付信息</h4>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="30">支付状态</th>
+                <th width="35">支付ID</th>
+                <th width="20">支付金额</th>
+                <th width="35">第三方支付单号</th>
+                <th width="45">支付时间</th>
+            </tr>
+        </thead>
+        <tbody>
+<?py for payment in pay_order: ?>
+    <tr class="text-c va-m" id="${payment.id}">
+        <td>${PAYMENT_STATUS[payment.pay_status]}</td>
+        <td>${payment.payment_id}</td>
+        <td><span class="price">${payment.amount}</span></td>
+        <td>${payment.other_payment_id}</td>
+        <td>${payment.payment_time}</td>
+    </tr>
+<?py #endfor ?>
+        </tbody>
+    </table>
+    <h4 style="margin-top: 30px">商品信息</h4>
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="50">缩略图</th>
+                <th width="50">商品序号</th>
+                <th width="50">商品名称</th>
+                <th width="50">品牌</th>
+                <th width="20">购买数量</th>
+                <th width="30">商品单价</th>
+                <th width="30">总金额</th>
+                <th width="10">链接</th>
+            </tr>
+        </thead>
+        <tbody>
+<?py for d in item_orders.result: ?>
+    <tr class="text-c">
+        <td><img width="40" class="product-thumb" src="${d.main_pic and d.main_pic.split(';')[0] or ''}@200w.jpg"></td>
+        <td>${d.item_no}</td>
+        <td>${d.title}</td>
+        <td>${d.brand}</td>
+        <td>${d.buy_nums}</td>
+        <td>${d.item_price}</td>
+        <td>${d.total_amount}</td>
+        <td>
+            <a target="_blank" href="http://www.qqqg.com/item/detail/${handler.set_show_id_by_id(d.id)}.html" >链接</a>
+        </td>
+    </tr>
+<?py #endfor?>
+        </tbody>
+    </table>
+    <h4 style="margin-top: 30px">收货人信息</h4>
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="10">收货人姓名</th>
+                <th width="30">手机号码</th>
+                <th width="30">身份证号码</th>
+                <th width="50">收货人地址</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-c">
+                <td>${user_name}</td>
+                <td>${phone}</td>
+                <td>${identify_card_num}</td>
+                <td>${address}</td>
+            </tr>    
+        </tbody>
+    </table>
+
+<?py if order.delivery_status >= 1: ?>
+    <h4 style="margin-top: 30px">发货信息</h4>
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="40">物流公司</th>
+                <th width="40">物流单号</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-c">
+                <td>${company_name}</td>
+                <td>${express_no}</td>
+            </tr>
+        </tbody>
+    </table>
+<?py #endif ?>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".dataTables_length,.dataTables_filter").hide();
+    });
+</script>
+
+

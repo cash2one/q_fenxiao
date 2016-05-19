@@ -1,0 +1,25 @@
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 报表统计 <span class="c-gray en">&gt;</span>销售排行统计<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="20">商品名称</th>
+                <th width="50">货号</th>
+                <th width="50">销售量</th>
+                <th width="50">销售额</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?py for r in data:?>
+                <tr class="text-c">
+                    <td>${handler.get_item_detail_by_item_id(r.item_id,'name')} </td>
+                    <td>${handler.get_item_detail_by_item_id(r.item_id,'type')} </td>
+                    <td>${r.buy_nums}</td>
+                    <td>${r.total_amount}</td>
+                </tr>
+        <?py #endfor?>
+        </tbody>
+    </table>
+    </div>
+</div>

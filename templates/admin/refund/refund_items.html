@@ -1,0 +1,48 @@
+<div class="pd-20">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 退款管理 <span class="c-gray en">&gt;</span> 退款<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+	<form action="${handler.reverse_url('refund_payment',order_id)}" method="get" class="form form-horizontal" id="form-article-add">
+        <h4>选择退货商品</h4>
+        <input type="hidden" name="operation" value="refund">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th>全选<input id="items" name="items" type="checkbox"></th>
+                <th>缩略图</th>
+                <th>商品序号</th>
+                <th>商品名称</th>
+                <th>品牌</th>
+                <th>购买数量</th>
+                <th>商品单价</th>
+                <th>总金额</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?py for d in items: ?>
+                <tr class="text-c">
+                    <td>
+                        <?py if not d.is_apply_refund:?>
+                            <input type="checkbox" name="item_id" value="${d.id}" onchange="">
+                        <?py else:?>
+                            已申请过退款
+                        <?py #endif ?>
+                    </td>
+                    <td><img width="40" class="product-thumb" src="${d.main_pic and d.main_pic.split(';')[0] or ''}@200w.jpg"></td>
+                    <td>${d.item_no}</td>
+                    <td>${d.name}</td>
+                    <td>${d.brand}</td>
+                    <td>${d.buy_nums}<input type="hidden" name="buy_nums" value="${d.buy_nums}"></td>
+                    <td>${d.item_price}</td>
+                    <td>${d.total_amount}<input type="hidden" name="total_ammout" value="${d.total_amount}"></td>
+                </tr>
+            <?py #endfor?>
+        </tbody>
+    </table>
+		<div class="row cl">
+			<div class="col-10 col-offset-1">
+				<button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i>退货</button>
+			</div>
+		</div>
+	</form>
+	</div>
+</div>

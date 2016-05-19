@@ -1,0 +1,51 @@
+
+<div class="pd-20">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 退款管理 <span class="c-gray en">&gt;</span>详情<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" ><i class="Hui-iconfont">&#xe6d4;</i></a> <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+           <h4>商品信息</h4>
+            <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+                <tr class="text-c">
+                    <th>缩略图</th>
+                    <th>商品序号</th>
+                    <th>商品名称</th>
+                    <th>品牌</th>
+                    <th>购买数量</th>
+                    <th>商品单价</th>
+                    <th>总金额</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?py for item in items:?>
+                    <tr class="text-c">
+                        <td><img width="40" class="product-thumb" src="${item.main_pic and item.main_pic.split(';')[0] or ''}@200w.jpg"></td>
+                        <td>${item.item_no}<input type="hidden" value="${item.id}" name="item_id"> </td>
+                        <td>${item.name}</td>
+                        <td>${item.brand}</td>
+                        <td>${item.buy_nums}</td>
+                        <td>${item.item_price}</td>
+                        <td>${item.total_amount}</td>
+                    </tr>
+                <?py #endfor ?>
+            </tbody>
+        </table>
+        <h4>退款信息</h4>
+
+        <div class="row cl">
+			<label class="form-label col-1"><span class="c-red">*</span>申请服务：</label>
+			<div class="formControls col-5">申请服务</div>
+
+			<label class="form-label col-1">退款金额：</label>
+			<div class="formControls col-5">
+				<input type="number" class="input-text" value="${refund.refound_amount}" min="1" max="" placeholder="" name="refund_money">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-1">退货说明：</label>
+			<div class="formControls col-5">
+                <textarea name="reason" cols="" rows="" class="textarea" placeholder="说点什么...最少输入1个字符" datatype="*1-100" dragonfly="true" nullmsg="备注不能为空！" onkeyup="textarealength(this,100)">${refund.content}</textarea>
+			</div>
+		</div>
+
+    </div>
+    </div>

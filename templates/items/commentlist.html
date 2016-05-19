@@ -1,0 +1,66 @@
+        <ul class="rate rateInfo clearfix">
+            <li class="first"> <span class="emptyStar percentStar"><span class="fullStar w10"></span></span>
+                <span class="goodPercent"><i>${(data.result.filter_by(assess_level=2).count()/data.result.count())*100}%</i>%好评</span><span class="comnum">共${data.result.count()}个评价</span> </li>
+        </ul>
+        <ul class="rate rateNav clearfix" id="discussShowWay">
+            <li class="active"> <label for="commentSelect1"><a class="wrapnRadio nRadioChecked" href="javascript:;"><input type="radio" checked="checked" id="commentSelect1" name="commentSelect" /></a>全部评价 (${count})</label></li>
+            <li><label for="commentSelect2"><a class="wrapnRadio nRadioUnchecked" href="javascript:;"><input type="radio" id="commentSelect2" name="commentSelect" /></a>好评 (${data.result.filter_by(assess_level=2).count()})</label></li>
+            <li><label for="commentSelect3"><a class="wrapnRadio nRadioUnchecked" href="javascript:;"><input type="radio" id="commentSelect3" name="commentSelect" /></a>中评 (${data.result.filter_by(assess_level=1).count()})</label></li>
+            <li><label for="commentSelect4"><a class="wrapnRadio nRadioUnchecked" href="javascript:;"><input type="radio" id="commentSelect4" name="commentSelect" /></a>差评 (${data.result.filter_by(assess_level=0).count()})</label></li>
+            <li><label for="commentSelect5"><a class="wrapnRadio nRadioUnchecked" href="javascript:;"><input type="radio" id="commentSelect5" name="commentSelect" /></a>晒单 (${data.result.filter_by(is_show=True).count()})</label></li>
+            <!-- <li class="last"><i><input type="checkbox" name="commentHasContent" id="hasContent" checked /></i>有内容的评价</li> -->
+            <li class="last"> <label class="m-checkbox m-checked" id="hasContent"> <span class="box"><i></i><em>&nbsp;</em></span>有内容的评价 </label> </li>
+        </ul>
+        
+        <div class="commWrap">
+            <?py for r in data.result:?>
+                   <div class="eachInfo clearfix">
+                    <ul class="commItem f-fl">
+                        <li class="clearfix c_666"><span class="itemDetail">
+                            ${r.comment}
+                        </span></li>
+                        <?py if r.is_show:?>
+                            <li class="clearfix c_666">
+                                <div class="pic_list clearfix">
+                                    <?py for img in r.show_imgs.split(';'):?>
+                                        <a name="js_preview" class="pic_item" title="点击预览" href="javascript:;"><img src="${img}" /><i class="align_center"></i></a>
+                                    <?py #endfor ?>
+                                    <p class="data_tpl">
+                                        <?py for img in r.show_imgs.split(';'):?>
+                                            <em>${img}@435w.jpg</em>
+                                        <?py #endfor ?>
+                                    </p>
+                                </div>
+                            </li>
+                        <?py #endif ?>
+                        <li class="clearfix c_999 dateColor"><span>07.21</span></li>
+                    </ul>
+                    <ul class="commItem-1">
+                        <li class="account">6***e　</li>
+                        <li><span class="comm-left-icon"> <span class="emptyStar percentStar"> <span style="width:100%" class="fullStar smw10"></span> </span></span> </li>
+                    </ul>
+                    <span class="superFlag"></span>
+                    </div>
+            <?py #endfor ?>
+        </div>
+
+        <div id="pageNavWrap">
+            <div id="pageNav">
+                <div id="pageBox" class="splitPages" style="display: block;"></div>
+                <!--
+                <div id="pageBox" class="splitPages" style="display: block;">
+                    <span class="prevPage">上一页<i></i></span>
+                    <span>1</span><a data-page="2" href="javascript:void(0);">2</a>
+                    <a data-page="3" href="javascript:void(0);">3</a>
+                    <a data-page="4" href="javascript:void(0);">4</a>
+                    <em>...</em>
+                    <a data-page="79" href="javascript:void(0);">79</a>
+                    <a data-page="2" href="javascript:void(0);" class="nextPage">下一页<i></i></a>&nbsp;
+                    <span class="jumptoTip">到第</span>
+                    <input type="text" value="" class="jumptoTxt" />
+                    <span class="jumptoTip">页</span>
+                    <a href="javascript:void(0);" class="jumptoBtn">确定</a>
+                </div>
+                -->
+            </div>
+        </div>

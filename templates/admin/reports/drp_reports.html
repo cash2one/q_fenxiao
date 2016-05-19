@@ -1,0 +1,27 @@
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 报表统计 <span class="c-gray en">&gt;</span>分销商排行统计<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="30">分销商名称</th>
+                <th width="30">分销商账号</th>
+                <th width="30">旗下会员数</th>
+                <th width="30">销售量</th>
+                <th width="30">销售额</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?py for r in data:?>
+                <tr class="text-c">
+                    <td>${handler.get_distributors_by_id(r.drp_usere_id)}</td>
+                    <td>${handler.get_distributors_by_id(r.drp_usere_id)}</td>
+                    <td>${handler.get_drpusers_by_id(r.drp_usere_id)}</td>
+                    <td>${r.buy_nums}</td>
+                    <td>${r.total_amount}</td>
+                </tr>
+        <?py #endfor?>
+        </tbody>
+    </table>
+    </div>
+</div>

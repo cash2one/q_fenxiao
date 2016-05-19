@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>忘记密码 全球抢购（qqqg.com）全球抢购-100%海外直采！</title>
+    <meta name="keywords" content="全球抢购,海淘,跨境购,代购,进口,跨境电商,海外直邮"/>
+    <meta name="description" content="全球抢购-安全、放心的跨境海淘网站，官方认证，正品保证。轻松购遍海外进口母婴，进口美食 ，进口美妆、进口电子数码，更多产品正陆续推出。"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="http://cdn.qqqg.com/web/images/qqqg.ico"/>
+
+    <link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/com.min.css">
+    <link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/register.min.css">
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript" src="http://cdn.qqqg.com/web/js/jquery.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/web/js/util.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/web/js/getpwd.min.js"></script>
+</head>
+<body>
+<div id="topNav" class="topNav">
+<?py include('common/header.html') ?>
+</div>
+<div class="qqqg-header">
+    <div class="container">
+        <div class="logo">
+            <a href="/" class="qqqg-logo">
+                全球抢购
+            </a>
+            <h2></h2>
+        </div>
+        <div class="borderline"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="content">
+        <div id="mainForm" method="post" class="regbox step1">
+            <div class="number">
+                <span id="toTelRegister" class="lblTips">找回密码</span>
+            </div>
+            <div class="normalInput" style="margin-bottom: 20px;">
+                <input type="text" autocomplete="off" placeholder="手机号码" maxlength="11" id="phone" name="phone" value="">
+            </div>
+            <span for="phone" class="error"></span>
+            <div class="usInput">
+                <div class="kapkeywrap">
+                    <input type="text" autocomplete="off" placeholder="图片验证码" maxlength="5" id="kapkey" name="kapkey">
+                </div>
+                <img src="/common/image_code/" title="点击可刷新验证码" class="randomCode" id="imgKey">
+            </div>
+            <span for="kapkey" class="error"></span>
+            <span id="spanerr" class="error"></span>
+            #{xsrf_form_html}
+
+            <a class="fullBtnBlue" id="step1">下一步</a>
+        </div>
+
+        <div class="regbox step2">
+            <div id="step2_txt" class="step2_txt">
+                <p>我们已经发送一条验证短信至 <span class="address-place"></span></p>
+                <p>请输入短信中的验证码</p>
+            </div>
+            <div class="usInput">
+                <div class="kapkeywrap">
+                    <input type="text" autocomplete="off" placeholder="验证码" maxlength="4" id="smskey" name="smskey">
+                </div>
+                <a class="linkABlue invalidBtn" href="javascript:void(0);" id="getKey">重新发送</a>
+            </div>
+            <span for="smskey" class="error"></span>
+            <span id="spansmskeyerr" class="error"></span>
+            <a class="fullBtnBlue" id="step2">下一步</a>
+        </div>
+
+        <div class="regbox step3">
+            <div class="number">
+                <span class="lblTips" >请输入密码</span>
+            </div>
+            <div class="normalInput">
+                <input type="password" autocomplete="off" value=""  maxlength="16" id="password1" placeholder="密码">
+                <div class="clear"></div>
+            </div>
+            <span for="password" class="error"></span>
+
+            <div class="normalInput">
+                <input type="password" autocomplete="off" value=""  maxlength="16" id="password2" placeholder="确认密码">
+                <div class="clear"></div>
+            </div>
+            <span for="password" class="error"></span>
+            <span id="pwderr" class="error"></span>
+            <a class="fullBtnBlue" id="getSubmit">确认</a>
+        </div>
+        <div class="regbox end">
+            <div class="success">恭喜您，密码修改成功！<a href="javascript:void(0)" class="login">登录</a></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<?py include('include/footer.html')?>
+</body>
+</html>

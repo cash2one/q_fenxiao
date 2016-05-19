@@ -1,0 +1,182 @@
+
+    <link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/member/order.min.css">
+    <link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/validform.min.css">
+    <script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/validform.min.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/web/js/member/member.min.js"></script>
+
+<div id="modAddress" class="container">
+    <div class="m-puser clearfix">
+
+        <div class="col-left">
+<?py include('member/menu.html') ?>
+        </div>
+        <div class="col-content clearfix">
+            <div class="u-box">
+                <div>
+                    <div class="orderNavTab">
+                        <div class="ntabs">
+                            <ul class="clearFix">
+                                <li class="utab active" ocategory="0"><span>我的地址</span></li>
+                            </ul>
+                            <div class="slideLine"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix address-data">
+                        <!--
+                        <span class="title">已保存收货地址<i>(共4条)&nbsp;最多保存10条</i></span>
+                        -->
+                        <a href="javascript:void(0);" id="linkAddAddress">+新增收货地址</a>
+                    </div>
+                    <div class="orderBox">
+                    <table class="oAddress">
+                        <thead>
+                        <tr>
+                            <th class="a-boy">收货人</th>
+                            <th class="a-address">收货地址</th>
+                            <th class="a-phone">联系电话</th>
+                            <th class="a-operate">操作</th>
+                            <th class="a-null"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+<?py for address in addresses:?>
+                         <tr data-id="${address.id}">
+                                <td>${address.name}</td>
+                                <td class="tdLeftAlign">${address.address}</td>
+                                <td>${address.phone}</td>
+                                <td><a class="addUpdate" href="javascript:void(0)">修改</a>
+                                    <a class="addDel" href="javascript:void(0)">删除</a></td>
+                                <td>
+    <?py if address.is_default:?>
+                                    <span class="default">默认地址</span>
+    <?py else: ?>
+                                    <a class="setDefault" href="javascript:void(0)">设为默认</a>
+    <?py #endif ?>
+
+                                </td>
+                            </tr>
+<?py #endfor ?>
+                        </tbody>
+                    </table>
+
+                    </div>
+                    <div id="addressedit">
+                        <div><span id="lblAddAddress" class="lblAddAddress" >新增收货地址</span></div>
+                        <div id="newAddress" class="newAddress">
+
+                            <a class="closeIcon" href="javascript:;">×</a>
+                            <form id="addressform" method="post" enctype="multipart/form-data" action="/member/address.html">
+                                #{xsrf_form_html}
+                                <table>
+                                    <tr>
+                                        <td>收货人姓名</td>
+                                        <td>
+                                            <input type="text" id="name" name="name" maxlength="9"  datatype="*" nullmsg="请输入收货人姓名！" errormsg="请输入收货人姓名"  />
+                                            <div class="Validform_checktip"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>所在地区</td>
+                                        <td>
+
+                                            <div class="item first clearfix">
+                                                <span id="provicecityarea"></span>
+                                                <span id="locationValue" class="locationValue"></span>
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>详细地址</td>
+                                        <td>
+                                            <textarea id="address" name="address"  placeholder="无需重复填写省市区，小于75个字"  datatype="*" nullmsg="请输入详细地址！" errormsg="请输入详细地址"></textarea>
+                                            <div class="Validform_checktip"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>收货人身份证号码</td>
+                                        <td>
+                                            <div class="item-idcard clearfix">
+                                                <input type="text" id="card_num" name="card_num" errormsg="请输入正确的身份证号码！"/>
+                                                <div class="Validform_checktip"></div>
+                                                <div class="m-idcardtip">
+                                                    <i id="m-idcardtip" class="iconfont w-icon-ask"></i>
+                                                    <div style="display: none;" class="m-notice m-notice-idcard">
+                                                        <p class="para1">据海关要求，购买跨境商品需实名认证，进行个人物品入境申报。</p>
+                                                        <p class="para2">
+                                                            因各保税区政策不同，郑州保税区需您提供收货人身份信息进行认证。其他保税区将通过支付平台实名信息进行入境申报，您可在支付平台进行认证（如已认证直接付款即可）。全球抢购会对您的身份证信息加密保管，绝不对外泄露！
+                                                        </p>
+                                                        <p class="para3">有任何身份认证的问题请咨询我们
+
+                                                        </p>
+                                                        <s><i class="arrow"></i></s>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>手机号码</td>
+                                        <td>
+                                            <input type="text" id="phone" name="phone" datatype="phone" nullmsg="请输入手机号码！" errormsg="请输入正确的手机号码！" />
+                                            <div class="Validform_checktip"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                    <td>
+                                        <input type="button" value="保存收货地址" class="item-submit" id="addressSubmit">
+                                    </td>
+                                    </tr>
+                                </table>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?py include('common/cart.html') ?>
+
+    <script id="templateLocation" type="x-tmpl">
+            <span class="nselect-wrap {{= zClass}}" cName="{{= zClass}}" style="width: 140px;">
+            <div class="nselector">
+            <div class="result-wrap" style="padding-left: 20px; padding-right: 20px;">
+            <div value="" class="result ellipsis" style="width: 98px;">
+            {{= locationTxt}}
+            </div>
+            <div class="cp-arrow cp-arrow-down"></div>
+            </div>
+            <div class="options-wrap">
+            <div class="options">
+            <ul>
+                {{tmpl(data) "#templatearea"}}
+            </ul>
+            </div>
+            </div>
+            </div>
+            </span>
+        </script>
+    <script id="templatearea" type="text/x-tmpl">
+        <li><a value="{{= id}}" title="{{= name}}" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 98px; padding-left: 20px; padding-right: 20px;">{{= name}}</a></li>
+        </script>
+
+<script id="templateoAddress" type="text/x-tmpl" >
+<tr data-id="{{= addressid}}">
+    <td>{{= name}}</td>
+    <td class="tdLeftAlign">{{= addressdetail}}</td>
+    <td>{{= phone}}</td>
+    <td><a href="javascript:void(0)" class="addUpdate">修改</a>
+        <a href="javascript:void(0)" class="addDel">删除</a></td>
+    <td>
+       <a href="javascript:void(0)" class="setDefault">设置默认</a>
+    </td>
+</tr>
+</script>

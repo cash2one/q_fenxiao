@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+
+    <link href="http://cdn.qqqg.com/admin/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.qqqg.com/admin/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.qqqg.com/admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.qqqg.com/admin/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://cdn.qqqg.com/admin/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="http://cdn.qqqg.com/admin/lib/icheck/icheck.css" type="text/css">
+    <link type="text/css" rel="stylesheet" href="http://cdn.qqqg.com/mobile/css/core.min.css"/>
+    <link type="text/css" rel="stylesheet" href="http://cdn.qqqg.com/admin/css/mobile_button.css"/>
+    <style type="text/css">
+        .ztree *{
+            font-size: 2.0rem;
+        }
+        .ztree li a {
+
+            height: 27px;
+
+        }
+        .ztree li span.button.switch {
+            height: 30px;
+            width: 30px;
+        }
+        .ztree li ul {
+            margin: 0;
+            padding: 0 0 0 30px;
+        }
+        .ztree li span.button.roots_open {
+            background-position: -192px -2px;
+        }
+        .ztree li span.button.ico_open {
+            background-position: -222px -34px;
+            margin-right: 2px;
+            vertical-align: top;
+        }
+        .ztree li span.button.center_docu {
+            background-position: -120px -40px;
+        }
+        .ztree li span.button.center_open {
+            background-position: -192px -40px;
+        }
+        .ztree li span.button {
+            background-repeat: no-repeat;
+            background-size: 320px ;
+            border: 0 none;
+            cursor: pointer;
+            display: inline-block;
+            height: 30px;
+            line-height: 0;
+            margin: 0;
+            outline: medium none;
+            vertical-align: middle;
+            width: 30px;
+        }
+        .ztree li span.button.roots_close {
+            background-position: -156px -10px;
+        }
+        .ztree li span.button.ico_close {
+            background-position: -222px -2px;
+            margin-right: 2px;
+            vertical-align: top;
+        }
+        .ztree li span.button.center_close {
+            background-position: -156px -45px;
+        }
+        .ztree li span.button.bottom_docu {
+            background-position: -120px -80px;
+        }
+        .ztree li span.button.ico_docu {
+            background-position: -222px -66px;
+            margin-right: 2px;
+            vertical-align: top;
+        }
+    </style>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/lib/layer/1.9.3/layer.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/lib/laypage/1.2/laypage.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/js/H-ui.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/lib/html5.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/lib/respond.min.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+    <title>商品库存列表</title>
+</head>
+<body>
+<div class="g-bd">
+    <header id="g-hd" class="g-hd ">
+        <div id="topbar-box" class=" m-topnav">
+            <div class="m-topnavbar">
+                <span id="toptitle" class="tit">商品库存列表</span>
+            </div>
+        </div>
+    </header>
+    <form>
+        <div class="text-c">
+            发布状态:
+            <select class="input-text" style="width:80px" name="is_online">
+<?py if is_online: ?>
+    <?py if is_online == '1': ?>
+        <option value = "">全部</option>
+        <option value = "1" selected = 'selected'>上架</option>
+        <option value = "0">下架</option>
+    <?py else: ?>
+        <option value = "">全部</option>
+        <option value = "0" selected = 'selected'>下架</option>
+        <option value = "1">上架</option>
+    <?py #endif ?>
+<?py else: ?>
+    <option value = "">全部</option>
+    <option value = "1">上架</option>
+    <option value = "0">下架</option>
+<?py #endif ?>
+            </select>&nbsp
+            <div style="margin: 5px 0;">
+			<input type="text" name="content" placeholder="请输入产品标题或产品序号" value="${content}" style="width:250px" class="input-text">&nbsp
+            </div>
+            <div style="margin: 5px 0;">
+            <input id="category_name" class="input-text" style="width:100px" placeholder="请选择类目" value="${category_name}" name="category_name" />
+            <a href="#" onclick="showMenu(); return false;">选择</a>&nbsp&nbsp
+            </div>
+            <input type="hidden" id="category_id" name="category_id" value="${category_id}" readonly />
+			<button name="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜产品</button>
+		</div>
+    </form>
+
+
+		<div class="mt-20 dataTables_wrapper" id="item_data">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th width="10">ID</th>
+						<th>产品标题</th>
+						<th width="10">卖价</th>
+                        <th width="10">大客户价格</th>
+						<th width="10">发布状态</th>
+                        <th width="10">可卖库存</th>
+						<th width="10">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+<?py for d in data.result:?>
+<tr class="text-c va-m" id="${d.id}">
+    <td>${d.id}</td>
+    <td class="text-l">#{d.title}</td>
+    <td><span class="price">${d.price}</span></td>
+    <td><span class="price">${d.bussiness_price}</span></td>
+    <td class="td-status">
+    <?py if d.is_online:?>
+        <span class="label label-success radius">已上架</span>
+    <?py else:?>
+        <span class="label label-danger radius">待上架</span>
+    <?py #endif?>
+    </td>
+    <td>${d.sale_quantity}</td>
+    <td class="td-manage">
+    <div>
+
+        <a style="text-decoration:none" class="u-btn2" href="${handler.reverse_url('admin_mobile_items','product_quantity')}?id=${d.id}" title="库存"><i class="Hui-iconfont">库存</i>
+        </a>
+    </div>
+
+    </td>
+</tr>
+<?py #endfor ?>
+				</tbody>
+            </table>
+        #{data.admin_pagination_html()}
+        <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+            <ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+        </div>
+</div>
+
+<script type="text/javascript" src="/static/admin/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript">
+function show_layer(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+/*产品-下架*/
+function product_stop(obj,id){
+    layer.confirm('确认要下架吗？',function(index){
+        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="product_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
+        $.ajax({
+            type:'post',
+            url:'/admin/items/online',
+            data:{
+                'id':id,
+                'is_online':0,
+            },
+            dataType:"json",
+            success:function(data){
+                if(data.stat == 'success'){
+                    $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已下架</span>');
+                    $(obj).remove();
+                    layer.msg('已下架!',{icon: 5,time:1000});    
+                }else{
+                    layer.msg('下架失败!',{icon: 5,time:1000});    
+                }
+            },
+            error:function(error){}
+        });
+    });
+}
+
+/*产品-上架*/
+function product_start(obj,id){
+    layer.confirm('确认要上架吗？',function(index){
+        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="product_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+        $.ajax({
+            type:'post',
+            url:'/admin/items/online',
+            data:{
+                'id':id,
+                'is_online':1,
+            },
+            dataType:"json",
+            success:function(data){
+                if(data.stat == 'success'){
+                    $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已上架</span>');
+                    $(obj).remove();
+                    layer.msg('已上架!',{icon: 6,time:1000});
+                }else{
+                    layer.msg('上架失败!',{icon: 6,time:1000});
+                }
+            }
+        })
+        
+    });
+}
+</script>
+
+
+<SCRIPT type="text/javascript">
+<!--
+var setting = {
+    async: {
+        enable: true,
+        url:"/admin/category/tree",
+        autoParam:["id", "name=n", "level=lv"],
+        otherParam:{"otherParam":"zTreeAsyncTest"},
+        dataFilter: filter
+    },
+    view: {
+        dblClickExpand: true
+    },
+    data: {
+        simpleData: {
+            enable: true
+        }
+    },
+    callback: {
+        beforeClick:beforeClick,
+        onClick:onClick
+    }
+};
+
+
+function filter(treeId, parentNode, childNodes) {
+    if (!childNodes) return null;
+    for (var i=0, l=childNodes.length; i<l; i++) {
+        childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+    }
+    return childNodes;
+}
+
+function onBodyDown(event) {
+    if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+        hideMenu();
+    }
+}
+
+function beforeClick(treeId, treeNode) {
+    var check = (treeNode && !treeNode.isParent);
+    if (!check) alert("只能选择子节点...");
+    return check;
+}
+
+function onClick(e, treeId, treeNode) {
+    var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+    nodes = zTree.getSelectedNodes(),
+    v = "";
+    id = "";
+    nodes.sort(function compare(a,b){return a.id-b.id;});
+    for (var i=0, l=nodes.length; i<l; i++) {
+        v += nodes[i].name + ",";
+        id += nodes[i].id ;
+
+    }
+    if (v.length > 0 ) v = v.substring(0, v.length-1);
+    var cityObj = $("#category_name");
+    cityObj.attr("value", v);
+
+    var category_obj = $("#category_id");
+    category_obj.attr("value", id);
+
+}
+
+function showMenu() {
+    var cityObj = $("#category_name");
+    var cityOffset = $("#category_name").offset();
+    $("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+    $("body").bind("mousedown", onBodyDown);
+}
+
+function onBodyDown(event) {
+    if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+        hideMenu();
+    }
+}
+
+function hideMenu() {
+    $("#menuContent").fadeOut("fast");
+    $("body").unbind("mousedown", onBodyDown);
+}
+
+$(document).ready(function(){
+    $.fn.zTree.init($("#treeDemo"), setting);
+});
+//-->
+</SCRIPT>
+</body>
+</html>

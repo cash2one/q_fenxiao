@@ -1,0 +1,35 @@
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span>程序发布列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+
+
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+        <span class="r">共有数据：<strong>${data.total}</strong> 条</span> </div>
+	<div class="mt-20 dataTables_wrapper">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+				<tr class="text-c">
+                <th>ID</th>
+				<th>日期</th>
+                <th>版本</th>
+				<th>程序类型</th>
+				<th>发布内容</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+                <?py for d in data.result:?>
+                <tr class="text-c">
+                    <td width="5%">${d.id}</td>
+                    <td>${d.gmt_created}</td>
+                    <td>${d.app_version}</td>
+                    <td>${d.app_type}</td>
+                    <td>${d.app_desc}</td>
+                    <td>下载命令</td>
+                </tr>
+            <?py #endfor?>
+		</tbody>
+	</table>
+    #{data.admin_pagination_html()}
+</div>

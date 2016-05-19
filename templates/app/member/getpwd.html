@@ -1,0 +1,163 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta content="text/html; charset=utf-8" />
+
+<meta name="robots" content="noindex,nofollow" />
+<meta name="googlebot" content="noimageindex" /> 
+<meta name="copyright" content="" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=yes" />
+<meta name="format-detection" content="email=no" />
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<title>全球抢购-忘记密码</title>
+<?py include('mobile/include/header.html') ?>
+<style type="text/css">
+.m-ipt{
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+.m-ipt input.inputTxt{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-width: 0 0 1px;
+    height: 44px;
+    padding: 0 14px;
+    background: none;
+    font-size: 16px;
+}
+.fitm-1 {
+    margin:20px 15px 10px;
+}
+
+.m-ipt input.pngcode{width: 120px;display: inline-block}
+
+
+.randomCode{
+    height: 43px;
+    position: absolute;
+    right: 10px;
+    top: 50px;
+}
+.otherError{
+    margin: 10px 0;
+    color: #ff0000;
+    font-size: 14px;
+}
+#kapkey{
+    width: 60%;
+}
+.u-suggest{
+    font-size: 16px;
+}
+.u-suggest p{
+    padding:10px;
+}
+#getKey{
+    position: absolute;
+    right: 15px;
+    width: 130px;
+    background: #f7f7f7;
+    color: #d71111;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+#smskey{
+    width: 50%;
+}
+.step2,.step3{
+    display: none;
+}
+</style>
+
+</head>
+
+<body>
+#{xsrf_form_html}
+<header class="g-hd " id="g-hd">
+    <div class=" m-topnav" id="topbar-box">
+        <div class="m-topnavbar">
+            <span id="backbtn" class="u-icn18 backbtn"></span>
+            <span class="tit" id="toptitle">找回密码</span>
+            <span class="u-menu" id="menu">&nbsp;</span>
+        </div>
+<?py include('mobile/include/headermenu.html') ?>
+    </div>
+</header>
+
+<div class="g-doc">
+    <div class="g-bd step1">
+        <form method="post" action="#" style="margin-bottom:20px;">
+
+            <div class="fitm">
+                <div class="u-suggest">
+                    <input type="text" class="u-ipt" name="phone" id="phone" placeholder="请输入手机号码" autocomplete="off" />
+                    <i class="u-icn6" id="namedel" style="display: none;">&nbsp;</i>
+                </div>
+
+            </div>
+            <div class="fitm">
+                <input type="text" class="u-ipt" name="kapkey" id="kapkey"  maxlength="16" placeholder="输入验证码" /><img id="imgKey" class="randomCode" title="点击可刷新验证码" src="/common/image_code/">
+            </div>
+
+            <div class="fitm fitm-1">
+                <a href="javascript: void(0);" class="u-btn u-btn-1 s-fc5" id="getPwdSubmit" style="background-color: #d71111">下一步</a>
+            </div>
+        </form>
+
+    </div>
+    <div class="g-bd step2">
+        <div class="fitm">
+            <div id="step2_txt" class="u-suggest">
+                <p>我们已经发送一条验证短信至 <span class="address-place"></span></p>
+                <p>请输入短信中的验证码</p>
+            </div>
+        </div>
+        <div class="fitm">
+            <input type="text" class="u-ipt" name="smskey" id="smskey"  maxlength="6" placeholder="短信验证码" /><a class="u-btn u-btn-1 s-fc5" href="javascript:void(0);" id="getKey">获取验证码</a>
+        </div>
+        <div class="fitm fitm-1">
+            <a href="javascript: void(0);" class="u-btn u-btn-1 s-fc5" id="next" >下一步</a>
+        </div>
+    </div>
+    <div class="g-bd step3">
+        <div class="fitm">
+            <div class="u-suggest">
+                <p>请输入密码</p>
+            </div>
+        </div>
+        <div class="fitm">
+            <div class="u-suggest">
+                <input class="u-ipt"  type="password" placeholder="密码" id="password1" maxlength="16" value="" autocomplete="off" />
+            </div>
+        </div>
+        <div class="fitm">
+            <div class="u-suggest">
+                <input class="u-ipt" type="password" placeholder="确认密码" id="password2" maxlength="16" value="" autocomplete="off"/>
+            </div>
+        </div>
+        <div class="fitm fitm-1">
+            <a href="javascript: void(0);" class="u-btn u-btn-1 s-fc5" id="regSubmit" >确认</a>
+        </div>
+    </div>
+    <div class="g-ft"></div>
+</div>
+<div id="popUp" class="m-toast" style="display: none;">
+    <table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td width="100%" valign="center" align="center">
+                <div class="toast box animated info show zoomIn">密码不正确</div>
+            </td>
+        </tr>
+    </table>
+</div>
+<footer class="m-docfoot">
+<?py include('mobile/include/copy.html') ?>
+</footer>
+</body>
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/getpwd.min.js"></script>
+<?py include('mobile/include/cnzz.html') ?>
+</html>

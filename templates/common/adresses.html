@@ -1,0 +1,170 @@
+<style type="text/css">
+    .u-upload input[type=file]{
+        width: 177px;
+        margin-right: 14px;
+    }
+    .u-upload .tips{
+        color: #666;
+    }
+</style>
+<div id="user-addresses">
+<h1 id="address-header" class="strong-header">选择收货地址</h1>
+<?py index=0?>
+<?py for address in addresses:?>
+    <?py if address.card_num:?>
+    <div class="addresses" data-id="${address.id}" data-card-num="True" data-card-img="${address.card_img1 and 'True' or 'False'}">
+    <?py else:?>
+    <div class="addresses" data-id="${address.id}" data-card-num="False" data-card-img="${address.card_img1 and 'True' or 'False'}">
+    <?py #endif?>
+                <div class="adrLabel ${index==0 and 'addressCheck' or ''}">
+                    <ul>
+                        <li>
+                            <div class="consignee">
+                                <span class="consigneeName">${address.name}</span>
+    <?py if address.is_default:?>
+                                <span class="default">默认地址</span>
+    <?py else: ?>
+                                <a class="setDefault" href="javascript:void(0)">设为默认</a>
+    <?py #endif ?>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="addressTxt">${address.province}${address.city}${address.area}${address.address}</span>
+                        </li>
+                        <li>
+                            <div class="rPhoneNumber">${address.phone}</div>
+                        </li>
+                        <li class="last">
+                            <div class="opSpan">
+                                <a class="mod" href="#">修改</a>
+                                <a class="del" href="#">删除</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    <?py index+=1 ?>
+<?py #endfor ?>
+</div>
+            <div class="clearfix"></div>
+            <a id="addNewAddress" class="addNewAddress">+新增收货地址</a>
+            <div id="addNewAd">
+                <a href="javascript:;" class="closeIcon">×</a>
+                <h1 class="strong-header">新增收货地址</h1>
+                <form id="addressfm" method="post"  enctype="multipart/form-data" action="/member/address.html">
+                    #{xsrf_form_html}
+                <div>
+                    <div class="itemheight area">
+                        <span class="txtTitle">收货人姓名</span>
+                        <input type="text" errormsg="请输入收货人姓名" nullmsg="请输入收货人姓名！" datatype="*" maxlength="9" id="name" name="name"></div>
+                    <div class="itemheight area">
+                        <span class="txtTitle">所在地区</span>
+                        <div class="item">
+                            <span id="provicecityarea"></span>
+                            <span id="locationValue" class="locationValue"></span>
+                        </div>
+                    </div>
+                    <div class="itemheight">
+                        <span class="txtTitle">详细地址</span>
+                        <textarea errormsg="请输入详细地址" nullmsg="请输入详细地址！" datatype="*" placeholder="无需重复填写省市区，小于75个字" name="address" id="address"></textarea></div>
+                    <div class="itemheight item-idcard">
+                        <span class="txtTitle">收货人身份证号码</span>
+                        <input type="text" errormsg="请输入正确的身份证号码！" nullmsg="请输入身份证号码！" datatype="idcard" name="card_num" id="card_num">
+                        <div class="m-idcardtip">
+                            <i class="iconfont w-icon-ask" id="m-idcardtip"></i>
+                            <div class="m-notice m-notice-idcard" style="display: none;">
+                                <p class="para1">据海关要求，购买跨境商品需实名认证，进行个人物品入境申报。</p>
+                                <p class="para2">
+                                    因各保税区政策不同，郑州保税区需您提供收货人身份信息进行认证。其他保税区将通过支付平台实名信息进行入境申报，您可在支付平台进行认证（如已认证直接付款即可）。全球抢购会对您的身份证信息加密保管，绝不对外泄露！
+                                </p>
+                                <p class="para3">有任何身份认证的问题请咨询我们
+                                </p>
+                                <s><i class="arrow"></i></s>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itemheight">
+                        <span class="txtTitle">手机号码</span>
+                        <input type="text" errormsg="请输入正确的手机号码！" nullmsg="请输入手机号码！" datatype="phone" name="phone" id="phone"></div>
+                    <div class="itemheight">
+                        <input type="button" id="addressSubmit" class="item-submit" value="保存收货地址"></div>
+                </div>
+                </form>
+            </div>
+        <script id="templateLocation" type="x-tmpl">
+            <span class="nselect-wrap {{= zClass}}" cName="{{= zClass}}" style="width: 140px;">
+            <div class="nselector">
+            <div class="result-wrap" style="padding-left: 20px; padding-right: 20px;">
+            <div value="" class="result ellipsis" style="width: 98px;">
+            {{= locationTxt}}
+            </div>
+            <div class="cp-arrow cp-arrow-down"></div>
+            </div>
+            <div class="options-wrap">
+            <div class="options">
+            <ul>
+                {{tmpl(data) "#templatearea"}}
+            </ul>
+            </div>
+            </div>
+            </div>
+            </span>
+        </script>
+        <script id="templatearea" type="text/x-tmpl">
+        <li><a value="{{= id}}" title="{{= name}}" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 98px; padding-left: 20px; padding-right: 20px;">{{= name}}</a></li>
+        </script>
+
+
+        <script id="templateaddress" type="text/x-tmpl">
+        <div class="addresses" data-id="{{= addressid}}" dataId="{{= addressid}}">
+            <div class="adrLabel">
+                <ul>
+                    <li>
+                        <div class="consignee">
+                            <span class="consigneeName">{{= name}}</span>
+                            <a class="setDefault" href="javascript:void(0)">设为默认</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="addressTxt">{{= addressdetail}}</span>
+                    </li>
+                    <li>
+                        <div class="rPhoneNumber">{{= phone}}</div>
+                    </li>
+                    <li class="last">
+                        <div class="opSpan">
+                            <a class="mod" href="#">修改</a>
+                            <a class="del" href="#">删除</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </script>
+
+<script id="templateAddressesIn" type="x-tmpl">
+    <div class="adrLabel {{= addressCheck}}">
+    <ul>
+    <li>
+    <div class="consignee">
+    <span class="consigneeName">{{= name}}</span>
+    <a href="javascript:void(0)" class="setDefault">设为默认</a>
+    </div>
+    </li>
+    <li>
+    <span class="addressTxt">{{= addressdetail}}</span>
+    </li>
+    <li>
+    <div class="rPhoneNumber">{{= phone}}</div>
+    </li>
+    <li class="last">
+    <div class="opSpan">
+    <a href="#" class="mod">修改</a>
+    <a href="#" class="del">删除</a>
+    </div>
+    </li>
+    </ul>
+    </div>
+</script>
+

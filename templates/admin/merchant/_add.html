@@ -1,0 +1,66 @@
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-warehouse-add">
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>供应商名称：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" name="name" value="${vendor and vendor.name or ''}" datatype="*" nullmsg="请填写供应商名称">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>供应商用户名：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" name="account" value="${vendor and vendor.account or ''}" datatype="*" nullmsg="请填写供应商用户名">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>供应商地址：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" name="address" value="${vendor and vendor.address or ''}" datatype="*" nullmsg="请填写供应商地址">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>联系人：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" name="contact" value="${vendor and vendor.contact or ''}" datatype="*" nullmsg="请填写供应商联系人">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>联系电话：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" name="phone" value="${vendor and vendor.phone or ''}" datatype="*" nullmsg="请填写供应商联系电话">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+			<label class="form-label col-3">描述：</label>
+			<div class="formControls col-5">
+				<textarea class="textarea" name="remark" style="width:225px;height:100px" >${vendor and vendor.remark or ''}</textarea>
+			</div>
+            <div class="col-4"> </div>
+		</div>
+		
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+		<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+    		<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+		</div>
+	</form>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+    $("#form-warehouse-add").Validform({});
+</script>

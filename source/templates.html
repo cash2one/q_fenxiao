@@ -1,0 +1,50 @@
+﻿<script  type="text/x-tmpl" id="templateOrderList">
+<div class="m-orderitem" order-no="${order_no}" order-tomsStatus="${tomsOrderStatus}">
+  <div class="m-orderhd">
+  <span class="ordertype">${orderStatusText}</span><span class="ordertime">${oTime}</span>
+  </div>
+  <ul class="m-goodslist">
+    {{tmpl(items) "#templateItems"}}
+  </ul>
+  <div class="f-tar m-orderinfo"><span>共<span class="count">${goodsCount}</span>件</span><span class="amount">实付：￥${real_amount}</span>
+  </div>
+  <div class="m-btnbox f-cb" >
+  {{if orderStatusText=='待付款'}}
+    <a class="u-btn3-yq m-orderbtn cancelOrder" href="javascript:void(0)" >取消订单</a>
+    <a class="u-btn m-orderbtn" href="/order/detail.html?order_no=${order_no}" >立即付款</a>
+  {{/if}}
+  {{if orderStatusText=='已送餐'}}
+    <a class="u-btn m-orderbtn confirmReceipt" href="javascript:void(0)">确认收货</a>
+  {{/if}}
+
+  </div>
+</div>
+</script>
+<script  type="text/x-tmpl" id="templateItems">
+    <li>
+      <section class="">
+        <div class="goodsdetail f-cb">
+          <div class="gimg f-fl">
+            <a href="/order/detail.html?order_no=${order_no}">
+              <img alt="${title}" data-src="${goodPhoto}@58w" src="http://cdn.qqqg.com/mobile/images/blank.gif" title="${title}">
+            </a>
+          </div>
+          <div class="ginfo1 f-fl">
+            <div class="gtitle"><a href="/order/detail.html?order_no=${order_no}">${title}</a>
+            </div>
+            <div class="gsku">
+              <a href="/order/detail.html?order_no=${order_no}">
+              </a>
+            </div>
+          </div>
+          <div class="ginfo2 f-fr">
+            <div class="gprinum">
+              <div class="gprice">¥
+                {{= item_price}}</div>
+              <div class="gnum">X${buy_nums}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </li>
+</script>

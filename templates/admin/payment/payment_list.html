@@ -1,0 +1,183 @@
+<div class="pd-20">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 支付管理 <span class="c-gray en">&gt;</span> 产品列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+        <form>
+        <br class="text-c"> 支付时间：
+			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;" name="start_date" value="${start_date}" />
+			-
+			<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d'})" id="logmax" class="input-text Wdate" style="width:120px;" name="end_date" value="${end_date}" />
+            供应商：
+            <select class="input-text" style="width:100px" name="supply_user_id" id="supply_user_id">
+                <?py if supply_user_id: ?>
+                    <option value="">全部</option>
+                    <?py for vendor in vendors: ?>
+                        <?py if vendor.id == int(supply_user_id): ?>
+                            <option value="${int(supply_user_id)}" selected="selected">${vendor.real_name}</option>
+                            <?py continue?>
+                        <?py else: ?>
+                            <option value="${vendor.id}">${vendor.real_name}</option>
+                        <?py #endif ?>
+                    <?py #endfor?>
+                <?py else: ?>
+                    <option value="">全部</option>
+                    <?py for vendor in vendors: ?>
+                        <option value="${vendor.id}">${vendor.real_name}</option>
+                    <?py #endfor?>
+                <?py #endif ?>
+            </select>
+            分销商：
+            <select class="input-text" style="width:100px" name="drp_usere_id" id="drp_usere_id">
+                <?py if drp_usere_id: ?>
+                    <option value="">全部</option>
+                    <?py for distributor in distributors: ?>
+                        <?py if distributor.id == int(drp_usere_id): ?>
+                            <option value="${int(drp_usere_id)}" selected="selected">${distributor.real_name}</option>
+                            <?py continue?>
+                        <?py else: ?>
+                            <option value="${distributor.id}">${distributor.real_name}</option>
+                        <?py #endif ?>
+                    <?py #endfor?>
+                <?py else: ?>
+                    <option value="">全部</option>
+                    <?py for distributor in distributors: ?>
+                        <option value="${distributor.id}">${distributor.real_name}</option>
+                    <?py #endfor?>
+                <?py #endif ?>
+            </select>
+            支付状态：
+            <select class="input-text" style="width:100px" name="pay_status" id="pay_status">
+                <?py if pay_status: ?>
+                    <option value="">全部</option>
+                    <option value="${int(pay_status)}" selected="selected">${PAYMENT_STATUS[int(pay_status)]}</option>
+                    <?py for key in PAYMENT_STATUS: ?>
+                        <?py if key == int(pay_status): ?>
+                            <?py continue?>
+                        <?py else: ?>
+                            <option value="${key}">${PAYMENT_STATUS[key]}</option>    
+                        <?py #endif ?>
+                    <?py #endfor?>
+                <?py else: ?>
+                    <option value="">全部</option>
+                    <?py for key in PAYMENT_STATUS: ?>
+                        <option value="${key}">${PAYMENT_STATUS[key]}</option>
+                    <?py #endfor?>
+                <?py #endif ?>
+            </select></br>
+            佣金结算：
+            <select class="input-text" style="width:100px" name="settlement" id="settlement" >
+                    <?py if settlement: ?>
+                        <option value="">全部</option>
+                        <?py if int(settlement) == 0:?>
+                            <option value="0" selected>未结算</option>
+                        <?py else:?>
+                            <option value="0" >未结算</option>
+                        <?py #endif?>
+                        <?py if int(settlement) == 1:?>
+                            <option value="1" selected>已结算</option>
+                        <?py else:?>
+                            <option value="1" >已结算</option>
+                        <?py #endif?>
+                    <?py else: ?>
+                            <option value="" >全部</option>
+                            <option value="1" >已结算</option>
+                            <option value="0">未结算</option>
+                    <?py #endif ?>
+
+            </select>
+
+            类型：
+            <select class="input-text" style="width:100px" name="pay_type" id="pay_type" >
+                <?py for p_type in PAY_TYPE: ?>
+                    <?py if pay_type and (int(pay_type) == p_type): ?>
+                        <?py if p_type == 0:?>
+                            <option value="" selected="selected">全部</option>    
+                        <?py else: ?>
+                            <option value="${p_type}" selected="selected">${PAY_TYPE[p_type]}</option>
+                        <?py #endif ?>
+                    <?py else: ?>
+                        <?py if p_type == 0:?>
+                            <option value="" >全部</option>    
+                        <?py else: ?>
+                            <option value="${p_type}" >${PAY_TYPE[p_type]}</option>
+                        <?py #endif ?>
+                    <?py #endif ?>
+                <?py #endfor?>
+            </select>
+
+			<input type="text" name="order_no" id="order_no" placeholder="请输入订单号" style="width:250px" class="input-text" value="${order_no}" >
+			<button name="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜支付单</button>
+             <a class="btn btn-danger radius" onclick="javascript:location.href='${handler.reverse_url('pay_excel')}?start_date='+$('#logmin').val()+'&end_date='+$('#logmax').val()+'&pay_status='+$('#pay_status option:selected').val()+'&order_no='+$('#order_no').val()+'&pay_type='+$('#pay_type option:selected').val()" title="导出支付单">导出支付单</a>
+		</div>
+        </form>
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="r">共有数据：<strong></strong>${count} 条</span>
+        </div>
+		<div class="mt-20 dataTables_wrapper" id="item_data">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th width="10"><input name="" type="checkbox" value=""></th>
+						<th width="15">ID</th>
+						<th width="25">订单编号</th>
+						<th width="35">支付ID</th>
+						<th width="30">第三方支付单号</th>
+                        <th width="30">佣金结算</th>
+                        <th width="30">结算编码</th>
+                        <th width="30">分销商</th>
+						<th width="30">支付状态</th>
+						<th width="20">金额</th>
+                        <th width="20">佣金</th>
+                        <th width="25">支付类型</th>
+						<th width="45">支付时间</th>
+						<th width="40">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+                    <?py for payment in data.result: ?>
+                        <tr class="text-c va-m" id="${payment.id}">
+                            <td><input name="" type="checkbox" value="${payment.id}"></td>
+                            <td>${payment.id}</td>
+                            <td>${payment.order_no}</td>
+                            <td>${payment.payment_id}</td>
+                            <td>${payment.other_payment_id}</td>
+                            <td>
+                                <?py if payment.settlement == 0: ?>
+                                    <span style="color:red">未结算</span>
+                                <?py else: ?>
+                                    <span style="color:blue">已结算</span>
+                                <?py #endif ?></td>
+                            <td>${payment.settlement_no}</td>
+                            <td>${handler.get_distributors_by_id(payment.drp_usere_id)}</td>
+                            <td><span class="label ${payment.pay_status==1 and 'label-success' or 'label-warning'}">${PAYMENT_STATUS[payment.pay_status]}</span></td>
+                            <td><span class="price">${payment.amount}</span></td>
+                            <td><span class="price">${payment.brokerage}</span></td>
+                            <td>
+                                <?py if payment.pay_type == 6: ?>
+                                    <span class="label label-success radius">微信支付</span>
+                                <?py elif payment.pay_type == 7:?>
+                                    <span class="label label-danger radius">通联支付</span>
+                                <?py elif payment.pay_type == 8: ?>
+                                    <span class="label radius">易汇金支付</span>
+                                <?py else: ?>
+
+                                <?py #endif ?>
+                            </td>
+                            <td>${payment.payment_time}</td>
+                            <td>
+                                <?py if payment.pay_status==1:?>
+                            	    <a href="${handler.reverse_url('refund_payment',payment.order_id)}?operation=refund_items">退款</a>
+                                <?py #endif ?>
+                            </td>
+                        </tr>
+                    <?py #endfor ?>
+				</tbody>
+			</table>
+               #{data.admin_pagination_html()}
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function show_order_items(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+</script>

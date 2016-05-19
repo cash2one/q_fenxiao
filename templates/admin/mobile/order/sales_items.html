@@ -1,0 +1,193 @@
+<?py from services.orders.orders_services import OrderServices ?>
+<?py orders_services = OrderServices()?>
+<?py orders_services.set_rdb(handler.rdb) ?>
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span>    售出商品列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <form>
+        <div class="text-c"> 售出时间：
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:100px;" name="start_date" value="${start_date}" />
+            -
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:100px;" name="end_date" value="${end_date}" />&nbsp
+            支付状态：
+            <select class="input-text" style="width:100px" name="pay_status">
+                <?py if pay_status: ?>
+                        <option value="">全部</option>
+                        <option value="${int(pay_status)}" selected="selected">${PAY_STATUS[int(pay_status)]}</option>
+                    <?py for key in PAY_STATUS: ?>
+                        <?py if key == int(pay_status): ?>
+                            <?py continue ?>
+                        <?py else: ?>
+                            <option value="${key}">${PAY_STATUS[key]}</option>
+                        <?py #endif ?>
+                    <?py #endfor ?>
+                <?py else: ?>
+                    <option value="">全部</option>
+                    <?py for key in PAY_STATUS: ?>
+                        <option value="${key}">${PAY_STATUS[key]}</option>
+                    <?py #endfor ?>
+                <?py #endif ?>
+            </select>&nbsp
+            <input type="text" class="input-text" style="width:150px" placeholder="输入订单号" name="order_no" value="${order_no}" />
+            <input type="text" class="input-text" style="width:150px" placeholder="输入品牌或者产品描述" name="content" value="${content}" />
+            <input id="category_name" class="input-text" style="width:100px" placeholder="请选择类目" value="${category_name}" name="category_name" />
+            <a href="#" onclick="showMenu(); return false;">选择</a>&nbsp
+            <input type="hidden" id="category_id" name="category_id" />
+            <button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜产品</button>
+        </div>
+    </form>
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">共有数据：<strong>${count}</strong> 条</span> </div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="5">ID</th>
+                <th width="25">缩略图</th>
+                <th width="20">订单号</th>
+                <th width="15">商品ID</th>
+                <th width="10">品牌</th>
+                <th width="25">商品标题</th>
+                <th width="30">售出单价</th>
+                <th width="10">购买数量</th>
+                <th width="30">总金额</th>
+                <th width="70">收货地址</th>
+                <th width="30">售出时间</th>
+                <th width="80">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?py for sale_item in data.result: ?>
+                <tr class="text-c">
+                    <?py d = handler.get_itemDetail_by_id(sale_item.item_id) ?>
+                    <td>${sale_item.id}</td>
+                    <td><img width="60" class="product-thumb" src="${d.main_pic and d.main_pic.split(';')[0] or ''}@200w.jpg"></td>
+                    <?py order = orders_services.get_order_by_order_id(sale_item.order_id)?>
+                    <?py if order: ?>
+                        <td><a onClick="show_order_items('订单商品信息','${handler.reverse_url('detail_orders','items')}?order_id=${order.id}','1180','600')">${order.order_no}</a></td>
+                    <?py else: ?>
+                        <td></td>
+                    <?py #endif ?>
+                    <td><a href="${handler.reverse_url('items','edit')}?id=${sale_item.item_id}">${sale_item.item_id}</a></td>
+                    <td>${d.brand}</td>
+                    <td>${d.title}</td>
+                    <td>${sale_item.item_price} 元</td>
+                    <td>${sale_item.buy_nums}${d.unit}</td>
+                    <td>${sale_item.total_amount} 元</td>
+                    <?py if order: ?>
+                        <?py user_address = ujson.loads(order.recevie_address) ?>
+                        <?py address = user_address.get('province')+user_address.get('city')+user_address.get('area')+user_address.get('address') ?>
+                        <td>${address}</td>
+                    <?py else: ?>
+                        <td></td>
+                    <?py #endif ?>
+                    <td>${sale_item.gmt_created}</td>
+                    <td class="td-manage">
+                        <!--
+                        <a onClick='item_comments("${sale_item.item_id}","${sale_item.order_id}")' title="评价">查看评价</a>
+                        -->
+                    </td>
+                </tr>    
+            <?py #endfor?>
+        </tbody>
+    </table>
+        #{data.admin_pagination_html()}
+    </div>
+    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+        <ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+/*发货-确认*/
+function delivery_goods(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+function show_order_items(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+function item_comments(item_id,order_id){
+    tab_show('/admin/comment/'+item_id+'/'+order_id,'商品评价');
+}
+</script> 
+<script type="text/javascript">
+
+var setting = {
+    async: {
+        enable: true,
+        url:"/admin/category/tree",
+        autoParam:["id", "name=n", "level=lv"],
+        otherParam:{"otherParam":"zTreeAsyncTest"},
+        dataFilter: filter
+    },
+    view: {
+        dblClickExpand: false
+    },
+    data: {
+        simpleData: {
+            enable: true
+        }
+    },
+    callback: {
+        beforeClick: beforeClick,
+        onClick: onClick
+    }
+};
+
+function filter(treeId, parentNode, childNodes) {
+    if (!childNodes) return null;
+    for (var i=0, l=childNodes.length; i<l; i++) {
+        childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+    }
+    return childNodes;
+}
+function beforeClick(treeId, treeNode) {
+    var check = (treeNode && !treeNode.isParent);
+    if (!check) alert("只能选择子节点...");
+    return check;
+}
+
+function onClick(e, treeId, treeNode) {
+    var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+    nodes = zTree.getSelectedNodes(),
+    v = "";
+    id = "";
+    nodes.sort(function compare(a,b){return a.id-b.id;});
+    for (var i=0, l=nodes.length; i<l; i++) {
+        v += nodes[i].name + ",";
+        id += nodes[i].id ;
+
+    }
+    if (v.length > 0 ) v = v.substring(0, v.length-1);
+    var cityObj = $("#category_name");
+    cityObj.attr("value", v);
+
+    var category_obj = $("#category_id");
+    category_obj.attr("value", id);
+
+}
+
+function showMenu() {
+    var cityObj = $("#category_name");
+    var cityOffset = $("#category_name").offset();
+    $("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+    $("body").bind("mousedown", onBodyDown);
+}
+
+function onBodyDown(event) {
+    if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+        hideMenu();
+    }
+}
+
+function hideMenu() {
+    $("#menuContent").fadeOut("fast");
+    $("body").unbind("mousedown", onBodyDown);
+}
+
+$(document).ready(function(){
+    $.fn.zTree.init($("#treeDemo"), setting);
+    $(".dataTables_length,.dataTables_filter").hide();
+});
+</script>
+
+

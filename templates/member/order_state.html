@@ -1,0 +1,73 @@
+<!--
+    status = Column(SmallInteger,doc='订单状态') #订单状态 1:生成订单 2:完成订单 3:取消订单 4:作废订单
+    pay_status = Column(SmallInteger,doc='支付状态') # 支付状态 0:未付款(等待买家付款) 1: 已付款(等待商家发货) 2:申请退款 3: 已退款,
+    delivery_status = Column(SmallInteger,doc='配送状态') #配送状态 0:未发货 1: 已发货 2:已签收 3:申请退货 4:已退货
+-->
+<?py if d.status==1:?>
+        <?py if d.pay_status==0:?>
+            <td class="orderStatus rbBorder" align="center">
+                <a target="_blank" href="${handler.reverse_url('member_order_detail',d.order_no)}">等待买家付款</a>
+                <a target="_blank" href="${handler.reverse_url('member_order_detail',d.order_no)}">订单详情</a>
+            </td>
+            <td class="operate rbBorder" align="center">
+                <span class="payNow btn-red30">立即付款</span>
+                <a class="cancelOrder" href="javascript:void(0);">取消订单</a>
+            </td>
+        <?py elif d.pay_status==1:?>
+            <?py if d.delivery_status==0:?>
+                <td align="center" class="orderStatus rbBorder">
+                    <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">等待商家发货</a>
+                    <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+                </td>
+                <td align="center" class="c_888 rbBorder operate" rowspan="1">
+                    <a href="#" class="confirmReceived btn-blue30">等待发货</a>
+                </td>
+            <?py elif d.delivery_status==1:?>
+                    <td align="center" class="orderStatus rbBorder">
+                        <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">商家已发货</a>
+                        <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+                        <a class="getWuliu cBlue aGray2" href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">查看物流</a>
+                    </td>
+                    <td align="center" class="c_888 rbBorder operate" rowspan="1">
+                        <a href="javascript;" class="confirmReceived btn-blue30">确认收货</a>
+                    </td>
+            <?py elif d.delivery_status==2:?>
+                <td align="center" class="orderStatus rbBorder">
+                    <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">交易成功</a>
+                    <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+                    <a class="getWuliu aGray2" href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">查看物流</a>
+                </td>
+                <td align="center" class="c_888 rbBorder operate" rowspan="1">
+                    <a href="/comment/add_pre.html?orderId=2015080416141011004982516" target="_blank" class="comment btn-white30">追加评价</a>
+                    <a href="javascript:;" class="againBuy">再次购买</a>
+                </td>
+            <?py #endif ?>
+        <?py #endif ?>
+
+<?py elif d.status==2:?>
+        <td align="center" class="orderStatus rbBorder">
+            <a href="/personal/order_detail.html?gid=201508041614GORDER82515190" target="_blank">交易成功</a>
+            <a href="/personal/order_detail.html?gid=201508041614GORDER82515190" target="_blank">订单详情</a>
+            <a class="getWuliu aGray2" href="/personal/order_detail.html?gid=201508041614GORDER82515190" target="_blank">查看物流</a>
+        </td>
+        <td align="center" class="c_888 rbBorder operate" rowspan="1">
+            <a href="/comment/add_pre.html?orderId=2015080416141011004982516" target="_blank" class="comment btn-white30">追加评价</a>
+            <a href="javascript:;" class="againBuy">再次购买</a>
+        </td>
+<?py elif d.status==3:?>
+        <td align="center" class="orderStatus rbBorder">
+            <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单关闭</a>
+            <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+        </td>
+            <td align="center" class="c_888 rbBorder operate" rowspan="1">
+            <a href="javascript:;" class="againBuy">再次购买</a>
+        </td>
+<?py elif d.status==4:?>
+        <td align="center" class="orderStatus rbBorder">
+            <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单关闭</a>
+            <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+        </td>
+            <td align="center" class="c_888 rbBorder operate" rowspan="1">
+            <a href="javascript:;" class="againBuy">再次购买</a>
+        </td>
+<?py #endif ?>

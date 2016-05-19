@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+	<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/jquery1.8.2.js"></script>
+	<script type="text/javascript">
+        var cookies={
+            // write cookies
+            set:function(name, value, hours,domain){
+                var expire = "";
+                if(hours != null)
+                {
+                    expire = new Date((new Date()).getTime() + hours * 3600000);
+                    expire = "; expires=" + expire.toGMTString();
+                }
+                var str=name + "=" + escape(value) + expire+";path=/";
+                if(domain) str+='; domain='+domain;
+                document.cookie = str;
+            },
+            // read cookies
+            get:function(name){
+                var cookieValue = "";
+                var search = name + "=";
+                if(document.cookie.length > 0)
+                {
+                    offset = document.cookie.indexOf(search);
+                    if (offset != -1)
+                    {
+                        offset += search.length;
+                        end = document.cookie.indexOf(";", offset);
+                        if (end == -1) end = document.cookie.length;
+                        cookieValue = unescape(document.cookie.substring(offset, end))
+                    }
+                }
+                return cookieValue;
+            }
+        }
+		$(function(){
+			$('#setcookie').on('click',function(){
+				var nameval=$('#nameval').val();
+				cookies.set('loginuser',nameval,10,'.qqqg.com');
+				cookies.set('loginuserwww',nameval,10);//set main domain
+			});
+			$('#delcookie').on('click',function(){
+				var nameval=$('#nameval').val();
+				cookies.set('loginuser',nameval,-10,'.qqqg.com');
+				cookies.set('loginuserwww',nameval,-10);//delete main domain
+			});
+		});
+	</script>
+</head>
+<body>
+<div>
+<input id="nameval" value="hello world" >
+<input id="setcookie" type="button" value="set cookie" >
+
+
+</div>
+<div>
+
+
+<input id="delcookie" type="button" value="delcookie" >
+</div>
+</body>
+</html>

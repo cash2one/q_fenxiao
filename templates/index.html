@@ -1,0 +1,173 @@
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/index.min.css">
+<script type="text/javascript" src="${handler.static_domain}/web/js/plugin/jquery.slider.min.js"></script>
+<!-- slider -->
+<div id="banner-box" class="banner-box">
+    <div class="bd">
+        <ul>
+            <li>
+                <div class="container">
+                    <div class="m-width">
+                        <a href="/item/category/10082.html"><img src="http://cdn.qqqg.com/web/images/imgProd/banner/index/1.jpg" /></a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="container">
+                    <div class="m-width">
+                        <a href="/item/category/10063.html"><img src="http://cdn.qqqg.com/web/images/imgProd/banner/index/2.jpg" /></a>
+                    </div>
+                </div>
+            </li>
+            <!--
+            <li>
+                <div class="container">
+                    <div class="m-width">
+                        <a href="/item/category/10031.html"><img src="http://cdn.qqqg.com/web/images/imgProd/banner/index/3.jpg" /></a>
+                    </div>
+                </div>
+            </li>
+            -->
+            <li>
+                <div class="container">
+                    <div class="m-width">
+                        <a href="/item/category/11005.html"><img src="http://cdn.qqqg.com/web/images/imgProd/banner/index/4.jpg" /></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="banner-btn">
+            <a class="prev" href="javascript:void(0);"></a>
+            <a class="next" href="javascript:void(0);"></a>
+            <div class="hd"><ul></ul></div>
+        </div>
+    </div>
+</div>
+<!-- slider End -->
+ #{xsrf_form_html}
+<div class="container">
+    <div class="m-recomds">
+    <h2 class="w-tit1"><span class="big">热销爆款 / </span>新品推荐</h2>
+    <ul class="clearfix">
+<?py index=1?>
+<?py for item in new_items:?>
+    <?py if index >4 : ?>
+        <?py break ?>
+    <?py #endif ?>
+    <?py if index % 4 ==0: ?>
+        <?py index_class = 4 ?>
+    <?py else: ?>
+        <?py index_class = index ?>
+    <?py #endif ?>
+        <li class="itm${index_class}">
+            <a title="${item.title}" target="_blank" href="${handler.reverse_url('item_detail',item.show_id)}" class="pic">
+                <img width="200px" height="200px" title="${item.title}" alt="${item.title}" src="http://cdn.qqqg.com/web/images/blank.gif"
+                     data-original="${item.main_pic and item.main_pic.split(';')[0] or ''}@220w.jpg" class="img-lazyload">
+    <?py if item.sale_quantity<=item.warning_quantity:?>
+        <span class="w-icon w-icon-13">&nbsp;</span>
+    <?py #endif ?>
+                <span class="w-icon w-icon-19 w-icon-19-1">新品</span>
+            </a>
+            <div class="txt">
+                <h3 class="tit">
+                    <a title="${item.title}" href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank">
+                        ${item.title}
+                    </a>
+                </h3>
+                <p class="price m-price">
+    <?py if int(item.bussiness_price) and handler.current_user and current_user.get('is_bussiness') and (item.bussiness_price!=item.price):?>
+        <label class="s-fc0 lbl">VIP价</label><strong><span class="symbol">¥</span>${item.bussiness_price}</strong>
+        <br>国内参考价 <span>¥${item.inner_price}</span>
+    <?py else:?>
+        <label class="s-fc0 lbl">包邮价</label><strong><span class="symbol">¥</span>${item.price}</strong>
+        <br>国内参考价 <span>¥${item.inner_price}</span>
+    <?py #endif ?>
+                </p>
+            </div>
+        </li>
+    <?py index+=1?>
+<?py #endfor ?>
+    </ul>
+    </div>
+<!--
+<div class="m-halfbanner">
+    <ul class="clearfix">
+        <li>
+            <a title="" href="#" target="_blank">
+                <img width="535px" height="175px" src="http://cdn.qqqg.com/images/blank.gif" data-original="http://cdn.qqqg.com/imgProd/index/1.jpg" class="img-lazyload" alt="" title="">
+            </a>
+        </li>
+        <li>
+            <a title="" href="#" target="_blank">
+                <img width="535px" height="175px" src="http://cdn.qqqg.com/images/blank.gif" data-original="http://cdn.qqqg.com/imgProd/index/2.jpg" class="img-lazyload" alt="" title="">
+            </a>
+        </li>
+        <li>
+            <a title="" href="#" target="_blank">
+                <img width="535px" height="175px" src="http://cdn.qqqg.com/images/blank.gif" data-original="http://cdn.qqqg.com/imgProd/index/3.jpg" class="img-lazyload" alt="" title="">
+            </a>
+        </li>
+        <li>
+            <a title="" href="#" target="_blank">
+                <img width="535px" height="175px" src="http://cdn.qqqg.com/images/blank.gif" data-original="http://cdn.qqqg.com/imgProd/index/4.jpg" class="img-lazyload" alt="" title="">
+            </a>
+        </li>
+    </ul>
+</div>
+-->
+<?py for category in categories :?>
+    <div class="goodsFloor">
+        <div class="header">
+            <h2 class="w-tit1"><span class="big">${category.name}  </span></h2>
+        </div>
+
+        <div class="m-result-four">
+            <ul class="clearfix">
+    <?py index=1?>
+    <?py items = handler.get_last_by_category(category.id)?>
+    <?py for item in items:?>
+        <li class="goods">
+            <div class="goodswrap promotion">
+                <div class="img">
+                    <a target="_blank" href="${handler.reverse_url('item_detail',item.show_id)}">
+                        <img width="262px" height="262px" class="img-lazyload"  data-original="${item.main_pic and item.main_pic.split(';')[0] or ''}@262w.jpg" src="http://cdn.qqqg.com/web/images/blank.gif" alt="${item.title}" title="${item.title}">
+        <?py if item.sale_quantity<=item.warning_quantity:?>
+        <span class="soldout"></span>
+        <?py #endif ?>
+                        <div class="activityflag">
+                            <img class="w-brand-img" src="${handler.get_country_flag(item.product_location)}" />
+                        </div>
+                    </a>
+                </div>
+                <div class="desc clearfix">
+                    <p><a title="${item.title}" class="title" href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank">${item.title}</a></p>
+                    <p class="price">
+        <?py if int(item.bussiness_price) and handler.current_user and current_user.get('is_bussiness',None) and (item.bussiness_price!=item.price):?>
+                <span class="cur"><span class="betext">VIP价&nbsp;</span>&nbsp;<i>¥</i>${item.bussiness_price}</span>
+                <b class="combinedLabel">${round((item.bussiness_price/item.inner_price)*10,1)}折</b>
+        <?py else:?>
+                <span class="cur"><span class="betext">包邮价&nbsp;</span>&nbsp;<i>¥</i>${item.price}</span>
+                <b class="combinedLabel">${round((item.price/item.inner_price)*10,1)}折</b>
+        <?py #endif ?>
+
+                    </p>
+                    <p>
+                        <del>市场价:${item.inner_price}</del>
+
+                    </p>
+                </div>
+            </div>
+        </li>
+
+
+        <?py index+=1?>
+    <?py #endfor ?>
+            </ul>
+        </div>
+
+    </div>
+
+<?py #endfor ?>
+
+</div>

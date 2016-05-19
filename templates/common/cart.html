@@ -1,0 +1,23 @@
+<div class="m-rightbar" id="rightBar2" style="position: absolute; top: 283px; display: block;">
+    <ul class="clearfix">
+        <li>
+            <form action="${handler.reverse_url('shopping_cart_caculate')}" method="get">
+                #{xsrf_form_html}
+                <a rel="nofollow" target="_blank" href="javascript:void(0);" title="购物车" class="shopcart"><span class="txt">购物车</span><span class="num">${handler.cart_count}</span></a>
+            </form>
+        </li>
+        <!--
+        <li>
+            <a data-label="" data-event="侧边栏点击数" data-category="联系客服" rel="nofollow" href="#" title="在线客服" class="servonline"><span class="txt">在线客服</span></a>
+        </li>
+        -->
+        <li>
+            <a rel="nofollow" href="#" title="返回顶部" id="scrollTop2" class="srcolltop">&nbsp;</a>
+        </li>
+    </ul>
+    <a rel="nofollow" target="_blank" href="#" class="m-app2 m-app2-1">
+        <i class="w-icon w-icon-app3"></i>
+        <span class="text">下载App<br>首单立减<strong>8</strong>元</span>
+        <span class="qrcode"></span>
+    </a>
+</div>

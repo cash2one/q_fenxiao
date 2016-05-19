@@ -1,0 +1,17 @@
+<ul class="container">
+    <li class="item " id="category_" ><a href="/">首页</a></li>
+<?py for nav in navs:?>
+    <li class="item"  id="category_${nav.show_id}">
+    <?py if nav.link:?>
+        <a href="${nav.link}" target="${nav.open_type==0 and '_self' or '_blank'}" >
+            ${nav.name}
+        </a>
+    <?py else:?>
+        <a href="${handler.reverse_url('item_category',nav.show_id)}" target="${nav.open_type==0 and '_self' or '_blank'}" >
+            ${nav.name}
+        </a>
+    <?py #endif ?>
+    </li>
+<?py #endfor?>
+    <li class="last"></li>
+</ul>

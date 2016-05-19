@@ -1,0 +1,73 @@
+<div class="pd-20">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 退款管理 <span class="c-gray en">&gt;</span> 退款<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+	<form action="${handler.reverse_url('refund_payment',order_id)}" method="post" class="form form-horizontal" id="form-article-add">
+        <h4>商品信息</h4>
+        <input type="hidden" name="order_id" value="${order_id}">
+        <?py for item in order_items:?>
+        <input type="hidden" name="drp_usere_id" value="${item.drp_usere_id}">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th>缩略图</th>
+                <th>商品序号</th>
+                <th>商品名称</th>
+                <th>品牌</th>
+                <th>购买数量</th>
+                <th>商品单价</th>
+                <th>总金额</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr class="text-c">
+                    <td><img width="40" class="product-thumb" src="${item.main_pic and item.main_pic.split(';')[0] or ''}@200w.jpg"></td>
+                    <td>${item.item_no}<input type="hidden" value="${item.id}" name="item_order_id"> </td>
+                    <td>${item.name}</td>
+                    <td>${item.brand}</td>
+                    <td>${item.buy_nums}</td>
+                    <td>${item.item_price}</td>
+                    <td>${item.total_amount}</td>
+                </tr>
+        </tbody>
+    </table>
+		<div class="row cl">
+			<label class="form-label col-1"><span class="c-red">*</span>申请服务：</label>
+			<div class="formControls col-5">申请服务</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-1">退货数量：</label>
+			<div class="formControls col-5">
+				<input type="number" class="input-text" value="${item.buy_nums}" placeholder="" name="item_count" readonly>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-1">退款金额：</label>
+			<div class="formControls col-5">
+				<input type="number" class="input-text" value="${item.total_amount}" min="1" max="${item.total_amount}" placeholder="" name="refund_money">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-1">退货说明：</label>
+			<div class="formControls col-5">
+                <textarea name="reason" cols="" rows="" class="textarea" placeholder="说点什么...最少输入1个字符" datatype="*1-100" dragonfly="true" nullmsg="备注不能为空！" onkeyup="textarealength(this,100)"></textarea>
+			</div>
+		</div>
+        <div class="row cl">
+          <label class="form-label col-1">上传凭证：</label>
+          <div class="formControls col-5"> <span class="btn-upload form-group">
+            <input class="input-text upload-url" type="text" name="refund_item_img" id="uploadfile-2" readonly  datatype="*" nullmsg="请添加附件！" style="width:200px">
+            <a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+            <input type="file" multiple name="refund_item" class="input-file">
+            </span> </div>
+          <div class="col-4"> </div>
+    </div>
+        <?py #endfor?>
+		<div class="row cl">
+			<div class="col-10 col-offset-1">
+				<button class="btn btn-primary radius" type="submit">退货</button>
+			</div>
+		</div>
+	</form>
+	</div>
+</div>

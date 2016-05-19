@@ -1,0 +1,253 @@
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/products.min.css">
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/jquery.pagination.min.js"></script>
+<!--[if lte IE 9]>
+<script src="http://cdn.qqqg.com/web/js/plugin/fly.requestanimationframe.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/jquery.fly.min.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/jquery.slider.min.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/product/product.min.js"></script>
+#{xsrf_form_html}
+<!--是否跨境类目 1跨境 0国内 默认威跨境-->
+<input type="hidden" value="${item.is_abroad}" id="is_abroad">
+<div class="container">
+    <div class="mainInfo">
+        <div class="crumbs">
+        <a href="http://www.qqqg.com/">全球抢购</a>&nbsp;&gt;&nbsp;<span class="ellipsis crumbs-title">${item.title}</span>
+    </div>
+        <div class="PInfoWrap clearfix">
+<?py if item.main_pic:?>
+            <div class="PImgBox">
+                <div class="litimg_box">
+                        <ul class="clearfix" id="litimgUl">
+    <?py index=0 ?>
+    <?py for img in item.main_pic.split(';'):?>
+                            <li class="${index==0 and 'active' or ''}"><a href="javascript:;"><img alt="${item.title}" src="${img}@70w.jpg" source="${img}@430w.jpg" lsource="${img}"></a></li>
+        <?py index+=1 ?>
+    <?py #endfor ?>
+                        </ul>
+                </div>
+                <div id="showImgBox">
+                    <img alt="${item.title}" id="showImg" src="${item.main_pic.split(';')[0]}@400w">
+                    <b style="top: 200px; left: 0px; display: none;"></b>
+                </div>
+                <div id="showDetails" style="display: none;">
+                    <img alt="${item.title}" id="showImgBig" src="${item.main_pic.split(';')[0]}" style="left: 0px; top: -400px;"></div>
+            </div>
+<?py #endif ?>
+<input type="hidden" value="${item.id}" id="item_id" >
+ <input type="hidden" value="${item.category_id}" id="category_id" >
+        <dl class="PInfo ">
+            <dt class="orig-country">
+                <img src="${handler.get_country_flag(item.product_location)}"><span>${handler.get_ware_house_name_by_id(item.ware_house_id)}</span> <!--<span class="importtype zy">海外<br>直邮</span-->
+            </dt>
+            <dt class="product-title">${item.title}</dt>
+            <dt class="subTit">${item.summary}</dt>
+            <!--
+            <dd class="m-temai" id="m_temaiDom">
+                <div class="m-temai-cnt">
+                    <div class="u-temai-banner fl">
+                        <span class="left-circle"></span><span class="u-title">特卖</span><span class="u-split">|</span><span class="u-desc">今日特卖</span><span class="right-circle"></span> </div>
+                    <div id="countBackwards" data-timeleft="48755200" class="u-temai-counter fl">
+                        距结束：<span class="num day">00</span>天<span class="num hour">13</span>时<span class="num min">21</span>分<span class="num sec">24</span>秒<span class="num milsec">9</span> </div>
+                </div>
+            </dd>
+            -->
+            <dd class="m-price-wrap">
+                <div class="m-price">
+                    <span class="m-line-title m-price-title">价格</span>
+                    <input type="hidden" name="goodsPrice" id="goodsPrice" value="${item.price}" />
+<?py if int(item.bussiness_price) and handler.current_user and current_user.get('is_bussiness',None) and (int(item.bussiness_price)!=int(item.price)):?>
+    <span id="js_currentPrice" class="PInfo_r currentPrice">¥<span>${item.bussiness_price}</span></span>
+    <span class="m-memberLabel m-baoyou">VIP</span>
+<?py else:?>
+    <span id="js_currentPrice" class="PInfo_r currentPrice">¥<span>${item.price}</span></span>
+<?py #endif ?>
+                    <span class="m-memberLabel m-baoyou">包邮</span>
+                    <span class="PInfo_r marketPrice">国内参考价&nbsp;&nbsp;¥<span id="js_marketPrice">${item.inner_price}</span></span>
+                </div>
+            </dd>
+            <dd class="postage">
+                <span class="m-line-title">运费</span>
+                &#12288;<span class="PInfo_r"><span class="feeTxt" id="feeTxt">免运费</span></span> <div class="addr-info"></div>
+            </dd>
+<?py if item.is_abroad:?>
+<dd class="m-taxrateline ">
+    <span class="m-line-title">关税</span><span>本商品适用税率为<b id="js_skuTaxRate">${item.tax_rate}%</b>，若订单关税≤50元则免征 <span class="js_taxrule skutaxdesc">
+<span class="maintext">关税收取规则<span class="tri_up iconfont"></span><span class="tri_down iconfont"></span>
+</span>
+<span class="desc">
+关税=购买单价 * 件数 * 商品税率<br>
+注：不同品类商品的税率不同，<a target="_blank" href="/help/pricelist.html">了解税率</a>
+</span>
+</span>
+</span>
+</dd>
+<?py #endif ?>
+            <dd id="js_skuBox" class="buyBox nosku">
+                <div>
+            <span>
+            <form method="get" action="${handler.reverse_url('item_orders',item.id)}" id="item-order-form">
+                <span class="m-line-title fl m-line-am-30">数量</span>
+                <em id="j_buyboxnum" data-it="" class="buybox" name="js_buyBox">
+                    <span class="ctrnum-wrap">
+                    <a hidefocus="true" class="ctrnum-b ctrnum-b-rd ctrnum-b-dis" href="javascript:;"></a>
+                        <input type="text" autocomplete="off" class="ctrnum-qty" id="goodsAmount" name="item_account" max_count = "${item.max_limit_quantity}" min_count = "${item.min_limit_quantity}" value="${item.min_limit_quantity}" isNone="${item.sale_quantity<=item.warning_quantity and '1' or '0'}" /><a hidefocus="true" class="ctrnum-b ctrnum-b-ad ${item.sale_quantity<=item.warning_quantity and 'ctrnum-b-dis' or ''}" href="javascript:;"></a> </span>
+                            <span id="js_dometxt" class="domeTips">${item.sale_quantity<=item.warning_quantity and '库存不足' or '库存充足'}</span>
+<?py if item.min_limit_quantity > 1: ?>
+                                <span id="minBuyNumber">（最少限购数量${item.min_limit_quantity}）</span>
+<?py #endif ?>
+                    <span id="js_overAmountTip" class="over-amt-alert left-arrow-tip hide">
+<span class="arr0">&nbsp;</span>
+<span class="arr1">&nbsp;</span>
+<span class="over-amt-txt">抱歉，1<a id="overAmount" href="javascript:;" hidefocus="true">海关限额￥1000</a>，请分次购买</span> <div class="tip-wrap">
+                        <div class="tip-tri"></div>
+                        <div class="tip-mask"></div>
+                        <div class="tip-body">
+                            <p>海关规定：</p>
+                            <p>① 消费者购买进口商品，以“个人自用，合理数量”为原则，每单最大购买金额不得超过1000元人民币（不含关税）。</p>
+                            <p>② 如有优惠活动，则1000元限值适用于订单优惠后的金额。</p>
+                            <p>③ 如果订单只含单件不可分割商品，则可以超过1000元限值。</p>
+                        </div>
+                    </div>
+</span>
+                </em>
+                <em class="buyBtns">
+<?py buyTxt=item.sale_quantity<=item.warning_quantity and '暂时缺货' or '立即购买'?>
+                    <a hidefocus="true"  href="javascript:void(0);" class="${item.sale_quantity<=item.warning_quantity and 'disabled' or ''}" id="buyBtn">${buyTxt}</a>
+                    <a hidefocus="true" id="addCart" href="javascript:;" class="${item.sale_quantity<=item.warning_quantity and 'disabled' or ''}">
+                    <span class="sign icon-cart20"></span>加入购物车</a>
+<?py if is_collection==0:?>
+<a href="javascript:void(0)" class="m-favbtn m-favbtn-s" style="display: inline-block; visibility: visible;"><i class="iconfont ic"></i><span class="txt">收藏</span></a>
+<?py else:?>
+<a href="javascript:void(0)" class="m-favbtn m-favbtn-s got" style="display: inline-block; visibility: visible;"><i class="iconfont ic"></i><span class="txt">已收藏</span></a>
+<?py #endif?>
+<!-- if 语句 直邮 不允许退货 -->
+<?py if int(item.is_abroad) != 1: ?>
+    <div  class="buynowonly-wrap">
+        <span class="buynowonly-tip-t">提示：</span>
+        <ul class="buynowonly-tip-lis"><li>本商品不支持无理由退换货</li></ul>
+    </div>
+<?py #endif ?>
+
+                    <!--
+                    <a href="#" class="m-favbtn m-favbtn-s got" style="display: inline-block; visibility: visible;"></a>
+                    -->
+                </em>
+                <div class="buyBtns" id="noGoods" style="display: none;">
+                    <span class="btn-nogoods">暂时缺货</span>
+                    <span class="btn-arrivalNotice"><b></b>到货通知</span><a href="#" class="m-favbtn m-favbtn-s btn-arrivalnotice-fav  got" style="display: inline-block; visibility: visible;">
+                    <i class="iconfont ic"></i>
+<?py if is_collection==0:?>
+<span class="txt">收藏</span>
+<?py else:?>
+<span class="txt">已收藏</span>
+<?py #endif?>
+                </a></div>
+            </form>
+            </span>
+                </div>
+            </dd>
+        </dl>
+    </div>
+<?py include('items/same_category.html') ?>
+        <div class="goodsDetailWrap">
+        <div id="P_nav" class="P_nav">
+            <a href="#" style="display: inline-block;" class="aBuyBtn mr10 buynowonly">立即购买</a>
+            <span id="goodsDetail_T" class="active">商品详情<i></i></span><span id="userRating_T">用户评价<em> <b class="commentCount v1 v0" id="commentCounts" data-comments="${comment_count}">${comment_count}</b> </em><i></i></span>
+            <span id="goodsQA_T">商品咨询</span>
+        </div>
+        <div id="goodsDetail">
+            <a name="articlepage"></a>
+            <ul class="goods_parameter">
+            </ul>
+            <div class="productCon">#{item.content}</div>
+            <div class="packdate"><img src="http://cdn.qqqg.com/web/images/blank.gif"  class="img-lazyload" width="710" hidden="368" data-original="http://cdn.qqqg.com/web/images/imgProd/packmanu.jpg"></div>
+            <div class="import-type-desc">
+                <!-- if 语句 保税仓 和 直邮 -->
+<?py if int(item.is_abroad) == 1: ?>
+    <img src="http://cdn.qqqg.com/web/images/blank.gif"  class="img-lazyload" width="890" hidden="1464" data-original="http://cdn.qqqg.com/web/images/imgProd/tax.jpg">
+<?py else: ?>
+    <img src="http://cdn.qqqg.com/images/blank.gif"  class="img-lazyload" width="890" hidden="1464" data-original="http://cdn.qqqg.com/web/images/imgProd/directmail.jpg">
+<?py #endif ?>
+            </div>
+        </div>
+        <!--评论内容 -->
+        <div id="userRating">
+            <div id="qscmt">
+            </div>
+            <div id="pageNavWrap">
+                <div id="pageNav">
+                    <div id="pageBox" class="splitPages" style="display: block;"></div>
+                </div>
+            </div>
+        </div>
+<?py include('items/history_view.html') ?>
+        </div>
+        </div>
+    </div>
+</div>
+
+<?py include('common/cart.html') ?>
+<script  type="text/x-tmpl" id="templateCmts">
+    <ul class="rate rateInfo clearfix">
+    <li class="first">
+    <span class="emptyStar percentStar"><span class="fullStar w10"></span></span>
+    <span class="goodPercent"><i>{{= good_percent}}%</i>%好评</span>
+    <span class="comnum">共{{= all_count}}个评价</span> </li>
+    </ul>
+        <ul class="rate rateNav clearfix" id="discussShowWay">
+            <li class="{{if level==''}}active{{/if}}"> <label for="commentSelect1"><a class="wrapnRadio {{if level==''}}nRadioChecked{{else}}nRadioUnchecked{{/if}}" href="javascript:;" data-count="{{= all_count}}"><input type="radio" {{if level==''}}checked="checked"{{/if}} id="commentSelect1" name="commentSelect" value="" /></a>全部评价 ({{= all_count}})</label></li>
+            <li class="{{if level==2}}active{{/if}}"><label for="commentSelect2"><a class="wrapnRadio {{if level==2}}nRadioChecked{{else}}nRadioUnchecked{{/if}}" href="javascript:;" data-count="{{= good_count}}"><input type="radio" id="commentSelect2" name="commentSelect"  value="2" {{if level==2}}checked="checked"{{/if}}/></a>好评 ({{= good_count}})</label></li>
+            <li class="{{if level==1}} active{{/if}}"><label for="commentSelect3"><a class="wrapnRadio {{if level==1}}nRadioChecked{{else}}nRadioUnchecked{{/if}}" href="javascript:;"><input type="radio" id="commentSelect3" name="commentSelect"  value="1" {{if level==1}}checked="checked"{{/if}}/></a>中评 ({{= mid_count}})</label></li>
+            <li class="{{if level=='0'}} active{{/if}}"><label for="commentSelect4"><a class="wrapnRadio  {{if level=='0'}}nRadioChecked{{else}}nRadioUnchecked{{/if}}" href="javascript:;" data-count="{{= bad_count}}"><input type="radio" id="commentSelect4" name="commentSelect"  value="0" {{if level=='0'}}checked="checked"{{/if}}/></a>差评 ({{= bad_count}})</label></li>
+            <li class="last" style="display:none;"><label for="commentSelect5"><a class="wrapnRadio nRadioUnchecked" href="javascript:;"><input type="radio" id="commentSelect5" name="commentSelect" /></a>晒单 ({{= show_count}})</label></li>
+        </ul>
+        <div class="commWrap">
+        {{if dataCmtItems.length>0}}
+        {{tmpl(dataCmtItems) "#templateCmtItems"}}
+        {{else}}
+        <p class="noRating">没有找到符合条件的评价哦</p>
+        {{/if}}
+        </div>
+
+</script>
+<script  type="text/x-tmpl" id="templateCmtItems">
+<div class="eachInfo clearfix">
+    <ul class="commItem f-fl">
+        <li class="clearfix c_666">
+        <span class="itemDetail">{{= comment}}</span></li>
+        {{if dataCmtPics}}
+        <li class="clearfix c_666">
+            <div class="pic_list clearfix">
+            {{tmpl(dataCmtPics) "#templateCmtPics"}}
+            </div>
+        </li>
+        {{/if}}
+
+        <li class="clearfix c_999 dateColor"><span>{{= cmtTime}}</span></li>
+        {{if is_add_comment==true && addition_comment!=''}}
+        <hr class="hr">
+        <li class="clearfix c_666 replyLi"><span class="itemDetail"><span class="c_999 appendTop">追加：</span>{{= addition_comment}}</span></li>
+        {{/if}}
+        {{if dataCmtPics}}
+        <li class="clearfix c_666">
+            <div class="pic_list clearfix">
+            {{tmpl(dataCmtPicsAgain) "#templateCmtPics"}}
+            </div>
+        </li>
+        {{/if}}
+    </ul>
+    <ul class="commItem-1">
+        <li class="account">匿名评论</li>
+    </ul>
+    <span class="superFlag" style="display:none"></span>
+</div>
+</script>
+<script  type="text/x-tmpl" id="templateCmtPics">
+<a name="js_preview" class="pic_item" title="点击预览" href="javascript:;"><img src="{{= cmtPhoto}}" /><i class="align_center"></i></a>
+
+<p class="data_tpl">
+    <em><img src="{{= cmtPhotoBig}}"/></em>
+</p>
+</script>

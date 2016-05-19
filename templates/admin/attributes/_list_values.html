@@ -1,0 +1,125 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 类目属性管理 <span class="c-gray en">&gt;</span>属性管理
+    <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="${handler.reverse_url('attributes','list')}" title="返回" ><i class="Hui-iconfont">&#xe6d4;</i>
+    </a>
+
+    <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i>
+    </a>
+</nav>
+<div class="pd-20">
+    <form>
+        <div class="text-c"> 
+            日期：
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;" name="starst_date" value="" />
+            -
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d'})" id="logmax" class="input-text Wdate" style="width:120px;" name="end_date" value="" />&nbsp
+        </div>
+    </form>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+            <a href="javascript:;" onClick="show_layer('添加属性','${handler.reverse_url('attribute_values','add')}?attribute_id=${attribute_id}&attribute_name=${attribute_name}','500','300')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe600;</i> 添加属性值</a>
+        </span>
+        <span class="r">共有数据：<strong></strong>${data.result.count()}条</span>
+    </div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="20">ID</th>
+                <th width="30">类目名称</th>
+                <th width="30">属性名称</th>
+                <th width="30">属性值</th>
+                <th width="25">状态</th>
+                <th width="80">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?py for d in data.result: ?>
+                <tr class="text-c">
+                    <td>${d.id}</td>
+                    <td>${category_name}</td>
+                    <td>${d.attribute_name}</td>
+                    <td>${d.attribute_value}</td>
+                    <td>
+                        <?py if d.status == 1: ?>
+                            <span class="label label-success radius">开启</span>
+                        <?py else: ?>
+                            <span class="label radius">关闭</span>
+                        <?py #endif ?>
+                    </td>
+                    <td>
+                        <?py if d.status == 1: ?>
+                            <a style="text-decoration:none" onClick="attribute_stop(this,'${d.id}')" href="javascript:;" title="关闭">
+                                <i class="Hui-iconfont">&#xe6de;</i>
+                            </a>
+                        <?py else: ?>
+                            <a style="text-decoration:none" onClick="attribute_start(this,'${d.id}')" href="javascript:;" title="开启">    <i class="Hui-iconfont">&#xe615;</i>
+                            </a>
+                        <?py #endif ?>
+                        
+                    </td>
+                </tr>    
+            <?py #endfor ?>
+        </tbody>
+    </table>
+    #{data.admin_pagination_html()}
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+
+function show_layer(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+</script> 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".dataTables_length,.dataTables_filter").hide();
+    });
+
+    function attribute_stop(obj,id){
+        layer.confirm('确认要关闭该属性值吗？',function(index){        
+            $.ajax({
+                type:'post',
+                url:'/admin/attribute/value/switch',
+                data:{
+                    'attribute_v_id':id,
+                    'status':0,
+                },
+                dataType:"json",
+                success:function(data){
+                    if(data.stat == 200){
+                           location.replace(location.href);
+                    }else{
+                        layer.msg('关闭失败!',{icon: 5,time:1000});    
+                    }
+                },
+                error:function(error){}
+            });
+        });
+    }
+
+    function attribute_start(obj,id){
+        layer.confirm('确认要开启该属性值吗？',function(index){
+            $.ajax({
+                type:'post',
+                url:'/admin/attribute/value/switch',
+                data:{
+                    'attribute_v_id':id,
+                    'status':1,
+                },
+                dataType:"json",
+                success:function(data){
+                    if(data.stat == 200){
+                        location.replace(location.href);
+                    }else{
+                        layer.msg('开启失败!',{icon: 6,time:1000});
+                    }
+                }
+            })
+            
+        });
+    }
+</script>
+
+

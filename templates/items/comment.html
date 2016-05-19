@@ -1,0 +1,278 @@
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/com.min.css">
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/validform.min.css">
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/order/commt.min.css">
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/ajaxfileupload.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/validform.min.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/order/commt.min.js"></script>
+<!--内容部分-->
+<div class="container">
+  <div id="rateCon">
+      <div class="rateBox">
+        <h3 class="title">我要评价</h3>
+      </div>
+      <div class="rateBoxGray">
+<?py for d,comment in data:?>
+    <?py if comment==None:?>
+      <form method="post" id="commtform${d.id}" class="cmtform" name="commtform"  data-item-id="${d.id}" data-order-id="${d.order_id}"  data-order-no="${d.order_no}">
+          <div class="list dataList clearfix ">
+              <div class="productTitle">
+                  <a href="${handler.reverse_url('item_detail',d.show_id)}" target="_blank"  class="pname"><img src="http://cdn.qqqg.com/web/images/blank.gif" alt="查看宝贝详情" class="img-lazyload" data-original="${d.main_pic and d.main_pic.split(';')[0] or ''}@70w.jpg" ></a>
+                  <a href="${handler.reverse_url('item_detail',d.show_id)}" target="_blank" class="pname"> ${d.title} </a>
+                  <div class="blueRight" style="display: none;">
+                      <a href="javascript:void(0);" class="btn-link commtAgain">追加评论</a>
+                  </div>
+              </div>
+              <div class="listDis clearfix">
+                  <div class="shop-rating">
+                      <span class="red require">*</span>
+                      <span class="title">评价打分：</span>
+                      <label>
+                          好评
+                          <input type="radio" name="assess_level" value="2" checked autocomplete="off"  />
+                      </label>
+                      <label>
+                          中评
+                          <input type="radio" name="assess_level" value="1" autocomplete="off" />
+                      </label>
+                      <label>
+                          差评
+                          <input type="radio" name="assess_level" value="0" autocomplete="off" datatype="*" errormsg="请为商品打分！" nullmsg="请为商品打分！" />
+                      </label>
+
+                      <div class="clearfix"></div>
+
+                  </div>
+                  <ul class="rate rateInfo">
+                      <li>
+                          <span class="require">&nbsp;</span><span class="title">评价商品：</span>
+                          <textarea  placeholder="商品是否给力，快来分享您的一些购物心得吧～" name="comment"></textarea>
+                      </li>
+                  </ul>
+                  <ul class="showBuyting">
+                      <li class="fileParent">
+                          <label class="title">晒图：</label>
+                          <i style="color: #51B8F1" class="seeupload">上传图片</i>
+                          <img src="http://cdn.qqqg.com/web/images/loading24.gif" class="loading" style="display: none;">
+                          <input type="file" id="file${d.id}" name="file" class="file seeupload" />
+
+                      </li>
+                      <li>（可上传5张图片，每张不超过5M，支持格式jpg，jpeg，bmp，png，gif）
+                          <input type="hidden" name="show_imgs" class="show_imgs" value="" autocomplete="off" />
+                      </li>
+                  </ul>
+                  <ul class="rate rateInfo">
+                      <li class="clearfix">
+                          <a  class="btn-primary btnSub btnCommt">提交评论</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </form>
+    <?py else:?>
+        <div class="listInfo dataList clearfix">
+              <div class="productTitle">
+                  <a href="${handler.reverse_url('item_detail',d.show_id)}" target="_blank"  class="pname"><img src="http://cdn.qqqg.com/web/images/blank.gif" alt="查看宝贝详情" class="img-lazyload" data-original="${d.main_pic and d.main_pic.split(';')[0] or ''}@70w.jpg" ></a>
+                  <a href="${handler.reverse_url('item_detail',d.show_id)}" target="_blank" class="pname"> ${d.title} </a>
+                  <div class="blueRight">
+        <?py if comment.is_add_comment==0:?>
+            <a class="btn-link commtAgain" href="javascript:void(0);">追加评论</a>
+        <?py #endif?>
+                  </div>
+
+              </div>
+              <div class="cmtInfos clearfix">
+                  <div class="shop-rating">
+
+                      <span class="title">我的打分：</span>
+                      <label>
+        <?py if comment.assess_level==2:?>
+        好评
+        <?py elif comment.assess_level==1:?>
+        中评
+        <?py else:?>
+        差评
+        <?py #endif?>
+                      </label>
+
+                      <div class="clearfix"></div>
+
+                  </div>
+                  <ul class="rate rateInfo">
+                      <li>
+                          <label class="title">我的评价：</label>
+                          <span>${comment and comment.comment or '默认好评'}</span>
+                      </li>
+                  </ul>
+        <?py if comment.show_imgs:?>
+        <ul class="showBuyting">
+          <li class="fileParent">
+              <label class="title">晒图：</label>
+          </li>
+            <div class="usphoto">
+            <?py for show_img in comment.show_imgs.split(';'):?>
+            <li class="usersShow">
+                <div class="hisphotos" data-src="${show_img}@100w">
+                    <a href="javascript:void(0)"><img src="${show_img}@100w" class="myshowpng" alt="图片"></a>
+                </div>
+            </li>
+            <?py #endfor?>
+            </div>
+        </ul>
+        <?py #endif?>
+              </div>
+              <div class="cmtAgainInfos clearfix">
+                  <ul class="rate rateInfo">
+                      <li>
+                          <label class="title">我的追评：</label>
+                          <span>${comment and comment.addition_comment or '默认好评'}</span>
+                      </li>
+                  </ul>
+        <?py if comment.add_show_imgs:?>
+            <ul class="showBuyting">
+              <li class="fileParent">
+                  <label class="title">追评晒图：</label>
+              </li>
+            <?py for add_show_img in comment.add_show_imgs.split(';'):?>
+            <li class="usersShow">
+              <div class="hisphotos" data-src="${add_show_img}">
+                  <a href="javascript:void(0)"><img src="${add_show_img}" class="myshowpng" alt="图片"></a>
+              </div>
+            </li>
+            <?py #endfor?>
+            </ul>
+        <?py #endif?>
+              </div>
+              <div class="disCmtAgain">
+                  <form method="post" id="commtAgainform${d.id}" class="commtAgainform" name="commtform"  data-item-id="${d.id}" data-order-id="${d.order_id}"  data-order-no="${d.order_no}">
+              <ul class="rate rateInfo">
+                  <li>
+                      <span class="require">&nbsp;</span><span>追加评价：</span>
+                      <textarea  placeholder="商品是否给力，快来分享您的一些购物心得吧～" name="comment">${comment and comment.comment}
+                      </textarea>
+                  </li>
+              </ul>
+              <ul class="showBuyting">
+                  <li class="fileParent">
+                      <label>追加晒图：</label>
+                      <i style="color: #51B8F1" class="seeupload">上传图片</i>
+                      <img src="http://cdn.qqqg.com/web/images/loading24.gif" class="loading" style="display: none;">
+                      <input type="file" id="fileAgain${d.id}" name="fileAgain" class="file seeupload" />
+
+                  </li>
+                  <li>（可上传5张图片，每张不超过5M，支持格式jpg，jpeg，bmp，png，gif）
+                      <input type="hidden" name="show_imgs" class="show_imgs" value="" autocomplete="off" />
+                  </li>
+              </ul>
+                  <ul class="rate rateInfo">
+                      <li class="clearfix">
+                          <a  class="btn-blue-s btnSub btnCommtAgain">追加评论</a>
+                      </li>
+                  </ul>
+                   </form>
+              </div>
+          </div>
+    <?py #endif?>
+<?py #endfor?>
+      </div>
+  </div>
+</div>
+<div>
+
+</div>
+<script id="templateHisPhotos" type="text/x-tmpl">
+    <div id="{{= id}}">
+        <div class="iDialogHead">
+        <h1>晒图</h1>
+        </div> <a class="iDialogClose" hidefocus="true" href="javascript:;">×</a>
+        <div class="iDialogBody">
+            <div class="iDialogMain">
+                <div class="staDialogStyle">
+                <img src="{{= dataSrc}}" alt="图片" class="blockPhoto">
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="templateHisCmtInfos" type="text/x-tmpl">
+<div class="cmtInfos clearfix">
+    <div class="shop-rating">
+        <span class="title">我的打分：</span>
+        <label>
+            {{= assess}}
+        </label>
+        <div class="clearfix"></div>
+    </div>
+    <ul class="rate rateInfo">
+        <li>
+            <label class="title">我的评价：</label>
+            <span>{{= comment}}</span>
+        </li>
+    </ul>
+    {{if boysphotos.length>0}}
+        <ul class="showBuyting">
+            <li class="fileParent">
+                <label class="title">晒图：</label>
+            </li>
+            <div class="usphoto">
+            {{tmpl(boysphotos) "#templateusphoto"}}
+            </div>
+        </ul>
+    {{/if}}
+</div>
+<div class="disCmtAgain">
+      <form data-comment-id="{{= comment_id}}"  name="commtform" class="commtAgainform" id="commtAgainform45" method="post">
+  <ul class="rate rateInfo">
+      <li>
+          <span class="title">追加评价：</span>
+          <textarea name="comment" placeholder="商品是否给力，快来分享您的一些购物心得吧～"></textarea>
+      </li>
+  </ul>
+  <ul class="showBuyting">
+      <li class="fileParent">
+          <label>追加晒图：</label>
+          <i class="seeupload" style="color: #51B8F1">上传图片</i>
+          <img style="display: none;" class="loading" src="http://cdn.qqqg.com/images/loading24.gif">
+          <input type="file" class="file seeupload" name="fileAgain" id="fileAgain{{= item_id}}">
+
+      </li>
+      <li>（可上传5张图片，每张不超过5M，支持格式jpg，jpeg，bmp，png，gif）
+          <input type="hidden" autocomplete="off" value="" class="show_imgs" name="show_imgs">
+      </li>
+  </ul>
+      <ul class="rate rateInfo">
+          <li class="clearfix">
+              <a class="btn-blue-s btnSub btnCommtAgain">追加评论</a>
+          </li>
+      </ul>
+       </form>
+</div>
+</script>
+<script id="templateusphoto" type="text/x-tmpl">
+<li class="usersShow">
+    <div class="hisphotos" data-src="{{= tomsPhotoBig}}">
+        <a href="javascript:void(0)"><img src="{{= tomsPhoto}}" class="myshowpng" alt="图片"></a>
+    </div>
+</li>
+</script>
+<script id="templateHisCmtAgainInfos" type="text/x-tmpl">
+<div class="cmtAgainInfos clearfix">
+          <ul class="rate rateInfo">
+              <li>
+                  <label class="title">我的追评：</label>
+                  <span>{{= addition_comment}}</span>
+              </li>
+          </ul>
+
+    {{if boysphotos.length>0}}
+    <ul class="showBuyting">
+        <li class="fileParent">
+            <label class="title">追评晒图：</label>
+        </li>
+        <div class="usphoto">
+        {{tmpl(boysphotos) "#templateusphoto"}}
+        </div>
+    </ul>
+    {{/if}}
+
+</div>
+</script>

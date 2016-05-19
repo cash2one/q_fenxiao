@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>${handler.title and handler.title or '全球抢购（qqqg.com）全球抢购-100%海外直采!'}</title>
+    <meta name="keywords" content="${handler.keywords and handler.keywords or '全球抢购,海淘,跨境购,代购,进口,跨境电商,海外直邮'}"/>
+    <meta name="description" content="${handler.description and handler.description or '全球抢购-安全、放心的跨境海淘网站，官方认证，正品保证。轻松购遍海外进口母婴，进口美食 ，进口电子数码，更多产品正陆续推出。'}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shoctcut icon" href="http://cdn.qqqg.com/mobile/images/qqqg.ico" />
+    <?py include('include/css.html') ?>
+    <?py include('include/js.html') ?>
+</head>
+<body>
+<?py include('include/header.html') ?>
+<?py include('include/navigation.html') ?>
+#{_content}
+<?py include('include/footer.html') ?>
+</body>
+</html>

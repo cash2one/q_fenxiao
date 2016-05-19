@@ -1,0 +1,227 @@
+<div class="pd-20">
+    <form>
+        <div class="text-c">
+            发布状态:
+            <select class="input-text" style="width:80px" name="is_online">
+                <?py if is_online: ?>
+                    <?py if is_online == '1': ?>
+                        <option value = "">全部</option>
+                        <option value = "1" selected = 'selected'>上架</option>
+                        <option value = "0">下架</option>
+                    <?py else: ?>
+                        <option value = "">全部</option>
+                        <option value = "0" selected = 'selected'>下架</option>
+                        <option value = "1">上架</option>
+                    <?py #endif ?>
+                <?py else: ?>
+                    <option value = "">全部</option>
+                    <option value = "1">上架</option>
+                    <option value = "0">下架</option>
+                <?py #endif ?>
+            </select>&nbsp
+
+			<button name="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜产品</button>
+		</div>
+    </form>
+
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+
+        <span class="r">共有数据：<strong></strong> ${count}条</span>
+    </div>
+		<div class="mt-20 dataTables_wrapper" id="item_data">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th width="10"><input name="" type="checkbox" value=""></th>
+                        <th width="10">ID</th>
+						<th width="20">图</th>
+                        <th width="20">分销商</th>
+                        <th width="10">货号</th>
+                        <th width="10">型号</th>
+                        <th width="10">描述</th>
+
+						<th width="10">发布状态</th>
+                        <th width="10">可卖库存</th>
+                        <th width="10">预警库存</th>
+
+					</tr>
+				</thead>
+				<tbody>
+<?py for d in data.result:?>
+<tr class="text-c va-m" id="${d.id}">
+    <td><input name="${d.id}" type="checkbox" value=""></td>
+    <td>${d.show_id}</td>
+    <td>
+        <img width="60" class="product-thumb" src="${d.main_pic and d.main_pic.split(';')[0] or ''}@280w.jpg">
+    </td>
+    <td>${handler.get_drp_by_id(d.drp_user_id)}</td>
+    <td>${d.item_no}</td>
+    <td>${d.type}</td>
+    <td>${d.title}</td>
+
+    <td class="td-status">
+    <?py if d.is_online:?>
+        <span class="label label-success radius">已上架</span>
+    <?py else:?>
+        <span class="label label-danger radius">待上架</span>
+    <?py #endif?>
+    </td>
+    <td>${d.sale_quantity}</td>
+    <td>${d.warning_quantity}</td>
+</tr>
+<?py #endfor ?>
+				</tbody>
+            </table>
+        #{data.admin_pagination_html()}
+        <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+            <ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+        </div>
+</div>
+
+<script type="text/javascript" src="/static/admin/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript">
+function show_layer(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+/*产品-下架*/
+function product_stop(obj,id){
+    layer.confirm('确认要下架吗？',function(index){
+        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="product_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
+        $.ajax({
+            type:'post',
+            url:'/admin/items/online',
+            data:{
+                'id':id,
+                'is_online':0,
+            },
+            dataType:"json",
+            success:function(data){
+                if(data.stat == 'success'){
+                    $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已下架</span>');
+                    $(obj).remove();
+                    layer.msg('已下架!',{icon: 5,time:1000});
+                }else{
+                    layer.msg('下架失败!',{icon: 5,time:1000});
+                }
+            },
+            error:function(error){}
+        });
+    });
+}
+
+/*产品-上架*/
+function product_start(obj,id){
+    layer.confirm('确认要上架吗？',function(index){
+        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="product_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+        $.ajax({
+            type:'post',
+            url:'/admin/items/online',
+            data:{
+                'id':id,
+                'is_online':1,
+            },
+            dataType:"json",
+            success:function(data){
+                if(data.stat == 'success'){
+                    $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已上架</span>');
+                    $(obj).remove();
+                    layer.msg('已上架!',{icon: 6,time:1000});
+                }else{
+                    layer.msg('上架失败!',{icon: 6,time:1000});
+                }
+            }
+        })
+
+    });
+}
+</script>
+
+
+<SCRIPT type="text/javascript">
+<!--
+var setting = {
+    async: {
+        enable: true,
+        url:"/admin/category/tree/list",
+        autoParam:["id", "name=n", "level=lv"],
+        otherParam:{"otherParam":"zTreeAsyncTest"},
+        dataFilter: filter
+    },
+    view: {
+        dblClickExpand: true
+    },
+    data: {
+        simpleData: {
+            enable: true
+        }
+    },
+    callback: {
+        beforeClick:beforeClick,
+        onClick:onClick
+    }
+};
+
+
+function filter(treeId, parentNode, childNodes) {
+    if (!childNodes) return null;
+    for (var i=0, l=childNodes.length; i<l; i++) {
+        childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+    }
+    return childNodes;
+}
+
+function onBodyDown(event) {
+    if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+        hideMenu();
+    }
+}
+
+function beforeClick(treeId, treeNode) {
+    var check = (treeNode && !treeNode.isParent);
+    if (!check) alert("只能选择子节点...");
+    return check;
+}
+
+function onClick(e, treeId, treeNode) {
+    var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+    nodes = zTree.getSelectedNodes(),
+    v = "";
+    id = "";
+    nodes.sort(function compare(a,b){return a.id-b.id;});
+    for (var i=0, l=nodes.length; i<l; i++) {
+        v += nodes[i].name + ",";
+        id += nodes[i].id ;
+
+    }
+    if (v.length > 0 ) v = v.substring(0, v.length-1);
+    var cityObj = $("#category_name");
+    cityObj.attr("value", v);
+
+    var category_obj = $("#category_id");
+    category_obj.attr("value", id);
+
+}
+
+function showMenu() {
+    var cityObj = $("#category_name");
+    var cityOffset = $("#category_name").offset();
+    $("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+    $("body").bind("mousedown", onBodyDown);
+}
+
+function onBodyDown(event) {
+    if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+        hideMenu();
+    }
+}
+
+function hideMenu() {
+    $("#menuContent").fadeOut("fast");
+    $("body").unbind("mousedown", onBodyDown);
+}
+
+$(document).ready(function(){
+    $.fn.zTree.init($("#treeDemo"), setting);
+});
+//-->
+</SCRIPT>

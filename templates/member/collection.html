@@ -1,0 +1,62 @@
+﻿<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/member/order.min.css">
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/member/member.min.js"></script>
+<div id="modCollect" class="container">
+    <div class="m-puser clearfix">
+        <div class="col-left">
+<?py include('member/menu.html') ?>
+        </div>
+        <div class="col-content clearfix">
+            <div class="u-box">
+                <div class="orderNavTab">
+                    <div class="ntabs">
+                    <ul class="clearFix">
+                        <li class="utab active"  ocategory="0"><span>我收藏的商品 (<span id="collectionCount">${collection_count}</span>个)</span></li>
+                    </ul>
+                    </div>
+                    <div class="slideLine"></div>
+                </div>
+                <div id="collectlist" class="collectlist">
+                    <div class="resultwrap">
+                        <div class="result">
+                            <ul class="clearfix" id="result">
+<?py if collections:?>
+    <?py for collection in collections.result: ?>
+        <?py goods = handler.get_item_by_item_id(collection.item_id)?>
+        <li class="good" id="auto-id">
+            <div class="img">
+                <a target="_blank" href="${handler.reverse_url('item_detail',goods.get('item').show_id)}" title="${goods.get('item').title}">
+                    <img class="img-lazyload" title="${goods.get('item').title}" src="${goods.get('item').main_pic.split(';')[0]}" data-original="#" id="auto-id-${goods.get('item').id}">
+                    <!--
+                    <div class="activityflag">
+                        <span class="danpin">直降</span>
+                        <span class="zhengdan large">满件减</span>
+                    </div>
+                    -->
+                </a>
+            </div>
+            <div class="desc">
+                <p class="title">
+                    <a href="" target="_blank" title="${goods.get('item').title}">${goods.get('item').title}</a>
+                </p>
+                <p class="price">
+                    <span class="cur"><i>¥</i>${goods.get('item').price}</span>
+                    <b class="combinedLabel">${round((goods.get('item').price/goods.get('item').inner_price)*10,1)}折</b>
+                </p>
+                <p class="clearfix"> <del>¥${goods.get('item').inner_price}</del>  <a target="_blank" href="" class="comments">${goods.get('comment_count')}人已评价</a>
+                </p>
+            </div>
+            <a class="delete abtn iconfont" href="javascript:void(0)" hidefocus="true" data-itemId="${goods.get('item').id}"></a>
+        </li>
+    <?py #endfor?>
+<?py #endif?>
+                            </ul>
+                        </div>
+
+                    </div>
+                        #{collections.admin_pagination_html()}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?py include('common/cart.html') ?>

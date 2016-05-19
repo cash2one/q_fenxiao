@@ -1,0 +1,75 @@
+<nav class="breadcrumb"><i class="Hui-iconfont"></i> 首页 <span class="c-gray en">&gt;</span> 站点管理 <span class="c-gray en">&gt;</span> 配置文件 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+    <i class="Hui-iconfont"></i></a></nav>
+<div class="pd-20">
+	<table class="table table-border table-bordered table-hover table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="6">站点配置文件(web_conf.conf)</th>
+			</tr>
+			<tr class="text-c">
+				<th width="40">名称</th>
+				<th width="200">值</th>
+			</tr>
+		</thead>
+		<tbody>
+            <?py for key in confs.keys():?>
+                <tr class="text-c">
+                    <td>${key}</td>
+                    <td>
+                        <?py if isinstance(confs[key],dict):?>
+                            <table class="table table-border table-bordered table-hover table-bg">
+                                <tbody>
+                                    <?py for k in confs[key].keys():?>
+                                        <tr class="text-c">
+                                            <td>${k}</td>
+                                            <td>${confs[key][k]}</td>
+                                        </tr>
+                                    <?py #endfor?>
+                                </tbody>
+                            </table>
+                        <?py else:?>
+                            ${confs[key]}
+                        <?py #endif ?>
+                    </td>
+                </tr>
+            <?py #endfor?>
+
+		</tbody>
+	</table>
+
+    <table class="table table-border table-bordered table-hover table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="6">站点配置文件(setting)</th>
+			</tr>
+			<tr class="text-c">
+				<th width="40">名称</th>
+				<th width="200">值</th>
+			</tr>
+		</thead>
+		<tbody>
+            <?py for key in settings.keys():?>
+                <tr class="text-c">
+                    <td>${key}</td>
+                    <td>
+                        <?py if isinstance(settings[key],dict):?>
+                            <table class="table table-border table-bordered table-hover table-bg">
+                                <tbody>
+                                    <?py for k in settings[key].keys():?>
+                                        <tr class="text-c">
+                                            <td>${k}</td>
+                                            <td>${settings[key][k]}</td>
+                                        </tr>
+                                    <?py #endfor?>
+                                </tbody>
+                            </table>
+                        <?py else:?>
+                            ${settings[key]}
+                        <?py #endif ?>
+                    </td>
+                </tr>
+            <?py #endfor?>
+
+		</tbody>
+	</table>
+</div>

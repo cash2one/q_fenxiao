@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+	<script type="text/javascript" src="source/static/js/jquery.js"></script>
+	<script type="text/javascript">
+        cookies:{
+            // write cookies
+            set:function(name, value, hours,domain){
+                var expire = "";
+                if(hours != null)
+                {
+                    expire = new Date((new Date()).getTime() + hours * 3600000);
+                    expire = "; expires=" + expire.toGMTString();
+                }
+                var str=name + "=" + escape(value) + expire+";path=/";
+                if(domain) str+='; domain='+domain;
+                document.cookie = str;
+            },
+            // read cookies
+            get:function(name){
+                var cookieValue = "";
+                var search = name + "=";
+                if(document.cookie.length > 0)
+                {
+                    offset = document.cookie.indexOf(search);
+                    if (offset != -1)
+                    {
+                        offset += search.length;
+                        end = document.cookie.indexOf(";", offset);
+                        if (end == -1) end = document.cookie.length;
+                        cookieValue = unescape(document.cookie.substring(offset, end))
+                    }
+                }
+                return cookieValue;
+            }
+        }
+	</script>
+</head>
+<body>
+<div>
+</div>
+</body>
+</html>

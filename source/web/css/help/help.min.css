@@ -1,0 +1,303 @@
+﻿.padtop{
+	margin: 40px auto;
+}
+.customerLeftNav .tit:after {
+	visibility:hidden;
+	display:block;
+	font-size:0;
+	content:"\20 ";
+	clear:both;
+	height:0
+}
+.f-fw {
+	font-weight:700
+}
+.f-wsn {
+	word-wrap:normal;
+	white-space:nowrap
+}
+.f-tal {
+	text-align:left!important
+}
+.f-tac {
+	text-align:center!important
+}
+.w-icon-arr {
+	position:absolute;
+	right:15px;
+	top:18px;
+	width:10px;
+	height:10px;
+	background-position:-7px -84px
+}
+.expanded .w-icon-arr {
+	background-position:-7px -123px
+}
+.w-icon-disc {
+	zoom:1;
+	font-size:30px;
+	color:#d22147
+}
+.w-icon-disc i {
+	position:absolute;
+	left:0;
+	top:0;
+	width:28px;
+	*width:34px;
+	text-align:center;
+	line-height:28px;
+	*line-height:26px;
+	_line-height:28px;
+	color:#fff;
+	font-size:20px;
+	font-style:italic;
+	font-family:verdana, arial
+}
+.w-tit {
+	font-size:24px;
+	line-height:40px;
+	padding:0 0 5px;
+}
+.m-agreement {
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.m-agreement li, .m-agreement p {
+	padding: 0 0 20px;
+	text-indent: 2em;
+}
+.m-agreement .w-tit{
+	font-weight: 700;
+	text-align: center;
+}
+.w-tit .red {
+	color:#d22147;
+	font-weight:700
+}
+.w-tit2 {
+	font-size:16px;
+	font-weight:700;
+	line-height:28px;
+	padding:0 0 5px
+}
+.mainWrap {
+	width:1090px;
+	padding:40px 0 0;
+	margin:0 auto
+}
+.customerLeftNav {
+	float:left;
+	width:178px;
+	border:1px solid #eaeaea
+}
+.customerRight {
+	float:right;
+	width:888px;
+	border:1px solid #eaeaea;
+	min-height:500px;
+	_height:500px
+}
+.customerLeftNav .tit {
+	position:relative;
+	zoom:1;
+	padding:0 10px 0 16px;
+	height:46px;
+	font-size:16px;
+	line-height:46px;
+	font-weight:700;
+	border-top:1px solid #eaeaea;
+	cursor:pointer
+}
+.customerLeftNav .first .tit {
+	border-top:0
+}
+.customerLeftNav .leaf {
+	font-size:14px;
+	line-height:28px
+}
+.customerLeftNav .leaf a, .customerLeftNav .leaf a:hover {
+	color:#333;
+	text-decoration:none
+}
+.customerLeftNav .leaf a:hover {
+	color:#d22147
+}
+.customerLeftNav .leaf .active {
+	color:#d22147;
+	font-weight:700
+}
+.customerLeftNav .subnav {
+	padding:12px 0 12px 16px;
+	border-top:1px solid #eaeaea
+}
+.customerLeftNav .collapsed .subnav {
+	display:none
+}
+.helpRH2 {
+	font-size:18px;
+	font-weight:700;
+	letter-spacing:1px;
+	line-height:56px;
+	padding:0 39px;
+	border-bottom:1px solid #eee
+}
+.helpRightBox {
+	padding:32px 0 0;
+	font-size:14px;
+	line-height:28px
+}
+.helpRightBox a {
+	text-decoration:underline;
+	color: #666;
+}
+.helpRightBox .w-tit, .helpRightBox .w-tit2, .helpRightBox dl, .helpRightBox ol, .helpRightBox p, .helpRightBox table, .helpRightBox ul {
+	margin:0 39px
+}
+.helpRightBox .para {
+	margin-bottom:30px
+}
+.helpRightBox .para  p,.helpRightBox .para  .w-tit,.helpRightBox .para  .w-tit2{
+	margin-left:0 ;
+}
+.helpRightBox ol {
+	padding-left:25px
+}
+.helpRightBox ol li {
+	list-style:decimal
+}
+.helpRightBox ul li {
+	list-style:none
+}
+.helpRightBox .bg {
+	padding:30px 0;
+	background:#f7f7f7;
+	border-top:1px solid #eaeaea
+}
+.w-table {
+	width:810px;
+	border-collapse:collapse
+}
+.w-table td, .w-table th {
+	border:1px solid #eaeaea;
+	padding:10px 20px;
+	text-align:left
+}
+.w-table th {
+	white-space:nowrap;
+	background:#f7f7f7;
+	color:#666;
+	font-weight:700
+}
+.w-table-1 td, .w-table-1 th {
+	text-align:center
+}
+.helpRightBox hr {
+	width:100%;
+	height:1px;
+	background:#eaeaea;
+	border:0;
+	color:#eaeaea;
+	margin:30px 0
+}
+.helpRightBox .red {
+	color:#d22147
+}
+.c-buy dt, #c-deliverymode dt, #p-freight dt, .c-returnprocess dt {
+	position:relative;
+	zoom:1;
+	padding-left:40px;
+	line-height:32px
+}
+.c-buy dt, #c-deliverymode dt{
+	font-size:24px;
+	color:#d22147
+}
+.w-icon-disc {
+	position:absolute;
+	left:0;
+	top:50%;
+	margin-top:-16px;
+	*margin-top:-14px;
+	_margin-top:-16px
+}
+.c-buy .helpRightBox img, #c-coupon dd img, #c-deliverymode dd img, #c-returnprocess dd img, #c-verification .helpRightBox img {
+	display:block;
+	margin:30px auto 60px
+}
+#p-siteintro .w-tit {
+	margin-left:30px
+}
+#p-refund .w-tit {
+	margin-bottom:10px
+}
+#p-faq dl .w-tit2, #p-faq dl ul {
+	margin-left:0;
+	margin-right:0
+}
+#p-freight dl table {
+	margin:0 0 30px
+}
+#p-freight dl p {
+	margin-left:0;
+	margin-right:0
+}
+.c-buy dd, .c-buy dt {
+	margin:0 39px
+}
+.c-buy .nomrg, .c-buy dl {
+	margin:0
+}
+.c-buy dl .w-tit2, .c-buy dl ol, .c-buy dl p, .c-buy dl ul {
+	margin-left:0;
+	margin-right:0
+}
+.c-buy dt {
+	margin-bottom:10px
+}
+.c-buy .w-tit2 {
+	padding-bottom:0
+}
+#p-tariff dt {
+	margin-bottom:10px
+}
+#p-coupon dl .w-tit, #p-coupon dl .w-tit2, #p-coupon dl p, #p-coupon dl ul, #p-tariff dl .w-tit2, #p-tariff dl p {
+	margin-left:0;
+	margin-right:0
+}
+#p-pricelist .w-tit {
+	margin-bottom:10px
+}
+#p-verification dl .w-tit, #p-verification dl .w-tit2, #p-verification dl p, #p-verification dl ul {
+	margin-left:0;
+	margin-right:0
+}
+#p-verification .w-tit2 {
+	font-weight:400;
+	font-size:14px
+}
+#p-verification .red2 {
+	color:#d22147;
+	font-size:16px;
+	margin-bottom:15px;
+	font-weight:700
+}
+#p-contactus .helpRightBox .w-tit {
+	margin-bottom:8px
+}
+.n-example h3 {
+	font-weight:700;
+	font-size:15px
+}
+.n-example h4 {
+	font-weight:700
+}
+.n-example p {
+	margin:0
+}
+.n-example .lst li {
+	margin-top:25px
+}
+.n-example .f-mgl {
+	margin-left:42px
+}

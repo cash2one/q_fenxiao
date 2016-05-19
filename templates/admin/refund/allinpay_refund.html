@@ -1,0 +1,49 @@
+
+<div class="pd-20">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 退款管理 <span class="c-gray en">&gt;</span> 发起退款<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:history.go(-1);" title="返回" ><i class="Hui-iconfont">&#xe6d4;</i></a> <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+    <form name="allpayment" id="allinpayment" action="https://service.allinpay.com/gateway/index.do" method="post">
+        <div class="row cl">
+			<label class="form-label col-1">退货商品：</label>
+			<div class="formControls col-5">
+                ${refund.item_id}
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-1">退款金额：</label>
+			<div class="formControls col-5">
+                ${refund.refound_amount}
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-1">退款人：</label>
+			<div class="formControls col-5">
+                ${refund.user_id}
+			</div>
+		</div>
+        <div class="row cl">
+			<label class="form-label col-1">退货原因：</label>
+			<div class="formControls col-5">
+                ${refund.content}
+			</div>
+		</div>
+        <div class="row cl">
+			<label class="form-label col-1">处理意见：</label>
+			<div class="formControls col-5">
+                ${refund.handling_idea}
+			</div>
+		</div>
+
+        <?py for key in params.keys():?>
+           <input type="hidden" name="${key}" value="${params.get(key)}" id="${key}" />
+        <?py #endfor ?>
+        <div class="row cl">
+            <div class="col-10 col-offset-1">
+                <input class="btn btn-primary radius" type="submit" value="退货">
+            </div>
+        </div>
+        <div align="center"></div>
+    </form>
+        </div>
+    </div>

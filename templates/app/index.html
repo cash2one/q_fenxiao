@@ -1,0 +1,120 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+<?py include('app/include/header.html') ?>
+  <link href="${handler.static_domain}/mobile/css/index.min.css" type="text/css" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="g-bd" id="g-bd">
+<article class="m-imgslider-wrap m-imgslider-wrap-idx">
+        <ul class="m-slide">
+<?py for banner in banners: ?>
+<li>
+    <a href="/app${banner.get('ad_link')}" class="imgwrap u-img-wrapper">
+        <img src="${banner.get('ad_img')}" >
+    </a>
+</li>
+<?py #endfor ?>
+        </ul>
+        <ul class="imgpagebox align-center">
+
+<?py index=0 ?>
+<?py for banner in banners: ?>
+    <?py if index==0: ?>
+        <li class="dot active"></li>
+    <?py else:?>
+        <li class="dot"></li>
+    <?py #endif?>
+    <?py index+=1 ?>
+<?py #endfor ?>
+        </ul>
+</article>
+
+    <article class="m-img-banner" >
+        <div class="imglist "   data-type="10">
+            <ul >
+                <li class="itm6" >
+                    <a href="/app/item/list/10082.html"><img  src="http://cdn.qqqg.com/mobile/images/half/1.jpg"></a>
+                </li>
+                <li class="itm6">
+                    <a href="/app/item/list/10147.html"><img src="http://cdn.qqqg.com/mobile/images/half/2.jpg"></a>
+                </li>
+                <li class="itm6">
+                    <a href="/app/item/list/10031.html"><img  src="http://cdn.qqqg.com/mobile/images/half/3.jpg"></a>
+                </li>
+                <li class="itm6">
+                    <a href="/app/item/list/10408.html"><img src="http://cdn.qqqg.com/mobile/images/half/4.jpg"></a>
+                </li>
+            </ul>
+        </div>
+    </article>
+  <div class="m-globalpick" data-hasmore="1">
+    <div class="list" >
+      <h2 class="u-tit"><i class="u-icn3">&nbsp;</i>全球精选</h2>
+      <div id="dataList" class="onsale-wrap">
+      </div>
+      <div class="m-loading f-tac" id="waterLoading"><img src="http://cdn.qqqg.com/mobile/images/loadingalpha.gif"/></div>
+    </div>
+    <div id="waterAllShow" class="nomore-data" style="display:none">已显示全部内容</div>
+  </div>
+  <div class="footPos"></div>
+  <div  id="appfootmenu" class="footMenu">
+      <div class="f-cb m-nav-fmenu">
+          <div class="f-fl f-tac nav active">
+              <a href="/app/index.html"><i class="app-index icon"></i><br>全球抢购</a>
+          </div>
+          <div class="f-fl f-tac nav">
+              <a href="/app/member/cart.html"><i class="app-cart icon"></i><br>购物车</a>
+          </div>
+          <div class="f-fl f-tac nav">
+              <a href="/app/order/orders.html"><i class="app-order icon"></i><br>我的订单</a>
+          </div>
+          <div class="f-fl f-tac nav">
+              <a href="/app/member/me.html"><i class="app-mcenter icon"></i><br>我</a></div>
+      </div>
+  </div>
+  <article class="m-mask" style="display:none;">
+
+  </article>
+</div>
+
+<div class="m-gotop-wrap" id="m-gotop-wrap">
+  <div class="ic-gotop">
+    <i class="up"></i>
+    <p class="desc">顶部</p>
+  </div>
+</div>
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/index.min.js"></script>
+<script type="text/x-tmpl" id="templateList">
+    <div class="m-onsale f-cb">
+    <a class="first" title="{{= title}}" href="/app/item/detail/{{= show_id}}.html">
+    <div class="pic">
+    <img title="{{= title}}" alt="{{= title}}" src="http://cdn.qqqg.com/mobile/images/blank.gif"  data-src="{{= main_pic}}@100w"/>
+    {{if issoldOut==1}}
+     <span class="u-slodout">&nbsp;</span>
+     {{/if}}
+    </div>
+    <div class="proinfo">
+    <div class="u-brand">
+    <img width="15px" src="{{= country_flag}}"><span>{{= ware_house}}发货</span>
+    </div>
+    <h3 class="tit"><strong>{{= title}}</strong></h3>
+    <p class="curprice">
+    <strong>
+    <span class="symbol">¥</span><span><span class="int">{{= price}}</span></span></strong>
+    </p>
+    <p class="marprice">国内参考价：<span class="symbol">¥</span><del>{{= inner_price}}</del></p>
+    </div>
+    </a>
+    </div>
+</script>
+<script src="http://cdn.qqqg.com/mobile/js/swiper.net.js" type="text/javascript"></script>
+</body>
+</html>

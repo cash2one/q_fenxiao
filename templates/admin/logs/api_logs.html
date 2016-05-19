@@ -1,0 +1,94 @@
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 日志中心 <span class="c-gray en">&gt;</span>API日志 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+
+	<form action="" method="get" class="form form-horizontal" id="form-article-add">
+
+        <div>
+
+
+   <?py from conf.logs_conf import LOGS_CONF ?>
+
+       <label class="form-label col-2"><span class="c-red">*</span>日志类型：</label>
+			<div class="formControls col-2"> <span class="select-box">
+				<select name="logs_type" class="select">
+                    <option value="">ALL</option>
+                    <?py for key in LOGS_CONF.keys():?>
+                        <?py if logs_type and int(logs_type)==key:?>
+					        <option value="${key}" selected>${LOGS_CONF[key]}</option>
+                        <?py else:?>
+                            <option value="${key}">${LOGS_CONF[key]}</option>
+                        <?py #endif ?>
+                    <?py #endfor ?>
+				</select>
+				</span> </div>
+            	<label class="form-label col-1"><span class="c-red">*</span>状态：</label>
+			<div class="formControls col-2"> <span class="select-box">
+				<select name="status" class="select">
+                    <option value="">ALL</option>
+                    <?py for key,value in ((0,'失败'),(1,'成功'),(2,'部分错误')):?>
+                        <option value="${key}" ${status==str(key) and 'selected'}>${value}</option>
+                    <?py #endfor?>
+				</select>
+				</span> </div>
+        </div>
+		<div>
+            日志日期：
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;" name="start_time" value="${start_time}" />
+            -
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d'})" id="logmax" class="input-text Wdate" style="width:120px;" name="end_time" value="${end_time}" />&nbsp;
+			<br>
+            关键字:
+            <div class="check-box">
+                    <input type="text" class="input-text" value="${key_params}" placeholder="" id="" name="key_params">
+				</div>
+            <button type="submit" class="btn btn-success radius"  name=""><i class="Hui-iconfont">&#xe665;</i> 搜</button>
+		</div>
+</form>
+
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+        <span class="r">共有数据：<strong>${data.total}</strong> 条</span> </div>
+	<div class="mt-20 dataTables_wrapper">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+				<tr class="text-c">
+                <th width="25">ID</th>
+				<th width="50">日志类型</th>
+				<th width="50">发起时间</th>
+				<th width="25">状态</th>
+                <th width="120">参数</th>
+				<th width="70">返回值</th>
+				<th width="40">操作</th>
+			</tr>
+		</thead>
+		<tbody> <?py from conf.logs_conf import LOGS_CONF ?>
+                <?py for d in data.result:?>
+                <tr class="text-c">
+                    <td width="5%">${d.id}</td>
+                    <td>${LOGS_CONF[d.logs_type]}</td>
+                    <td>${d.gmt_created}</td>
+                    <td>
+                        <?py if d.status==1:?>
+                            <span class="label label-success">成功</span>
+                        <?py elif d.status==2:?>
+                             <span class="label label-warning">有部分错误</span>
+                        <?py else:?>
+                            <span class="label label-danger">失败</span>
+                        <?py #endif ?>
+                    </td>
+                    <td style="word-break:break-all">${d.params}</td>
+                    <td>${d.result}</td>
+                    <td>
+                        <?py if d.status==0 and d.logs_type==1:?>
+                            <a href="${handler.reverse_url('api_tasks')}?operation=qingguan&order_no=${d.key_params}">重新执行</a>
+                        <?py elif d.status==0 and d.logs_type==3:?>
+                            <a href="${handler.reverse_url('api_tasks')}?operation=pay&log_id=${d.id}">重新执行</a>
+                        <?py #endif?>
+                    </td>
+                </tr>
+            <?py #endfor?>
+		</tbody>
+	</table>
+    #{data.admin_pagination_html()}
+</div>

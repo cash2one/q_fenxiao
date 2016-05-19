@@ -1,0 +1,357 @@
+
+<?py from services.item.item_services import ItemService ?>
+<?py item_service = ItemService() ?>
+<?py item_service.set_rdb(handler.rdb) ?>
+<div class="pd-20">
+<form action="" method="post" class="form form-horizontal" id="item-form-add">
+
+<input type="hidden" id="_xsrf" name="_xsrf" value="${xsrf_token}"/>
+
+<div class="row cl">
+    <label class="form-label col-2"><span class="c-red">*</span>货号：</label>
+    <div class="formControls col-4">
+<?py if item: ?>
+<input type="text" class="input-text" datatype="*" nullmsg="货号！" errormsg="请填写产品货号" value="${item.item_no}" placeholder="商品货号" name="item_no">
+<?py else: ?>
+<input type="text" class="input-text" datatype="*" nullmsg="货号！" errormsg="请填写产品货号" placeholder="商品货号" name="item_no">
+<?py #endif ?>
+    </div>
+
+    <label class="form-label col-2"><span class="c-red">*</span>产品名称：</label>
+    <div class="formControls col-4">
+<?py if item: ?>
+<input type="text" class="input-text" datatype="*" nullmsg="产品名称！" errormsg="请填写产品名称" value="${item.name}" placeholder="产品名称" name="name">
+<?py else: ?>
+<input type="text" class="input-text" datatype="*" nullmsg="产品名称！" errormsg="请填写产品名称" placeholder="产品名称" name="name">
+<?py #endif ?>
+    </div>
+</div>
+
+<div class="row cl">
+    <label class="form-label col-2"><span class="c-red">*</span>产品标题：</label>
+    <div class="formControls col-10">
+<?py if item: ?>
+<input type="text" class="input-text" datatype="*" nullmsg="请填写产品标题！" errormsg="请填写产品标题" value="${item.title}" placeholder="标题,前端现实的商品" name="title">
+<?py else: ?>
+<input type="text" class="input-text" datatype="*" nullmsg="请填写产品标题！" errormsg="请填写产品标题" placeholder="标题,前端现实的商品" name="title">
+<?py #endif ?>
+    </div>
+</div>
+
+<div class="row cl">
+    <label class="form-label col-2">简略标题：</label>
+    <div class="formControls col-4">
+<?py if item: ?>
+<input type="text" class="input-text" datatype="*" nullmsg="请填写简略标题！" value="${item.summary}" placeholder="" id="summary" name="summary">
+<?py else: ?>
+<input type="text" class="input-text" datatype="*" nullmsg="请填写简略标题！" placeholder="" id="summary" name="summary">
+<?py #endif ?>
+    </div>
+
+<label class="form-label col-2">型号：</label>
+    <div class="formControls col-4">
+        <?py if item: ?>
+            <input type="text" class="input-text" value="${item.type}" placeholder="" id="type" name="type" />
+        <?py else: ?>
+            <input type="text" class="input-text" placeholder="" id="type" name="type" />
+        <?py #endif ?>
+    </div>
+</div>
+
+<div class="row cl">
+    <label class="form-label col-2">销售价格：</label>
+    <div class="formControls col-4">
+        <?py if item: ?>
+            <input type="text" name="price" id="price" placeholder="" datatype="price" nullmsg="请填写销售价格！" errormsg="请填写有效的数字，小数点保留2位！" value="${item.price}" class="input-text" style="width:90%">
+        <?py else: ?>
+            <input type="text" name="price" id="price" placeholder="" datatype="price" nullmsg="请填写销售价格！" errormsg="请填写有效的数字，小数点保留2位！" class="input-text" style="width:90%">
+        <?py #endif ?>
+            元
+    </div>
+
+    <label class="form-label col-2">是否上架：</label>
+    <div class="formControls col-4">
+    <?py if item: ?>
+        <?py if item.is_online: ?>
+        <input type="checkbox" id="is_online" name="is_online" checked="checked" value="on" />
+        <?py else: ?>
+        <input type="checkbox" id="is_online" name="is_online" value="on"/>
+        <?py #endif ?>
+    <?py else: ?>
+        <input type="checkbox" id="is_online" name="is_online" checked="checked" value="on"/>
+    <?py #endif ?>
+    </div>
+</div>
+
+<div class="row cl">
+    <label class="form-label col-2">产品关键字：</label>
+    <div class="formControls col-10">
+<?py if item: ?>
+<input type="text" id="product_keywords" name="product_keywords" datatype="*" nullmsg="请填写产品关键字！" placeholder="多个关键字用英文逗号隔开，限10个关键字" value="${item.product_keywords}" class="input-text">
+<?py else: ?>
+<input type="text" id="product_keywords" name="product_keywords" datatype="*" nullmsg="请填写产品关键字！" placeholder="多个关键字用英文逗号隔开，限10个关键字" class="input-text">
+<?py #endif ?>
+    </div>
+</div>
+
+<div class="row cl">
+    <label class="form-label col-2">数量：</label>
+    <div class="formControls col-3">
+<?py if item: ?>
+<input type="text" name="amount" id="amount" placeholder="" datatype="*" nullmsg="当个商品的数量！" value="${item.amount}" class="input-text" style="width:90%">
+<?py else: ?>
+<input type="text" name="amount" id="amount" placeholder="" datatype="*" nullmsg="当个商品的数量！" value="" class="input-text" style="width:90%">
+<?py #endif ?>
+        备注:这里的数量表示单个商品的数量  比如一箱奶粉有6罐,这里填写6
+    </div>
+    <label class="form-label col-2">单位：</label>
+    <div class="formControls col-3">
+        <span class="select-box">
+        <select name="unit" id="unit" class="select">
+<?py for u in units: ?>
+    <?py if item: ?>
+        <?py if item.unit == u.name: ?>
+        <option value="${u.name}" selected='selected'>${u.name}</option>
+        <?py else: ?>
+        <option value="${u.name}">${u.name}</option>
+        <?py #endif ?>
+    <?py else: ?>
+    <option value="${u.name}">${u.name}</option>
+    <?py #endif ?>
+<?py #endfor ?>
+        </select>
+        </span>
+    </div>
+</div>
+
+<div class="row cl">
+    <label class="form-label col-2">规格：</label>
+    <div class="formControls col-3">
+<?py if item: ?>
+<input type="text" name="standard" id="standard" value="${item.standard}" class="input-text" style="width:90%">
+<?py else: ?>
+<input type="text" name="standard" id="standard" value="" class="input-text" style="width:90%">
+<?py #endif ?>
+    </div>
+
+    <label class="form-label col-2">标签：</label>
+    <div class="formControls col-3">
+<?py if item: ?>
+<input type="text" name="item_tags" id="item_tags" value="${item.item_tags}" class="input-text" style="width:90%">
+<?py else: ?>
+<input type="text" name="item_tags" id="standard" value="" class="input-text" style="width:90%">
+<?py #endif ?>
+    </div>
+</div>
+
+<div class="row cl">
+    <label class="form-label col-2">最小限购数量：</label>
+    <div class="formControls col-2">
+<?py if item: ?>
+<input type="text" name="min_limit_quantity" datatype="n" nullmsg="请填写最小限购数量！" errormsg="请填写有效的数字！" id="min_limit_quantity" value="${item.min_limit_quantity}" class="input-text">
+<?py else: ?>
+<input type="text" name="min_limit_quantity" datatype="n" nullmsg="请填写最小限购数量！" errormsg="请填写有效的数字！" id="min_limit_quantity" value="" class="input-text">
+<?py #endif ?>
+    </div>
+
+    <label class="form-label col-2">最大限购数量：</label>
+    <div class="formControls col-2">
+<?py if item: ?>
+<input type="text" name="max_limit_quantity" datatype="n" nullmsg="请填写最大限购数量！" errormsg="请填写有效的数字！" id="max_limit_quantity" value="${item.max_limit_quantity}" class="input-text">
+<?py else: ?>
+<input type="text" name="max_limit_quantity" datatype="n" nullmsg="请填写最大限购数量！" errormsg="请填写有效的数字！" id="max_limit_quantity" value="" class="input-text">
+<?py #endif ?>
+    </div>
+</div>
+
+<div class="row cl">
+    <label class="form-label col-2">库存：</label>
+
+    <div class="formControls col-10">
+<?py if item: ?>
+    <input type="text" name="quantity" id="quantity" placeholder="输入数量" datatype="n" nullmsg="请填写库存！" errormsg="请填写有效的数字！"  value="${item.quantity}" class="input-text" style=" width:25%">
+<?py else: ?>
+    <input type="text" name="quantity" id="quantity" placeholder="输入数量" datatype="n" nullmsg="请填写库存！" errormsg="请填写有效的数字！"  value="" class="input-text" style=" width:25%">
+<?py #endif ?>
+
+        可卖库存:
+<?py if item: ?>
+    <input type="text" name="sale_quantity" id="sale_quantity" placeholder="输入数量" datatype="n" nullmsg="请填写可卖库存！" errormsg="请填写有效的数字！" value="${item.sale_quantity}" class="input-text" style=" width:25%">
+<?py else: ?>
+    <input type="text" name="sale_quantity" id="sale_quantity" placeholder="输入数量" datatype="n" nullmsg="请填写可卖库存！" errormsg="请填写有效的数字！" value="" class="input-text" style=" width:25%">
+<?py #endif ?>
+
+        预警库存:
+<?py if item: ?>
+    <input type="text" name="warning_quantity" id="warning_quantity" placeholder="输入输入数量" datatype="n" nullmsg="请填写预警库存！" errormsg="请填写有效的数字！" value="${item.warning_quantity}" class="input-text" style=" width:25%">
+<?py else: ?>
+    <input type="text" name="warning_quantity" id="warning_quantity" placeholder="输入输入数量" datatype="n" nullmsg="请填写预警库存！" errormsg="请填写有效的数字！" value="" class="input-text" style=" width:25%">
+<?py #endif ?>
+    </div>
+</div>
+<div class="row cl">
+    <label class="form-label col-2">主缩略图：</label>
+
+    <div class="formControls col-10">
+        <div class="uploader-thum-container">
+            <div id="fileList" class="uploader-list"></div>
+            <label id="item_main_img" class="btn btn-default radius ml-10">开始上传</label>
+        </div>
+
+        <div style="position: static">
+<ul id="preViewList" class="dragsort">
+<?py if item: ?>
+    <?py if item.main_pic: ?>
+        <?py for data in item.main_pic.split(';'): ?>
+        <li class="iconitem" data-url="${data}">
+            <div  style="cursor: pointer;">
+            <input type="hidden" name="imgs_url" value="${data}" >
+            <a href="javascript:;" class="see showbig" >
+                <img src="${data}" />
+            </a>
+            <a class="ui-close" href="javascript:;">×</a>
+            </div>
+        </li>
+        <?py #endfor ?>
+    <?py #endif ?>
+<?py #endif ?>
+</ul>
+        </div>
+    </div>
+</div>
+
+<div class="row cl">
+    <label class="form-label col-2">详细内容：</label>
+    <div class="formControls col-10">
+<?py if item: ?>
+<textarea name="content" id="content" datatype="*" nullmsg="请填写详细内容！" errormsg="请填写详细内容！" >${item.content}</textarea>
+<?py else: ?>
+<textarea name="content" id="content" datatype="*" nullmsg="请填写详细内容！" errormsg="请填写详细内容！" ></textarea>
+<?py #endif ?>
+    </div>
+</div>
+
+
+<!-- SEO信息-->
+
+<div class="row cl">
+    <div class="col-10 col-offset-2">
+        <button onClick="" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+        <button onClick="item_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
+        <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+    </div>
+</div>
+<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+    <ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+</div>
+</form>
+</div>
+</div>
+<?py include('admin/common/kindeditor.html') ?>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<link rel="stylesheet" href="/static/admin/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="/static/admin/lib/zTree/v3/css/demo.css" type="text/css">
+
+<script type="text/javascript" src="/static/admin/lib/zTree/v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="/static/admin/lib/jquery.blockui.js"></script>
+<script type="text/javascript" src="/static/admin/lib/jquery-list-dragsort.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $.fn.zTree.init($("#treeDemo"), setting);
+        $('.brand').change(function(){
+            loadSelect.getBrandId();
+        })
+    });
+
+    KindEditor.ready(function(K) {
+        var editor = K.editor({
+            allowFileManager : true,
+            uploadJson:'${handler.reverse_url('img_upload','0')}',
+            imageSizeLimit:'20MB',
+            extraFileUploadParams:{"_xsrf":$("#_xsrf").val()},
+            fieldName : 'imgFile',
+            method:'POST'
+        });
+
+        K('#item_main_img').click(function() {
+            editor.loadPlugin('multiimage', function() {
+                editor.plugin.multiImageDialog({
+                    clickFn : function(urlList) {
+                        var div = K('#J_imageView');
+                        K.each(urlList, function(i, data) {
+                            //$('#preViewList').append('<li class="iconitem" data-url="'+data.url+'"><div><input type="hidden" name="imgs_url" value="'+data.url+'" ><a href="javascript:;" class="showbig" ><img src="'+data.url+'" /></a><a class="ui-close" href="javascript:;">×</a></div></li>');
+                            $('#preViewList').append('<li class="iconitem" data-url="'+data.url+'"><div  style="cursor: pointer;"><input type="hidden" name="imgs_url" value="'+data.url+'" ><img src="'+data.url+'" /><a href="javascript:;" class="see showbig" data-src="'+data.url+'"></a><a class="ui-close" href="javascript:;">×</a></div></li>');
+                        });
+                        editor.hideDialog();
+                    }
+
+                });
+
+            });
+        });
+    });
+
+
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="content"]', {
+            allowFileManager : true,
+            allowImageUpload : true,
+            uploadJson:'${handler.reverse_url('img_upload','0')}',
+            imageSizeLimit:'20MB',
+            minHeight:300,
+            width:'100%',
+            extraFileUploadParams:{"_xsrf":$("#_xsrf").val()}
+        });
+    });
+
+    $(function(){
+
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+        $('#list1,#preViewList').dragsort();
+
+        $('#preViewList').on('click','.showbig',function(){
+            var src=$(this).attr('data-src');
+            console.log(src);
+            $.blockUI({
+                message: '<h1><img src="'+src+'" width="600" /></h1>',
+                css: {
+                    top:  ($(window).height() - 600) /2 + 'px',
+                    left: ($(window).width() - 600) /2 + 'px',
+                    width: '600px'
+                }
+            });
+        });
+        $('#preViewList').on('click','.ui-close',function(){
+            $(this).parent().parent().remove();
+        });
+        $('body').on('click','.blockOverlay',function(){
+            $.unblockUI();
+        });
+
+        $("#item-form-add").Validform({
+            datatype:{
+                price:/^\d+\.?\d{0,2}$/,
+                limit_quantity:function(gets,obj,curform,regxp){
+                    //参数gets是获取到的表单元素值，obj为当前表单元素，curform为当前验证的表单，regxp为内置的一些正则表达式的引用;
+                    if($('#is_limit')[0].checked==true ){
+                        if(!/^\d+$/.test(gets)){
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+        });
+
+    });
+
+</script>
+

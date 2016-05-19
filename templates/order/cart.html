@@ -1,0 +1,269 @@
+﻿<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/order/order.min.css">
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/order/order.min.js"></script>
+<div class="ht-header-wrapper">
+    <div class="ht-header" id="htHeader">
+        <div class="container">
+            <a class="ht-logo" href="/">全球抢购</a>
+            <div class="mod-buysteps">
+                <div class="orderstepsbg"></div>
+                <ul class="clearfix">
+                    <li class="step step-1 active">
+                        <div class="txt">我的购物车</div>
+                    </li>
+                    <li class="step step-2">
+                        <div class="txt">提交订单</div>
+                    </li>
+                    <li class="step step-3 ">
+                        <div class="txt">选择支付方式</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<?py include('include/navigation.html') ?>
+<div class="container">
+    <div id="cart">
+<?py if ware_house_ids:?>
+    <?py for house_id in ware_house_ids:?>
+        <?py ware_house = handler.get_ware_house_by_id(house_id) ?>
+        <?py if ware_house.is_abroad == 1: ?>
+        <form name="fmCart" method="post" action="/order/cart/caculate.html">
+            #{xsrf_form_html}
+            <input type="hidden" value="True" id="is_abroad"  name="is_abroad">
+                <div>
+                    <h1 class="strong-header">${handler.get_ware_house_name_by_id(house_id)}</h1>
+                    <div class="productTable" is_abroad='True'>
+                        <table width="100%">
+                            <colgroup>
+                                <col width="8%">
+                                <col width="42%">
+                                <col width="10%">
+                                <col width="20%">
+                                <col width="10%">
+                                <col width="10%">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="first">
+                                    <span class="checkboxIcons checkboxSimulate checkboxSimulateChecked checkAll"></span>
+                                    全选
+                                </th>
+                                <th>商品信息</th>
+                                <th>单价(元)</th>
+                                <th>数量</th>
+                                <th>金额(元)</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+            <?py good_counts,total_price,tax_acount=0,0,0 ?>
+            <?py for item in items:?>
+                <?py if item.sale_quantity>item.warning_quantity:?>
+                    <?py if house_id==item.ware_house_id:?>
+                        <?py good_counts+=int(item_keys[item.id]) ?>
+                        <?py total_price= total_price+float(item.price)*float(item_keys[item.id]) ?>
+                         <tr class="trHeight chosen" data-id="${item.id}" data-price="${item.price}">
+                                <td align="left" class="first">
+                                    <input type="hidden" name="item_id" value="${item.id}">
+                                <span class="checkboxIcons checkboxSimulate checkboxSimulateChecked" data-itemid="${item.id}"></span>
+                                </td>
+                                <td align="center"><a class="cartImgBox" href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank"><img width="80" height="80" alt="${item.title}" src="${item.main_pic and item.main_pic.split(';')[0] or ''}">
+                                </a>
+                                    <span class="ptitle">${item.title}</span>
+                                </td>
+                                <td align="center" class="price"><span class="strongSize">${item.price}</span></td>
+                                <td align="center">
+                                    <div class="buyBox clearfix">
+                                        <a class="ctrNumFont ctrNum reduceNum" href="javascript:;"></a>
+                                        <input type="text" autocomplete="off" price="${item.price}" class="buyNum" max_count = "${item.max_limit_quantity}" min_count = "${item.min_limit_quantity}" gid="${item.id}" tax_rate="${item.tax_rate}" value="${item_keys[item.id]}" />
+                                        <a class="ctrNumFont ctrNum addNum" href="javascript:;"></a>
+                                    </div>
+                                </td>
+                        <?py tax_acount = tax_acount+int(item_keys[item.id])*float(item.price)*item.tax_rate/100 ?>
+                                <td align="center" class="amountMoney"><span class="strongSize">${int(item_keys[item.id])*float(item.price)}</span></td>
+                                <td align="center">
+                                    <a  href="javascript:void(0)" class="cartShutBtn">X</a>
+                                </td>
+                                            </tr>
+                    <?py #endif ?>
+                <?py else:?>
+                        <tr class="trHeight" data-id="${item.id}" data-price="${item.price}">
+                            <td align="left" class="first">
+                            </td>
+                            <td align="center"><a class="cartImgBox" href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank">
+                                <img width="80" height="80" alt="${item.title}" src="${item.main_pic and item.main_pic.split(';')[0] or ''}">
+                            </a>
+                                <span class="ptitle">${item.title}</span>
+                            </td>
+                            <td align="center" class="price"><span class="strongSize">${item.price}</span></td>
+                            <td align="center">
+                                <div class="buyBox clearfix">
+                                    ${item_keys[item.id]}<span class="red">(库存不足)</span>
+                                </div>
+                            </td>
+                            <td align="center" class="amountMoney"><span class="strongSize">${int(item_keys[item.id])*float(item.price)}</span></td>
+                            <td align="center">
+                                <a  href="javascript:void(0)" class="cartShutBtn">X</a>
+                            </td>
+                        </tr>
+                <?py #endif ?>
+            <?py #endfor ?>
+            <?py if tax_acount>50:?>
+                <?py total_price=total_price+tax_acount?>
+            <?py #endif ?>
+                            <tr class="trlast">
+                                <td colspan="6">
+                                <div class="opdel">
+                                    <span class="checkboxIcons checkboxSimulate checkboxSimulateChecked checkAll"></span>
+                                    <span class="labelall">全选</span>
+                                    <a class="delproduct" href="javascript:void(0);">删除选中商品</a>
+
+                                </div>
+                                    <div class="ordersub">
+                                        <ul>
+                                            <li>商品总计：<label>￥<span class="totalPrice">${total_price}</span></label></li>
+                                            <li>活动优惠：<label>-￥<span class="discount">0.00</span></label></li>
+                                            <li>订单关税： <label class="tariffLbl ${tax_acount<=50 and 'lineThrough' or ''}">￥<span class="tariff">${tax_acount}</span></label></li>
+                                            <li>
+                                                已选商品 <span class="finalChooseNum">${good_counts}</span> 件 总价(不含运费)：
+                                                <label class="moneyCount">￥${total_price}</label>                                            </li>                                        </ul>
+                                    <span class="goToChoice">请至少选择一个商品进行结算</span>
+                                        <a class="submitCartBtn oOrgBtn" href="javascript:void(0)">去结算</a>
+                                        <div class="goToPayNotice noticeLimit">您已超过海关<i class="noticeLimitArrow"></i><i style="color:#D22046;">限额￥1000</i>，请选择部分商品进行结算<i class="askIcon"></i>
+                                            <div style="display: none;" class="tip-wrap">
+                                                <div class="tip-tri"></div>
+                                                <div class="tip-mask"></div>
+                                                <div class="tip-body">
+                                                    <p>海关规定：</p>
+                                                    <p>① 消费者购买进口商品，以“个人自用，合理数量”为原则，每单最大购买金额不得超过1000元人民币（不含关税）。</p>
+                                                    <p>② 如有优惠活动，则1000元限值适用于订单优惠后的金额。</p>
+                                                    <p>③ 如果订单只含单件不可分割商品，则可以超过1000元限值。</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </form>
+        <?py else:?>
+        <form name="fmCart" method="post" action="/order/cart/caculate.html">
+            #{xsrf_form_html}
+            <input type="hidden" value="False" id="is_abroad" name="is_abroad">
+                <div>
+                    <h1 class="strong-header">${handler.get_ware_house_name_by_id(house_id)}</h1>
+                    <div class="productTable" is_abroad ='False'>
+                        <table width="100%">
+                            <colgroup>
+                                <col width="8%">
+                                <col width="42%">
+                                <col width="10%">
+                                <col width="20%">
+                                <col width="10%">
+                                <col width="10%">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="first">
+                                    <span class="checkboxIcons checkboxSimulate checkboxSimulateChecked checkAll"></span>
+                                    全选
+                                </th>
+                                <th>商品信息</th>
+                                <th>单价(元)</th>
+                                <th>数量</th>
+                                <th>金额(元)</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+            <?py good_counts,total_price=0,0 ?>
+            <?py for item in items:?>
+                <?py if item.sale_quantity>item.warning_quantity:?>
+                    <?py if house_id==item.ware_house_id:?>
+                                            <?py good_counts+=int(item_keys[item.id]) ?>
+                                            <?py total_price= total_price+float(item.price)*float(item_keys[item.id]) ?>
+                                            <tr class="trHeight chosen" data-id="${item.id}" data-price="${item.price}">
+                                                <td align="left" class="first">
+                                                    <input type="hidden" name="item_id" value="${item.id}">
+                                                <span class="checkboxIcons checkboxSimulate checkboxSimulateChecked" data-itemid="${item.id}"></span>
+                                                </td>
+                                                <td align="center"><a class="cartImgBox" href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank"><img width="80" height="80" alt="${item.title}" src="${item.main_pic and item.main_pic.split(';')[0] or ''}">
+                                                </a>
+                                                    <span class="ptitle">${item.title}</span>
+                                                </td>
+                                                <td align="center" class="price"><span class="strongSize">${item.price}</span></td>
+                                                <td align="center">
+                                                    <div class="buyBox clearfix">
+                                                        <a class="ctrNumFont ctrNum reduceNum" href="javascript:;"></a>
+                                                        <input type="text" autocomplete="off" price="${item.price}" class="buyNum" max_count = "${item.max_limit_quantity}" min_count = "${item.min_limit_quantity}" gid="${item.id}" tax_rate="${item.tax_rate}" value="${item_keys[item.id]}" />
+                                                        <a class="ctrNumFont ctrNum addNum" href="javascript:;"></a>
+                                                    </div>
+                                                </td>
+                                                <td align="center" class="amountMoney"><span class="strongSize">${int(item_keys[item.id])*float(item.price)}</span></td>
+                                                <td align="center">
+                                                    <a  href="javascript:void(0)" class="cartShutBtn">X</a>
+                                                </td>
+                                            </tr>
+                    <?py #endif ?>
+                <?py else:?>
+                        <tr class="trHeight" data-id="${item.id}" data-price="${item.price}">
+                            <td align="left" class="first">
+                            </td>
+                            <td align="center"><a class="cartImgBox" href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank">
+                                <img width="80" height="80" alt="${item.title}" src="${item.main_pic and item.main_pic.split(';')[0] or ''}">
+                            </a>
+                                <span class="ptitle">${item.title}</span>
+                            </td>
+                            <td align="center" class="price"><span class="strongSize">${item.price}</span></td>
+                            <td align="center">
+                                <div class="buyBox clearfix">
+                                    ${item_keys[item.id]}<span class="red">(库存不足)</span>
+                                </div>
+                            </td>
+                            <td align="center" class="amountMoney"><span class="strongSize">${int(item_keys[item.id])*float(item.price)}</span></td>
+                            <td align="center">
+                                <a  href="javascript:void(0)" class="cartShutBtn">X</a>
+                            </td>
+                        </tr>
+                <?py #endif ?>
+            <?py #endfor ?>
+                            <tr class="trlast">
+                                <td colspan="6">
+                                <div class="opdel">
+                                    <span class="checkboxIcons checkboxSimulate checkboxSimulateChecked checkAll"></span>
+                                    <span class="labelall">全选</span>
+                                    <a class="delproduct" href="javascript:void(0);">删除选中商品</a>
+
+                                </div>
+                                    <div class="ordersub">
+                                        <ul>
+                                            <li>商品总计：<label>￥<span class="totalPrice">${total_price}</span></label></li>
+                                            <li>活动优惠：<label>-￥<span class="discount">0.00</span></label></li>
+                                            <li>
+                                                已选商品 <span class="finalChooseNum">${good_counts}</span> 件 总价(不含运费)：
+                                                <label class="moneyCount">￥${total_price}</label>                                            </li>                                        </ul>
+                                    <span class="goToChoice">请至少选择一个商品进行结算</span>
+                                        <a class="submitCartBtn oOrgBtn" href="javascript:void(0)">去结算</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </form>
+        <?py #endif?>
+    <?py #endfor ?>
+<?py else:?>
+    <div id="productEmpty" class="cartCon">
+        <div class="productEmpty">
+            <div class="nullcart">购物车里空空如也，赶紧去<a href="/">逛逛吧&gt;</a></div>
+        </div>
+    </div>
+<?py #endif ?>
+</div>
+</div>

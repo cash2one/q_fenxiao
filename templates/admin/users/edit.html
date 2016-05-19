@@ -1,0 +1,96 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员中心 <span class="c-gray en">&gt;</span>编辑会员信息<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+</div>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="r">
+                <a href="javascript:history.go(-1);" class="btn btn-danger radius">返回上一页</a>
+            </span>
+    </div>
+<form action="" method="post" class="form form-horizontal" id="user-form-edit">
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>UID：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                    <input type="text" class="input-text" datatype="*"  disabled nullmsg="UID" errormsg="UID" value="${data.uid}" placeholder="UID" name="uid">
+                <?py #endif ?>
+			</div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>会员账号：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                    <input type="text" class="input-text" datatype="*"  disabled nullmsg="会员账号" errormsg="会员账号" value="${data.user_name}" placeholder="会员账号" name="user_name">
+                <?py #endif ?>
+			</div>
+
+			<label class="form-label col-2"><span class="c-red">*</span>手机号码：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                <input type="text" class="input-text" datatype="*" nullmsg="手机号码！" errormsg="手机号码" disabled value="${data.phone}" placeholder="手机号码" name="phone">
+                <?py #endif ?>
+			</div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>昵称：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                    <input type="text" class="input-text" datatype="*"  disabled nullmsg="昵称" errormsg="昵称" value="${data.nick}" placeholder="会员账号" name="user_name">
+                <?py #endif ?>
+			</div>
+
+			<label class="form-label col-2"><span class="c-red">*</span>真实姓名：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                <input type="text" class="input-text" datatype="*" nullmsg="真实姓名！" errormsg="真实姓名" disabled value="${data.real_name}" placeholder="真实姓名" name="real_name">
+                <?py #endif ?>
+			</div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>Email：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                    <input type="text" class="input-text" datatype="*"  disabled nullmsg="邮箱地址" errormsg="邮箱地址" value="${data.email}" placeholder="邮箱地址" name="email">
+                <?py #endif ?>
+			</div>
+
+			<label class="form-label col-2"><span class="c-red">*</span>性别：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                <input type="text" class="input-text" datatype="*" nullmsg="性别！" errormsg="性别" disabled value="${data.sex}" placeholder="性别" name="sex">
+                <?py #endif ?>
+			</div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>用户头像：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                    <img src="${data.photo}" width="" height="">
+                <?py else:?>
+                    <img src="" width="" height="">
+                <?py #endif ?>
+			</div>
+          <label class="form-label col-2"><span class="c-red">*</span>来源：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                <input type="text" class="input-text" datatype="*" nullmsg="来源！" errormsg="来源" disabled value="${data.regist_from}" placeholder="注册时间" name="regist_from">
+                <?py #endif ?>
+			</div>
+    </div>
+    <div class="row cl">
+           <label class="form-label col-2"><span class="c-red">*</span>注册时间：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                <input type="text" class="input-text" datatype="*" nullmsg="注册时间！" errormsg="注册时间" disabled value="${data.gmt_created}" placeholder="注册时间" name="gmt_created">
+                <?py #endif ?>
+			</div>
+
+			<label class="form-label col-2"><span class="c-red"></span>最后访问时间：</label>
+			<div class="formControls col-4">
+                <?py if data: ?>
+                <input type="text" class="input-text" datatype="*" nullmsg="最后访问时间！" errormsg="最后访问时间" disabled value="${data.gmt_created}" placeholder="最后访问时间" name="last_visit">
+                <?py #endif ?>
+			</div>
+    </div>
+</form>
+</div>

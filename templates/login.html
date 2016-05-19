@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>登录 全球抢购（qqqg.com）全球抢购-100%海外直采！</title>
+    <meta name="keywords" content="全球抢购,海淘,跨境购,代购,进口,跨境电商,海外直邮"/>
+    <meta name="description" content="全球抢购-安全、放心的跨境海淘网站，官方认证，正品保证。轻松购遍海外进口母婴，进口美食 ，进口美妆、进口电子数码，更多产品正陆续推出。"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="http://cdn.qqqg.com/web/images/qqqg.ico"/>
+
+    <link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/com.min.css">
+    <link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/login.min.css">
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript" src="http://cdn.qqqg.com/web/js/jquery.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/web/js/util.js"></script>
+    <script type="text/javascript" src="http://cdn.qqqg.com/web/js/login.js"></script>
+
+</head>
+<body>
+
+<div class="qqqg-header">
+    <div class="container">
+        <div class="logo">
+            <a href="/" class="qqqg-logo">
+                全球抢购
+            </a>
+            <h2></h2>
+        </div>
+        <div class="borderline"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="content box loginboxOuter">
+        <img class="defimg" alt="" src="http://cdn.qqqg.com/web/images/default-banner.png?v=1">
+        <div>
+            <div id="loginTab" class="loginTab">
+                <a class="idLogin active">账号登录</a><a class="smsLogin">短信快捷登录</a>
+            </div>
+            #{xsrf_form_html}
+            <div id="loginForm" class="loginbox">
+                <div id="phoneloginbox" class="boxwrap">
+                    <span id="LoginAccountInfo" class="error" style="display: none;"></span>
+                    <form method="post">
+                    <div class="normalInput" style="margin-bottom: 20px;">
+                        <input type="text" autocomplete="off" placeholder="手机号码" maxlength="11" id="phone" name="phone" value="">
+                    </div>
+                    <span for="phone" class="error"></span>
+
+                    <div class="normalInput">
+                        <input type="password" autocomplete="off" value=""  maxlength="16" id="password" placeholder="密码">
+                        <a onselectstart="return false" class="pwdBtnShow noselect" id="pwdBtn">
+                            <i class="i_icon"></i>
+                        </a>
+                        <div class="clear"></div>
+                    </div>
+                    <span for="password" class="error"></span>
+                    <!--
+                    <div class="normalInput">
+                        <input type="text" autocomplete="off" placeholder="图片验证码" maxlength="6" id="kapkey" name="kapkey">
+                        <img src="/static/images/random.jpg?t=1440496755500" title="点击可刷新验证码" class="randomCode" id="imgKey">
+                    </div>
+                    <span for="kapkey" class="error"></span>
+                    -->
+                    <a class="fullBtnBlue" id="phoneloginBtn">登录</a>
+                    </form>
+                </div>
+
+                <div id="smsloginbox" class="boxwrap"  style="display: none;">
+                    <span id="LoginPhoneInfo" class="error" style="display: none;"></span>
+                    <form method="post">
+                    <div class="normalInput" style="margin-bottom: 20px;">
+                        <input type="text" autocomplete="off" placeholder="手机号码" maxlength="11" id="smsphone" name="phone" value="">
+                    </div>
+                    <span for="phone" class="error"></span>
+
+                    <div class="usInput">
+                        <div class="smskeywrap">
+                        <input type="password" autocomplete="off" value=""  maxlength="16" id="smskeyword" class="smskeyword" placeholder="动态密码">
+                        </div>
+                        <a class="linkABlue invalidBtn" href="javascript:void(0);" id="getKeyWord">获取动态密码</a>
+                        <div class="clear"></div>
+                    </div>
+                    <span for="password" class="error"></span>
+                    <!--
+                    <div class="normalInput">
+                        <input type="text" autocomplete="off" placeholder="图片验证码" maxlength="6" id="kapkey" name="kapkey">
+                        <img src="/static/images/random.jpg?t=1440496755500" title="点击可刷新验证码" class="randomCode" id="imgKey">
+                    </div>
+                    <span for="kapkey" class="error"></span>
+                    -->
+                    <a class="fullBtnBlue" id="smsloginBtn" class="loginBtn">登录</a>
+                    </form>
+                </div>
+                <div class="foot">还没有账号？<a href="reg.html">立即注册</a>&nbsp;|&nbsp;<a href="/getpwd.html">忘记密码</a></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<?py include('include/footer.html') ?>
+</body>
+</html>

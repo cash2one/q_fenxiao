@@ -1,0 +1,825 @@
+﻿body {
+    background-color:#f3f3f3
+}
+.m-search .resultinfo a {
+    color: #333;
+}
+.m-search .gnum {
+    color: #999;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    margin-left: 15px;
+}
+.m-search .resultinfo {
+    line-height: 24px;
+    margin: 5px 0 15px;
+}
+.u-gap {
+    color: #999;
+    display: inline-block;
+    font-family: simsun;
+    font-weight: bold;
+    margin: 0 5px;
+}
+.m-result .saelsinfo span, .m-search .arrow-down, .m-search .arrow-up, .m-search .more span, .m-search .simplePage a, .m-search .simplePage span, .m-search .soldout {
+    background:url(http://cdn.qqqg.com/web/images/search/icon-new.png) -9999px -9999px no-repeat
+}
+.m-checkbox .box {
+    color: #ddd;
+    font-family: iconfont;
+    font-size: 14px;
+    line-height: 14px;
+    padding-right: 22px;
+    position: relative;
+}
+.m-checkbox .box {
+    color: #ddd;
+    font-family: iconfont;
+    font-size: 14px;
+    line-height: 14px;
+}
+.m-checkbox i {
+    background: #fff none repeat scroll 0 0;
+    color: #d12147;
+    font-size: 15px;
+    height: 14px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    text-indent: -9999px;
+    top: 0;
+    width: 14px;
+}
+.m-checkbox em {
+    border: 1px solid #ddd;
+    font-size: 16px;
+    height: 13px;
+    left: 0;
+    position: absolute;
+    text-indent: -9999px;
+    top: -1px;
+    width: 13px;
+}
+.m-search {
+    width:1104px;
+    margin:0 auto;
+    text-align:left;
+    font-size:14px
+}
+.m-search .resultwrap {
+    margin-bottom:20px;
+    padding-top:10px
+}
+.m-search .correction {
+    width:1038px;
+    padding:10px 25px;
+    margin-top:10px;
+    border:1px solid #ddd;
+    background-color:#FFF8DB;
+    line-height:24px
+}
+.m-search .correction a, .m-search .correction a:hover, .m-search .correction span {
+    color:#d71111;
+}
+.m-search .resultinfo {
+    margin:5px 0 15px
+}
+.m-search .total {
+    float:left;
+    line-height:24px
+}
+.m-search .chosen {
+    display:inline-block;
+    position:relative;
+    float:left;
+    height:22px;
+    padding:0 30px 0 10px;
+    margin-left:15px;
+    border:1px dotted #d71111;
+    background-color:#fff;
+    color:#d71111;
+    line-height:22px;
+    font-size:12px;
+    cursor:pointer
+}
+.m-search .chosen b {
+    position:absolute;
+    top:0;
+    right:8px;
+    font-weight:700;
+    font-size:14px;
+    color:#d71111;
+    font-family:iconfont
+}
+.m-search .options {
+    width:1090px;
+    margin:0 auto
+}
+.m-search i {
+    color:#d71111
+}
+.m-search .name {
+    float:left;
+    width:120px;
+    height:100%;
+    padding-top:10px;
+    color:#333;
+    line-height:34px
+}
+.m-search .opertaion {
+    padding:0 20px;
+    margin-bottom:12px;
+    background-color:#fff
+}
+.m-classify {
+    position:relative;
+    background-color:#fff;
+    border-bottom:1px solid #eaeaea
+}
+.m-classify .hdbrands {
+    margin-left:80px;
+    padding:10px 0;
+    background-color:#fff
+}
+.m-classify .hdbrands2 {
+    position:relative;
+    height:34px;
+    overflow:hidden
+}
+.m-classify .autoheight .hdbrands2 {
+    height:auto
+}
+.m-classify .line2height .hdbrands2 {
+    height:68px
+}
+.m-classify .brands {
+    _float:left;
+    width:900px;
+    line-height:26px
+}
+.m-classify .brands a {
+    display:inline-block;
+    position:relative;
+    height:26px;
+    padding:0 20px 0 10px;
+    margin:4px 10px 4px 0;
+    cursor:pointer;
+    text-decoration:none;
+    color:#333
+}
+.m-classify .brands a:hover, .m-classify .brands span:hover {
+    color:#d71111
+}
+.m-classify .brands em, .m-classify .brands i, .m-classify .multbtn {
+    display:none
+}
+.m-classify .multiple .brands a {
+    padding-left:22px
+}
+.m-classify .multiple em {
+    display:block;
+    position:absolute;
+    left:0;
+    top:6px;
+    width:12px;
+    height:12px;
+    border:1px solid #ddd
+}
+.m-classify .multiple .selected i {
+    display:block;
+    position:absolute;
+    left:0;
+    top:6px;
+    width:12px;
+    height:12px;
+    font-size:14px;
+    line-height:14px;
+    color:#d71111;
+    text-align:center;
+    font-family:iconfont
+}
+.m-classify .multiple .multbtn {
+    display:block;
+    padding-right:100px;
+    text-align:center
+}
+.m-classify .multbtn span {
+    display:inline-block;
+    width:58px;
+    height:28px;
+    margin:10px;
+    border:1px solid #ccc;
+    color:#333;
+    line-height:28px;
+    cursor:pointer
+}
+.m-classify .multbtn .submit {
+    background-color:#d71111;
+    border-color:#d71111;
+    color:#fff
+}
+.m-classify .multbtn .submit:hover {
+    background-color:#f3385f
+}
+.m-classify .multbtn .cancel:hover {
+    border-color:#d71111;
+    color:#d71111
+}
+.m-classify .multbtn .disable, .m-classify .multbtn .disable:hover {
+    background-color:#ccc;
+    border-color:#ccc;
+    cursor:pointer
+}
+.m-classify .brands b {
+    display:none;
+    position:absolute;
+    top:0;
+    right:4px;
+    font-family:iconfont
+}
+.m-classify .brands .active b {
+    display:block;
+    font-weight:700
+}
+.m-classify .brands .active, .m-classify .brands .active:hover {
+    background-color:#d71111;
+    color:#fff
+}
+.m-classify .morewrap {
+    position:absolute;
+    top:16px;
+    right:0
+}
+.m-classify .more {
+    position:relative;
+    float:right;
+    width:42px;
+    margin-left:18px;
+    line-height:22px;
+    cursor:pointer
+}
+.m-classify .more:hover {
+    color:#d71111
+}
+.m-classify .more:hover span {
+    background-position:-50px 0
+}
+.m-classify .more:hover .packup {
+    background-position:-50px -13px
+}
+.m-classify .more span {
+    position:absolute;
+    top:8px;
+    left:32px;
+    width:9px;
+    height:6px;
+    background-position:0 0
+}
+.m-classify .more .packup {
+    background-position:-21px 0
+}
+.m-classify .extmore {
+    float:right;
+    width:50px;
+    height:20px;
+    border:1px solid #ccc;
+    background-color:#f8f8f8;
+    text-align:center;
+    letter-spacing:1px;
+    cursor:pointer
+}
+.m-classify .extmore:hover {
+    background-color:#fff
+}
+.m-classify .extmore span {
+    font-weight:700
+}
+.m-filter {
+    margin:0 0 10px;
+    background-color:#fff
+}
+.m-filter .name {
+    padding-top:0;
+    line-height:46px
+}
+.m-filter .hdorder {
+    height:26px;
+    margin-left:80px;
+    padding:12px 0 20px;
+    background-color:#fff
+}
+.m-filter .order dd {
+    float:left;
+    width:60px;
+    height:24px;
+    margin-right:10px;
+    line-height:24px;
+    border:1px solid #ddd;
+    background-color:#f8f8f8;
+    cursor:pointer;
+    text-align:center
+}
+.m-filter .order .active {
+    position:relative;
+    border-color:#d71111;
+    background-color:#fff;
+    color:#d71111;
+    text-align:left
+}
+.m-filter .order .active span {
+    display:inline-block;
+    margin-left:10px
+}
+.m-filter .order .arrow-down, .m-filter .order .arrow-up {
+    display:block;
+    position:absolute;
+    top:8px;
+    right:10px;
+    width:8px;
+    height:10px
+}
+.m-filter .order .arrow-down {
+    background-position:0 -13px
+}
+.m-filter .order .arrow-up {
+    background-position:-23px -13px
+}
+.m-filter .simplePage {
+    float:right;
+    margin-top:10px;
+    line-height:12px
+}
+.m-filter .simplePage a, .m-filter .simplePage span {
+    display:inline-block;
+    float:left;
+    margin-left:7px
+}
+.m-filter .simplePage .arrow-left {
+    background-position:-24px -29px;
+    width:6px;
+    height:10px;
+    cursor:pointer
+}
+.m-filter .simplePage .arrow-left:hover {
+    background-position:-47px -29px
+}
+.m-filter .simplePage .def-left, .m-filter .simplePage .def-left:hover {
+    background-position:0 -29px;
+    cursor:default
+}
+.m-filter .simplePage .arrow-right {
+    background-position:-23px -49px;
+    width:6px;
+    height:10px;
+    cursor:pointer
+}
+.m-filter .simplePage .arrow-right:hover {
+    background-position:-47px -49px
+}
+.m-filter .simplePage .def-right, .m-filter .simplePage .def-right:hover {
+    background-position:0 -49px;
+    cursor:default
+}
+.m-result {
+    margin-bottom:20px
+}
+.m-result .goods {
+    position:relative;
+    float:left;
+    width:262px;
+    height:371px;
+    margin:0 7px 14px;
+    _margin:0 6px 14px;
+    background-color:#fff;
+    font-size:12px
+}
+.m-result .goodswrap {
+    position:absolute;
+    top:-1px;
+    left:-1px;
+    background-color:#fff;
+    border:1px solid #f3f3f3;
+    border-bottom:none
+}
+.m-result .goods .img {
+    position:relative
+}
+.m-result .goods a {
+    display:block;
+    color:#333
+}
+.m-result .goods img {
+    display:block;
+    width:262px;
+    height:262px
+}
+.m-result .goods .discount {
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    width:42px;
+    height:40px;
+    background-color:#fff;
+    border:1px solid #666;
+    font-size:16px;
+    text-align:center;
+    line-height:40px;
+    color:#666;
+    font-weight:700
+}
+.m-result .goods .desc {
+    width:234px;
+    padding:0 14px 16px
+}
+.m-result .goods .title {
+    height:44px;
+    overflow:hidden;
+    font-size:14px;
+    line-height:22px
+}
+.m-result .title:hover {
+    color:#d71111
+}
+.m-result .goods .price {
+    height:24px;
+    margin-top:6px;
+    color:#d71111
+}
+.m-result .price .cur {
+    display:inline-block;
+    margin-right:2px;
+    font-weight:700;
+    font-size:22px;
+    line-height:24px
+}
+.m-result .cur .betext {
+    font-size:12px;
+    font-weight:400
+}
+.m-result .price i {
+    font-size:12px;
+    font-weight:700
+}
+.m-result .combinedLabel {
+    position:relative;
+    top:-4px;
+    display:inline-block;
+    padding:0 4px;
+    border:1px dotted #d71111;
+    font-size:12px;
+    color:#d71111;
+    font-weight:700;
+    line-height:18px
+}
+.m-result .goods .comments, .m-result .goods del {
+    float:left;
+    display:inline-block;
+    margin-right:8px;
+    color:#999
+}
+.m-result .soldout {
+    position:absolute;
+    top:0;
+    right:0;
+    width:59px;
+    height:60px;
+    background-position:0 -98px
+}
+.m-result .activityflag {
+    position:absolute;
+    top:6px;
+    left:6px;
+    width:110px;
+    height:22px
+}
+.m-result .activityflag span {
+    display:inline-block;
+    float:left;
+    width:44px;
+    height:22px;
+    margin-right:4px;
+    font-size:12px;
+    color:#fff;
+    text-align:center;
+    line-height:22px
+}
+.m-result .activityflag .large {
+    width:54px
+}
+.m-result .danpin {
+    background-color:#F5345E
+}
+.m-result .zhengdan {
+    background-color:#FFA64D
+}
+.m-result .new {
+    background-color:#BC72EE
+}
+.m-result .promotion .title {
+    height:22px;
+    width:234px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden
+}
+.m-result .saelsinfo {
+    position:relative;
+    padding-left:20px;
+    width:214px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    line-height:22px;
+    font-size:14px;
+    color:#d71111
+}
+.m-result .saelsinfo span {
+    display:block;
+    position:absolute;
+    left:0;
+    top:4px;
+    width:18px;
+    height:14px;
+    background-position:0 -166px
+}
+.m-result .goods:hover .title {
+    min-height:44px;
+    height:auto
+}
+.m-result .goods:hover .promotion .saelsinfo, .m-result .goods:hover .promotion .title {
+    height:auto;
+    min-height:22px;
+    white-space:normal
+}
+.m-result .goods:hover {
+    z-index:99;
+    *zoom:1
+}
+.m-result .goods:hover .goodswrap {
+    border:1px solid #d71111;
+    box-shadow:1px 2px 3px rgba(0, 0, 0, .2)
+}
+.orderPages .jumpto, .orderPages .jumptoBtn, .orderPages .jumptoTip, .orderPages .jumptoTxt {
+    display:inline-block
+}
+.jumptoTip {
+    margin:0 8px
+}
+.m-empty {
+    position:relative;
+    width:1090px;
+    height:180px;
+    margin:30px 7px 10px;
+    padding-top:70px;
+    background-color:#fff
+}
+.m-empty .content {
+    margin-left:450px;
+    font-size:14px
+}
+.m-empty .errorimg {
+    position:absolute;
+    top:54px;
+    left:290px;
+    display:block;
+    width:144px;
+    height:121px;
+    background:url(http://cdn.qqqg.com/web/images/search/empty.png) no-repeat
+}
+.m-empty-2 .content {
+    margin-left:430px
+}
+.m-empty-2 .errorimg {
+    left:270px
+}
+.m-pagination li {
+    cursor:pointer;
+    background-color:#fff
+}
+.m-pagination li:hover {
+    background-color:#f3f3f3
+}
+.m-search .m-checkbox {
+    float:left;
+    margin-left:20px;
+    line-height:26px;
+    font-size:14px;
+    cursor:pointer
+}
+.m-loading {
+    height:60px;
+    width:80px;
+    margin:80px 426px;
+    padding:40px 0 0 100px;
+    background:url(http://cdn.qqqg.com/web/images/search/loading-search.gif) no-repeat #f3f3f3
+}
+.s-color {
+    color:#d71111
+}
+.search-recom {
+    position:relative;
+    width:1090px;
+    margin:0 auto
+}
+#recent, #recomGoodsWrap, .newRecomWrap {
+    margin-top:10px
+}
+#recent h4 {
+    padding-right:17px
+}
+.generalize, .newRecomItemWrap {
+    background-color:#fff
+}
+.m-brand {
+    height:120px;
+    padding:8px 40px 8px 20px;
+    margin-bottom:10px;
+    background-color:#fff
+}
+.m-brand img {
+    display:block;
+    float:left;
+    width:120px;
+    height:120px
+}
+.m-brand .info {
+    margin-top:20px;
+    margin-left:140px;
+    line-height:24px;
+    color:#333
+}
+.m-brand .title {
+    height:26px;
+    line-height:26px
+}
+.m-brand .brandname {
+    float:left;
+    font-size:22px
+}
+.m-brand a {
+    color:#333
+}
+.m-brand a:hover .brandname {
+    color:#d71111
+}
+.m-brand .detail {
+    position:relative;
+    height:46px;
+    margin-top:10px;
+    color:#666;
+    overflow:hidden;
+    font-size:14px;
+    line-height:24px
+}
+.m-brand .follow {
+    display:block;
+    float:left;
+    width:68px;
+    height:24px;
+    margin:1px 10px;
+    border-radius:12px;
+    color:#fff;
+    background-color:#CF2C48;
+    cursor:pointer;
+    text-align:center;
+    line-height:24px
+}
+.m-brand .follow:hover {
+    background-color:#F5345E
+}
+.m-brand .unfo {
+    background-color:#ddd
+}
+.m-brand .unfo:hover {
+    background-color:#ddd;
+    color:#333
+}
+.m-brand .info b {
+    position:relative;
+    top:-1px;
+    font-size:12px;
+    font-family:iconfont
+}
+.m-brand .dot .dotshow {
+    display:block
+}
+.m-brand .dotshow {
+    display:none;
+    font-weight:700;
+    position:absolute;
+    bottom:-2px;
+    right:0;
+    padding:0 15px 1px 42px;
+    background:url(http://cdn.qqqg.com/web/images/search/ellipsis_bg.png) repeat-y
+}
+.m-brand2 {
+    height:270px;
+    margin:20px 0;
+    overflow:hidden;
+    background-color:#fff
+}
+.m-brand2 .detailImg {
+    display:block;
+    float:left;
+    width:540px;
+    height:270px
+}
+.m-brand2 .content {
+    margin-left:540px;
+    width:510px;
+    padding:20px
+}
+.m-brand2 .info {
+    height:70px
+}
+.m-brand2 .logo {
+    display:block;
+    float:left;
+    width:68px;
+    height:68px;
+    border:1px solid #eaeaea
+}
+.m-brand2 .bname {
+    float:left;
+    margin-left:12px;
+    height:70px;
+    width:280px;
+    overflow:hidden
+}
+.m-brand2 .title {
+    margin-top:10px;
+    font-size:18px;
+    line-height:28px;
+    font-weight:700
+}
+.m-brand2 .sold {
+    font-size:12px;
+    line-height:24px
+}
+.m-brand2 .sold span {
+    color:#d71111;
+    letter-spacing:1px
+}
+.m-brand2 .from {
+    float:right;
+    margin-top:15px
+}
+.m-brand2 .from img {
+    display:block;
+    float:left
+}
+.m-brand2 .from span {
+    display:block;
+    margin-left:50px;
+    line-height:20px;
+    font-size:12px;
+    color:#999
+}
+.m-brand2 .intro {
+    margin-top:4px;
+    font-size:14px;
+    line-height:24px;
+    word-wrap:break-word;
+    word-break:break-all
+}
+.m-brand2 .intro p {
+    font-size:12px;
+    line-height:24px;
+    overflow:hidden
+}
+.m-brand2 .focus {
+    height:32px;
+    margin-top:14px
+}
+.m-brand2 .follow {
+    display:block;
+    float:left;
+    width:106px;
+    height:32px;
+    line-height:32px;
+    border-radius:16px;
+    background-color:#d71111;
+    color:#fff;
+    font-size:12px;
+    text-align:center;
+    cursor:pointer
+}
+.m-brand2 .follow b {
+    position:relative;
+    top:-1px;
+    font-size:12px;
+    font-family:iconfont;
+    font-weight:700
+}
+.m-brand2 .follow:hover {
+    background-color:#F5345E
+}
+.m-brand2 .unfo {
+    background-color:#ddd
+}
+.m-brand2 .unfo:hover {
+    background-color:#ddd;
+    color:#333
+}

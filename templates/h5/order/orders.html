@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+  <link rel="shortcut icon" href="http://cdn.qqqg.com/mobile/images/qqqg.ico" />
+  <meta name="description" content="全球抢购">
+	<title> 我的订单-全球抢购</title>
+  <?py include('mobile/include/header.html') ?>
+	<link rel="stylesheet" type="text/css" href="http://cdn.qqqg.com/mobile/css/orders.min.css">
+</head>
+<body>
+#{xsrf_form_html}
+<header class="g-hd " id="g-hd">
+  <div class=" m-topnav" id="topbar-box">
+  	<div class="m-topnavbar">
+	    <span id="backbtn" class="u-icn18 backbtn"></span>
+	    <span class="tit" id="toptitle">我的订单</span>
+	    <span class="u-menu" id="menu">&nbsp;</span>
+    </div>
+<?py include('mobile/include/headermenu.html') ?>
+  </div>
+</header>
+
+<!--订单详情-->
+<div class="g-bd">
+    <div id="orders">
+      <div id="orderTab" class="m-table m-orderstab">
+        <ul class="tr">
+          <li class="td f-tac tab tab-cur"><span>全部</span>
+          </li>
+          <li class="td f-tac tab"><span class="ordertype">待付款</span>
+          </li>
+          <li class="td f-tac tab"><span class="ordertype">待发货</span>
+          </li>
+          <li class="td f-tac tab"><span class="ordertype">待收货</span>
+          </li>
+        </ul>
+      </div>
+      <div id="m-listloading" class="m-listloading f-tac">
+        <img src="http://cdn.qqqg.com/mobile/images/loading.gif">
+      </div>
+      <div id="m-orderbox" class="m-orderbox">
+      </div>
+      <div id="emptyOrder" class="m-emptyorder f-tac" style="display:none">
+            <div><span class="u-emtorder">&nbsp;</span></div>
+            <div class="f-tac emttip">啊哦，您还没有相关订单～</div>
+      </div>
+    </div>
+</div>
+
+
+
+
+	<div class="m-gotop-wrap" id="m-gotop-wrap">
+		<div class="ic-gotop">
+			<i class="up"></i>
+			<p class="desc">顶部</p>
+		</div>
+	</div>
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/order/orders.min.js"></script>
+
+<script  type="text/x-tmpl" id="templateOrderList">
+<div class="m-orderitem" data-id="{{= id}}" order-no="{{= order_no}}">
+  <div class="m-orderhd">
+  <span class="ordertype">{{= orderStatusText}}</span><span class="ordertime">{{= oTime}}</span>
+  </div>
+  <ul class="m-goodslist">
+    {{tmpl(items) "#templateItems"}}
+  </ul>
+  <div class="f-tar m-orderinfo"><span>共<span class="count">{{= goodsCount}}</span>件</span><span class="amount">实付：￥{{= real_amount}}</span>
+  </div>
+  <div class="m-btnbox f-cb" >
+  {{if orderStatusText=='等待付款'}}
+    <a class="u-btn3-yq m-orderbtn cancelOrder" href="javascript:void(0)" >取消订单</a>
+    <a class="u-btn m-orderbtn" href="/order/{{= id}}/pay/{{= id}}.html" >立即付款</a>
+  {{/if}}
+  {{if orderStatusText=='已发货'}}
+    <a class="u-btn1 m-orderbtn" href="/order/express_check/{{= order_no}}.html">订单跟踪</a>
+    <a class="u-btn m-orderbtn confirmReceipt" href="javascript:void(0)">确认收货</a>
+  {{/if}}
+  {{if orderStatusText=='交易成功'}}
+    <a class="u-btn m-orderbtn" href="javascript:void(0)" style="display:none;">评价</a>
+  {{/if}}
+  </div>
+</div>
+</script>
+<script  type="text/x-tmpl" id="templateItems">
+    <li>
+      <section class="">
+        <div class="goodsdetail f-cb">
+          <div class="gimg f-fl">
+            <a href="/order/{{= order_id}}/detail.html">
+              <img alt="{{= title}}" data-src="{{= goodPhoto}}@58w" src="http://cdn.qqqg.com/mobile/images/blank.gif" title="{{= title}}">
+            </a>
+          </div>
+          <div class="ginfo1 f-fl">
+            <div class="gtitle"><a href="/order/{{= order_id}}/detail.html">{{= title}}</a>
+            </div>
+            <div class="gsku">
+              <a href="/order/{{= order_id}}/detail.html">
+              </a>
+            </div>
+          </div>
+          <div class="ginfo2 f-fr">
+            <div class="gprinum">
+              <div class="gprice">¥
+                {{= price}}</div>
+              <div class="gnum">X{{= buy_nums}}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </li>
+</script>
+<?py include('mobile/include/cnzz.html') ?>
+</body>
+</html>

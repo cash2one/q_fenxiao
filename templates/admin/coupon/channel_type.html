@@ -1,0 +1,40 @@
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 优惠券管理 <span class="c-gray en">&gt;</span> 类型管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+        <a href="${handler.reverse_url('coupon_type')}?operation=edit" class="btn btn-primary radius">
+            <i class="Hui-iconfont">&#xe600;</i> 添加</a></span>
+        </div>
+	<div class="mt-20 dataTables_wrapper">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+				<tr class="text-c">、
+				<th width="80">ID</th>
+				<th width="150">名称</th>
+				<th>代码</th>
+				<th>描述</th>
+				<th width="150">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+                <?py for d in conpon_types:?>
+                <tr class="text-c">
+                    <td>${d.id}</td>
+                    <td>${d.name}</td>
+                    <td>${d.code}</td>
+                    <td>${d.description}</td>
+                    <td>
+                        <a href="${handler.reverse_url('coupon_type')}?operation=edit&id=${d.id}" class="red"> <i class="Hui-iconfont"></i>编辑</a>
+                    </td>
+                </tr>
+            <?py #endfor?>
+		</tbody>
+	</table>
+</div>
+
+<script type="text/javascript">
+/*权限-添加*/
+function channel_add(title,url,w,h){
+	layer_show(title,url,w,400);
+}
+</script>

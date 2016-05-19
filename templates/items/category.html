@@ -1,0 +1,211 @@
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/search.min.css">
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/member/order.min.css">
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/product/category.min.js"></script>
+<div id="searchbox" class="m-search">
+    <div class="resultwrap">
+        <div class="options">
+            <div class="resultinfo clearfix">
+                <p class="total"><a href="/">全球抢购</a><b class="u-gap">&gt;</b><a href="/">${category_name}</a></p><b class="u-gap f-fl">&gt;</b>
+                <!--<a href="/"><span class="chosen" id="delcat3">分类：爱他美<b></b></span></a>-->
+                <span class="gnum">商品共<i>${item_count}</i>个</span>
+            </div>
+            <div id="queryparam" class="opertaion">
+<?py if categorys:?>
+<div class="m-classify z-cat3 j-box clearfix" id="classify">
+    <div class="name">分类：</div>
+    <div class="hdbrands  j-tagwrap autoheight">
+        <div class="hdbrands2 ctag">
+            <div class="brands all ctag">
+    <?py for category in categorys:?>
+        <?py if category.name==category_name:?>
+        <a data-brid="${category.show_id}"  href="${handler.reverse_url('item_category_list',show_id)}" class="active">${category.name}<b></b></a>
+        <?py else:?>
+        <a data-brid="${category.show_id}"  href="${handler.reverse_url('item_category_list',category.show_id)}">${category.name}<b></b></a>
+        <?py #endif?>
+    <?py #endfor?>
+            </div>
+        </div>
+    </div>
+</div>
+<?py #endif?>
+<?py if brands.count()>0:?>
+<div class="m-classify j-box clearfix" id="brandbox">
+    <div class="name">品牌：</div>
+    <div class="hdbrands j-tagwrap autoheight">
+        <div class="hdbrands2 ctag">
+            <div class="brands all ctag">
+    <?py for brand in brands:?>
+                <?py if int(brand.id) and int(brand.id)==brand_id:?>
+                <a data-brid="${brand.id}" class="active" href="${handler.reverse_url('item_category_list',show_id)}?brand_id=${brand.id}&catindex=${catindex}" title="${brand.name}">${brand.name}</a>
+                <?py else:?>
+                <a data-brid="${brand.id}"  href="${handler.reverse_url('item_category_list',show_id)}?brand_id=${brand.id}&catindex=${catindex}" title="${brand.name}">${brand.name}</a>
+                <?py #endif?>
+    <?py #endfor?>
+            </div>
+
+        </div>
+    </div>
+</div>
+<?py #endif?>
+<?py if attributes:?>
+    <?py my_param =''?>
+    <?py my_param1 =''?>
+    <?py for att in attributes:?>
+        <?py att_id = str(att.get('attribute_id','')) +  '_'?>
+        <?py my_param1 += att_id ?>
+    <div class="m-classify property clearfix">
+        <div class="name">${att.get('name')}：</div>
+        <div class="hdbrands autoheight">
+            <div class="hdbrands2 ptag">
+                <div class="brands all ptag">
+        <?py tmp=''?>
+        <?py import copy ?>
+        <?py gg = copy.deepcopy(search_content)?>
+        <?py if str(att.get('attribute_id','')) in gg.keys():?>
+            <?py gg.pop(str(att.get('attribute_id','')))?>
+        <?py #endif?>
+        <?py tmp= ','.join(gg.values())?>
+        <?py for val in att.get('value'):?>
+                    <?py my_param = str(att.get('attribute_id',''))+'_'+str(val.get('attribute_value_id',''))?>
+                    <?py if catindex=='0':?>
+                     <a href="${handler.reverse_url('item_category_list',show_id)}?brand_id=${brand_id}&catindex=${my_param}" data-id="${att.get('attribute_id')}-${val.get('attribute_value_id')}">${val.get('attribute_value')}</a>
+                    <?py else:?>
+                        <?py if my_param in arrs:?>
+                        <a href="${handler.reverse_url('item_category_list',show_id)}?brand_id=${brand_id}&catindex=${my_param},${tmp}" class="active" data-id="${att.get('attribute_id')}-${val.get('attribute_value_id')}">${val.get('attribute_value')}</a>
+                        <?py else:?>
+                        <a href="${handler.reverse_url('item_category_list',show_id)}?brand_id=${brand_id}&catindex=${my_param},${tmp}" data-id="${att.get('attribute_id')}-${val.get('attribute_value_id')}">${val.get('attribute_value')}</a>
+                        <?py #endif?>
+                    <?py #endif?>
+        <?py #endfor ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?py #endfor?>
+<?py #endif?>
+            </div>
+            <div  id="sortparam" class="opertaion">
+                <div class="m-filter clearfix">
+                    <div class="name">排序：</div>
+                    <div id="order" class="hdorder clearfix">
+<dl class="order">
+<?py if sortfield=='0':?>
+    <dd class="jtag active" data-sortfield="0">
+    <?py if is_desc=='desc':?>
+    <span>人气<span class="arrow-down"></span></span>
+    <?py else:?>
+    <span>人气<span class="arrow-up"></span></span>
+    <?py #endif?>
+</dd>
+<?py else:?>
+<dd class="jtag" data-sortfield="0">
+    <span>人气</span>
+</dd>
+<?py #endif?>
+<?py if sortfield=='1':?>
+<dd class="jtag active" data-sortfield="1">
+    <?py if is_desc=='desc':?>
+    <span>销量<span class="arrow-down"></span></span>
+    <?py else:?>
+    <span>销量<span class="arrow-up"></span></span>
+    <?py #endif?>
+</dd>
+<?py else:?>
+<dd class="jtag" data-sortfield="1">
+    <span>销量</span>
+</dd>
+<?py #endif?>
+<?py if sortfield=='2':?>
+<dd class="jtag active" data-sortfield="2">
+    <?py if is_desc=='desc':?>
+    <span>价格<span class="arrow-down"></span></span>
+    <?py else:?>
+    <span>价格<span class="arrow-up"></span></span>
+    <?py #endif?>
+</dd>
+<?py else:?>
+<dd class="jtag" data-sortfield="2">
+    <span>价格</span>
+</dd>
+<?py #endif?>
+</dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+<?py if lists.result.count()>0:?>
+<div class="m-result">
+    <ul id="result" class="clearfix">
+    <?py for item in lists.result: ?>
+    <li class="goods">
+        <div class="goodswrap promotion">
+            <div class="img">
+                <a href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank">
+                    <img width="200px" height="200px" title="${item.title}" alt="${item.title}" src="http://cdn.qqqg.com/web/images/blank.gif"
+                     data-original="${item.main_pic and item.main_pic.split(';')[0] or ''}@220w.jpg" class="img-lazyload">
+        <?py if item.sale_quantity<=item.warning_quantity:?>
+        <span class="soldout"></span>
+        <?py #endif ?>
+                    <div class="activityflag">
+                        <span class="danpin">直降</span>
+                    </div>
+                </a>
+            </div>
+            <div class="desc clearfix">
+                <p><a target="_blank" href="${handler.reverse_url('item_detail',item.show_id)}" class="title" title="${item.title}">${item.title}</a></p>
+        <?py cheapprice = item.inner_price - item.price?>
+                <p class="saelsinfo"><span></span>直降价，立省${cheapprice}元</p>
+                <p class="price">
+                    <span class="cur"><span class="betext">包邮价&nbsp;</span>&nbsp;<i>¥</i>${item.price}</span>
+                    <b class="combinedLabel">${round((item.price/item.inner_price)*10,1)}折</b>
+                </p>
+                <p>
+                    <del>市场价:${item.inner_price}</del>
+                    <a class="comments" href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank">${handler.get_comments_count(item.id)}人已评价</a>
+                </p>
+            </div>
+        </div>
+    </li>
+    <?py #endfor?>
+    </ul>
+    </div>
+        #{lists.admin_pagination_html()}
+    </div>
+<?py else:?>
+    <div class="m-empty m-empty-2">
+        <div class="content">
+            <p style="font-size:18px;" id="auto-id-1450752891052">抱歉，没有找到与<span style="color:#d22147"></span>相关的商品</p>
+        </div>
+        <span class="errorimg"></span>
+    </div>
+<?py #endif?>
+</div>
+    <div class="newRecomWrap search-recom clearfix recentWrap">
+        <h4 class="newRecomTitle">最近浏览<b>你最近一段时间浏览的商品</b>
+            <!--
+            <a class="rec-backward" href="javascript:;">&gt;</a><span class="rec-page">1/4</span>
+            <a class="rec-forward" href="javascript:;">&lt;</a>
+            -->
+        </h4>
+        <div class="clearfix" id="pro_recBow">
+        </div>
+    </div>
+</div>
+<div id="progress" class="progress progress-fix animated">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" style="background-color: rgb(92, 184, 92); width: 5%;">
+    </div>
+</div>
+<script id="templateHisGoodsList" type="text/x-tmpl" >
+        <div class="newRecomItemWrap ">
+            <a href="/item/detail/{{= show_id}}.html" target="_blank" class="itemImg"> <img border="0" style="opacity: 1;" src="{{= main_pic}}" alt="{{= title}}" title="{{= title}}" /> </a>
+            <p class="itemTitle"> <a target="_blank" title="{{= title}}" href="/product/6914.html?from=detailzjll"><b>{{= title}}</b></a> </p>
+            <div class="itemInfo clearfix">
+                <p class="price">&yen;{{= price}}
+                    <del>
+                        &yen;{{= inner_price}}
+                    </del></p>
+                <a class="comment" target="_blank" href="/item/detail/{{= show_id}}.html#mainBtmWrap">{{= comments}} 人已评价</a>
+            </div>
+        </div>
+</script>

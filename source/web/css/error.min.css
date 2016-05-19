@@ -1,0 +1,24 @@
+﻿@charset"UTF-8";
+.errpage{
+	height: 520px;
+}
+
+.errorpadding{
+	padding:185px 0 0 146px;
+	font-size:18px;
+}
+.errorpadding img{
+	float: left;
+	margin-right: 54px;
+}
+.errorpadding h2{
+	padding-top: 15px;
+}
+.rollback a{
+	 font-size: 18px;
+	 color: #d71111;
+}
+.rollback a:hover{
+	font-size: 18px;
+	color: #dd2727;
+}

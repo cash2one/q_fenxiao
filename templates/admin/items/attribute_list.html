@@ -1,0 +1,93 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 商品管理 <span class="c-gray en">&gt;</span> 商品列表 <span class="c-gray en">&gt;</span> 属性列表 
+
+    <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="${handler.reverse_url('items','')}" title="返回" ><i class="Hui-iconfont">&#xe6d4;</i>
+    </a>
+
+    <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <form>
+        <div class="text-c"> 
+            属性类型:
+            <select class="input-text" style="width:100px;margin-right:20px;vertical-align:middle" name="attribute_type" id="order_status">
+                <?py if attribute_type == 'sku': ?>
+                    <option value='sku' selected="selected">SKU属性</option>
+                    <option value='filter'>查询属性</option>
+                <?py else: ?>
+                    <option value='filter' selected="selected">查询属性</option>
+                    <option value='sku'>SKU属性</option>
+                <?py #endif ?>    
+            </select>
+            <input type='hidden' value='${item_id}' name='item_id' />
+            <input type='hidden' value='${item_price}' name='item_price' />
+            <input type='hidden' value='${item_name}' name='item_name' />
+            <button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 查询属性</button>
+        </div>
+    </form>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="r">共有数据：<strong></strong> ${data.result.count()}条</span>
+    </div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="20">ID</th>
+                <th width="25">商品ID</th>
+                <th width="40">商品名称</th>
+                <?py if attribute_type == 'sku': ?>
+                    <th width="45">SKU组合</th>
+                    <th width='45'>属性值</th>
+                    <th width="20">商品价格</th>
+                    <th width="20">商品库存</th>
+                    <th width='20'>可卖库存</th>
+                    <th width="20">预警库存</th>
+                    <th width="50">操作</th>
+                <?py else: ?>
+                    <th width="45">搜索属性</th>
+                    <th width='45'>属性值</th>
+                <?py #endif ?>
+            </tr>
+        </thead>
+        <tbody>
+        <?py for d in data.result: ?>
+            <tr class="text-c">
+                <td>${d.id}</td>
+                <td>${item_id}</td>
+                <td>${item_name}</td>
+                <?py if attribute_type == 'sku': ?>
+                    <td>${d.attribute_name_list}</td>
+                    <td>${d.attribute_value_list}</td>
+                    <td>${item_price}元</td>
+                    <td>${d.item_count}</td>
+                    <td>${d.sale_quantity}</td>
+                    <td>${d.warning_quantity}</td>
+                    <td class="td-manage">
+                        <a onClick="show_layer('添加库存','${handler.reverse_url('product_attribute_list','item_count')}?sku_id=${d.id}','400','350')" title="添加库存">库存
+                        </a>
+                    </td>
+                <?py else: ?>
+                    <?py name,value = handler.get_attribute_value(d.attribute_id,d.attribute_value_id) ?>
+                    <td>${name}</td>
+                    <td>${value}</td>
+                <?py #endif ?>
+            </tr>
+        <?py #endfor?>
+        </tbody>
+    </table>
+        #{data.admin_pagination_html()}
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+function show_layer(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+</script> 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".dataTables_length,.dataTables_filter").hide();
+    });
+
+</script>
+
+

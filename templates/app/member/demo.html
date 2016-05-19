@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+  <link rel="shortcut icon" href="http://cdn.qqqg.com/mobile/images/qqqg.ico" />
+  <meta name="description" content="全球抢购">
+    <title>全球抢购-购物车</title>
+    <link rel="shoctcut icon" href="http://cdn.qqqg.com/mobile/images/qqqg.ico">
+    <link href="http://cdn.qqqg.com/mobile/css/core.min.css" type="text/css" rel="stylesheet"/>
+    <link href="http://cdn.qqqg.com/mobile/css/list.min.css" type="text/css" rel="stylesheet"/>
+    <!--页面内联样式-->
+    <link rel="stylesheet" type="text/css" href="http://cdn.qqqg.com/mobile/css/cart.min.css">
+  <style type="text/css">
+    #man{
+      border: 1px solid red;
+      margin: 10px;
+      padding:20px;
+    }
+  </style>
+</head>
+<body id="activity-netease-com">
+<div id="man">hello world</div>
+<input type="button" id="getData" value="填充数据">
+<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/jquery1.8.2.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/plugin/jquery.tmpl.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+    $('#getData').on('click',function(){
+      var data={
+        name:'王锦宽',
+        age:18
+      }
+      $('#man').empty();
+      $('#testTemplate').tmpl(data).appendTo('#man');
+    });
+  });
+</script>
+<script type="text/x-tmpl" id="testTemplate">
+  <li>
+    <span>姓名</span><span>{{= name}}</span>
+    <span>年龄</span><span>{{= age}}</span>
+  </li>
+</script>
+
+</body>
+</html>

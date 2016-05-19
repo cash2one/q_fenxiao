@@ -1,0 +1,72 @@
+﻿<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/order/order.min.css">
+
+<script type="text/javascript">
+    $(function(){
+        var param={
+            _xsrf:$("input[name=_xsrf]").val()
+        }
+        loop = setInterval(function(){
+            wxqqqg.isPayed(param);
+        },1500);
+    });
+    wxqqqg={
+        isPayed:function(param){
+            $.post($('#refreshurl').val(),param,function(r){
+                var r=JSON.parse(r);
+                if(r.state==200){
+                    window.location.href= r.info;
+                    window.clearInterval(loop);
+                }
+            });
+
+        }
+    }
+
+</script>
+<div class="ht-header-wrapper">
+    <div class="ht-header" id="htHeader">
+        <div class="container">
+            <a class="ht-logo" href="/">
+                全球抢购</a>
+            <div class="mod-buysteps m-step-2">
+                <div class="orderstepsbg"></div>
+                <ul class="clearfix">
+                    <li class="step step-1 ">
+                        <div class="txt">我的购物车</div>
+                    </li>
+                    <li class="step step-2">
+                        <div class="txt">提交订单</div>
+                    </li>
+                    <li class="step step-3 active">
+                        <div class="txt">选择支付方式</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<?py include('include/navigation.html') ?>
+<div class="container">
+    <input type="hidden" id="refreshurl" value="${handler.reverse_url('weixin_pament',order_no)}" name="pay_check">
+    #{xsrf_form_html}
+    <div id="payway">
+        <div class="orderbox">
+            <div class="trieTitle">
+                <span class="trieTips">请使用手机微信扫描二维码支付</span>
+                <div class="trieTime"><img width="200" class="proImg img-lazyload" data-original="${handler.reverse_url('weixin_qcode_pay',order_no)}" src="http://cdn.qqqg.com/web/images/blank.gif" /></div>
+            </div>
+            <div class="logisticsInfor">
+                <div class="receiptInfo">收货信息：
+<?py import ujson ?>
+<?py address = ujson.loads(order.recevie_address) ?>
+${address.get('province')} ${address.get('city')} ${address.get('area')} ${address.get('address')} 收货人: ${address.get('user_name')} 电话: ${address.get('phone')}
+                </div>
+            </div>
+                <div class="orderInfo">
+                    <span class="payAmount">支付金额：</span> <span class="allCount">${pay_order.amount}</span>
+                    <div class="clearfix"></div>
+                </div>
+        </div>
+
+    </div>
+</div>

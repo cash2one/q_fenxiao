@@ -1,0 +1,118 @@
+﻿@charset"UTF-8";
+.g-bd{
+    background: #f2f2f2;
+}
+.my {
+    background: transparent url("http://cdn.qqqg.com/microshop/images/app/cloud.png") no-repeat scroll center top / 100% auto;
+    height: 137px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+.my_head {
+    text-align: center;
+}
+.my_body_box{
+
+}
+.my_head_pic {
+    padding: 20px 0 0;
+}
+.my_head_img {
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #fff;
+    display: inline-block;
+    height: 65px;
+    width: 65px;
+}
+.my_head_name {
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: 7.5px 0 5.5px;
+    color:#222204;
+}
+.me-list{
+    margin: 20px 0;
+    padding: 0 30px;
+    background: #fff;
+}
+.me-list li{
+    height: 100px;
+    border-bottom: 1px solid #eeeeee;
+}
+.me-list .last{
+    border: none;
+}
+.me-list .nav a{
+    position: relative;
+    height: 100px;
+    display: block;
+    cursor: pointer;
+}
+.me-list .nav a .lableName{
+    cursor: pointer;
+}
+
+.me-list .nav .count{
+    background: #d71111 none repeat scroll 0 0;
+    border-radius: 9px;
+    color: #fff;
+    height: 18px;
+    left: 70%;
+    line-height: 18px;
+    padding: 0 6px;
+    position: absolute;
+    text-align: center;
+    top: 5px;
+}
+.me-list i{
+    display: inline-block;
+    margin-top: 16px;
+}
+.linklist{
+    height: 100px;
+}
+.me-list .lableName{
+    font-size: 1.6rem;
+    line-height: 100px;
+}
+.meArrow{
+    float: right;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+.linklist .f-fr{
+    padding-top: 43px;
+}
+.me-order{
+    height: 100px;
+}
+.me-order .nav{
+    width: 25%;
+    width: 33%;
+    text-align: center;
+}
+.me-order p{
+    display: block;
+}
+.iconPayment{
+    width: 48px;
+    height: 42px;
+    background:url(http://cdn.qqqg.com/microshop/images/me/payment.png) no-repeat;
+}
+.iconShip{
+    width: 48px;
+    height: 42px;
+    background:url(http://cdn.qqqg.com/microshop/images/me/ship.png) no-repeat;
+}
+.iconReceiving{
+    width: 48px;
+    height: 42px;
+    background:url(http://cdn.qqqg.com/microshop/images/me/receiving.png) no-repeat;
+}
+.iconEvaluation{
+    width: 48px;
+    height: 42px;
+    background:url(http://cdn.qqqg.com/microshop/images/me/evaluation.png) no-repeat;
+}

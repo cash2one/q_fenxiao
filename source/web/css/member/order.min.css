@@ -1,0 +1,1262 @@
+﻿.m-puser {
+    width:1090px;
+    margin:40px auto 0
+}
+.m-puser .col-left {
+    float:left;
+    width:160px;
+    margin-right:-160px;
+    position:relative
+}
+.m-puser .col-left .leftmenu {
+    width:120px
+}
+.m-puser .col-content {
+    float:right;
+    width:100%;
+    overflow:hidden
+}
+.m-puser .u-box {
+    margin-left: 160px;
+}
+.m-puser .title, .m-puser .title1 {
+    padding-bottom:20px;
+    line-height:20px;
+    font-size:18px;
+    font-weight:700;
+    color:#191E1F
+}
+.m-puser .title1 {
+    border-bottom:1px solid #ddd
+}
+.puser-recom {
+    position:relative;
+    width:1090px;
+    margin:40px auto 0
+}
+.leftmenu h3 {
+    padding-bottom:20px;
+    padding-top: 12px;
+    margin-bottom:22px;
+    line-height:20px;
+    font-size:18px;
+    font-weight:700;
+    color:#191E1F;
+    border-bottom:1px solid #ddd
+}
+.leftmenu dl dd {
+    height:28px;
+    line-height:28px;
+    font-size:14px
+}
+.leftmenu dd.sep {
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px solid #eee
+}
+.leftmenu dd .ti {
+    display:inline-block;
+    padding-right:5px;
+    height:14px;
+    line-height:14px;
+    border-left:2px solid transparent;
+    _border-left-color:tomato;
+    _filter:chroma(color=tomato)
+}
+.leftmenu dd.active .ti {
+    border-left-color:#D21F46
+}
+.leftmenu dd .ti-new {
+    padding:0 4px;
+    line-height:18px;
+    height:18px;
+    margin-top:5px;
+    border-radius:3px;
+    background-color:#FF3A09;
+    color:#FFF;
+    font-size:12px;
+    display:inline-block
+}
+.leftmenu a, .leftmenu dd a:visited {
+    color:#191E1F
+}
+.leftmenu dd a:hover, .leftmenu dd.active a, .leftmenu dd.active a:visited {
+    color:#D21F46
+}
+.leftmenu dd.active a {
+    font-weight:700
+}
+.leftmenu dd .cp-count {
+    position:relative;
+    padding-left:5px
+}
+.leftmenu dd .cp-count i, .leftmenu dd .cp-count span {
+    position:absolute;
+    left:5px;
+    width:18px;
+    display:block
+}
+.leftmenu dd .cp-count i {
+    top:-7px;
+    color:#D21F46;
+    font-size:18px;
+    font-family:iconfont;
+    z-index:1
+}
+.leftmenu dd .cp-count span {
+    top:-7px;
+    font-size:12px;
+    color:#fff;
+    text-align:center;
+    font-family:arial;
+    z-index:2
+}
+.orderNavTab {
+    height: 52px;
+    margin-top: 0px;
+    position: relative;
+}
+.orderNavTab .ntabs{
+    height: 51px;
+}
+.orderNavTab .active {
+    color: #fff !important;
+    background: #666;
+}
+.orderNavTab .utab {
+    color: #191e1f;
+    cursor: pointer;
+    float: left;
+    font-size: 18px;
+    height: 27px;
+    line-height: 27px;
+    padding: 12px 0;
+    padding: 0 25px;
+    margin-right: 20px;
+    text-align: center;
+    height: 51px;
+}
+
+.orderNavTab .utab a,.orderNavTab .utab > span{
+    padding: 12px 0;
+    display: inline-block;
+    color: #333;
+}
+.orderNavTab .active a,.orderNavTab .active > span{
+    color: #fff;
+}
+.orderNavTab .utab b {
+    color: #d22147;
+}
+.slideLine {
+    background: #ddd;
+
+    font-size: 0;
+    height: 1px;
+}
+
+.orderNavTab .recycleBin {
+    float: right;
+    font-size: 14px;
+    font-weight: 400;
+}
+.orderNavTab .recycleBin span {
+    background: rgba(0, 0, 0, 0) url("http://cdn.qqqg.com/web/images/garbage.png") no-repeat scroll 0 0;
+    display: inline-block;
+    height: 17px;
+    padding-right: 5px;
+    position: relative;
+    top: 3px;
+    width: 17px;
+}
+.orderBox .oTable{
+    width: 100%;
+}
+.orderBox .o-goods {
+    padding-left: 20px;
+    text-align: left;
+    width: 325px;
+}
+.orderBox .o-price {
+    width: 70px;
+}
+.orderBox .o-amount {
+    width: 48px;
+}
+.orderBox .o-gOperate {
+    width: 80px;
+}
+.orderBox .o-status{
+    width: 130px;
+}
+.orderBox .o-operate {
+    width: 120px;
+}
+.orderBox th{
+    height: 60px;
+    font-weight: normal;
+}
+.orderBox tbody th{
+    height: 60px;
+    font-weight: normal;
+    text-align: left;
+}
+.orderBox .o-info {
+    background: #f7f7f7;
+    color: #666;
+    height: 40px;
+    border: 1px solid #e8e8e8;
+    font-weight: 400;
+    text-align: left;
+}
+
+.o-info span {
+    display: inline-block;
+    margin-right: 25px;
+}
+.o-info i {
+    color: #999;
+    font-family: iconfont;
+    font-size: 13px;
+    margin-left: 10px;
+    padding-right: 4px;
+}
+.o-info .garbage {
+    background: rgba(0, 0, 0, 0) url("http://cdn.qqqg.com/web/images/garbage.png") no-repeat scroll 0 0;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    height: 17px;
+    width: 17px;
+}
+.o-info .garbage:hover {
+    background: rgba(0, 0, 0, 0) url("http://cdn.qqqg.com/web/images/garbage.png") no-repeat scroll 0 -21px;
+}
+.myOdr_tb1 {
+    margin-bottom: 20px;
+}
+.myOdr_tb1 th strong.c_imp {
+    font-family: Verdana;
+}
+.myOdr_tb1 th {
+    border: 1px solid #e8e8e8;
+    font-weight: 400;
+    text-align: left;
+}
+.myOdr_tb1 .cfrDisabled, .myOdr_tb1 .grayBtn2, .myOdr_tb1 .subBtn1, .myOdr_tb1 .subBtn2 {
+    margin: 8px 0;
+}
+.myOdr_tb1 th.bbNone {
+    border-bottom: medium none;
+}
+.myOdr_tb1 th.oInfo2 {
+    border-color: #e4e4e4;
+}
+.myOdr_tb1 .oInfo2 .sign12 {
+    margin-right: 5px;
+}
+.myOdr_tb1 .a_problem {
+    background: rgba(0, 0, 0, 0) url("http://mm.bst.126.net/images/signs.png?205fc2cede04d592690e780138269042") no-repeat scroll 61px -389px;
+    display: inline-block;
+    line-height: 18px;
+    padding-right: 21px;
+}
+.myOdr_tb1 .rbBorder {
+    border-bottom: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+}
+.myOdr_tb1 .oInfo {
+    color: #666;
+    height: 40px;
+}
+.myOdr_tb1 .cgWidth {
+    width: 488px;
+}
+.myOdr_tb1 .cgPay {
+    width: 118px;
+}
+.myOdr_tb1 .cgStatus {
+    width: 120px;
+}
+.myOdr_tb1 .cgOper {
+    width: 110px;
+}
+.myOdr_tb1 .aOrder .operate {
+    padding: 0 8px;
+}
+.myOdr_tb2 .bBorder td {
+    border-bottom: 1px solid #e8e8e8;
+}
+.myOdr_tb2 .goodsTitle {
+    padding-right: 12px;
+    width: 280px;
+}
+.myOdr_tb2 .price {
+    width: 70px;
+}
+.myOdr_tb2 .amount {
+    width: 48px;
+}
+.myOdr_tb2 .goodsOperate {
+    width: 100px;
+}
+.operate a, .orderStatus a, .orderStatus strong {
+    display: block;
+}
+.border .fb {
+    font-weight: 700;
+    color: #333;
+}
+.aOrder {
+    font-size: 14px;
+}
+.border .aTit {
+    color: #333;
+    font-size: 14px;
+    word-break: break-all;
+}
+.border .aTit:hover {
+    color: #d22147;
+}
+.border .marketPrice {
+    color: #999;
+    text-decoration: line-through;
+}
+.border .fee, .border .sku_mod {
+    color: #999;
+    font-size: 12px;
+}
+.border a{
+    color: #333;
+}
+.border a:hover{
+    color: #dd2727;
+}
+.border .confirmReceived:hover{
+    color:#fff;
+}
+.payNow > a{
+    color:#fff;
+}
+.payNow > a:hover{
+    color:#fff;
+}
+.border-items {
+    border: 1px solid #e8e8e8;
+}
+.border .rbBorder {
+    border-bottom: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+}
+.myOdr_tb2 .hasborder td {
+    border-bottom: 1px solid #e8e8e8;
+}
+.address-data {
+    font-size: 14px;
+    margin-top: 26px;
+}
+.address-data .title {
+    float: left;
+    font-size: 14px;
+}
+.address-data .title i {
+    color: #999;
+}
+.address-data a {
+    color: #d22147;
+    float: right;
+}
+.orderBox .uTable {
+    width: 100%;
+}
+.orderBox{
+    margin-top: 10px;
+}
+.orderBox .uTable th {
+    height: 10px;
+}
+.orderBox .oAddress{
+    width: 100%;
+}
+#addressedit{
+    display: none;
+}
+#newAddress{
+    padding: 20px;
+    border: 1px solid #ccc;
+    position: relative;
+    display: block;
+}
+.oAddress th{
+    background: #f7f7f7;
+    border: 1px solid #e8e8e8;
+}
+.oAddress tbody td{
+    text-align: center;
+    border: 1px solid #e8e8e8;
+    color: #333;
+    font-size: 14px;
+    padding: 20px 0;
+    text-align: center;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.oAddress .tdLeftAlign{
+    text-align: left;
+    padding-left:10px;
+}
+.oAddress .a-address{
+    width: 300px;
+}
+.oAddress .a-phone{
+    width: 100px;
+}
+.oAddress .a-operate{
+    width: 200px;
+}
+.oAddress .a-null{
+    width: 100px;
+}
+.newAddress input[type=text],.newAddress textarea{
+    border: 1px solid #ddd;
+    width: 300px;
+    padding: 15px;
+}
+.newAddress .item-cancle, .newAddress .item-submit {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    height: 40px;
+    margin-right: 20px;
+    margin-top: 30px;
+    width: 130px;
+}
+.newAddress .item-submit {
+    background-color: #d71111;
+    border: 1px solid #d71111;
+    color: #fff;
+}
+
+.newAddress .item-submit:hover {
+    background-color: #dd2727;
+    border: 1px solid #dd2727;
+}
+.newAddress td{
+    padding: 15px;
+    font-size: 14px;
+}
+.addUpdate,.addDel,.setDefault{
+    color:#000;
+    padding-right: 10px;
+}
+
+.default,.defaultAddress{
+    color:#d71111;
+}
+.lblAddAddress{
+    color: #000;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px;
+}
+.item-idcard {
+    position: relative;
+    z-index: 100;
+    width: 340px;
+}
+.m-idcardtip {
+    position: absolute;
+    right: -10px;
+    top: 10px;
+}
+.m-idcardtip .w-icon-ask {
+    cursor: pointer;
+    left: 8px;
+    position: relative;
+    top: 6px;
+}
+.w-icon-ask {
+    color: #d22147;
+    font-size: 13px;
+}
+.iconfont {
+    font-family: iconfont !important;
+    font-size: 16px;
+    font-style: normal;
+}
+.m-notice {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ededee;
+    color: #333;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+}
+.m-notice-idcard {
+    border-color: #ccc;
+    font-size: 12px;
+    padding: 15px;
+    text-align: left;
+    width: 320px;
+}
+.m-notice-idcard .arrow {
+    top: 112px;
+}
+.m-notice-idcard .arr, .m-notice-idcard .arr1 {
+    border-width: 7px;
+}
+.m-notice-idcard .arr {
+    border-left-color: #ccc;
+    right: -14px;
+}
+.m-notice-idcard .arr1 {
+    right: -13px;
+}
+.m-idcardtip .m-notice-idcard {
+    position: absolute;
+    right: 14px;
+    top: -60px;
+}
+.m_myaddress_verify .m-idcardtip {
+    right: 0;
+    top: 5px;
+}
+#addressform .m-notice-idcard{
+    border: 1px solid #ccc;
+}
+#addressform .m-notice-idcard, #addressform .m-notice-idcard {
+    left: 36px;
+    right: auto;
+    z-index: 100;
+}
+
+#addressform .m-notice-idcard s   {position:absolute;top:64px;left:-20px;display:block;width:0px;height:0px;font-size:0px;line-height:0px;border-color:transparent #ccc transparent transparent;border-style:dashed solid dashed dashed;border-width:10px;}
+#addressform .m-notice-idcard .arrow   {position:absolute;top:-10px;left:-8px;display:block;width:0px;height:0px;font-size:0px;line-height:0px;border-color:transparent #fff transparent transparent;border-style:dashed solid dashed dashed;border-width:10px;}
+
+/* pager start */
+.dataTables_info,.dataTables_paginate{
+    text-align: right;
+}
+.dataTables_info {
+    margin: 10px 15px 0;
+}
+.dataTables_paginate {
+    color:#333;
+    overflow:hidden;
+    *overflow:visible;
+    _overflow:hidden;
+    clear:both;
+    padding-bottom:30px
+}
+.dataTables_paginate {
+    padding:20px 0;
+    text-align: right;
+}
+.dataTables_paginate a {
+    height:28px;
+    text-align:center;
+    margin-right:-1px;
+    line-height:28px;
+    border:1px solid #e3e3e3;
+    color:#333;
+    vertical-align:middle
+}
+.dataTables_paginate a, .dataTables_paginate span {
+    display:inline-block
+}
+.dataTables_paginate .paginate_button{
+    padding: 0 10px;
+}
+
+.dataTables_paginate .previous {
+    margin-right:5px
+}
+.dataTables_paginate a:hover, .dataTables_paginate a:visited {
+    color:#333
+}
+.dataTables_paginate a:hover {
+    color:#D22147;
+    border-color:#D22147;
+    position:relative;
+    z-index:1;
+    text-decoration:none
+}
+.dataTables_paginate a.selected , .dataTables_paginate a.selected:hover{
+    background: #d71111;
+    color: #fff;
+}
+.dataTables_paginate span {
+
+    position:relative;
+    z-index:2
+}
+
+.dataTables_paginate .next , .dataTables_paginate .previous  {
+    background-color:#fff;
+    width:58px;
+    position:relative
+}
+.dataTables_paginate .next  {
+    margin-right:2px
+}
+.dataTables_paginate span.next , .dataTables_paginate span.previous {
+    border-color:#e8e8e8;
+    color:#bababa
+}
+/* pager end */
+
+.aImg img{
+    height: 80px;
+    padding: 20px 12px 20px 20px;
+    width: 80px;
+    display: inline-block;
+    overflow:hidden ;
+}
+#iDialogCancelOrder .nselect-wrap .nselector {
+    position: relative;
+}
+#iDialogCancelOrder .options-wrap {
+    left: 0;
+    position: absolute;
+    top: 36px;
+    width: 100%;
+    z-index: 1000;
+}
+#iDialogCancelOrder .iDialogMain {
+    overflow: visible;
+}
+/* 收藏商品 */
+/*
+.collectlist .resultwrap {
+    margin-left: 15px;
+    padding-top: 30px;
+    width: 930px;
+}
+
+.collectlist .result {
+    margin-bottom: 20px;
+    margin-left: -15px;
+}
+.collectlist .good {
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    float: left;
+    font-size: 12px;
+    height: 268px;
+    margin: 0 15px 15px 0;
+    overflow: hidden;
+    position: relative;
+    width: 172px;
+}
+.collectlist .good .img {
+    position: relative;
+}
+.collectlist .good .img a {
+    color: #333;
+    display: block;
+    transition: opacity 0.2s ease 0s;
+}
+.collectlist .good .img a:hover {
+    opacity: 0.8;
+    text-decoration: none;
+}
+.collectlist .good img {
+    display: block;
+    height: 172px;
+    width: 172px;
+}
+.collectlist .good .discount {
+    background-color: #fff;
+    border: 1px solid #666;
+    color: #666;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    height: 40px;
+    left: 0;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 42px;
+}
+.collectlist .good .not-online {
+    color: #666;
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: center;
+}
+.collectlist .good .desc {
+    padding: 2px 10px 0;
+    width: 152px;
+}
+.collectlist .good .title {
+    border-bottom: medium none;
+    font-size: 12px;
+    font-weight: 400;
+    height: 36px;
+    line-height: 18px;
+    overflow: hidden;
+    padding-bottom: 0;
+}
+.collectlist .good .title a {
+    color: #333;
+}
+.collectlist .good .title i, .collectlist .title a:hover {
+    color: #d22147;
+}
+.collectlist .good .price {
+    color: #d22147;
+    height: 24px;
+    margin-top: 5px;
+}
+.collectlist .price .cur {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-right: 2px;
+    vertical-align: top;
+}
+.collectlist .combinedLabel {
+    border: 1px dotted #d22147;
+    color: #d22147;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    margin-left: 3px;
+    padding: 0 4px;
+}
+.collectlist .good .comments, .collectlist .good del {
+    color: #999;
+    display: inline-block;
+    float: left;
+    font-weight: 300;
+    margin-right: 8px;
+}
+.collectlist .soldout {
+    background: rgba(0, 0, 0, 0) url("http://cdn.qqqg.com/images/icon-new.png") no-repeat scroll 0 -98px;
+    height: 60px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 59px;
+}
+.collectlist .activityflag {
+    height: 22px;
+    left: 6px;
+    position: absolute;
+    top: 6px;
+    width: 110px;
+}
+.collectlist .activityflag span {
+    color: #fff;
+    display: inline-block;
+    float: left;
+    font-size: 12px;
+    height: 22px;
+    line-height: 22px;
+    margin-right: 4px;
+    text-align: center;
+    width: 44px;
+}
+.collectlist .activityflag .large {
+    width: 54px;
+}
+.collectlist .danpin {
+    background-color: #f5345e;
+}
+.collectlist .zhengdan {
+    background-color: #ffa64d;
+}
+.collectlist .new {
+    background-color: #bc72ee;
+}
+.collectlist .abtn, .collectlist .abtn:active, .collectlist .abtn:hover, .collectlist .abtn:link, .collectlist .abtn:visited {
+    text-decoration: none;
+}
+.collectlist .good .delete {
+    position:absolute;
+    right:7px;
+    top:7px;
+    z-index:1;
+    width:32px;
+    height:32px;
+    background-color:#7F7F7F;
+    background-color:rgba(0, 0, 0, .5);
+    *background-color:#7F7F7F;
+    color:#fff;
+    text-align:center;
+    line-height:32px;
+    font-size:19px;
+    display: none;
+}
+
+.collectlist .good:hover a.delete{
+    display: block;
+}
+.collectlist .delete:hover {
+    background-color: #d22147;
+}
+.collectlist .deletemask {
+    position:absolute;
+    z-index:2;
+    left:0;
+    right:0;
+    bottom:0;
+    top:0;
+    *height:100%;
+    background-color:#7F7F7F;
+    background-color:rgba(0, 0, 0, .65);
+    *background-color:#7F7F7F;
+    *zoom:1
+}
+.collectlist .deletemask .msg {
+    color: #fff;
+    font-size: 12px;
+    height: 56px;
+    line-height: 56px;
+    margin-top: 85px;
+    text-align: center;
+}
+.collectlist .deletemask .btns {
+    text-align: center;
+}
+.collectlist .deletemask .btns .abtn {
+    display: inline-block;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: top;
+    width: 54px;
+}
+.collectlist .deletemask .deleting .abtn {
+    color: #999;
+    cursor: wait;
+}
+.collectlist .deletemask .btns .ok {
+    background-color: #d22147;
+    color: #fff;
+}
+.collectlist .deletemask .btns .ok:hover {
+    background-color: #f5345e;
+}
+.collectlist .deletemask .btns .cc {
+    background-color: #fff;
+    color: #333;
+    margin-left: 10px;
+}
+.collectlist .deletemask .btns .cc:hover {
+    color: #d22147;
+}
+.m-favrec {
+    margin: 0 auto;
+    position: relative;
+    width: 1090px;
+}
+*/
+/* ------------------- */
+.collectlist .loading {
+    height:150px;
+    background:url(http://cdn.qqqg.com/web/images/loading.gif) center bottom no-repeat #fff
+}
+.collectlist .tbl-nodata {
+    width:390px
+}
+.collectlist .tbl-nodata .info {
+    font-size:16px
+}
+.collectlist .tbl-loaderror {
+    width:390px;
+    margin:60px auto
+}
+.collectlist .tbl-loaderror .img {
+    display:inline-block;
+    width:83px;
+    height:81px;
+    vertical-align:middle;
+    margin-right:15px;
+    background:url(http://cdn.qqqg.com/web/images/loading.gif) center center no-repeat #fff
+}
+.collectlist .tbl-loaderror .info {
+    font-size:16px
+}
+.m-loading {
+    padding-top:10px
+}
+.collectlist .resultwrap {
+    width:930px;
+    padding-top:30px;
+    margin-left:15px
+}
+.collectlist .result {
+    margin-left:-15px;
+    margin-bottom:20px
+}
+.collectlist .good {
+    float:left;
+    position:relative;
+    width:172px;
+    height:268px;
+    margin:0 15px 15px 0;
+    background-color:#fff;
+    border:1px solid #eaeaea;
+    overflow:hidden;
+    font-size:12px
+}
+.collectlist .good .img {
+    position:relative
+}
+.collectlist .good .img a {
+    display:block;
+    color:#333;
+    transition:opacity .2s ease
+}
+.collectlist .good .img a:hover {
+    opacity:.8;
+    text-decoration:none;
+    filter:alpha(opacity=80)
+}
+.collectlist .good img {
+    display:block;
+    width:172px;
+    height:172px
+}
+.collectlist .good .discount {
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    width:42px;
+    height:40px;
+    background-color:#fff;
+    border:1px solid #666;
+    font-size:16px;
+    text-align:center;
+    line-height:40px;
+    color:#666;
+    font-weight:700
+}
+.collectlist .good .not-online {
+    margin-top:8px;
+    font-size:14px;
+    color:#666;
+    text-align:center
+}
+.collectlist .good .desc {
+    width:152px;
+    padding:2px 10px 0
+}
+.collectlist .good .title {
+    line-height:18px;
+    height:36px;
+    overflow:hidden;
+    padding-bottom:0;
+    border-bottom:none;
+    font-size:12px;
+    font-weight:400
+}
+.collectlist .good .title a {
+    color:#333
+}
+.collectlist .good .title i, .collectlist .title a:hover {
+    color:#d22147
+}
+.collectlist .good .price {
+    height:24px;
+    margin-top:5px;
+    color:#d22147
+}
+.collectlist .price .cur {
+    display:inline-block;
+    margin-right:2px;
+    font-weight:700;
+    font-size:16px;
+    line-height:24px;
+    vertical-align:top
+}
+.collectlist .combinedLabel {
+    display:inline-block;
+    margin-left:3px;
+    padding:0 4px;
+    border:1px dotted #d22147;
+    font-size:12px;
+    color:#d22147;
+    font-weight:700;
+    line-height:18px
+}
+.collectlist .good .comments, .favlist .good del {
+    float:left;
+    display:inline-block;
+    margin-right:8px;
+    color:#999;
+    font-weight:300
+}
+.collectlist .soldout {
+    position:absolute;
+    top:0;
+    right:0;
+    width:59px;
+    height:60px;
+    background:url(http://cdn.qqqg.com/web/images/icon-new.png) 0 -98px no-repeat
+}
+.collectlist .activityflag {
+    position:absolute;
+    top:6px;
+    left:6px;
+    width:110px;
+    height:22px
+}
+.collectlist .activityflag span {
+    display:inline-block;
+    float:left;
+    width:44px;
+    height:22px;
+    margin-right:4px;
+    font-size:12px;
+    color:#fff;
+    text-align:center;
+    line-height:22px
+}
+.collectlist .activityflag .large {
+    width:54px
+}
+.collectlist .danpin {
+    background-color:#F5345E
+}
+.collectlist .zhengdan {
+    background-color:#FFA64D
+}
+.collectlist .new {
+    background-color:#BC72EE
+}
+.collectlist .abtn, .collectlist .abtn:active, .collectlist .abtn:hover, .collectlist .abtn:link, .collectlist .abtn:visited {
+    text-decoration:none
+}
+.collectlist .good .delete {
+    position:absolute;
+    right:7px;
+    top:7px;
+    z-index:1;
+    width:32px;
+    height:32px;
+    background-color:#7F7F7F;
+    background-color:rgba(0, 0, 0, .5);
+    *background-color:#7F7F7F;
+    color:#fff;
+    text-align:center;
+    line-height:32px;
+    font-size:19px;
+    display: none;
+}
+.collectlist .good:hover a.delete{
+    display: block;
+}
+.collectlist .delete:hover {
+    background-color:#d22147
+}
+.collectlist .deletemask {
+    position:absolute;
+    z-index:2;
+    left:0;
+    right:0;
+    bottom:0;
+    top:0;
+    *height:100%;
+    background-color:#7F7F7F;
+    background-color:rgba(0, 0, 0, .65);
+    *background-color:#7F7F7F;
+    *zoom:1
+}
+.collectlist .deletemask .msg {
+    height:56px;
+    line-height:56px;
+    text-align:center;
+    margin-top:85px;
+    color:#fff;
+    font-size:12px
+}
+.collectlist .deletemask .btns {
+    text-align:center
+}
+.collectlist .deletemask .btns .abtn {
+    display:inline-block;
+    width:54px;
+    height:24px;
+    line-height:24px;
+    font-size:12px;
+    text-align:center;
+    vertical-align:top
+}
+.collectlist .deletemask .deleting .abtn {
+    color:#999;
+    cursor:wait
+}
+.collectlist .deletemask .btns .ok {
+    background-color:#d22147;
+    color:#fff
+}
+.collectlist .deletemask .btns .ok:hover {
+    background-color:#F5345E
+}
+.collectlist .deletemask .btns .cc {
+    margin-left:10px;
+    background-color:#fff;
+    color:#333
+}
+.collectlist .deletemask .btns .cc:hover {
+    color:#d22147
+}
+.m-favrec {
+    position:relative;
+    width:1090px;
+    margin:0 auto
+}
+/* 收藏商品  end */
+
+.wuliuInfo {
+    position:absolute;
+    width:280px;
+    border:1px solid #d22147;
+    border-top:3px solid #d22147;
+    background-color:#fff;
+    font-size:12px;
+    z-index:99
+}
+.wuliuInfo .triangle {
+    display:inline-block;
+    position:absolute;
+    top:-13px;
+    *top:-34px;
+    _top:-11px;
+    left:50%;
+    _height:0;
+    margin-left:-2.5px;
+    border-width:5px;
+    _border-width:4px;
+    border-style:solid;
+    border-color:transparent transparent #d22147;
+    _border-color:#fff #fff #d22147 #fff;
+    _overflow:hidden
+}
+.wuliuInfo .mask {
+    display:inline-block;
+    position:absolute;
+    top:-17px;
+    left:0;
+    height:17px;
+    width:215px
+}
+.wuliuInfo .packageInfo {
+    padding-top:18px;
+    margin:0 20px;
+    color:#333
+}
+.wuliuInfo .packageInfo b {
+    font-weight:900;
+    color:#d22147
+}
+.wuliuInfo .packageInfo a {
+    float:right
+}
+.wuliuInfo .company {
+    display:block;
+    padding:13px 0 10px;
+    margin:0 20px;
+    color:#333;
+    border-bottom:1px solid #eee
+}
+.wuliuInfo .infoWrap {
+    color:#999;
+    padding:20px 20px 15px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+.wuliuInfo .infoWrap .primage {
+    color:#d22147
+}
+.wuliuInfo li {
+    position:relative;
+    padding:0 0 15px 15px;
+    border-left:1px solid #eee
+}
+.wuliuInfo .first {
+    color:#d22147
+}
+.wuliuInfo .last {
+    padding-bottom:0
+}
+.wuliuInfo .dotWrap {
+    position:absolute;
+    top:0;
+    _top:-3px;
+    left:-3px;
+    _left:-18px;
+    display:inline-block;
+    width:5px;
+    height:15px;
+    _height:5px;
+    background-color:#fff
+}
+.wuliuInfo .dot {
+    position:absolute;
+    top:5px;
+    left:0;
+    display:inline-block;
+    width:5px;
+    height:5px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    background:#ddd
+}
+.first .dot {
+    background:#d22147
+}
+.wuliuInfo .more {
+    display:block;
+    padding:12px 0 15px;
+    margin:0 20px;
+    border-top:1px solid #eee;
+    text-align:left
+}
+.wuliuInfo .more .appLink {
+    margin-left:16px;
+    color:#51B8F1
+}
+.wuliuError {
+    font-size:14px;
+    text-align:center
+}
+.wuliuError .errorTxt {
+    padding:50px 0 20px
+}
+.wuliuInfo .loading{
+    padding: 30px;
+}
+.wuliuError .errorTxt i {
+    font-family:iconfont;
+    color:#d22147;
+    padding-right:5px
+}
+.wuliuError .errorOperation {
+    padding-bottom:40px
+}
+.wuliuError a {
+    color:#d22147;
+    outline:0
+}
+.wuliuError a:hover {
+    color:#d22147;
+    cursor:pointer;
+    outline:0
+}
+.getWuliu {
+    z-index:100
+}
+.cBlue {
+    color:#51B8F1
+}

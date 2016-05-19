@@ -1,0 +1,57 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <title>物流信息</title>
+    <link href="http://cdn.qqqg.com/admin/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.qqqg.com/admin/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.qqqg.com/admin/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdn.qqqg.com/admin/lib/jquery/1.9.1/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://cdn.qqqg.com/mobile/css/core.min.css"/>
+    <link type="text/css" rel="stylesheet" href="http://cdn.qqqg.com/admin/css/mobile_button.css"/>
+</head>
+<div>
+    <header id="g-hd" class="g-hd ">
+        <div id="topbar-box" class=" m-topnav">
+            <div class="m-topnavbar">
+                <span id="toptitle" class="tit">物流信息</span>
+            </div>
+        </div>
+    </header>
+<div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <h5>物流公司: ${data.get('company_name')}</h5> 
+        <h5>物流单号: ${data.get('WaybillNumber')}</h5> 
+        <thead>
+            <tr class="text-c">
+                <th width="50">时间</th>
+                <th width="50">状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?py if data.get('status') == 200: ?>
+                <?py for d in data.get('data'): ?>
+                    <tr class="text-c">
+                        <td>${d.get('time')}</td>
+                        <td>${d.get('content')}</td>
+                    </tr>    
+                <?py #endfor?>    
+            <?py else: ?>
+                <tr class="text-c">
+                    <td></td>
+                    <td>${data.get('data')}</td>
+                </tr>  
+            <?py #endif ?>
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+</body>
+</html>

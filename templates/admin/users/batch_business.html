@@ -1,0 +1,93 @@
+
+<link href="/static/admin/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-permission-add">
+        #{xsrf_form_html}
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>手机1：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" id="business_phone_1" />
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>手机2：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" id="business_phone_2" />
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>手机3：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" id="business_phone_3" />
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>手机4：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" id="business_phone_4" />
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>手机5：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" id="business_phone_5" />
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="button" onClick="datadel()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+function datadel(){
+    phone_1 = $('#business_phone_1').val();
+    phone_2 = $('#business_phone_2').val();
+    phone_3 = $('#business_phone_3').val();
+    phone_4 = $('#business_phone_4').val();
+    phone_5 = $('#business_phone_5').val();
+    var data_phone = {'phone_1':phone_1,'phone_2':phone_2,'phone_3':phone_3,'phone_4':phone_4,'phone_5':phone_5};
+    var str_data_phone = JSON.stringify(data_phone);
+    $.ajax({
+        type: 'post',
+        async: false,
+        url: '/admin/batch/business/batch',
+        data: {
+               'data':str_data_phone
+              },
+        dataType: "json",
+        success: function(data){
+            if (data.stat == 'success') {
+                alert(data.info);
+                var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+            }
+
+        },
+        error: function(error){
+        	alert('设置失败');
+        	var index = parent.layer.getFrameIndex(window.name);
+			parent.layer.close(index);
+        }
+        
+    });    
+}
+</script>
+
+
+
+
+
+
+

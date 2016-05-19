@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>分销系统后台管理</title>
+    <link href="${handler.static_domain}/admin/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="${handler.static_domain}/admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="${handler.static_domain}/admin/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="${handler.static_domain}/admin/css/style.css" rel="stylesheet" type="text/css" />
+
+    <link href="${handler.static_domain}/admin/skin/default/skin.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script type="text/javascript" src="${handler.static_domain}/admin/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="${handler.static_domain}/admin/lib/layer/1.9.3/layer.js"></script>
+    <script type="text/javascript" src="${handler.static_domain}/admin/js/H-ui.js"></script>
+    <script type="text/javascript" src="${handler.static_domain}/admin/js/H-ui.admin.js"></script>
+    <link href="${handler.static_domain}/admin/css/mobile_admin.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        function yqGetQuery(a){var d=window.location.href;var b=new RegExp("(^|&)"+a+"=([^&]*)(&|$)");var c=d.substr(d.indexOf("?")+1).match(b);if(c!=null){return unescape(c[2])}return null};
+        $(function(){
+            if ( yqGetQuery('device')!='m_mobile' && /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                $('.ui-mask').show();
+                $('#login-dialog').show();
+            }
+            $('.ui-dialog-close').click(function(){
+                $('.ui-mask').hide();
+                $('#login-dialog').hide();
+            });
+        });
+    </script>
+    <title></title>
+</head>
+<body>
+    <?py include('admin/include/header.html') ?>
+    <?py include('admin/include/_left.html') ?>
+    <section class="Hui-article-box">
+      <div id="Hui-tabNav" class="Hui-tabNav">
+            <div class="Hui-tabNav-wp">
+                <ul id="min_title_list" class="acrossTab cl" style="width: 133px; left: 0px;">
+                    <li class="active"><span title="我的桌面" data-href="welcome.html">我的桌面</span><em></em></li>
+                </ul>
+            </div>
+            <div class="Hui-tabNav-more btn-group" style="display: none;"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont"></i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont"></i></a></div>
+      </div>
+	  <div id="iframe_box" class="Hui-article">
+        <div class="show_iframe">
+			<div style="display:none" class="loading"></div>
+
+			<iframe scrolling="yes" frameborder="0" src="javascript:0">
+
+            </iframe>
+            #{_content}
+        </div>
+	</div>
+    </section>
+
+</body>
+<script type="text/javascript">
+/*资讯-添加*/
+function article_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*图片-添加*/
+function picture_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*产品-添加*/
+function product_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+</script>
+
+<div class="ui-mask"></div>
+<div class="ui-dialog login-dialog" id="login-dialog">
+    <div class="ui-dialog-container">
+        <div class="login-form">
+            <div class="ui-form">
+                <div class="ui-form-title">手机端 <span class="logoName">快捷菜单</span>
+                </div>
+                <div><a href="/admin/users/mobile/list/" class="mobilelinks">设置大客户</a></div>
+                <div><a href="/admin/mobile/orders" class="mobilelinks">订单管理</a></div>
+                <div><a href="/admin/mobile/items/" class="mobilelinks">商品库存管理</a></div>
+
+            </div>
+        </div>
+
+
+    </div> <a class="ui-dialog-close" href="javascript:;">×</a>
+</div>
+
+</html>

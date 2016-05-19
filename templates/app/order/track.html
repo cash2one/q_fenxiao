@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <link rel="shortcut icon" href="http://cdn.qqqg.com/mobile/images/qqqg.ico">
+  <title>订单跟踪页-全球抢购</title>
+<?py include('mobile/include/css.html') ?>
+  <style type="text/css">.m-tracktitle{height:65px}.m-tracktitle .logo{width:60px;height:100%;background:url(http://cdn.qqqg.com/mobile/images/icon1.png) no-repeat -235px -430px;background-size:500px}.m-tracktitle .textbox{height:20px;line-height:20px;padding-top:15px}.m-tracktitle .u-text{font-size:15px;color:#999}.m-tracktitle .u-text-1{color:#333}.m-tracktitle .f-fc1{color:#333}.m-tracklist{padding-top:11px;background:#f2f0f0}.m-tracklist .listbox{padding:15px 0 10px 15px;background:#fff}.m-tracklist .listbox h3{margin-bottom:10px;height:16px;line-height:16px;font-size:13px}.m-tracklist .item{position:relative;margin-left:10px;padding:0 0 28px 20px;color:#666;border-left:1px solid #eee}.m-tracklist .item p{line-height:20px;font-size:13px}.m-tracklist .stop:before{content:"";display:inline-block;margin:0 13px 0 -27px;width:14px;height:14px;border:4px solid #fff;background-color:#ddd;border-radius:7px}.m-tracklist .stop-1:before{background-color:#95be19}.m-tracklist .line{border-bottom:1px dashed #ccc;margin-top:14px;margin-bottom:-14px}.m-tracklist .icon{position:absolute;top:-6px;left:-14px;display:inline-block;border:3px solid #fff;width:29px;height:29px;background:url(http://cdn.qqqg.com/mobile/images/icon1.png) no-repeat -245px -508px #fff;background-size:500px}.m-tracklist .icon1{background-position:-289px -508px}.m-tracklist .icon1-1{background-position:-289px -544px}.m-tracklist .icon2{background-position:-338px -508px}.m-tracklist .icon2-1{background-position:-338px -544px}.m-tracklist .icon3{background-position:-385px -508px}.m-tracklist .icon3-1{background-position:-385px -544px}.m-tracklist .icon4{background-position:-426px -508px}.m-tracklist .icon4-1{background-position:-426px -544px}.m-tracklist .icon5{background-position:-468px -508px}.m-tracklist .icon5-1{background-position:-468px -544px}.m-tracklist .f-fc1{color:#64800f}.m-tracklist .f-bl0{border-left:0}.m-movetab{width:100%;overflow:hidden;border-bottom:1px solid #ccc}.m-movetab .tabs{white-space:nowrap;display:inline-block}.m-movetab .item{position:relative;line-height:45px;height:45px;text-align:center;font-size:14px;display:inline-block;width:110px}.m-movetab .item-cur{color:#d22046}.m-movetab .item-cur:after{position:absolute;bottom:-1px;content:".";left:50%;margin-left:-25px;height:4px;width:50px;background:#d22147;border-radius:15px 15px 0 0}</style>
+</head>
+<body>
+<header class="g-hd " id="g-hd">
+  <div class=" m-topnav" id="topbar-box">
+    <div class="m-topnavbar">
+      <span class="tit" id="toptitle">订单跟踪</span>
+    </div>
+  </div>
+
+</header>
+<div class="m-movetab" id="movetabbox">
+
+</div>
+<div class="g-bd">
+  <div id="trackbox"></div>
+  <div class="footPos"></div>
+  <div class="footMenu">
+    <div class="f-cb m-nav-fmenu">
+      <div class="f-fl f-tac nav">
+        <a href="/app/index.html"><i class="app-index icon"></i><br>全球抢购</a>
+      </div>
+      <div class="f-fl f-tac nav">
+        <a href="/app/member/cart.html"><i class="app-cart icon"></i><br>购物车</a>
+      </div>
+      <div class="f-fl f-tac nav  active">
+        <a href="/app/order/orders.html"><i class="app-order icon"></i><br>我的订单</a>
+      </div>
+      <div class="f-fl f-tac nav">
+        <a href="/app/coupon.html"><i class="app-mcenter icon"></i><br>我</a></div>
+    </div>
+  </div>
+</div>
+<?py include('mobile/include/js.html') ?>
+
+<script type="text/javascript">
+  (function(){
+    $(function(){
+      ht.track={
+        getExpress:function(){
+          var myExpTempl='<div class="m-tracktitle f-cb"><div class="f-fl logo"></div><div class="f-fl textbox"><p class="u-text ">{{= expCompany}}</p><p class=u-text>运单号：{{= expNo}}</p></div></div><div class=m-tracklist><div class=listbox><h3>物流跟踪</h3><ul id=express>	{{each data}}<li class="item"><p class="stop ">{{= $value.content}}</p><p>{{= $value.time}}</p></li>{{/each}}</ul></div></div>';
+          $.template('templateExp', myExpTempl);
+          var oNum=function(){
+            var arr=window.location.href.split('/');
+            return arr[arr.length-1].match(/\d+/g);
+          }
+
+          $.post('/order/express_check/'+oNum()+'.html',function(r){
+            var r=JSON.parse(r);
+            r.expCompany= r.company_name;
+            r.expNo=r.WaybillNumber;
+            $.tmpl('templateExp', r).appendTo('#trackbox');
+
+          });
+
+          //$.tmpl('templateExp', data).appendTo('#trackbox');
+          //$('#templateExp').tmpl(data).appendTo('#trackbox');
+        }
+      }
+    });
+    $(function(){
+      ht.track.getExpress();
+    });
+  })();
+
+
+</script>
+<?py include('mobile/include/cnzz.html') ?>
+</body>
+</html>

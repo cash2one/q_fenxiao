@@ -1,0 +1,10 @@
+目录结构说
+common   通用插件html
+detail
+help      站点帮助html
+include     公用菜单等html
+items     商品相关
+member    个人中心相关页面
+pay         支付相关页面
+product      产品像页面
+shop

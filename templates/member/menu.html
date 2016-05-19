@@ -1,0 +1,13 @@
+<div class="leftmenu">
+    <h3>个人中心</h3>
+    <dl>
+        <dd class="" id="1" ><span class="ti">&nbsp;</span><a href="${handler.reverse_url('member')}">我的订单</a></dd>
+        <dd class="sep" id="2"><span class="ti">&nbsp;</span><a href="${handler.reverse_url('member_collection')}">我收藏的商品</a></dd>
+        <!--<dd class=""><span class="ti">&nbsp;</span><a href="#">我关注的品牌</a></dd>-->
+        <dd class="sep" id="3"><span class="ti">&nbsp;</span><a href="${handler.reverse_url('address_list')}">管理收货地址</a></dd>
+        <!--<dd class="sep"><span class="ti">&nbsp;</span><a href="/personal/service_records.html">售后管理</a></dd>-->
+    </dl>
+</div>
+<script>
+    $('#${menu}').addClass('active');
+</script>

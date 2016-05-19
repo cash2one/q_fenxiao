@@ -1,0 +1,262 @@
+﻿body {
+    background: #fff;
+    min-height: 800px;
+}
+.footerWrap{
+    position: absolute;
+    top:700px;
+}
+.qqqg-header{
+    background-color: #fff;
+    padding: 10px 0;
+}
+.qqqg-logo {
+    background-image: url("http://cdn.qqqg.com/web/images/logo-180x55.png");
+}
+.content{
+    padding: 50px 0;
+}
+.box{
+    position: relative;
+    width: 1200px;
+}
+.loginbox {
+    margin: 0 auto;
+    overflow: hidden;
+    width: 343px;
+    font-size: 14px;
+    position: absolute;
+    right: 120px;
+    padding: 20px 50px;
+    border: 1px solid #ccc;
+    border-top: none;
+    top:98px;
+}
+.loginboxOuter{
+    height: 300px;
+}
+.box .defimg{
+    height: 203px;
+    left: 10px;
+    position: absolute;
+    top: 154px;
+    width: 400px;
+}
+
+
+.number {
+    font-size: 20px;
+    margin-bottom: 30px;
+
+    width: 350px;
+}
+.loginTab{
+    font-size: 18px;
+    position: absolute;
+    right: 120px;
+    width: 445px;
+    background: #F2F2F2;
+
+}
+.loginTab .sep{
+    color:gray;
+    margin: 0 60px;
+}
+.loginTab a{
+    display: inline-block;
+    cursor: pointer;
+    width: 214px;
+    text-align: center;
+    padding: 10px 0;
+}
+.loginTab a:hover{
+
+}
+.loginTab .idLogin{
+    color: #7f7f7f;
+}
+.loginTab .smsLogin{
+    color: #7f7f7f;
+    width: 229px;
+}
+.loginTab .active{
+    color: #000;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background: #fff;
+}
+.tabLineWrap{
+    border-bottom: 1px solid #eee;
+    height: 1px;
+}
+.tabLine{
+    height: 2px;
+    background: red;
+    width: 100px;
+}
+.normalInput {
+    border: 1px solid #dadada;
+    color: #474747;
+    display: inline-block;
+    font-size: 16px;
+    height: 50px;
+    line-height: 22px;
+    margin-bottom: 20px;
+    outline: medium none;
+    overflow: hidden;
+    padding: 0 10px;
+    position: relative;
+    width: 320px;
+}
+.usInput{
+    color: #474747;
+    display: inline-block;
+    font-size: 16px;
+    height: 50px;
+    line-height: 22px;
+    margin-bottom: 20px;
+    outline: medium none;
+    position: relative;
+    width: 340px;
+}
+.smskeywrap{
+    display: inline-block;
+    border: 1px solid #dadada;
+    padding: 0 10px;
+}
+#smskeyword{
+    width: 200px;
+}
+#getKeyWord {
+    border: medium none;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    outline: medium none;
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    top: 0;
+    width: 104px;
+    background: #ccc;
+}
+#mainForm input,#smsloginbox input {
+    height: 22px;
+    line-height: 22px;
+    padding: 14px 0;
+    font-size: 16px;
+}
+.normalInput input {
+    font-size: 16px;
+    height: 50px;
+    width: 100%;
+}
+
+ .check_chk i, .check_unchk i {
+    background:  url("http://cdn.qqqg.com/web/images/elements.png") no-repeat scroll 0 0;
+}
+.i_icon {
+    display: inline-block;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+.check_unchk i {
+    background-position: 0 -127px;
+}
+
+.check_chk i {
+    background-position: -31px -127px;
+}
+
+.checkboxPic {
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 25px;
+}
+a.linkABlue:link, a.linkABlue:visited {
+    color: #7f7f7f;
+}
+a.linkABlue:hover{
+    color:#dd2727;
+}
+
+
+.rememberField {
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+a.fullBtnBlue {
+    background-color: #d71111;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 20px;
+    outline: medium none;
+    text-align: center;
+    width: 342px;
+}
+a.fullBtnBlue:hover{
+    background-color: #dd2727;
+}
+.borderline{
+    margin-top: 20px;
+}
+
+.form-line {
+    border-left: 1px solid #dadada;
+    color: #d9d9d9;
+    display: inline-block;
+    height: 40px;
+    position: absolute;
+    right: 108px;
+    top: 5px;
+}
+#getKeyWord {
+    border: medium none;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    outline: medium none;
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    top: 0;
+    width: 104px;
+}
+.btn_enabled{
+    color:gray;
+}
+a.btn_enabled:hover{
+    color:gray;
+}
+span.error, span.otherError {
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 0;
+    color:red;
+}
+.randomCode{
+    height: 36px;
+    margin-left: 13px;
+    overflow: hidden;
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    width: 88px;
+}
+.foot{
+    text-align: right;
+}
+.foot a{
+    color: #7f7f7f;
+}

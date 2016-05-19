@@ -1,0 +1,25 @@
+        <div class="mainBtmWrap clearfix" id="mainBtmWrap">
+        <div class="siderBox">
+            <div class="sideGrayBox">
+                <h4>看了又看</h4>
+                <ul class="userBuyView" id="pro_seeAga">
+                </ul>
+            </div>
+            <div class="sideGrayBox">
+                <h4>看了最终买</h4>
+                <ul class="userBuyView" id="pro_actBuy">
+                </ul>
+            </div>
+        </div>
+
+<script id="templateSeeGoodsList" type="text/x-tmpl" >
+    <li class="clearfix"> <a class="aImg" target="_blank" href="/item/detail/{{= show_id}}.html"><img border="0" title="{{= title}}" alt="{{= title}}" src="{{= main_pic}}" /></a> <p class="productTit"> <a href="/item/detail/{{= id}}.html" title="{{= title}}" target="_blank" class="aTit">{{= title}}</a> </p>
+        <div class="clearfix">
+            <p class="productPrice"><span>&yen;{{= price}}</span>
+                <del>
+                    &yen;{{= inner_price}}
+                </del></p>
+            <p class="commentCount"><a target="_blank" href="/item/detail/{{= show_id}}.html#mainBtmWrap">{{= comments}} 人已评价</a></p>
+        </div>
+    </li>
+</script>

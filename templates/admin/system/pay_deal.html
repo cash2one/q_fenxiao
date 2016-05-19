@@ -1,0 +1,29 @@
+<div class="pd-20">
+	<form action="/admin/system/paydeal.html" method="post" class="form form-horizontal" id="form-attributes-add">
+        <div class="row cl">
+            <label class="form-label col-3">
+            <span class="c-red">*</span>支付类型：</label>
+            <div class="formControls col-2">
+                <span class="select-box">
+                    <select name="pay_type" class="select">
+                        <option value="7">通联支付</option>
+                        <option value="8">易汇金支付</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+			<label class="form-label col-3">回调日志：</label>
+			<div class="formControls col-5">
+                <textarea name="content" cols="60" rows="5"  placeholder="回调日志"> </textarea>
+			</div>
+            <div class="col-4"> </div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>

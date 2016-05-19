@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+<?py include('mobile/include/css.html') ?>
+    <link rel="stylesheet" type="text/css" href="http://cdn.qqqg.com/mobile/css/orders.min.css">
+</head>
+<body>
+<div class="g-bd">
+    <div style="text-align:center;font-size:1.8rem;margin:10px 0;">
+        <span class="tit">支付成功</span>
+    </div>
+    <a style="background-color: #d71111" class="u-btn u-btn-1 s-fc5" href="${self.reverse_url('member')}">查看订单</a>
+    <div class="footPos"></div>
+    <div class="footMenu">
+        <div class="f-cb m-nav-fmenu">
+            <div class="f-fl f-tac nav">
+                <a href="/app/index.html"><i class="app-index icon"></i><br>全球抢购</a>
+            </div>
+            <div class="f-fl f-tac nav">
+                <a href="/app/member/cart.html"><i class="app-cart icon"></i><br>购物车</a>
+            </div>
+            <div class="f-fl f-tac nav">
+                <a href="/app/order/orders.html"><i class="app-order icon"></i><br>我的订单</a>
+            </div>
+            <div class="f-fl f-tac nav">
+                <a href="/app/coupon.html"><i class="app-mcenter icon"></i><br>我</a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

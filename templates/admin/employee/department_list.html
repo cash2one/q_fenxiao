@@ -1,0 +1,31 @@
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i>
+    首页 <span class="c-gray en">&gt;</span> 员工管理
+    <span class="c-gray en">&gt;</span> 部门管理
+    <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+        <i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="pd-20">
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l">
+                <a href="${handler.reverse_url('departments')}?add=" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe600;</i>添加</a>
+            </span>
+    </div>
+	<div class="mt-20 dataTables_wrapper">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+				<tr class="text-c">
+				<th>ID</th>
+				<th>名称</th>
+			</tr>
+		</thead>
+		<tbody>
+                <?py for d in departments:?>
+                <tr class="text-c">
+                    <td>${d.id}</td>
+                    <td>${d.name}</td>
+                </tr>
+            <?py #endfor?>
+		</tbody>
+	</table>
+</div>

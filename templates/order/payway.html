@@ -1,0 +1,97 @@
+﻿<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/order/order.min.css">
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/order/order.min.js"></script>
+<div class="ht-header-wrapper">
+    <div class="ht-header" id="htHeader">
+        <div class="container">
+            <a class="ht-logo" href="/">
+                全球抢购</a>
+            <div class="mod-buysteps m-step-2">
+                <div class="orderstepsbg"></div>
+                <ul class="clearfix">
+                    <li class="step step-1 ">
+                        <div class="txt">我的购物车</div>
+                    </li>
+                    <li class="step step-2">
+                        <div class="txt">提交订单</div>
+                    </li>
+                    <li class="step step-3 active">
+                        <div class="txt">选择支付方式</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<?py include('include/navigation.html') ?>
+<div class="container">
+    <div id="payway">
+        <!--
+<?py if notice_content:?>
+<div id="onlineNotice"> 		<div class="text"><i></i><span style="font-size: 14px;font-family: 微软雅黑, sans-serif">尊敬的客户：</span><p style="margin-bottom: 7px;margin-left: 12px;margin-right: 12px;margin-top: 7px" ><span style="font-size: 14px;font-family: 微软雅黑, sans-serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size: 14px;font-family: 微软雅黑, sans-serif">因快递公司自2016年01月27日起停运，2016年02月15日开始陆续恢复揽件，故即日起所有订单暂停发货，待快递恢复揽件后依次清关发货。
+   ${notice_content}
+</span></p></div>
+</div>
+<?py #endif?>
+            -->
+
+
+    <div class="orderbox">
+        <div class="trieTitle">
+            <i></i> <span class="trieTips">订单提交成功，现在只差最后一步啦！</span>
+            <div class="trieTime">请您在提交订单后<!--span class="alarmcolor">1小时00分</span-->内完成支付，否则订单会自动取消！</div>
+        </div>
+        <div class="logisticsInfor">
+            <a class="myOrder" target="_blank" href="${handler.reverse_url('member_order_detail',order.order_no)}">订单详情</a>
+            <span class="orderFrom">${item_title}&nbsp;&nbsp;&nbsp;等<label class="alarmcolor">${item_count}</label>件商品...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进口行货 ${order.house_ware_name}发货</span>
+            <div class="receiptInfo">收货信息：
+<?py import ujson ?>
+<?py address = ujson.loads(order.recevie_address) ?>
+                ${address.get('province')} ${address.get('city')} ${address.get('area')} ${address.get('address')} 收货人: ${address.get('user_name')} 电话: ${address.get('phone')}
+            </div>
+        </div>
+    </div>
+    <!--<div id="onlineNotice" style="display: block;margin-top: 20px;">-->
+        <!--<div class="text"><i></i><span style="font-size: 14px;font-family: 微软雅黑, sans-serif">尊敬的客户：</span><p style="margin-bottom: 7px;margin-left: 12px;margin-right: 12px;margin-top: 7px" ><span style="font-size: 14px;font-family: 微软雅黑, sans-serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size: 14px;font-family: 微软雅黑, sans-serif">因支付系统正在维护中，暂时停止支付功能，我们会尽快开通支付功能，给您带来不便，敬请谅解。-->
+<!--</span></p></div>-->
+    <!--</div>-->
+    <div class="payInfo payWays">
+        <form  id="paywayform" method="get" target="_blank" action="${handler.reverse_url('allinpay_payment',order.id,order.order_no)}" >
+        <div class="orderInfo">
+            <span class="payAmount">支付金额：</span> <span class="allCount">${order.real_amount}</span>
+            <input type="hidden" name="pay_gate_way" id="pay_gate_way" value="${handler.reverse_url('allinpay_payment',order.id,order.order_no)}">
+            <?py if not order.is_abroad:?>
+            <!--支付宝支付-->
+            <div class="banks">
+                <a class="wrapnRadio  nRadio" href="javascript:;">
+                    <input type="radio" id="zhifubao" name="zhifubao">
+                </a>
+                <label class="bankinfo zhiFuBao" for="zhifubao" data-action="${handler.reverse_url('alipay_payment',order.id,order.order_no)}" ><span></span></label>
+            </div>
+            <?py else:?>
+            <!--通联支付-->
+            <div class="banks">
+                <a class="wrapnRadio nRadioChecked" href="javascript:;">
+                    <input type="radio" id="tongLianpay" name="tongLianpay">
+                </a>
+                <label class="bankinfo tongLian  checked" for="tongLianpay"  data-action="${handler.reverse_url('allinpay_payment',order.id,order.order_no)}" ><span></span></label>
+            </div>
+            <!--<div class="banks">-->
+                <!--<a class="wrapnRadio  nRadio" href="javascript:;">-->
+                    <!--<input type="radio" id="weixinpay" name="weixinpay">-->
+                <!--</a>-->
+                <!--<label class="bankinfo weiXin" for="weixinpay" data-action="${handler.reverse_url('allinpay_payment',order.id,order.order_no)}" ><span></span></label>-->
+            <!--</div>-->
+            <div class="banks">
+                <a class="wrapnRadio nRadio" href="javascript:;">
+                    <input type="radio" id="ehkingpay" name="ehkingpay">
+                </a>
+                <label class="bankinfo yiHuiJin" for="ehkingpay"  data-action="${handler.reverse_url('ehking_payment',order.id,order.order_no)}"><span></span></label>
+            </div>
+            <?py #endif?>
+            <div class="clearfix"></div>
+        </div>
+        <input id="payBtn" type="submit" class="oOrgBtn"  value="去支付" />
+        </form>
+    </div>
+    </div>
+</div>

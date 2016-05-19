@@ -1,0 +1,81 @@
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 优惠券管理 <span class="c-gray en">&gt;</span> 优惠券 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+        <form>
+            <div class="text-c">渠道：
+            <select name="media_types" style="width:100px;vertical-align:middle;margin-right:12px" class="input-text">
+                        <option value="">全部</option>
+                        <?py for d in coupon_channels:?>
+                            <option value="${d.id}__${d.name}">${d.name}</option>
+                        <?py #endfor ?>
+            </select>
+                投放广告时间：
+                <input type="text" value="" name="start_date" style="width:120px;" class="input-text Wdate" id="datemin" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})">
+                -
+                <input type="text" value="" name="end_date" style="width:120px;" class="input-text Wdate" id="datemax" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})">
+                <input type="text" value="" name="name" id="" placeholder="输入广告名称" style="width:200px;margin-left:10px;" class="input-text">
+            </div>
+            <div style="margin-top:20px;margin-bottom:30px;" class="text-c">
+                是否开启：
+                <select name="is_open" style="width:100px;vertical-align:middle;margin-right:12px" class="input-text">
+                        <option value="">全部</option>
+                            <option value="0">关闭</option>
+                            <option value="1">开启</option>
+                </select>
+                删除状态：
+                 <select name="status" style="width:100px;vertical-align:middle;margin-right:12px" class="input-text">
+        <option selected="selected" value="0">正常</option>
+                <option value="1">已删除</option>
+                </select>
+                排序：
+                    <select name="reorder" style="width:100px;vertical-align:middle;margin-right:10px" class="input-text">
+    <option value="asc">升序</option>
+
+<option value="desc">降序</option>
+            </select>
+            <button name="" id="" class="btn btn-success radius" type="submit"><i class="Hui-iconfont"></i> 搜索</button>
+        </div>
+    </form>
+
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+        <a href="${handler.reverse_url('coupon_handler')}?operation=edit" class="btn btn-primary radius">
+            <i class="Hui-iconfont">&#xe600;</i> 添加</a></span>
+        </div>
+	<div class="mt-20 dataTables_wrapper">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+				<tr class="text-c">
+				<th>ID</th>
+				<th>渠道</th>
+				<th>类型</th>
+				<th>金额</th>
+                <th>优惠码</th>
+                <th>领取</th>
+                <th>使用</th>
+                <th>生效时间</th>
+                <th>过期时间</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+                <?py for d in data.result:?>
+                <tr class="text-c">
+                   <td>${d.id}</td>
+                   <td>${d.channel}</td>
+                   <td>${d.name}</td>
+                   <td>${d.total_amount}</td>
+                   <td>${d.code}</td>
+                   <td>${d.is_claim}</td>
+                   <td>${d.is_used}</td>
+                   <td>${d.effective_time}</td>
+                   <td>${d.expired_time}</td>
+                   <td>
+                        <a href="${handler.reverse_url('coupon_handler')}?operation=edit&id=${d.id}" class="red"> <i class="Hui-iconfont"></i>编辑</a>
+                        <a href="${handler.reverse_url('coupon_handler')}?operation=deleted&id=${d.id}" class="red"> <i class="Hui-iconfont"></i>删除</a>
+                   </td>
+                </tr>
+            <?py #endfor?>
+		</tbody>
+	</table>
+ #{data.admin_pagination_html()}
+</div>
+    </div>

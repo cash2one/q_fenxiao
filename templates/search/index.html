@@ -1,0 +1,146 @@
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/search.min.css">
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/member/order.min.css">
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/product/search.min.js"></script>
+<div id="searchbox" class="m-search">
+<?py if lists:?>
+    <div class="resultwrap">
+    <div class="options">
+        <div class="resultinfo clearfix">
+            <p class="total">
+                <span class="s-color">${searchkey} </span>商品共${item_count}个
+            </p>
+        </div>
+        <div class="opertaion">
+            <div class="m-classify clearfix" id="classify">
+                <div class="name">品牌：</div>
+                <div class="hdbrands line2height">
+                    <div id="brandsAllCtagDad" class="hdbrands2 ctag">
+                        <div id="brandsAllCtag" class="brands all ctag">
+    <?py if brands:?>
+        <?py for brand in brands:?>
+            <?py category_show_id = handler.set_show_id_by_id(brand.category_id)?>
+        <a data-brid="${brand.id}" href="${handler.reverse_url('item_category',category_show_id)}">${brand.name}</a>
+        <?py #endfor?>
+    <?py #endif?>
+                        </div>
+                        <div class="multbtn">
+                            <span class="submit disable ctag">提交</span>
+                            <span class="cancel ctag">取消</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="morewrap">
+                    <div style="display: none;" class="more ctag" id="moreBrand">更多<span></span></div>
+                </div>
+            </div>
+            <div class="m-filter clearfix">
+                <div class="name">排序：</div>
+                <div id="order" class="hdorder clearfix">
+                    <dl class="order">
+                        <dd class="jtag active" >
+                            <span>人气<span class="arrow-down"></span></span>
+                        </dd>
+
+                        <dd class="jtag" >
+                            <span>销量</span>
+                        </dd>
+
+                        <dd class="jtag" >
+                            <span>价格</span>
+                        </dd>
+                    </dl>
+
+                    <label class="m-checkbox jtag" >
+                        <span class="box"><i></i><em></em></span>只选有货商品
+                    </label>
+                    <!--<div class="simplePage">-->
+                        <!--<a class="arrow-left" href="#"></a>-->
+                        <!--&lt;!&ndash;<span class="num"><i>3</i>/15</span>&ndash;&gt;-->
+                        <!--<a class="arrow-right" href="#"></a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-result">
+    <ul id="result" class="clearfix">
+    <?py for item in lists.result: ?>
+    <li class="goods">
+        <div class="goodswrap promotion">
+            <div class="img">
+                <a href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank">
+                    <img width="200px" height="200px" title="${item.title}" alt="${item.title}" src="http://cdn.qqqg.com/web/images/blank.gif"
+                     data-original="${item.main_pic and item.main_pic.split(';')[0] or ''}@220w.jpg" class="img-lazyload">
+                        <?py if item.sale_quantity<=item.warning_quantity:?>
+                        <span class="soldout"></span>
+                        <?py #endif ?>
+                    <div class="activityflag">
+                        <span class="danpin">直降</span>
+                    </div>
+                </a>
+            </div>
+            <div class="desc clearfix">
+                <p>
+                    <a target="_blank" href="${handler.reverse_url('item_detail',item.show_id)}" class="title" title="${item.title}">${item.title}</a>
+                </p>
+        <?py cheapprice = item.inner_price - item.price?>
+                <p class="saelsinfo"><span></span>直降价，立省${cheapprice}元</p>
+                <p class="price">
+                    <span class="cur"><span class="betext">包邮价&nbsp;</span>&nbsp;<i>¥</i>${item.price}</span>
+                    <b class="combinedLabel">${round((item.price/item.inner_price)*10,1)}折</b>
+                </p>
+                <p>
+                    <del>市场价:${item.inner_price}</del>
+                    <a class="comments" href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank">${item.comments}人已评价</a>
+                </p>
+            </div>
+        </div>
+    </li>
+    <?py #endfor?>
+    </ul>
+    </div>
+        #{lists.admin_pagination_html()}
+    </div>
+
+<?py else:?>
+    <div class="m-empty m-empty-2">
+    <div class="content">
+        <p style="font-size:18px;" id="auto-id-1450752891052">抱歉，没有找到与<span style="color:#d22147">${searchkey}</span>相关的商品</p>
+        <br>
+        <p>建议您：</p>
+        <p>1、看看输入的文字是否有误</p>
+        <p>2、拆分要搜索的关键词，分成几个词语再次搜索</p>
+    </div>
+    <span class="errorimg"></span>
+</div>
+<?py #endif?>
+</div>
+<div class="newRecomWrap search-recom clearfix recentWrap">
+    <h4 class="newRecomTitle">最近浏览<b>你最近一段时间浏览的商品</b>
+        <!--
+        <a class="rec-backward" href="javascript:;">&gt;</a><span class="rec-page">1/4</span>
+        <a class="rec-forward" href="javascript:;">&lt;</a>
+        -->
+    </h4>
+    <div class="clearfix" id="pro_recBow">
+
+    </div>
+</div>
+<div id="progress" class="progress progress-fix animated">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" style="background-color: rgb(92, 184, 92); width: 5%;">
+    </div>
+</div>
+<script id="templateHisGoodsList" type="text/x-tmpl" >
+        <div class="newRecomItemWrap ">
+            <a href="/item/detail/{{= show_id}}.html" target="_blank" class="itemImg"> <img border="0" style="opacity: 1;" src="{{= main_pic}}" alt="{{= title}}" title="{{= title}}" /> </a>
+            <p class="itemTitle"> <a target="_blank" title="{{= title}}" href="/product/6914.html?from=detailzjll"><b>{{= title}}</b></a> </p>
+            <div class="itemInfo clearfix">
+                <p class="price">&yen;{{= price}}
+                    <del>
+                        &yen;{{= inner_price}}
+                    </del></p>
+                <a class="comment" target="_blank" href="/item/detail/{{= show_id}}.html#mainBtmWrap">{{= comments}} 人已评价</a>
+            </div>
+        </div>
+</script>

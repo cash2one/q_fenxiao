@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+	<link rel="shortcut icon" href="http://cdn.qqqg.com/microshop/images/qqqg.ico" />
+  <meta name="description" content="破冰的微店">
+<?py include('mobile/include/header.html') ?>
+	<link href="http://cdn.qqqg.com/microshop/css/list.min.css" type="text/css" rel="stylesheet"/>
+	<style>
+		.topTabBoxFixed {
+		    position: fixed;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    z-index: 100;
+		    background: #fff;
+		    border-bottom: 1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+#{xsrf_form_html}
+<header class="g-hd " id="g-hd">
+  <div class=" m-topnav" id="topbar-box">
+  	<div class="m-topnavbar">
+	    <span id="backbtn" class="u-icn18 backbtn"></span>
+	    <span class="tit" id="toptitle">破冰的微店</span>
+	    <span class="u-menu" id="menu">&nbsp;</span>
+    </div>
+<?py include('mobile/include/headermenu.html') ?>
+  </div>
+</header>
+<div class="appbanner appbanner-top"></div>
+<div class="g-bd" id="box">
+	<a href="javascript:void(0);"
+		class="m-single-img  m-block   u-img-wrapper"
+		style="padding-top:52.083333%; display: none;">
+		<img src="http://cdn.qqqg.com/mobile/images/menu/1.jpg">
+	</a>
+	<div class="m-nav-wrap" style="" id="navTop">
+		<article class="m-nav-stickytabs" >
+			<div style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 120ms; transform: translate(0px, 0px) translateZ(0px);width:100%;padding-right:0px" class="navbox js-navbox m-tbl  scroll-navbox" >
+<?py for site in nav_sites: ?>
+	<?py site_link = site.link and site.link or '/item/list/'+str(site.show_id)+'.html' ?>
+	<?py if int(category_id) == site.category_id: ?>
+		<span style="color:#d71111;" class="tab  curr" ><a href='${site_link}'>${site.name}</a></span>
+	<?py else: ?>
+		<span style="color: #333333;" class="tab "><a href='${site_link}'>${site.name}</a></span>
+	<?py #endif ?>
+<?py #endfor ?>
+			</div>
+			<span class="select-btn" id="auto-id-1445998025145"><span class="ic" id=""></span></span>
+
+		</article>
+	</div>
+	<article class="m-block m-item-block prd-box m-item-nav-lift" style="background-color:#f0f0f0;">
+		<a class="head-txt" href="javascript:void(0);" style="display: none;"> <b>&nbsp;</b>${category_name}</a>
+		<div class="m-prdList  ">
+			<dl id="list"  class="m-avg2item-lst"></dl>
+		</div>
+	</article>
+    <input type="hidden" value="${category_id}" id="category_id" />
+
+	<div class="m-loading f-tac" style="display: none;" id="waterLoading"><img src="http://cdn.qqqg.com/mobile/images/loadingalpha.gif" style="width:23px;height:23px"></div>
+	<div class="nomore-data" id="waterAllShow" style="display: none;">已显示全部内容</div>
+<!-- 返回主会场
+	<a href="http://m.kaola.com/activity/h5/4819.html?zposition=0&zid=8" class="m-single-img m-img-block-loading m-block   u-img-wrapper" style="padding-top:23.4375%;" data-block="8" data-navid="">
+		<img data-src="http://cdn.qqqg.com/mobile/images/back.jpg" src="/static/mobile/images/blank.gif">
+	</a>
+-->
+	<footer class="m-docfoot">
+<?py include('mobile/include/footer.html') ?>
+<?py include('mobile/include/copy.html') ?>
+	</footer>
+</div>
+	<div class="m-gotop-wrap" id="m-gotop-wrap">
+		<div class="ic-gotop">
+			<i class="up"></i>
+			<p class="desc">顶部</p>
+		</div>
+	</div>
+<div id="m-dropdown" class="m-dropdown ">
+	<span class="select-btn"><span class="ic"></span></span>
+	<div class="tit">破冰的微店</div>
+	<ul class="floors">
+
+	</ul>
+</div>
+<?py include('mobile/include/js.html') ?>
+
+<script type="text/javascript" src="http://cdn.qqqg.com/microshop/js/product/list.min.js"></script>
+
+
+
+<script type="text/x-tmpl" id="templateList">
+<dd class="h">
+	<article class="m-2avg-item">
+		<a href="/item/detail/{{= show_id}}.html" class="imgwrap u-img-wrapper">
+			<img src="http://cdn.qqqg.com/mobile/images/blank.gif" alt="{{= title}}" class="j-lazy u-item-img" data-src="{{= main_pic}}@305w">
+			{{if issoldOut==1}}
+			<i class="m-soldout"><span class="txt">售完</span></i>
+			{{/if}}
+		</a>
+		<div class="txtwrap">
+			<p class="tit"><a href="/item/detail/{{= show_id}}.html">{{= title}}</a>
+			</p>
+			<p class="act-price"><span class="symbol"><span class="priceLbl">售价</span>
+¥</span><span class="bold">{{= price}}</span>
+			</p>
+		</div>
+		<div class="lbl-wrap"></div>    <a href="/item/detail/{{= show_id}}.html" style="background-color:#d71111; color: #fff;" class="action">立即疯抢</a>
+	</article>
+</dd>
+</script>				
+</body>
+</html>

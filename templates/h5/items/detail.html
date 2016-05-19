@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+<?py include('mobile/include/header.html') ?>
+	<link href="http://cdn.qqqg.com/mobile/css/detail.min.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<div style="width:0;height:0;position:absolute; top:-9999px;">
+	<p>今天在全球抢购发现了一件不错的东东!</p>
+	<img src="${item.main_pic and item.main_pic.split(';')[0] or ''}@640w">
+</div>
+
+<div class="g-bd">
+
+   <article class="m-box">
+	  <div class="imgbox">
+		<div class="m-sliderbox" id="top-banner">
+			<ul class="m-slide">
+				<li>
+					<img title="" src="${item.main_pic and item.main_pic.split(';')[0] or ''}@640w">
+				</li>
+			</ul>
+		</div>
+		<div class="u-slide-detail-wrap">
+		<div id="u-slide-detail" class="u-slide-detail">查看<br/>详情</div>
+		</div>
+		<div class="u-member-lbl-wrap">
+			<!--
+		<div class="u-member-lbl">2件<br/>组合装</div>
+		-->
+		</div>
+	  </div>
+    </article>
+
+	<header class="m-header" data-goodsId="9299">
+		<div class="import-type">
+			<img class="cty-icon" src="${handler.get_country_flag(item.product_location)}"></img>
+
+			<span class="desc">${handler.get_ware_house_name_by_id(item.ware_house_id)}</span>
+		</div>
+<p class="tit">${item.title}</p>
+<div class="m-price m-price-reduce">
+	<div>
+
+<span class="m-curr-price">
+	<span class="rmb">¥</span><span class="amount-int" style="">${item.price}</span>
+</span>
+
+<!--
+<span class="member-lbl">折合单件¥<span class="bold">110</span></span>
+-->
+	</div>
+<!--
+<span class="suggest-price">全球抢购原价 ¥
+	<span class="suggest-price-amt">${item.price}</span>
+</span>
+-->
+<span class="market-price">国内参考价 ¥ <span class="market-price-amt">${item.inner_price}</span></span>
+</div>
+
+	</header>
+	<article class="m-intro">
+		<dl class="fee">
+			<dd class="postage">
+				<span class="tit">配送费：</span>
+				<span class="desc">
+						免运费
+				</span>
+			</dd>
+			<dd class="custom">
+				<span class="tit">关&nbsp;&nbsp;&nbsp;&nbsp;税：</span>
+				    <span class="desc">本商品适用税率为 <span class="tax-rate">${item.tax_rate}%</span>，若订单总税额≤50元则免征</span>
+			</dd>
+		</dl>
+	</article>
+
+	<article class="m-detail">
+		<div class="tabbar-wrap">
+		</div>
+		<div class="desc show" id="js_goodsdetail">
+		</div>
+		<ul class="params">
+			<li class="param" title="商品品牌：Swisse">
+				<span class="name">商品品牌</span><span class="val">Swisse</span>
+			</li>
+		</ul>
+		<div class="faq"></div>
+	</article>
+	<div class="download-banner"></div>
+
+
+
+
+</div>
+<div style="display:none" class="u-icn-cart"></div>
+
+<div class="m-gotop-wrap" id="m-gotop-wrap">
+	<div class="ic-gotop">
+		<i class="up"></i>
+		<p class="desc">顶部</p>
+	</div>
+</div>
+<div id="popUp" class="m-toast" style="display: none;">
+	<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0">
+		<tr>
+		<td width="100%" valign="center" align="center">
+			<div class="toast box animated success show zoomIn">恭喜，加入购物车成功</div>
+		</td>
+		</tr>
+	</table>
+</div>
+<div>
+	<form id="buyNowFm" method="post" action="/h5/member/confirm_${item.id}.html">
+		#{xsrf_form_html}
+		<input type="hidden" name="from" value="goods" />
+		<input type="hidden" name="ware_house_id" value="${item.ware_house_id}" />
+		<input type="hidden" name="item_id" class="fmItem_id" autocomplete="off" value="">
+		<input type="hidden" name="tempBuyAmount" class="fmItem_tempBuyAmount" autocomplete="off" value="">
+	</form>
+</div>
+<div class="m-sku-mask"></div>
+<article id="m-sku" class="m-sku ">
+	<div id="overAmount" class="overAmount u-info ">
+		<i class="warn u-icn8 u-icn8-2"></i>
+		<p class="desc">啊哦，海关规定购买多件的总价不能超¥1000，请您分多次购买。</p>
+	</div>
+	<div class="buynow-only u-info ">
+		<i class="money"></i>
+		<p class="desc">省钱贴士：据海关规定，订单总税额≤50元则免征。本品税费¥21.90，单件直接下单可免税哦！</p>
+	</div>
+</article>
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript" id="sku-info">
+	window.__getGoodsInfo = (function(){
+		var __goodsInfo = {"itemId":${item.id},"title":"${item.title}","main_pic":"${item.main_pic and item.main_pic.split(';')[0] or ''}","price":"${item.price}","inner_price":"${item.inner_price}","tax_rate":"${item.tax_rate}","cart_count":"${cart_count}","min_limit_quantity":"${item.min_limit_quantity}","max_limit_quantity":"${item.max_limit_quantity}","lowStocks":"${item.sale_quantity<=item.warning_quantity}"}
+		return function(){
+			window.__getGoodsInfo = null;
+			return __goodsInfo;
+		}
+	})();
+	$('#sku-info').remove();
+</script>
+<script type="text/javascript" id="m-goods-detail">
+	window.__getGoodsDetail = (function(){
+
+		var __goodsDetail = '#{content}';
+		return function(){
+			window.__getGoodsDetail = null;
+			return __goodsDetail;
+		}
+	})();
+
+
+	$('#m-goods-detail').remove();
+</script>
+<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/product/detail.min.js"></script>
+<script  type="text/x-tmpl" id="templateBtns">
+<div class="nogoods {{if lowStocks!="True"}}hide{{/if}}" >缺货</div>
+<div class="btn-wrap">
+	<a href="#" class="buynow btn {{if lowStocks=="True"}}dis{{/if}}" id="buyNow">立即购买</a>
+	<a href="#" class="addcart btn {{if lowStocks=="True"}}dis{{/if}}" id="addCart">加入购物车</a>
+	<a href="/h5/member/cart.html" class="cart  u-icn-cart" id="cart"><span class="count">{{= cartCount}}</span></a>
+</div>
+</script>
+<script  type="text/x-tmpl" id="templateSku">
+<div class="topblock">
+	<div class="topbar">
+		<span class="left" id="topbar-left"><i class="back u-icn" id="topbar-back"></i></span> 			规格选择
+	</div>
+	<div class="product">
+		<img src="{{= main_pic}}@50w" alt="{{= title}}" class="pic" id="showImg">
+		<div class="txt-wrap">
+			<p class="tit">{{= title}}</p>
+			<p class="stat">
+				<span class="price"><span class="rmb">¥ </span>{{= price}}</span> 					<span class="stock-tip"> ({{= stockTxt}})</span></p>
+			<p class="selected">&nbsp;</p>
+		</div>
+	</div>
+</div>
+<div class="sku-scroll">
+	<div class="skuwrap" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+	<form action="/order/confirm.html?from=detailfp" method="post">
+	<div class="ctr-num">
+		<span class="opt-name">数量</span>
+		<div class="optbox">
+				<span class="ctrnum-wrap">
+					<span class="minus dis"><i class="u-icn14 u-icn14-1 u-icn14-3"></i></span>
+					<input type="text" id="tempBuyAmountObj" name="tempBuyAmount" class="qty" autocomplete="off" readonly="readonly" value="{{= tempBuyAmount}}">
+					<span class="plus "><i class="u-icn14 "></i></span>
+				</span>
+			<span class="tip" id="js_stockTip">{{= stockTip}}</span>
+			<span class="stock" id="js_stock">9748</span>
+		</div>
+	</div>
+
+	</form>
+	</div>
+</div>
+</script>
+</body>
+</html>

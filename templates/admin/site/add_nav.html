@@ -1,0 +1,118 @@
+
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
+         <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>一级类目：</label>
+            <div class="formControls col-5"> <span class="select-box">
+                <select class="select" id="category_id" name="category_id">
+                    <option value="">--请选择--</option>
+                    <?py for category in categories:?>
+                           <?py if site_nav and site_nav.category_id==category.id:?>
+                                <option value="${category.id}" selected>${category.name}</option>
+                           <?py else:?>
+                                <option value="${category.id}">${category.name}</option>
+                           <?py #endif ?>
+                    <?py #endfor?>
+                </select>
+                </span> </div>
+            <div class="col-3"> </div>
+        </div>
+
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>名称：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" value="${site_nav and site_nav.name or ''}" placeholder="" id="name" name="name" datatype="*2-16" nullmsg="导航名称">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+			<label class="form-label col-3">连接：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" value="${site_nav and site_nav.link or ''}" placeholder="" id="link" name="link">(默认为类目连接)
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>排序：</label>
+			<div class="formControls col-5">
+				<input type="number" class="input-text" value="${site_nav and site_nav.sort or ''}" placeholder="" id="sort" name="sort" nullmsg="排序不能为空">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>打开方式：</label>
+			<div class="formControls col-5 skin-minimal">
+                <div class="radio-box ${(site_nav and site_nav.open_type==0) and 'checked' or ''}">
+                    <input type="radio" id="open_type-1" name="open_type"   datatype="*" value="0" nullmsg="请选择打开方式！">
+                    <label for="open_type-1">当前窗口</label>
+                </div>
+                <div class="radio-box ${(site_nav and site_nav.open_type==1) and 'checked' or ''}">
+                    <input type="radio" id="open_type-2" name="open_type"  class="${(site_nav and site_nav.open_type==1) and 'selected' or ''}" value="1">
+                    <label for="open_type-2">新窗口</label>
+                </div>
+
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>开启app导航：</label>
+			<div class="formControls col-5 skin-minimal">
+				<?py if site_nav and site_nav.is_app_start == 0: ?>
+					<div class="radio-box">
+	                	<input type="radio" id="app_start-2" name="app_start" value="1">
+	                	<label for="app_start-2">是</label>
+	            	</div>
+					<div class="radio-box">
+	                    <input type="radio" id="app_start-1" name="app_start" value="0" checked="checked" >
+	                    <label for="app_start-1">否</label>
+					</div>	
+				<?py else: ?>
+					<div class="radio-box">
+	                	<input type="radio" id="app_start-2" name="app_start" value="1" checked="checked" >
+	                	<label for="app_start-2">是</label>
+	            	</div>
+					<div class="radio-box">
+	                    <input type="radio" id="app_start-1" name="app_start" value="0" >
+	                    <label for="app_start-1">否</label>
+					</div>
+				<?py #endif ?>
+			</div>
+			
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+
+	$("#form-admin-add").Validform({
+		tiptype:2,
+		callback:function(form){
+			$("#form-admin-add").submit();
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+});
+</script>
+</body>
+</html>

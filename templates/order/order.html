@@ -1,0 +1,189 @@
+﻿﻿<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/order/order.min.css">
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/validform.min.css">
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/validform.min.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/order/order.min.js"></script>
+<style type="text/css">
+    .Validform_checktip{
+        display: block;
+        margin-left: 200px;
+    }
+    .productlist td, .productTable td{
+        font-size: 14px;
+        color: #222;
+    }
+    .u-upload{
+        margin: 5px 0;
+    }
+    input[type=file]{
+        font-size:85px;
+        border:none;
+        opacity:0;
+        filter:alpha(opacity=0);
+        cursor:pointer;
+        position:absolute;
+        right:-3px;
+        top:-3px;
+    }
+    .lblCardUp{
+        height:40px;display:inline-block;line-height:40px;background: #ff4351;color:#fff;
+        border:1px solid #ff4351;
+        border-radius: 3px;
+        padding:0 5px;
+    }
+    .filesTxt{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100px;
+        display: inline-block;
+        position: absolute;
+        height:40px;
+        line-height: 40px;
+        margin-left: 6px;
+    }
+    #idCardPhotos .tips{
+        font-size: 14px;
+        color: #666;
+    }
+    #idCardPhotos .Validform_wrong{
+        color:#ff4351;
+        font-size: 16px;
+    }
+</style>
+<div class="ht-header-wrapper">
+    <div class="ht-header" id="htHeader">
+        <div class="container">
+            <a class="ht-logo" href="/">全球抢购</a>
+            <div class="mod-buysteps m-step-1">
+                <div class="orderstepsbg"></div>
+                <ul class="clearfix">
+                    <li class="step step-1 ">
+                        <div class="txt">我的购物车</div>
+                    </li>
+                    <li class="step step-2 active">
+                        <div class="txt">提交订单</div>
+                    </li>
+                    <li class="step step-3 ">
+                        <div class="txt">选择支付方式</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<?py include('include/navigation.html') ?>
+<div class="container">
+<div id="orders">
+</div>
+<?py include('common/adresses.html')?>
+    <form method="post" id="orderSubmitForm" enctype="multipart/form-data" action="${handler.reverse_url('orders_submit')}" onsubmit="return false;">
+    <div id="idCardPhotos" style="border: 1px solid #eee;padding:8px; display: none;font-size: 18px;">
+        <div style="padding: 5px 0 ; color:#f71111;">购买海外直邮商品，根据国家政策法规，海关需要上传身份证复印件信息，全球抢购会对您的身份信息进行加密处理。</div>
+        <div class="u-upload itemheight">
+            <span class="txtTitle">身份证正面</span>
+
+            <label for="font_card" class="lblCardUp">
+                <input id="font_card" name="font_card" type="file" autocomplete="off" />
+                上传身份证正面
+            </label>
+            <span class="filesTxt"></span>
+        </div>
+
+        <div class="u-upload itemheight">
+            <span class="txtTitle">身份证反面</span>
+            <label for="back_card" class="lblCardUp">
+                <input id="back_card" name="back_card" type="file" autocomplete="off" />
+                上传身份证反面
+            </label>
+            <span class="filesTxt"></span>
+        </div>
+        <div class="tips">仅支持JPG、JPEG和PNG格式，大小不超过4M</div>
+        <div id="wrongimg" style="display: none;margin-left:0; " class="Validform_checktip Validform_wrong">身份证图片格式错误</div>
+    </div>
+<h1 class="strong-header clearfix">确认商品信息</h1>
+<div class="productlist">
+
+        <input type="hidden" value="${house_ware_id}" id="house_ware_id" name="house_ware_id">
+        <input type="hidden" value="${is_abroad}" id="is_abroad" name="is_abroad">
+
+<?py if is_cart:?>
+        <input type="hidden" value="1" name="is_cart">
+<?py #endif ?>
+       <input type="hidden" id="address_id" name="address_id" value=""/>
+        #{xsrf_form_html}
+    <table width="100%">
+        <colgroup>
+            <col width="55%">
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>商品</th>
+            <th>单价(元)</th>
+            <th>数量</th>
+            <th>金额(元)</th>
+        </tr>
+        </thead>
+        <tbody>
+<?py for item in items:?>
+            <tr class="trHeight">
+                <td align="left" class="first">${item.title}</td>
+                <input type="hidden" name="item_id" value='${item.id}'>
+                <input type="hidden" name="item_account" value='${item.num}'>
+                <td align="center">${item.price}${item.bussiness_buy and '(大客户价:'+str(item.bussiness_price)+')' or ''}</td>
+                <td align="center">${item.num}</td>
+                <td align="center">${item.bussiness_buy and '大客户价:' or ''}<span class="strongSize16">${item.total_price}</span></td>
+            </tr>
+<?py #endfor ?>
+        <tr class="trlast">
+            <td colspan="4">
+                <div class="ps">
+                    备注：<input id="remark" name="remark" type="text" value="" autocomplete="off" />
+                </div>
+
+                <div class="oShowPrice clearfix">
+                <div class="submitWrap">
+                    <div class="itemAmount clearfix">
+                        <div class="settlementAmount clearfix">
+                            <p><em class="amount">¥0.00</em></p>
+<?py if is_abroad:?>
+<p><em class="amount ${total_tax<=50 and 'lineThrough' or ''}">¥${total_tax}</em></p>
+<?py #endif?>
+                            <p class="totalPrice"><em class="amount"><span rel="" id="orderPayAmount">¥${total_account}</span></em></p>
+                        </div>
+                        <div class="settlementItem clearfix">
+                            <p><em class="tit"><b class="freeTax"><b class="littleIcon speaker"></b>亲，全球抢购给你包邮<b class="sTriangle"></b></b>运费：</em></p>
+<?py if is_abroad:?>
+    <?py if total_tax<=50:?>
+    <p><em class="tit"><b class="freeTax"><b class="littleIcon RMB"></b>亲，关税≤50，免征哦！&nbsp;<b class="sTriangle"></b></b>关税：</em></p>
+    <?py else:?>
+    <p><em class="tit">关税：</em></p>
+    <?py #endif ?>
+<?py #endif?>
+                            <p><em class="tit">应付金额：</em></p>
+                        </div>
+                    </div>
+                    <div class="ordersub">
+                        <input id="submitOrderBtn" type="submit" class="oOrgBtn"  value="提交订单" />
+                    </div>
+
+                </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        <div class="oShowCon agreement">
+            <label class="m-checkbox m-checked">
+                <span disabled="" name="agree" id="agree" class="box"><i></i><em></em></span>
+            </label>
+            <label for="agree">本人同意并接受<a href="/help/agreement.html" target="_blank">《全球抢购服务协议》</a></label>
+        </div>
+
+</div>
+    </form>
+</div>
+</div>

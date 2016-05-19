@@ -1,0 +1,266 @@
+<div class="pos-a" style="width:150px;left:0;top:0; bottom:0; height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5">
+	<ul id="treeDemo" class="ztree">
+	</ul>
+</div>
+<div style="margin-left:150px;">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 产品列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="pd-20">
+		<form>
+			<div class="text-c">
+				<input type="text" name="category_name" id="category_name" placeholder=" 类目名称" style="width:250px" class="input-text" value='${category_name}'>
+				<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜类目</button>
+			</div>	
+		</form>
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+			<span class="l">
+				&nbsp;&nbsp;<a class="btn btn-danger radius" title="添加父类目" onClick="show_layer('添加父类目','${handler.reverse_url('category','add')}?type=parent','600','300')">添加父类目</a>
+							<a class="btn btn-primary radius" title="增加子类目" onClick="show_layer('添加子类目','${handler.reverse_url('category','add')}?type=children','600','350')">添加子类目</a>
+			</span>
+		</div>
+		<div class="mt-20">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th width="10">ID</th>
+						<th width="20">类目名称</th>
+						<th width="10">类目级别</th>
+						<th width="10">父级类目ID</th>
+						<th width="20">类目全路径</th>
+						<th width="10">类型</th>
+						<th width="20">描述</th>
+						<th width="50">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+<?py for d in data.result: ?>
+	<tr class="text-c va-m">
+	<td>${d.id}</td>
+	<td>${d.name}</td>
+	<td>${d.level}级</td>
+<?py if d.parent_id == '0': ?>
+	<td></td>
+<?py else: ?>
+	<td>${d.parent_id}</td>
+<?py #endif ?>
+
+<td>${d.full_parent_id}</td>
+<?py if d.is_abroad == 1: ?>
+	<td><span class="label label-success radius">跨境</span></td>
+<?py else: ?>
+	<td><span class="label label-danger radius">国内</span></td>
+<?py #endif ?>
+
+	<td>${d.desc}</td>
+	<td>
+<?py if d.parent_id == '0': ?>
+	<a onClick="show_layer('编辑类目','${handler.reverse_url('category','edit')}?type=parent&category_id=${d.id}','600','350')" title="编辑类目">编辑
+	</a>
+<?py else: ?>
+	<a onClick="show_layer('编辑类目','${handler.reverse_url('category','edit')}?type=children&category_id=${d.id}','600','350')" title="编辑类目">编辑
+	</a>
+<?py #endif ?>
+
+	</td>
+	</tr>
+<?py #endfor ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/static/admin/lib/zTree/v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript">
+var setting = {
+
+	async: {
+		enable: true,
+		url:"/admin/item/category",
+		type:"get",
+		autoParam:["id", "name=n", "level=lv"],
+		otherParam:{"otherParam":"zTreeAsyncTest"},
+		dataFilter: filter
+	},
+
+	data: {
+        simpleData: {
+            enable: true,
+            idKey: "id",
+			pIdKey: "pId",
+			rootPId: 0
+        }
+    },
+
+	callback: {
+		beforeRemove: beforeRemove,
+		onRemove: onRemove,
+		onRename: onRename
+	}
+};
+
+function filter(treeId, parentNode, childNodes) {
+    if (!childNodes) return null;
+    for (var i=0, l=childNodes.length; i<l; i++) {
+        childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+    }
+    return childNodes;
+}
+
+
+var log, className = "dark";
+function beforeDrag(treeId, treeNodes) {
+	return false;
+}
+
+function onRename(event, treeId, treeNode, isCancel) {
+	$.ajax({
+	    type: 'post',
+	    async: false,
+	    url: '/admin/item/category',
+	    data: {
+	           "id":treeNode.id,
+	           "name":treeNode.name
+	       	  },
+	    dataType: "json",
+	    success: function(data){
+	    	if (data.stat == 'ok') {
+	    		alert("修改成功");
+	    	}
+	    },
+	    error: function(error){ }
+    });
+}
+
+var code;
+
+function showCode(str) {
+	if (!code) code = $("#code");
+	code.empty();
+	code.append("<li>"+str+"</li>");
+}
+
+var newCount = 1;
+function add(e) {
+
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+	var isParent = e.data.isParent;
+	var nodes = zTree.getSelectedNodes();
+	treeNode = nodes[0];
+
+	if (!isParent) {
+		if (!treeNode) {
+			alert('添加子节点前，请选择一个父节点');
+			return ;
+		}
+	}
+
+	if (treeNode) {
+	    parent_id = treeNode.id;
+	} else {
+	    parent_id = '0';
+	}
+
+	//子节点
+	if (treeNode) {
+		addPost(parent_id,newCount,function(_id){
+			treeNode = zTree.addNodes(treeNode, {id:_id, pId:treeNode.id, isParent:isParent, name:"new node"});
+		});
+	//根节点
+	} else {
+		addPost(parent_id,newCount,function(_id){
+			treeNode = zTree.addNodes(null, {id:_id, pId:0, isParent:isParent, name:"new node"});
+		});
+	}
+};
+
+
+function addPost(parent_id , count , callback){
+	$.ajax({
+	    type: 'put',
+	    async: false,
+	    url: '/admin/item/category',
+	    data: {
+	           "parent_id":parent_id,
+	           "name":"new node",
+	       	  },
+	    dataType: "json",
+	    success: function(data){
+	    	callback(data.id);
+	    },
+	    error: function(error){ }
+    });
+};
+
+function edit() {
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+	nodes = zTree.getSelectedNodes(),
+	treeNode = nodes[0];
+	if (nodes.length == 0) {
+		alert("请先选择一个节点");
+		return;
+	}
+	zTree.editName(treeNode);
+};
+
+function filter(treeId, parentNode, childNodes) {
+	if (!childNodes) return null;
+	for (var i=0, l=childNodes.length; i<l; i++) {
+		childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+	}
+	return childNodes;
+};
+
+function remove(e) {
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+	nodes = zTree.getSelectedNodes(),
+	treeNode = nodes[0];
+	if (nodes.length == 0) {
+		alert("请先选择一个节点");
+		return;
+	}
+	if (treeNode.isParent) {
+		alert('请先删除子节点');
+		return ;
+	}
+	var callbackFlag = true;
+	zTree.removeNode(treeNode,callbackFlag);
+};
+
+function beforeRemove(treeId, treeNode) {
+	return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+};
+
+function onRemove(e, treeId, treeNode) {
+
+	$.ajax({
+	    type: 'delete',
+	    async: false,
+	    url: '/admin/item/category',
+	    data: {
+	           "id":treeNode.id,
+	           "deleted":1
+	       	  },
+	    dataType: "json",
+	    success: function(data){
+	    	if (data.stat == 'ok') {
+	    		alert("删除成功");
+	    	}
+
+	    },
+	    error: function(error){ }
+    });
+};
+
+$(document).ready(function(){
+	$.fn.zTree.init($("#treeDemo"), setting);
+	$("#addParent").bind("click", {isParent:true}, add);
+	$("#addLeaf").bind("click", {isParent:false}, add);
+	$("#edit").bind("click", edit);
+	$("#remove").bind("click", remove);
+
+	$(".dataTables_length,.dataTables_info,.dataTables_filter").hide();
+});
+
+function show_layer(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+</script>

@@ -1,0 +1,78 @@
+
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/static/admin/lib/html5.js"></script>
+<script type="text/javascript" src="/static/admin/lib/respond.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/PIE_IE678.js"></script>
+<![endif]-->
+<link href="/static/admin/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-permission-add">
+
+        #{xsrf_form_html}
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>部门：</label>
+			<div class="formControls col-5">
+                <select name="department_id" class="select">
+                    <?py for d in departments:?>
+                        <option value="${d.id}">${d.name}</option>
+                    <?py #endfor ?>
+                </select>
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>名称：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" value="" placeholder="" id="user-name" name="name" datatype="*2-16" nullmsg="权限不能为空">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>电话：</label>
+			<div class="formControls col-8">
+			    <input type="text" class="input-text" value="" placeholder="" id="mobile" name="mobile" datatype="*2-16" nullmsg="权限路径不能为空">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-3">备注：</label>
+			<div class="formControls col-5">
+				<textarea name="description" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-permission-add").Validform({
+		tiptype:2,
+		callback:function(form){
+			$('#form-permission-add').submit();
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+});
+</script>

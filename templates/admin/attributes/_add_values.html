@@ -1,0 +1,55 @@
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-attributes-add">
+        <div class="row cl">
+            <label class="form-label col-3">属性值：</label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" placeholder="批量添加时,属性值以空格隔开" id="values" name="values">
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>状态：</label>
+            <div class="radio-box">
+                <input name="status" type="radio" datatype="*"  checked="checked" value="1" nullmsg="请选择"/>开启
+            </div>
+            <div class="radio-box">
+                <input name="status" type="radio" datatype="*"  value="0" nullmsg="请选择"/>关闭
+            </div>
+        <div>
+        
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span>排序：</label>
+            <div class="">
+                <input type="number" class="input-text" id="paixu" name="paixu" nullmsg="排序不能为空" >
+            </div>
+            <div class="col-4"> </div>
+        <div>
+
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+		<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+    		<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+		</div>
+        <input type="hidden" name="attribute_id" value="${attribute_id}" />
+        <input type="hidden" name="attribute_name" value="${attribute_name}" />
+	</form>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+    $("#form-attributes-add").Validform({
+        
+    });
+</script>
+
+
+<script type="text/javascript">
+    
+</script>

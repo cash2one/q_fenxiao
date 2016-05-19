@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>tornado demo</title>
+</head>
+<body>
+
+<h3><a href="${handler.reverse_url('common_handler')}">Tornado普通GET请求方式</a></h3>
+<h3><form method="post" action="${handler.reverse_url('common_handler')}">
+        #{xsrf_form_html}
+    <input type="submit" value="Tornado普通POST请求">
+</form>
+</h3>
+
+<h3><a href="${handler.reverse_url('json_handler')}">TornadoGET请求返回JSON</a></h3>
+<h3><form method="post" action="${handler.reverse_url('json_handler')}">
+    #{xsrf_form_html}
+    <input type="submit" value="TornadoPOST请求返回JSON">
+</form></h3>
+
+<h3><a href="${handler.reverse_url('asyn_handler')}">Tornado非阻塞GET请求</a></h3>
+<h3><form method="post" action="${handler.reverse_url('asyn_handler')}">
+        #{xsrf_form_html}
+     <input type="submit" value="Tornado非阻塞POST请求">
+</form></a></h3>
+
+
+<h3><a href="${handler.reverse_url('asyn_handler')}">测试页面缓存</a></h3>
+<h3><form method="post" action="${handler.reverse_url('asyn_handler')}">
+        #{xsrf_form_html}
+     <input type="submit" value="测试缓存">
+</form></a></h3>
+
+</body>
+</html>

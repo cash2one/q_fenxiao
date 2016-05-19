@@ -1,0 +1,1002 @@
+﻿.ht-header .mod-buysteps {
+    position:absolute;
+    top:4px;
+    right:0;
+    width:354px;
+    *zoom:1
+}
+.ht-header .mod-buysteps:after {
+    content:'\20';
+    display:block;
+    height:0;
+    clear:both
+}
+.mod-buysteps .orderstepsbg {
+    height: 20px;
+    position: absolute;
+    right: 40px;
+    top: 0;
+    width: 290px;
+    background: #fff url("http://cdn.qqqg.com/web/images/buysteps.png") no-repeat scroll 0 0;
+}
+.m-step-1 .orderstepsbg {
+    background-position: 0 -34px;
+}
+.m-step-2 .orderstepsbg {
+    background-position: 0 -65px;
+}
+
+
+.mod-buysteps ul {
+    float: right;
+    padding: 20px 0 0;
+}
+.mod-buysteps .step {
+    color: #ddd;
+    float: left;
+    text-align: center;
+}
+.mod-buysteps .step-1 {
+    width: 70px;
+}
+.mod-buysteps .step-2 {
+    margin-left: 72px;
+    width: 60px;
+}
+.m-step-2 .step-2{
+    color: #d22147;
+}
+.mod-buysteps .step-3 {
+    margin-left: 66px;
+    width: 86px;
+}
+.mod-buysteps .active, .mod-buysteps .step-1{
+    color: #d22147;
+}
+#user-addresses{
+    margin-top: 10px;
+}
+#payway{
+    margin-top: 20px;
+}
+.addresses {
+    border: 1px solid #eee;
+    height: 158px;
+    width: 342px;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+
+}
+.adrLabel {
+    border: 2px solid #fff;
+    cursor: pointer;
+    height: 154px;
+    margin-right: 15px;
+    position: relative;
+    width: 338px;
+}
+.adrLabel:hover {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border-color: #f7f7f7;
+}
+.adrLabel ul{
+    margin: 10px;
+    height: 154px;
+}
+.consignee{
+    height: 30px;
+    line-height: 30px;
+}
+.consigneeName{
+    color: #000;
+    font-size: 16px;
+}
+.rPhoneNumber{
+
+}
+
+.default,.setDefault{
+    float: right;
+}
+.addresses a{
+    color:#666;
+}
+.addresses a:hover{
+    color:#dd2727;
+}
+.addresses a.setDefault{
+    display: none;
+    color: #d71111;
+}
+
+.addresses .last{
+    position: absolute;
+    bottom:10px;
+}
+.adrLabel .opSpan{
+    display: none;
+}
+.adrLabel:hover .opSpan{
+    display: block;
+}
+.adrLabel:hover .setDefault{
+    display: block;
+}
+.addressCheck,.addressCheck:hover{
+    border: 2px solid #d71111;
+    background: #fff url("http://cdn.qqqg.com/web/images/ordericon.png") no-repeat scroll 308px 124px;
+}
+.productTable td{
+    background: #FFFBF0;
+}
+.productTable .trlast td{
+    background: #F7F7F7;
+}
+.productTable .ptitle{
+    display: inline-block;
+    width:260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.productlist th,.productTable th{
+    color: #999;
+    border: 1px solid #e8e8e8;
+    border-bottom: none;
+    height: 30px;
+    line-height: 30px;
+}
+.productlist td,.productTable td{
+    color: #333;
+    border: 1px solid #e8e8e8;
+    border-bottom: none;
+    height: 30px;
+    line-height: 30px;
+}
+.trHeight .first{
+    padding-left: 10px;
+}
+.trHeight td{
+    padding:20px 0 ;
+}
+
+.productlist td, .productTable td {
+    color: #222;
+    font-size: 14px;
+}
+.strongSize{
+    font-size: 14px;
+    font-weight: bold;
+}
+.strongSize16{
+    font-size: 16px;
+    font-weight: bold;
+}
+.trlast td{
+    border: 1px solid #e8e8e8;
+
+}
+.m-step ul {
+    float: right;
+    padding: 20px 0 0;
+}
+
+.oOrgBtn, .oOrgBtn:link, .oOrgBtn:visited {
+    background: #d71111 none repeat scroll 0 0;
+    color: #fff;
+    display: inline-block;
+    font-family: "微软雅黑";
+    font-size: 16px;
+    font-weight: 700;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 120px;
+    float: right;
+    cursor: pointer;
+}
+
+.oOrgBtn:hover{
+    background: #dd2727;
+}
+.oOrgBtnDis, .oOrgBtnDis:link, .oOrgBtnDis:visited {
+    background: #ddd;
+    color: #f7f7f7;
+}
+.oOrgBtnDis:hover{
+    background: #ddd;
+    color: #f7f7f7;
+}
+
+.goToChoice {
+    bottom: 12px;
+    color: #d12046;
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 10px;
+    padding-top: 6px;
+    text-align: right;
+    width: 350px;
+    display: none;
+}
+
+.labelall{
+    margin: 0 10px;
+}
+.opdel{
+    padding-left: 10px;
+    margin-top: 10px;
+}
+.delproduct{
+    color:#333;
+}
+.right {
+    float: right;
+    position: relative;
+}
+.oShowPrice{
+    background: #f7f7f7;
+}
+.submitWrap {
+    display: inline;
+    float: right;
+    padding: 26px 27px 5px 0;
+    position: relative;
+    text-align: right;
+}
+.submitWrap p {
+    line-height: 24px;
+    padding: 2px 0;
+}
+.submitWrap .settlementAmount, .submitWrap .settlementItem {
+    float: right;
+}
+.submitWrap .freeTax {
+    background-color: #fffbf0;
+    border: 1px solid #d71111;
+    color: #d71111;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 400;
+    height: 21px;
+    line-height: 21px;
+    margin-right: 12px;
+    position: relative;
+    text-align: center;
+    width: 160px;
+}
+
+.submitWrap .speaker {
+    background: rgba(0, 0, 0, 0) url("http://cdn.qqqg.com/web/images/order/orderConfirmImgs.png") no-repeat scroll 0 -30px;
+    height: 12px;
+    left: 7px;
+    margin-right: 8px;
+    top: 4px;
+    width: 12px;
+}
+.submitWrap .littleIcon {
+    display: inline-block;
+    float: left;
+    position: relative;
+}
+
+.submitWrap .sTriangle {
+    background: #fffbf0 url("http://cdn.qqqg.com/web/images/order/orderConfirmImgs.png") no-repeat scroll -26px -34px;
+    display: inline-block;
+    height: 11px;
+    overflow: hidden;
+    position: absolute;
+    right: -6px;
+    top: 4px;
+    width: 6px;
+}
+.submitWrap .RMB {
+    background: rgba(0, 0, 0, 0) url("http://cdn.qqqg.com/web/images/order/orderConfirmImgs.png") no-repeat scroll -11px -30px;
+    height: 13px;
+    left: 5px;
+    top: 4px;
+    width: 15px;
+}
+.submitWrap .littleIcon {
+    display: inline-block;
+    float: left;
+    position: relative;
+}
+
+.submitWrap .amount {
+    display: inline-block;
+    font-size: 14px;
+    padding-left: 15px;
+}
+.totalPrice span {
+    color: #e73333;
+    font-size: 18px;
+    font-weight: 700;
+}
+.submitWrap .lineThrough ,#cart .lineThrough{
+    text-decoration: line-through;
+}
+.agreement {
+    color: #999;
+    float: right;
+    padding-top: 10px;
+}
+.m-checkbox {
+    font-size: 12px;
+}
+
+.m-checkbox .box {
+    color: #ddd;
+    font-family: iconfont;
+    font-size: 14px;
+    line-height: 14px;
+    padding-right: 22px;
+    position: relative;
+}
+.m-checkbox i {
+    background: #fff none repeat scroll 0 0;
+    color: #d12147;
+    font-size: 15px;
+    height: 14px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    text-indent: -9999px;
+    top: 0;
+    width: 14px;
+}
+.m-checked .box i {
+    text-indent: 0;
+}
+.m-checkbox em {
+    border: 1px solid #ddd;
+    font-size: 16px;
+    height: 13px;
+    left: 0;
+    position: absolute;
+    text-indent: -9999px;
+    top: -1px;
+    width: 13px;
+}
+.agreement a {
+    color: #999;
+}
+.agreement a:hover {
+    color: #dd2727;
+}
+.ordersub{
+    float: right;
+    padding: 20px;
+}
+#cart .ordersub{
+    position: relative;
+}
+.moneywrap{
+    padding: 10px 0;
+}
+.moneyCount{
+    color: #e73333;
+    font-size: 18px;
+    font-weight: 700;
+}
+.addNewAddress{
+    color: #d71111;
+    font-size: 14px;
+    display: inline-block;
+    margin: 10px 0;
+    cursor: pointer;
+}
+#addNewAd input[type=text],#addNewAd textarea{
+    border: 1px solid #ddd;
+    width: 430px;
+    padding: 15px;
+}
+#addNewAd .item-cancle, #addNewAd .item-submit {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    height: 30px;
+    margin-right: 20px;
+    margin-top: 30px;
+    width: 130px;
+}
+#addNewAd .item-submit {
+    background-color: #d71111;
+    border: 1px solid #d71111;
+    color: #fff;
+}
+
+#addNewAd .item-submit:hover {
+    background-color: #dd2727;
+    border: 1px solid #dd2727;
+}
+#addNewAd .itemheight{
+    margin: 8px 0;
+}
+#addNewAd{
+    padding: 20px;
+    border: 1px solid #ccc;
+    position: relative;
+    display: none;
+}
+.item-idcard {
+    position: relative;
+    z-index: 100;
+}
+.m-idcardtip {
+    position: absolute;
+    left: 660px;
+    top: 10px;
+}
+.m-idcardtip .w-icon-ask {
+    cursor: pointer;
+    left: 8px;
+    position: relative;
+    top: 6px;
+}
+.w-icon-ask {
+    color: #d22147;
+    font-size: 13px;
+}
+.iconfont {
+    font-family: iconfont !important;
+    font-size: 16px;
+    font-style: normal;
+}
+.m-notice {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ededee;
+    color: #333;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+}
+.m-notice-idcard {
+    border-color: #ccc;
+    font-size: 12px;
+    padding: 15px;
+    text-align: left;
+    width: 320px;
+}
+.m-notice-idcard .arrow {
+    top: 112px;
+}
+.m-notice-idcard .arr, .m-notice-idcard .arr1 {
+    border-width: 7px;
+}
+.m-notice-idcard .arr {
+    border-left-color: #ccc;
+    right: -14px;
+}
+.m-notice-idcard .arr1 {
+    right: -13px;
+}
+.m-idcardtip .m-notice-idcard {
+    position: absolute;
+    left: 40px;
+    top: -60px;
+}
+#addNewAd .m-notice-idcard s   {position:absolute;top:64px;left:-20px;display:block;width:0px;height:0px;font-size:0px;line-height:0px;border-color:transparent #ccc transparent transparent;border-style:dashed solid dashed dashed;border-width:10px;}
+#addNewAd .m-notice-idcard .arrow   {position:absolute;top:-10px;left:-8px;display:block;width:0px;height:0px;font-size:0px;line-height:0px;border-color:transparent #fff transparent transparent;border-style:dashed solid dashed dashed;border-width:10px;}
+.txtTitle{
+    width: 200px;
+    display: inline-block;
+}
+#addressfm .txtTitle{
+    padding: 14px 0;
+}
+.area .txtTitle{
+    float: left;
+}
+.productTable .checkAll {
+    vertical-align: text-bottom;
+}
+.warehouse{
+    background-color: #d22147;
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    height: 22px;
+
+    line-height: 22px;
+    margin-right: 10px;
+
+    text-align: center;
+
+    width: 80px;
+}
+.productTable th.first{
+    text-align: left;
+    padding-left: 10px;
+}
+.cartImgBox {
+    background-color: transparent !important;
+    border: none;
+    display: inline-block;
+    height: 80px;
+    vertical-align: middle;
+    width: 80px;
+}
+
+.buyBox .ctrNum {
+    display:inline-block;
+    height:20px;
+    line-height:20px;
+    text-align:center;
+    text-decoration:none!important;
+    width:20px;
+    border:1px solid #bcbcbc;
+    font-size:12px;
+    color:#333;
+    margin-right:5px;
+    overflow:hidden;
+    _line-height:23px;
+    zomm:1;
+    background:#f5f5f5;
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#fff), to(#ededed));
+    background:-moz-linear-gradient(#fff, #ededed);
+    -pie-background:linear-gradient(#fff, #ededed)
+}
+.buyBox .ctrNum:hover {
+    color:#dd2727;
+    border-color:#bcbcbc;
+}
+.buyBox .ctrNumDis {
+    color:#bcbcbc!important;
+    border-color:#bcbcbc;
+    cursor:default
+}
+.buyBox .ctrNumDis:hover {
+    color:#bcbcbc;
+    border-color:#bcbcbc
+}
+.buyNum {
+    width:43px;
+    height:20px;
+    line-height:20px;
+    text-align:center;
+    border:1px solid #bcbcbc;
+    vertical-align:top;
+    margin-right:5px
+}
+.ctrNumFont {
+    font-family:iconfont;
+    font-size:12px
+}
+.buyBox .addNum, .buyBox .buyNum, .buyBox .reduceNum {
+    float:left;
+    margin-right:0
+}
+.buyBox {
+    padding-left:75px
+}
+.buyBox .buyNum, .buyBox .reduceNum {
+    border-right:0;
+    font-size:12px;
+    background:0 0
+}
+.buyBox .ctrNumDis{
+    background-color: #f3f3f3;
+    color: #ccc !important;
+    cursor: default;
+}
+.cartShutBtn {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    color: #666;
+}
+.cartShutBtn:hover {
+    color: #dd2727;
+}
+
+.ordersub li{
+    text-align: right;
+}
+
+.ordersub label{
+    width: 100px;
+    display:inline-block;
+}
+
+.finalChooseNum{
+    color: #d12147;
+    font-size: 18px;
+}
+.dis *{
+    color: #999;
+}
+
+.tip-wrap {
+    display:none;
+    z-index:1000;
+    width:280px;
+    position:absolute;
+    right:-124px;
+    top:35px;
+    background-color:#fff;
+    color:#666;
+    cursor:default;
+    line-height:18px;
+    font-size:12px;
+    font-weight: 400;
+}
+.tip-wrap .tip-tri {
+    position:absolute;
+    left:50%;
+    top:-10px;
+    margin-left:-5px;
+    _bottom:5px;
+    _right:8px;
+    width:0;
+    height:0;
+    border-width:5px;
+    border-color:transparent transparent #D41C44;
+    border-style:dashed dashed solid;
+    z-index:1;
+    line-height:0
+}
+.tip-wrap .tip-body {
+    border:1px solid #D22147;
+    border-top-width:3px;
+    padding:2px 20px 20px
+}
+.tip-wrap .tip-mask {
+    position:absolute;
+    width:250px;
+    height:50px;
+    top:-40px;
+    left:25px
+}
+.tip-wrap .tip-body p {
+    margin-top:15px;
+    color: #666;
+}
+.goToPayNotice {
+    display: none;
+    background-color: #fff6ba;
+    border: 1px solid #d5d5d5;
+    bottom: 18px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 6px 0 6px 16px;
+    position: absolute;
+    right: 160px;
+    width: 352px;
+    z-index: 50;
+}
+
+.goToPayNotice .noticeLimitArrow {
+    background: rgba(0, 0, 0, 0) url("http://cdn.qqqg.com/web/images/cart/notice_arrow_right.png") no-repeat scroll 0 0;
+    height: 9px;
+    position: absolute;
+    right: -5px;
+    top: 13px;
+    width: 7px;
+}
+
+.goToPayNotice .askIcon {
+    width:12px;
+    height:12px;
+    right:10px;
+    *left:10px;
+    top:14px;
+    position:absolute;
+    z-index:50;
+    cursor:pointer;
+    background: url(http://cdn.qqqg.com/web/images/cart/askNoticeNew.png) no-repeat;
+}
+.goToPayNotice i {
+    font-weight: 700;
+}
+.goToPayNotice i {
+    font-weight: 700;
+}
+.goToChoice {
+    color: #d12046;
+}
+.orderbox,.payInfo,.orderdetail {
+    border: 1px solid #eaeaea;
+    padding: 20px 32px;
+}
+
+.trieTitle{
+    font-size: 14px;
+}
+.trieTitle .trieTips{
+    font-size: 18px;
+    font-weight: 700;
+}
+.trieTitle i {
+    background: #fff url("http://cdn.qqqg.com/web/images/orderGroup.png") no-repeat scroll -2px -240px;
+    display: inline-block;
+    height: 24px;
+    left: 0;
+    margin-right: 10px;
+    position: relative;
+    top: 6px;
+    width: 24px;
+}
+.trieTime{
+    margin: 7px 0;
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px 0;
+}
+.logisticsInfor{
+    color: #333;
+    font-size: 12px;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    position: relative;
+}
+
+.logisticsInfor .myOrder {
+    color: #999;
+    cursor: pointer;
+    outline: 0 none;
+    position: absolute;
+    right: 35px;
+    top: 20px;
+}
+.payInfo{
+    margin-top: 20px;
+}
+.orderInfo,.orderdetail{
+    padding-bottom: 4px;
+}
+.payAmount{
+    font-size: 14px;
+    vertical-align: middle;
+}
+.allCount{
+    color: #d12147;
+    font-size: 24px;
+    font-weight: 700;
+    vertical-align: middle;
+}
+.banks{
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    padding-bottom: 10px;
+    position: relative;
+}
+a.wrapnRadio {
+    display: inline-block;
+    height: 14px;
+    outline: 0 none;
+    text-decoration: none;
+    width: 14px;
+    z-index: 99;
+}
+.payInfo a {
+    left: 0;
+    position: absolute;
+    top: 26px;
+}
+.nRadio {
+    background: rgba(0, 0, 0, 0) url("http://cdn.qqqg.com/web/images/nRadio.png") no-repeat scroll 0 0;
+}
+.nRadioChecked {
+    background: rgba(0, 0, 0, 0) url("http://cdn.qqqg.com/web/images/nRadio.png") no-repeat scroll 0 -14px;
+}
+.banks input{
+    display: none;
+}
+.bankinfo{
+    cursor: pointer;
+    display: inline-block;
+    height: 56px;
+    margin-left: 35px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 146px;
+    font-size: 16px;
+    font-weight: 700;
+}
+#payBtn{
+    position: static;
+    float: none;
+    cursor: pointer;
+}
+
+.productEmpty {
+     font-size: 16px;
+     height: 218px;
+ }
+.productEmpty a{
+    color: #d71111;
+}
+.nullcart{
+    background: #fff url("http://cdn.qqqg.com/web/images/cartIcon.png") no-repeat scroll 0 0;
+    width: 354px;
+    height: 100px;
+    margin: 70px auto;
+    padding-left: 80px;
+}
+.cartImgBox img{
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    overflow: hidden;
+}
+.orderdetail{
+    padding-bottom: 20px;
+}
+.orderdetail .cred {
+    color: #d12147;
+    background: none;
+    font-family: iconfont;
+    font-size: 21px;
+    position: static;
+}
+.orderdetail .oOrgBtn{
+    float: none;
+}
+
+.orderdetail a:link{
+    color: #333;
+}
+.orderdetail a.oOrgBtn{
+    color: #fff;
+}
+.order-detail .oddetail {
+    border: 1px solid #eee;
+    font-size: 14px;
+    margin: 20px 0;
+}
+.order-detail .oddetail .title {
+    border-bottom: 1px solid #eee;
+    color: #999;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 20px;
+}
+.order-detail .oddetail .cnt {
+    line-height: 26px;
+    padding: 15px 20px;
+}
+.order-detail .oddetail .ls {
+    letter-spacing: 5px;
+}
+.order-detail .oddetail .addr {
+    display: block;
+    margin-left: 70px;
+}
+.order-detail .fangpianRemind {
+    background-color: #fff8db;
+    border: 1px solid #eee;
+    font-size: 14px;
+    margin-top: 20px;
+    padding: 12px 15px 12px 36px;
+}
+.order-detail .fangpianRemind .title {
+    color: #d22147;
+    display: inline-block;
+    font-weight: 700;
+    position: relative;
+}
+.order-detail .fangpianRemind .title b {
+    background: #fff url("http://cdn.qqqg.com/web/images/goddnessAlert.png") no-repeat scroll 0 0;
+    display: inline-block;
+    height: 16px;
+    left: -22px;
+    margin-right: 6px;
+    position: absolute;
+    top: 3px;
+    width: 16px;
+}
+.order-detail tr.trlast td{
+    background: #f7f7f7;
+}
+.order-detail span.pname{
+    width:400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+.ps{
+    margin: 20px 10px;
+}
+.ps input[type="text"]{
+    border: 1px solid #ddd;
+    padding: 15px;
+    width: 430px;
+}
+
+
+.payWays label {
+    margin-left:35px;
+    display:inline-block;
+    vertical-align:middle;
+    width:146px;
+    height:56px;
+    border:2px solid #fff;
+    cursor:pointer;
+    overflow:hidden;
+    background:url(http://cdn.qqqg.com/web/images/orderGroup26.png) no-repeat #fff;
+    _background:#fff url(http://cdn.qqqg.com/web/images/orderGroup26.png) no-repeat
+}
+.payWays label.checked span {
+    margin-left:118px;
+    margin-top:28px;
+    display:inline-block;
+    width:28px;
+    height:28px;
+    overflow:hidden;
+    background:url(http://cdn.qqqg.com/web/images/orderGroup24.png) -30px -358px no-repeat;
+    _background:url(http://cdn.qqqg.com/web/images/orderGroup24.png) no-repeat -30px -358px
+}
+.payWays .checked {
+    background-position:center -60px;
+    border:2px solid #d31b43
+}
+.payWays input {
+    cursor:pointer;
+}
+.payWays .wrap {
+    position:relative;
+    display:block;
+    padding-bottom:10px;
+    height:60px;
+    line-height:60px
+}
+.payWays .inline {
+    display:inline-block
+}
+.payWays a {
+    position:absolute;
+    left:0;
+    top:23px
+}
+.payWays .yiHuiJin {
+    background-position:center -340px
+}
+.alipay .checked {
+    background-position:center 0!important
+}
+.payWays .tongLian {
+    background-position:center -412px
+}
+.netease .checked {
+    background-position:center -60px!important
+}
+.payWays .weiXin {
+    background-position:center -466px
+}
+.tencent .checked {
+    background-position:center -120px!important
+}
+.payWays .zhiFuBao {
+    background-position:center -282px
+}
+/*
+.payWays .wangInfo, .payWays .weixinInfo, .payWays .zhiInfo {
+    display:inline-block;
+    font-size:12px;
+    color:#999;
+    padding-left:10px;
+    vertical-align:text-top
+}
+.payWays .zhiInfo {
+    color:#d22147
+}*/
+
+#iDialogCancelOrder .nselect-wrap .nselector {
+    position: relative;
+}
+#iDialogCancelOrder .options-wrap {
+    left: 0;
+    position: absolute;
+    top: 36px;
+    width: 100%;
+    z-index: 1000;
+}
+#iDialogCancelOrder .iDialogMain {
+    overflow: visible;
+}

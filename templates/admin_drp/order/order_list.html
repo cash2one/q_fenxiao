@@ -1,0 +1,237 @@
+<?py import ujson ?>
+<?py from services.payments.payorder_services import PayOrderService ?>
+<?py payorder_services = PayOrderService()?>
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单中心 <span class="c-gray en">&gt;</span>订单列表<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <form>
+        <div class="text-c"> 
+            订单日期：
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;" name="start_date" value="${start_date}" />
+            -
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d'})" id="logmax" class="input-text Wdate" style="width:120px;" name="end_date" value="${end_date}" />&nbsp
+            
+            支付时间：
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" class="input-text Wdate" style="width:120px;" name="pay_start_date" id="pay_start_date" value="${pay_start_date}" />
+            -
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d'})" class="input-text Wdate" style="width:120px;" name="pay_end_date" id="pay_end_date" value="${pay_end_date}" />&nbsp
+            <input type="text" name="content" id="content" placeholder="请输入订单号、身份证号码、手机号码" style="width:250px" class="input-text" value="${content}" />
+        </div> 
+        <div class="text-c" style="margin-top:20px;margin-bottom:30px">   
+    订单状态:
+    <select class="input-text" style="width:100px;margin-right:20px;vertical-align:middle" name="order_status" id="order_status">
+        <?py if order_status: ?>
+            <option value="">全部</option>
+            <option value="${int(order_status)}" selected="selected">${ORDER_STAYUS[int(order_status)]}</option>
+            <?py for key in ORDER_STAYUS: ?>
+                <?py if key == int(order_status): ?>
+                    <?py continue?>
+                <?py else: ?>
+                    <option value="${key}">${ORDER_STAYUS[key]}</option>
+                <?py #endif ?>
+            <?py #endfor?>
+        <?py else: ?>
+            <option value="">全部</option>
+            <?py for key in ORDER_STAYUS: ?>
+                <option value="${key}">${ORDER_STAYUS[key]}</option>
+            <?py #endfor?>
+        <?py #endif ?>
+    </select>
+
+    支付状态:
+    <select class="input-text" style="width:100px;margin-right:20px;vertical-align:middle" name="pay_status" id="pay_status" >
+        <?py if pay_status: ?>
+            <option value="">全部</option>
+            <option value="${int(pay_status)}" selected="selected">${PAY_STATUS[int(pay_status)]}</option>
+            <?py for key in PAY_STATUS: ?>
+                <?py if key == int(pay_status): ?>
+                    <?py continue?>
+                <?py else: ?>
+                    <option value="${key}">${PAY_STATUS[key]}</option>
+                <?py #endif ?>
+            <?py #endfor?>
+        <?py else: ?>
+            <option value="">全部</option>
+            <?py for key in PAY_STATUS: ?>
+                <option value="${key}">${PAY_STATUS[key]}</option>
+            <?py #endfor?>
+        <?py #endif ?>
+    </select>
+            
+    配送状态:
+    <select class="input-text" style="width:100px;margin-right:20px;vertical-align:middle" name="delivery_status" id="delivery_status">
+        <?py if delivery_status: ?>
+            <option value="">全部</option>
+            <option value="${int(delivery_status)}" selected="selected">${DELIVERRY_STATUS[int(delivery_status)]}</option>
+            <?py for key in DELIVERRY_STATUS: ?>
+                <?py if key == int(delivery_status): ?>
+                    <?py continue?>
+                <?py else: ?>
+                    <option value="${key}">${DELIVERRY_STATUS[key]}</option>
+                <?py #endif ?>
+            <?py #endfor?>
+        <?py else: ?>
+            <option value="">全部</option>
+            <?py for key in DELIVERRY_STATUS: ?>
+                <option value="${key}">${DELIVERRY_STATUS[key]}</option>
+            <?py #endfor?>
+        <?py #endif ?>
+    </select>&nbsp
+
+            <button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜订单</button>&nbsp
+            <a class="btn btn-danger radius" id="addParent" onclick="javascript:if(checkTime()==0){return false;};location.href='${handler.reverse_url('orders_excel')}?start_date='+$('#logmin').val()+'&end_date='+$('#logmax').val()+'&order_status='+$('#order_status option:selected').val()+'&pay_status='+$('#pay_status option:selected').val()+'&delivery_status='+$('#delivery_status option:selected').val()+'&content='+$('#content').val()+'&pay_start_date='+$('#pay_start_date').val()+'&pay_end_date='+$('#pay_end_date').val()" title="导出订单">导出订单</a>
+        </div>
+    </form>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="r">共有数据：<strong></strong>${count} 条</span>
+    </div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="30">ID</th>
+                <th width="45">订单号</th>
+                <th width="40">实付金额</th>
+                <th width="45">订单状态</th>
+                <th width="45">支付状态</th>
+                <th width="45">配送状态</th>
+                <th width='80'>订单时间</th>
+                <th width="10">订单来源</th>
+                <th width='80'>支付时间</th>
+                <th width="80">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+<?py for order in data.result: ?>
+    <tr class="text-c">
+        <td>${order.id}</td>
+        <td>
+            <a onClick="show_order_items('订单商品信息','${handler.reverse_url('detail_orders','detail')}?order_id=${order.id}','1180','600')">${order.order_no}
+            </a>
+        </td>
+        <td>${order.real_amount}元</td>
+        <td><span>${ORDER_STAYUS[order.status]}</span></td>
+        <td><span class="label ${order.pay_status==0 and 'label' or 'label-success' }">${PAY_STATUS[order.pay_status]}</span></td>
+        <td><span class="label ${order.delivery_status==0 and 'label' or 'label-success'}">${DELIVERRY_STATUS[order.delivery_status]}</span></td>
+        <td>${order.gmt_created}</td>
+        <td>${order.order_from}</td>
+    <?py payorder_services.set_rdb(handler.rdb)?>
+    <?py payorder = payorder_services._list(order_no=order.order_no).scalar()?>
+    <td>${payorder.payment_time}</td>
+    <td class="td-manage">
+        <a onClick="show_order_items('订单详情','${handler.reverse_url('drp_detail_order','detail')}?order_id=${order.id}','1180','600')" title="订单详情">详情
+        </a>
+       <?py if order.delivery_status == 0 and order.pay_status == 1: ?>
+            <a onClick="delivery_goods('发货确认','${handler.reverse_url('drp_detail_order','delivery')}?order_no=${order.order_no}','','300')" title="发货">发货</a>
+        <?py #endif ?>
+        <?py if order.status == 1 and (order.delivery_status ==1 or order.delivery_status == 2): ?>
+            <a onClick="delivery_goods('物流信息','${handler.reverse_url('drp_express_check')}?order_id=${order.id}','','400')" title="物流信息">物流信息
+            </a>
+        <?py #endif?>
+        </td>
+    </tr>
+<?py #endfor?>
+        </tbody>
+    </table>
+        #{data.admin_pagination_html()}
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+/*发货-确认*/
+function delivery_goods(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+
+function show_order_items(title,url,w,h){
+    layer_show(title,url,w,h);
+}
+</script> 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".dataTables_length,.dataTables_filter").hide();
+    });
+
+    $(".look-product").on("click",function(){
+        if($(this).attr('_href')){
+            var bStop=false;
+            var bStopIndex=0;
+            var _href=$(this).attr('_href');
+            var _titleName=$(this).html();
+            var topWindow=$(window.parent.document);
+            var show_navLi=topWindow.find("#min_title_list li");
+            show_navLi.each(function() {
+                if($(this).find('span').attr("data-href")==_href){
+                    bStop=true;
+                    bStopIndex=show_navLi.index($(this));
+                    return false;
+                }
+            });
+            if(!bStop){
+                creatIframe(_href,_titleName);
+                min_titleList();
+            }
+            else{
+                show_navLi.removeClass("active").eq(bStopIndex).addClass("active");
+
+                var iframe_box=topWindow.find("#iframe_box");
+                iframe_box.find(".show_iframe").hide().eq(bStopIndex).show().find("iframe").attr("src",_href);
+            }
+        }
+    });
+    
+    function min_titleList(){
+        var topWindow=$(window.parent.document);
+        var show_nav=topWindow.find("#min_title_list");
+        var aLi=show_nav.find("li");
+    };
+
+    function tabNavallwidth(){
+        var taballwidth=0,
+            $tabNav = $(".acrossTab"),
+            $tabNavWp = $(".Hui-tabNav-wp"),
+            $tabNavitem = $(".acrossTab li"),
+            $tabNavmore =$(".Hui-tabNav-more");
+        if (!$tabNav[0]){return}
+        $tabNavitem.each(function(index, element) {
+            taballwidth+=Number(parseFloat($(this).width()+60))});
+        $tabNav.width(taballwidth+25);
+        var w = $tabNavWp.width();
+        if(taballwidth+25>w){
+            $tabNavmore.show()}
+        else{
+            $tabNavmore.hide();
+            $tabNav.css({left:0})}
+    }
+
+    function creatIframe(href,titleName){
+        var topWindow=$(window.parent.document);
+        var show_nav=topWindow.find('#min_title_list');
+        show_nav.find('li').removeClass("active");
+        // var iframe_box=topWindow.find('#iframe_box');
+        if(!topWindow.find('#navProductDetail')[0]){
+            show_nav.append('<li class="active" id="navProductDetail"><span data-href="'+href+'">'+titleName+'</span><i></i><em></em></li>');
+        }else{
+            topWindow.find('#navProductDetail').addClass('active').html('<span data-href="'+href+'">'+titleName+'</span><i></i><em></em>');
+        }
+    }
+    function checkTime(){
+        var longM=1;//几个月跨度
+        var isOk=0;
+        var $logminVal=$('#logmin').val();
+        var $logmaxVal=$('#logmax').val();
+
+        var a=new Date($logminVal).getTime();
+        var b=new Date($logmaxVal).getTime();
+        var c=b-a;
+        if(c>longM*31*24*3600*1000){
+            alert('导出订单时间跨度不能大于'+longM+'个月');
+            return isOk;
+
+        }
+        return 1;
+        
+    }
+</script>
+
+

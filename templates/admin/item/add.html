@@ -1,0 +1,134 @@
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>类目名称：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" value="${item_category and item_category.name or ''}" placeholder="" id="category_name" name="category_name" datatype="*2-16" nullmsg="类目名称">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+<?py if type == 'children': ?>
+<div class="row cl">
+	<label class="form-label col-3"><span class="c-red">*</span>一级类目：</label>
+	<div class="formControls col-5"> <span class="select-box">
+		<select class="select" id="parent_id" name="parent_id">
+    <?py if not item_category: ?>
+		<option value="">--请选择--</option>
+    <?py #endif ?>
+    <?py for category in categories:?>
+        <?py if item_category and int(item_category.parent_id)==category.id:?>
+			<option value="${category.id}" selected='selected'>${category.name}</option>
+        <?py else:?>
+			<option value="${category.id}">${category.name}</option>
+        <?py #endif ?>
+    <?py #endfor?>
+		</select>
+		</span> </div>
+	<div class="col-3"></div>
+</div>
+<?py else: ?>
+<input type='hidden' value='0' name='parent_id' />
+<?py #endif ?>
+
+	    <div class="row cl">
+	    	<label class="form-label col-3"><span class="c-red">*</span>是否跨境类目：</label>
+	        <div class="formControls col-5">
+<?py if item_category and item_category.is_abroad == 0: ?>
+	<input name="is_abroad" type="radio" datatype="*" value="1" nullmsg="请选择"/>是
+	<input name="is_abroad" type="radio" datatype="*" value="0" checked="checked" nullmsg="请选择"/>否
+<?py else: ?>
+	<input name="is_abroad" type="radio" datatype="*" value="1" checked="checked" nullmsg="请选择"/>是
+	<input name="is_abroad" type="radio" datatype="*" value="0" nullmsg="请选择"/>否
+<?py #endif ?>
+	        </div>
+	        
+    	</div>
+
+        <div class="row cl">
+			<label class="form-label col-3">描述：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" value="${item_category and item_category.desc or ''}" placeholder="" id="category_desc" name="category_desc">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<input type='hidden' value='${item_category and item_category.full_parent_id or ''}' name='category_full_parent_id' id='category_full_parent_id' />
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onclick="addPost();">
+			</div>
+		</div>
+	</form>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+
+	$("#form-admin-add").Validform({
+		tiptype:2,
+		callback:function(form){
+			$("#form-admin-add").submit();
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+});
+
+function addPost(){
+<?py if type == 'children': ?>
+	parent_id = $('#parent_id option:selected').val();
+<?py else: ?>
+	parent_id = 0;
+<?py #endif ?>
+	category_name = $('#category_name').val();
+	category_desc = $('#category_desc').val();
+	full_parent_id = $('#category_full_parent_id').val();
+	is_abroad = $("input[name='is_abroad']:checked").val();
+	$.ajax({
+	    type: 'post',
+	    async: false,
+	    url: '',
+	    data: {
+	           "parent_id":parent_id,
+	           "name":category_name,
+	           'desc':category_desc,
+	           'full_parent_id':full_parent_id,
+	           'is_abroad':is_abroad,
+	       	  },
+	    dataType: "json",
+	    success: function(data){
+	    	if(data.state == 200){
+	    		alert('添加成功');
+	    		var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+	    	}
+	    },
+	    error: function(error){ }
+    });
+};
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

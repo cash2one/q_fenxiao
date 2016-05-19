@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+  <meta name="description" content="全球抢购">
+  <title>全球抢购</title>
+  <link rel="shoctcut icon" href="http://cdn.qqqg.com/microshop/images/qqqg.ico">
+  <link href="http://cdn.qqqg.com/microshop/css/core.min.css" type="text/css" rel="stylesheet"/>
+  <style type="text/css">.g-bd{height:90%;background-color:#f2f0f0;}.m-orderinfo{margin-bottom:10px;text-align:center;background-color:#fff;}.m-orderinfo .ordersuc{padding:8px 0 8px;font-size:18px;}.m-orderinfo .ordersuc b{position:relative;top:7px;margin-right:3px;}.m-orderinfo .lefttime{margin:0 15px;padding-bottom:10px;border-bottom:1px dashed #cbcbcb;font-size:14px;color:#656565;}.m-orderinfo .lefttime b{color:#333;}.m-orderinfo .payamount{padding:10px 0;font-size:12px;}.m-orderinfo .payamount b{padding-left:8px;font-weight:bold;font-size:18px;color:#d22147;}.m-payway{background-color:#fff;}.m-payway .title{padding:15px;font-size:14px;border-bottom:1px solid #ddd;}.m-payway .detail li{margin-left:15px;border-bottom:1px solid #ddd;font-size:16px;}.m-payway .detail li .u-radiobox{position:relative;height:55px;}.m-payway .detail li .u-radiobox span{display:inline-block;margin-left:76px;height:55px;line-height:55px;}.m-payway .detail li .u-radiobox input{margin:14px 15px 0 0;}.m-payway .detail li .zhifubao b{position:absolute;top:50%;margin-top:-10px;left:0;}.m-payway .detail li .wangyibao b{position:absolute;top:50%;margin-top:-14px;left:0;}.m-payway .detail li .bankcard b{position:absolute;top:50%;margin-top:-16.5px;left:0;left:6px;}.m-payway .detail .wxHint{margin-top:-5px;padding-bottom:5px;font-size:12px;color:#999;}.m-payway .detail .last{border-bottom:none;}.m-payway .detail .bbnone{border-bottom:none;}.m-blank{height:60px;background-color:#f2f0f0;}.m-confirm{position:fixed;bottom:0;width:100%;height:60px;border-top:1px solid #ddd;background-color:#fff;}.m-confirm .confirm{display:inline-block;width:290px;height:40px;line-height:40px;position:absolute;top:50%;margin-top:-20px;left:50%;margin-left:-145px;text-align:center;background-color:#d22147;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;font-size:16px;color:#fff;}.m-mask{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;background:-webkit-radial-gradient(center,rgba(0,0,0,0.3),#000 80%);background:-moz-radial-gradient(center,rgba(0,0,0,0.3),#000 80%);background:-o-radial-gradient(center,rgba(0,0,0,0.3),#000 80%);background:radial-gradient(center,rgba(0,0,0,0.3),#000 80%);opacity:0.4;filter:alpha(opacity = 40);}.m-alertbox{width:270px;height:110px;position:absolute;top:50%;margin-top:-55px;left:50%;margin-left:-135px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;background-color:#ececec;text-align:center;z-index:999;}.m-alertbox .text{padding:20px 0 10px;font-size:14px;color:#333;}.m-alertbox .operate{height:38px;line-height:38px;border-top:1px solid #ddd;}.m-alertbox .operate .cancle,.m-alertbox .operate .check{display:inline-block;width:135px;color:#007aff;font-size:16px;}.m-alertbox .operate .check{border-left:1px solid #ddd;}
+  .u-icn-wx{
+      background-position:-44px -334px;
+      width:60px;
+      height:32px;
+  }
+  </style>
+
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        function callpay()
+        {
+            if (typeof WeixinJSBridge == "undefined"){
+                if( document.addEventListener ){
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }else if (document.attachEvent){
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }else{
+                jsApiCall();
+            }
+        }
+        function jsApiCall(){
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+                {"package":"${ret_dict.get('package')}",
+                "timeStamp":"${ret_dict.get('timeStamp')}",
+                 "signType": "MD5",
+                 "paySign":"${ret_dict.get('paySign')}",
+                 "appId":"${ret_dict.get('appId')}",
+                 "nonceStr":"${ret_dict.get('nonceStr')}"
+                 },
+                function(res){
+                    if(res.err_msg == "get_brand_wcpay_request:ok"){
+                        $('#orderStatus').html('<b class="u-icn29"></b>订单支付成功');
+                        $('#pay_div').hide()
+                    }else{
+
+                    }
+                }
+            );
+        }
+    </script>
+</head>
+
+<body>
+#{xsrf_form_html}
+<header class="g-hd " id="g-hd">
+  <div class=" m-topnav" id="topbar-box">
+    <div class="m-topnavbar"> <span id="backbtn" class="u-icn18 backbtn"></span>
+      <span class="tit" id="toptitle">选择支付方式</span>
+      <span class="u-menu" id="menu"> </span>
+    </div>
+<?py include('mobile/include/headermenu.html') ?>
+  </div>
+</header>
+<div id="bdWrap" class="g-bd">
+
+<section class="m-orderinfo">
+<div id="orderStatus" class="ordersuc"><b class="u-icn29"></b>订单已提交</div>
+<div class="lefttime">(请在<b id="leftTime" lefttime="7200">2小时</b>内完成支付)</div>
+<div class="payamount">支付金额<b>¥${order.real_amount}</b></div>
+</section>
+<div id="pay_div">
+
+    <section id="auto-id-1446620616928" class="m-payway">
+    <div class="title">选择支付方式</div>
+    <ul id="payMethod" class="detail">
+      <li >
+        <label for="zhiFuBao">
+          <div class="zhifubao u-radiobox f-cb">
+            <b class="u-icn26 u-icn-wx" ></b>
+            <span>微信支付</span>
+            <input id="zhiFuBao" class="paymethod f-fr" value="6" name="payway" checked="checked" type="radio">
+          </div>
+        </label>
+      </li>
+    </ul>
+    </section>
+    <section class="m-blank"></section>
+    <section class="m-confirm">
+    <span id="payNow" class="confirm" onclick="javascript:callpay();">立即支付</span>
+    </section>
+</div>
+</div>
+<section id="mask" class="m-mask f-dn"></section>
+<section id="alertbox" class="m-alertbox f-dn">
+  <div class="text">
+    <p>订单已生成，确定要退出支付返回吗？</p>
+    <p>退出后可下载APP继续支付该订单</p>
+  </div>
+  <div class="operate"> <span class="cancle">不退出</span><span class="check">退出支付并返回</span>
+  </div>
+</section>
+<div style="display: none;" class="progress progress-fix animated">
+  <div style="background-color: rgb(91, 192, 222); width: 0%;" role="progressbar" class="progress-bar progress-bar-striped active"></div>
+</div>
+<div style="display: none;" class="m-toast">
+  <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
+    <tbody><tr>
+      <td valign="center" width="100%" align="center">
+      </td>
+    </tr>
+    </tbody></table>
+</div>
+<div class="m-notify m-notify-right"></div>
+<section style="display: none;" class="m-mask m-bigimageMask">
+  <img style="display: none;" class="m-bigimage">
+</section>
+<?py include('mobile/include/js.html') ?>
+</body>

@@ -1,0 +1,279 @@
+<link rel="stylesheet" media="screen" href="http://cdn.qqqg.com/web/css/member/order.min.css">
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/plugin/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="http://cdn.qqqg.com/web/js/member/member.min.js?v=20151230"></script>
+<div id="modOrder" class="container">
+    <div class="m-puser clearfix">
+        <div class="col-left">
+<?py include('member/menu.html') ?>
+    </div>
+        #{xsrf_form_html}
+        <div class="col-content clearfix">
+            <div class="u-box">
+                <div>
+                    <!--
+                    <div id="onlineNotice">
+                        <div class="text"><i></i><span style="font-size: 14px;font-family: 微软雅黑, sans-serif">尊敬的客户：</span><p style="margin-bottom: 7px;margin-left: 12px;margin-right: 12px;margin-top: 7px" ><span style="font-size: 14px;font-family: 微软雅黑, sans-serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size: 14px;font-family: 微软雅黑, sans-serif">因快递公司自2016年01月27日起停运，2016年02月15日开始陆续恢复揽件，故即日起所有订单暂停发货，待快递恢复揽件后依次清关发货。
+            订单付款后不能取消和退款，请您斟酌发货时长再完成付款，给您带来不便敬请谅解，谢谢！
+            全球抢购全体员工恭祝您猴年阖家欢乐，身体健康，万事顺意！
+</span></p></div>
+                    </div>
+                    -->
+                    <div class="orderNavTab">
+                        <div class="ntabs">
+                        <ul class="clearFix">
+                            <li class="utab ${state=='' and 'active' or '' }" ocategory="0"><a href="${handler.reverse_url('member')}?page=1&state=">所有订单</a></li>
+
+                            <li class="utab ${state=='1' and 'active' or '' }" ocategory="1"><a href="${handler.reverse_url('member')}?page=1&state=1">待付款&nbsp;<b>${waiting_pay}</b></a></li>
+
+                            <li class="utab ${state=='2' and 'active' or '' }" ocategory="2"><a href="${handler.reverse_url('member')}?page=1&state=2">待发货&nbsp;<b>${waiting_deliver}</b></a></li>
+
+                            <li class="utab ${state=='3' and 'active' or '' }" ocategory="4"><a href="${handler.reverse_url('member')}?page=1&state=3">待收货&nbsp;<b>${waiting_recieve}</b></a></li>
+
+                            <li class="utab ${state=='4' and 'active' or '' }" ocategory="3"><a href="${handler.reverse_url('member')}?page=1&state=4">待评价&nbsp;<b>${waiting_assess}</b></a></li>
+                            <!--<li class="utab recycleBin" ocategory="5">-->
+                                <!--<a href=""><span></span>订单回收站&nbsp;<b></b></a>-->
+                            <!--</li>-->
+                        </ul>
+                        </div>
+                        <div class="slideLine"></div>
+                    </div>
+                    <div class="orderBox">
+                    <table class="oTable">
+                        <thead>
+                        <tr>
+                            <th class="o-goods">商品</th>
+                            <th class="o-price">售价(元)</th>
+                            <th class="o-amount">数量</th>
+                            <th class="o-gOperate">商品操作</th>
+                            <th class="o-total">总计(元)</th>
+                            <th class="o-status">
+                                订单状态
+                            </th>
+                            <th class="o-operate">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+<?py for d in data.result:?>
+                        <table class="uTable">
+                            <thead>
+                            <tr>
+                                <th class="o-goods"></th>
+                                <th class="o-price"></th>
+                                <th class="o-amount"></th>
+                                <th class="o-gOperate"></th>
+                                <th class="o-total"></th>
+                                <th class="o-status">
+                                </th>
+                                <th class="o-operate"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="o-info" colspan="7">
+                                    <span><i></i>${d.house_ware_name}发货</span>
+                                    <span>订单号：${d.order_no}</span>
+                                    <span>下单时间：${d.gmt_created}</span>
+                                    <!--
+                                    <span class="garbage"></span>
+                                    -->
+                                </td>
+                            </tr>
+                            <tr class="border" data-id="${d.id}"  data-no="${d.order_no}">
+                                <td class="border-items" colspan="4">
+                                    <table cellspacing="0" cellpadding="0" border="0" class="myOdr_tb2 fr">
+                                        <tbody>
+    <?py buy_item=None?>
+    <?py for item in order_service.query_item_by_order_id(d.id):?>
+        <?py buy_item=item?>
+                                        <tr class="item hasborder"  data-itemid="${item.show_id}">
+                                            <td align="center">
+                                                <a href="${handler.reverse_url('item_detail',item.show_id)}" target="_blank" class="aImg">
+                                                    <img border="0" src="${item.main_pic and item.main_pic.split(';')[0]+'@100w.jpg' or ''}" alt="${item.title}" title="${item.title}"></a>
+                                            </td>
+                                            <td class="goodsTitle">
+                                                <a data-isnewergift="0"  data-pid="${item.top_category_id}" href="${handler.reverse_url('item_detail',item.show_id)}" title="${item.title}" target="_blank" class="aTit">${item.title}</a> </td>
+                                            <td align="center" class="price pd0"><p class="marketPrice">${item.inner_price}</p>${handler.get_item_old_price(d.id,item.id)}</td>
+                                            <td align="center" class="amount bdrGray">${item.buy_nums}</td>
+                                            <td align="center" class="bdrGray goodsOperate"></td>
+                                        </tr>
+    <?py #endfor ?>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="rbBorder" align="center">
+                                    <p class="fb">${d.real_amount}</p><p class="fee">(含运/税费:${d.tax_amount<=50 and '0' or d.tax_amount})</p>
+                                </td>
+    <?py if d.status==1:?>
+            <?py if d.pay_status==0:?>
+                <td class="orderStatus rbBorder" align="center">
+                    <a target="_blank" class="orderStatusBtn" href="${handler.reverse_url('member_order_detail',d.order_no)}">
+
+                    </a>
+                    <a target="_blank" href="${handler.reverse_url('member_order_detail',d.order_no)}">订单详情</a>
+                </td>
+                <td class="operate rbBorder" align="center">
+                    <span class="payNow btn-red30"><a href="${handler.reverse_url('pay_order',d.order_no)}">立即付款</a></span>
+                    <a class="cancelOrder" href="javascript:void(0);">取消订单</a>
+                </td>
+            <?py elif d.pay_status==1:?>
+                <?py if d.delivery_status==0:?>
+                    <td align="center" class="orderStatus rbBorder">
+                        <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">等待商家发货</a>
+                        <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+                    </td>
+                    <td align="center" class="c_888 rbBorder operate" rowspan="1">
+                        <span class="confirmWait btn-blue30" style="display: inline-block;cursor: default;">等待发货</span>
+                    </td>
+                <?py elif d.delivery_status==1:?>
+                        <td align="center" class="orderStatus rbBorder">
+                            <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">商家已发货</a>
+                            <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+                            <a class="getWuliu cBlue aGray2" href="javascript:void(0)"  data-id="${d.order_no}">查看物流</a>
+                        </td>
+                        <td align="center" class="c_888 rbBorder operate" rowspan="1">
+                            <a href="javascript:;" class="confirmReceived btn-red30">确认收货</a>
+                        </td>
+                <?py elif d.delivery_status==2:?>
+                    <td align="center" class="orderStatus rbBorder">
+                        <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">交易成功</a>
+                        <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+                        <a class="getWuliu cBlue aGray2" href="javascript:void(0)"  data-id="${d.order_no}">查看物流</a>
+                    </td>
+                    <td align="center" class="c_888 rbBorder operate" rowspan="1">
+                        <a href="/item/comment.html?order_no=${d.order_no}" target="_blank" class="comment btn-white30">评价</a>
+                        <a href="${handler.reverse_url('item_detail',item.show_id)}" class="againBuy">再次购买</a>
+                    </td>
+                <?py #endif ?>
+            <?py #endif ?>
+
+    <?py elif d.status==2:?>
+            <td align="center" class="orderStatus rbBorder">
+                <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">交易成功</a>
+                <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+                <a class="getWuliu cBlue aGray2" href="javascript:void(0)"  data-id="${d.order_no}">查看物流</a>
+            </td>
+            <td align="center" class="c_888 rbBorder operate" rowspan="1">
+        <?py if d.is_addition_assess and d.is_assess:?>
+            已评价
+        <?py elif d.is_assess and not d.is_addition_assess:?>
+            <a href="/item/comment.html?order_no=${d.order_no}" target="_blank" class="letmcmtAgain comment btn-white30">追加评价</a>
+        <?py else:?>
+            <a href="/item/comment.html?order_no=${d.order_no}" target="_blank" class="letmcmtAgain comment btn-white30">评价</a>
+        <?py #endif ?>
+                <a href="${handler.reverse_url('item_detail',item.show_id)}" class="againBuy">再次购买</a>
+            </td>
+    <?py elif d.status==3:?>
+            <td align="center" class="orderStatus rbBorder">
+                <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单关闭</a>
+                <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+            </td>
+                <td align="center" class="c_888 rbBorder operate" rowspan="1">
+                <a href="${handler.reverse_url('item_detail',item.show_id)}" class="againBuy">再次购买</a>
+            </td>
+    <?py elif d.status==4:?>
+            <td align="center" class="orderStatus rbBorder">
+                <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单关闭</a>
+                <a href="${handler.reverse_url('member_order_detail',d.order_no)}" target="_blank">订单详情</a>
+            </td>
+                <td align="center" class="c_888 rbBorder operate" rowspan="1">
+                <a href="${handler.reverse_url('item_detail',item.show_id)}" class="againBuy">再次购买</a>
+            </td>
+    <?py #endif ?>
+                            </tr>
+                            </tbody>
+                        </table>
+<?py #endfor ?>
+                    </div>
+    #{data.admin_pagination_html()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?py include('common/cart.html') ?>
+<div class="wuliuInfo" id="wuliuInfo" style="display: none;">loading</div>
+<script id="templateCancelOrder" type="text/x-tmpl" >
+<div id="iDialogCancelOrder" class="iDialogCancelOrder">
+    <div class="iDialogHead">
+        <h1>提示</h1>
+    </div>
+    <a href="#" hidefocus="true" class="iDialogClose">×</a>
+    <div class="iDialogBody">
+        <div class="iDialogMain" style="height: 123px;">
+            <div class="cancelOrderStyle">
+                <div class="tipText">您确定要取消订单吗？取消订单后，不能恢复</div>
+                <span gid="201509161010GORDER99301806" class="cancelOrderBtnOk btn-red30">确认</span>
+                <span class="reasonSelect">
+                    <span class="nselect-wrap" style="width: 140px;">
+                        <div class="nselector">
+                            <div class="result-wrap" style="padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">
+                                <div value="其他原因" class="result ellipsis" style="width: 108px;">请选择关闭理由</div><div class="cp-arrow cp-arrow-down" style="top: 9.5px;"></div>
+                            </div>
+                            <div class="options-wrap" style="top: 24px;">
+                                <div class="options" style="display: none;">
+                                    <ul>
+                                        <li><a value="其他原因 " title="请选择关闭理由" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 108px; padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">请选择关闭理由</a></li>
+                                        <li><a value="我不想买了" title="我不想买了" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 108px; padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">我不想买了</a></li>
+                                        <li><a value="信息填写错误" title="信息填写错误" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 108px; padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">信息填写错误</a></li><li><a value="付款遇到困难" title="付款遇到困难" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 108px; padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">付款遇到困难</a></li>
+                                        <li><a value="拍错了" title="拍错了" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 108px; padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">拍错了</a></li>
+                                        <li><a value="重复下单" title="重复下单" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 108px; padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">重复下单</a></li>
+                                        <li><a value="商品价格太贵" title="商品价格太贵" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 108px; padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">商品价格太贵</a></li>
+                                        <li><a value="不能开具发票" title="不能开具发票" class="option ellipsis" href="javascript:;" hidefocus="true" style="width: 108px; padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">不能开具发票</a></li><li><a value="其他原因" title="其他原因" class="option ellipsis curr" href="javascript:;" hidefocus="true" style="width: 108px; padding-left: 10px; padding-right: 20px; height: 22px; line-height: 22px;">其他原因</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+                </span>
+                <div>
+                    <span class="reasonText">请选择取消订单的理由：</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
+<script id="templateRecOk" type="text/x-tmpl">
+    <div class="iDialogHead">
+         <h1>确认收货</h1>
+    </div> <a class="iDialogClose" hidefocus="true" href="#">×</a>
+    <div class="iDialogBody">
+        <div class="iDialogMain">
+            <div style="padding-right: 53px;" class="staDialogStyle"><i class="success"></i>交易成功！
+            <div style="font-size:14px;">对全球抢购的服务满意吗？与大家分享你的评价吧。</div>
+            <div>
+            <span class="btn-white30-redBorder"><a href="/item/comment.html?order_no={{= order_no}}" class="">立即评价</a></span>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="iDialogFoot">
+    </div>
+</script>
+
+<script id="templateWuliu" type="text/x-tmpl" >
+<i class="triangle"></i><span class="mask"></span>
+<div class="packageInfo clearfix"><span>您一共有<b>{{= number}}</b>个包裹</span>
+</div>
+<span class="company">{{= company}}&nbsp;&nbsp;&nbsp;运单号:{{= WaybillNumber}}</span>
+<ul class="infoWrap">
+{{tmpl(data) "#templateWuliuList"}}
+</ul>
+</script>
+<script id="templateWuliuList" type="text/x-tmpl">
+<li class={{= className}}>
+<span class="dotWrap"><b class="dot"></b></span>{{= content}}<br>{{= time}}
+</li>
+</script>
+<script id="templateWuliuError" type="text/x-tmpl">
+    <i class="triangle"></i><span class="mask"></span>
+    <div class="errorTxt"><i></i>全球抢购已经为您发货了，物流信息稍有延迟，请稍等。</div>
+</script>
+<script id="templateWuliuLoading" type="text/x-tmpl">
+    <i class="triangle"></i><span class="mask"></span>
+    <div class="loading">loading...</div>
+</script>

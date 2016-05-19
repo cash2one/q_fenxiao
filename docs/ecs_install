@@ -1,0 +1,16 @@
+
+yum -y install gcc gcc-c++ make libtool zlib zlib-devel openssl openssl-devel pcre pcre-devel
+安装tengine
+
+wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.33.tar.gz
+wget https://www.openssl.org/source/openssl-0.9.8zg.tar.gz
+wget http://tengine.taobao.org/download/tengine-2.1.1.tar.gz
+
+wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
+wget  http://peak.telecommunity.com/dist/ez_setup.py
+
+tar   -jxvf pcre2-10.20.tar.bz2
+./configure --prefix=/usr/local/pcre
+make && make install
+
+

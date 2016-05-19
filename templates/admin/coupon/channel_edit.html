@@ -1,0 +1,60 @@
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 优惠券管理 <span class="c-gray en">&gt;</span> 渠道管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+
+<div class="pd-20">
+	<form action="${handler.reverse_url('coupon_channel')}" method="post" class="form form-horizontal" id="form-admin-add">
+		<div class="row cl">
+            <input type="hidden" name="id" value="${coupon_channel and coupon_channel.id or ''}">
+			<label class="form-label col-3"><span class="c-red">*</span>渠道名称:</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" value="${coupon_channel and coupon_channel.name or ''}" placeholder="" id="user-name" name="name" datatype="*2-16" nullmsg="渠道名称不能为空">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>渠道代码:</label>
+			<div class="formControls col-5">
+				<input type="text" placeholder="代码" autocomplete="off" value="${coupon_channel and coupon_channel.code or ''}" name="code" class="input-text" datatype="*2-20" nullmsg="渠道不能为空">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>描述:</label>
+			<div class="formControls col-5">
+                <textarea name="description" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符" datatype="" dragonfly="true" nullmsg="备注不能为空！">${coupon_channel and coupon_channel.description or ''}</textarea>
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+
+	$("#form-admin-add").Validform({
+		tiptype:2,
+		callback:function(form){
+			$("#form-admin-add").submit();
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-warehouse-add">
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>名称：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" name="name" value="${ware_house and ware_house.name or ''}" datatype="*" nullmsg="请填写保税仓名称">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+			<label class="form-label col-3">描述：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" value="${ware_house and ware_house.desc or ''}" name="desc">
+			</div>
+            <div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+            <label class="form-label col-3">公告：</label>
+            <div class="formControls col-5">
+                <textarea class="textarea" name="notice" style="width:225px;height:100px" >${ware_house and ware_house.notice or ''}</textarea>
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3">是否跨境：</label>
+<?py if ware_house and ware_house.is_abroad == 0: ?>
+	<div class="radio-box">
+		<input name="is_abroad" type="radio" datatype="*" value="1" nullmsg="请选择" />是
+	</div>
+	<div class="radio-box">
+		<input name="is_abroad" type="radio" datatype="*" value="0" nullmsg="请选择" checked="checked" />否
+	</div>
+<?py else: ?>
+	<div class="radio-box">
+		<input name="is_abroad" type="radio" datatype="*" value="1" nullmsg="请选择" checked="checked" />是
+	</div>
+	<div class="radio-box">
+		<input name="is_abroad" type="radio" datatype="*" value="0" nullmsg="请选择"/>否
+	</div>
+<?py #endif ?>
+                            
+            </div>
+        </div>
+
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+		<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+    		<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+		</div>
+	</form>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+    $("#form-warehouse-add").Validform({});
+</script>

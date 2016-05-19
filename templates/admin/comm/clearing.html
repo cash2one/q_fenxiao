@@ -1,0 +1,76 @@
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/static/admin/lib/html5.js"></script>
+<script type="text/javascript" src="/static/admin/lib/respond.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/PIE_IE678.js"></script>
+<![endif]-->
+<link href="/static/admin/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-clearing-add">
+       #{xsrf_form_html}
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red"></span>分销商名称：</label>
+			<div class="formControls col-5">
+				${drp.real_name}
+			</div>
+        </div>
+    	</br>
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red"></span>分销商账号：</label>
+			<div class="formControls col-5">
+				${drp.user_name}
+			</div>
+        </div>
+    	</br>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red"></span>结算金额：</label>
+			<div class="formControls col-5">
+				${count}
+			</div>
+        </div>
+    	</br>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>银行流水号：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" name="payment_no" value="" datatype="*" nullmsg="银行流水号不能为空">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		</br>
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red"></span>备注：</label>
+			<div class="formControls col-8">
+                <textarea name="content" cols="60" rows="5"  id="content" value='' placeholder="请输入描述信息"> </textarea>
+			</div>
+        </div>
+        </br>
+        <input type="hidden" value="${drp.id}" id="drp_usere_id" name="drp_usere_id" />
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+		<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+    		<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript">
+$(function(){
+        $("#form-clearing-add").Validform({
+            datatype:{
+                limit_quantity:function(gets,obj,curform,regxp){
+                    //参数gets是获取到的表单元素值，obj为当前表单元素，curform为当前验证的表单，regxp为内置的一些正则表达式的引用;
+                    if($('#is_limit')[0].checked==true ){
+                        if(!/^\d+$/.test(gets)){
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+        });
+
+    });
+</script>

@@ -1,0 +1,26 @@
+
+        <div class="newRecomWrap">
+            <h4 class="newRecomTitle">最近浏览<b>你最近一段时间浏览的商品</b>
+                <!--
+                <a class="rec-backward" href="javascript:;">&gt;</a><span class="rec-page">1/4</span>
+                <a class="rec-forward" href="javascript:;">&lt;</a>
+                -->
+                </h4>
+            <div class="clearfix" id="pro_recBow">
+
+            </div>
+        </div>
+
+<script id="templateHisGoodsList" type="text/x-tmpl" >
+        <div class="newRecomItemWrap ">
+            <a href="/item/detail/{{= show_id}}.html" target="_blank" class="itemImg"> <img border="0" style="opacity: 1;" src="{{= main_pic}}" alt="{{= title}}" title="{{= title}}" /> </a>
+            <p class="itemTitle"> <a target="_blank" title="{{= title}}" href="/item/detail/{{= show_id}}.html"><b>{{= title}}</b></a> </p>
+            <div class="itemInfo clearfix">
+                <p class="price">&yen;{{= price}}
+                    <del>
+                        &yen;{{= inner_price}}
+                    </del></p>
+                <a class="comment" target="_blank" href="/item/detail/{{= show_id}}.html#mainBtmWrap">{{= comments}} 人已评价</a>
+            </div>
+        </div>
+</script>

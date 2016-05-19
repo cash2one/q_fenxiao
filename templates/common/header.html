@@ -1,0 +1,71 @@
+ <div id="topNavWrap" class="container">
+        <div id="topNavLeft" class="clearfix">
+            <?py if handler.current_user:?>
+                ${current_user.get('nick')},全球抢购欢迎你！
+                <a href="javascript:void(0)" id="loginout" class="loginout">退出</a>
+            <?py else:?>
+                <a href="javascript:void(0)" class="login">登录</a>
+                <span class="sep">|</span>
+                <a href="/reg.html">免费注册</a>
+            <?py #endif ?>
+        </div>
+        <ul id="topNavRight">
+            <li><a href="${handler.reverse_url('member')}" class="toplevel">我的订单</a><span class="sep">|</span></li>
+            <li><a href="${handler.reverse_url('member')}" class="toplevel">个人中心</a><span class="sep">|</span></li>
+            <li><a href="/help/notice.html" class="toplevel">消费者告知</a><span class="sep">|</span></li>
+            <li>
+                <div class="mcDropMenuBox">
+                    <a rel="nofollow" href="javascript:void(0);" class="toplevel topNavHolder nolink">客户服务<i class="arr"></i></a><span class="sep">|</span>
+                    <div class="mcDropMenu">
+                        <!--
+                        <a data-label="" rel="nofollow" onclick="javascript:void(0);" href="#" class="contact">联系客服</a>
+                        -->
+                        <a rel="nofollow" href="javascript:void(0);" class="phone nolink">400-1513-400</a>
+                        <a rel="nofollow" href="/help/faq.html" class="help">帮助中心</a>
+                    </div>
+                </div>
+            </li>
+            <li class="more">
+                <div class="mcDropMenuBox focuson">
+                    <a href="#" class="toplevel topNavHolder">更多<i class="arr"></i></a></a>
+                    <div class="mcDropMenu">
+                        <a rel="nofollow" href="javascript:;" id="addFavBtn">收藏本站</a>
+                        <a rel="nofollow" href="javascript:void(0);" class="nolink clearfix">
+                            <span class="txt">微信公众号</span>
+                        <span class="m-notice">
+                            <img width="100px" height="100px" src="http://cdn.qqqg.com/web/images/2dcode/2dcode-wx.jpg">
+                            <span class="arrow">
+                                <span class="arr"></span>
+                                <span class="arr1"></span>
+                            </span>
+                        </span>
+                        </a>
+                        <a rel="nofollow" target="_blank" href="#" class="wb clearfix">
+                            <span class="txt">新浪微博</span>
+                        <span class="m-notice m-notice-1">
+                            <img width="100px" height="100px" src="http://cdn.qqqg.com/web/images/2dcode/2dcode-weibo.jpg">
+                            <span class="arrow">
+                                <span class="arr"></span>
+                                <span class="arr1"></span>
+                            </span>
+                        </span>
+                        </a>
+                        <!--
+                        <a rel="nofollow" href="javascript:void(0);" class="yixin nolink clearfix">
+                            <span class="txt">易信公众号</span>
+                        <span class="m-notice m-notice-2">
+                            <img width="100px" height="100px" src="/static/images/2dcode/2dcode-wx.jpg">
+                            <span class="arrow">
+                                <span class="arr"></span>
+                                <span class="arr1"></span>
+                            </span>
+                        </span>
+                        </a>
+                        -->
+                        <a rel="nofollow" href="#" class="cooperation">招商合作</a>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </div>

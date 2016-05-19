@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<link rel="shortcut icon" href="http://cdn.qqqg.com/mobile/images/qqqg.ico" />
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+<title>全球抢购-登录</title>
+<?py include('mobile/include/header.html') ?>
+<style type="text/css">
+.m-form-login .fitm {
+    zoom:1;
+}
+.m-form-login .fitm:after {
+    display:block;
+    clear:both;
+    visibility:hidden;
+    height:0;
+    overflow:hidden;
+    content:".";
+}
+.m-form-login .fitm-1 {
+    margin:20px 15px 10px;
+}
+.m-form-login .fitm-2 {
+    padding:0 20px;
+    font-size:13px;
+    line-height:24px;
+}
+.m-form-login .fitm-2 a, .m-form-login .fitm-2 a:hover {
+    color:#878787;
+}
+.m-thirdpart {
+    padding:150px 20px 50px;
+}
+.m-thirdpart .tit {
+    position:relative;
+    border-bottom:1px dotted #aaa;
+}
+.m-thirdpart .tit .txt {
+    position:absolute;
+    left:50%;
+    top:-13px;
+    margin:0 0 0 -70px;
+    width:140px;
+    background:#fff;
+    text-align:center;
+    color:#666;
+    font-size:16px;
+    line-height:26px;
+}
+.m-thirdpart .lnk {
+    position:relative;
+    padding:15px 0 0;
+    width:230px;
+    margin:0 auto;
+    text-align:center;
+}
+.m-thirdpart .lnk a {
+    margin:0 15px;
+}
+.m-thirdpart .lnk .m-notice1 {
+    position:absolute;
+    left:0;
+    top:70px;
+}
+#submit {
+    background-color:#d71111;
+}
+#switchSms{
+    background: #fff;
+    border: 1px solid #d71111;
+    color: #d71111;
+}
+.m-thirdpart{
+    visibility: hidden;
+}
+#smskeyword{
+    width: 70%;
+}
+#getKeyWord{
+    position: absolute;
+    right: 15px;
+    width: 130px;
+    background: #f7f7f7;
+    color: #d71111;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+</style>
+</head>
+<body id="index-netease-com">
+#{xsrf_form_html}
+<header class="g-hd " id="g-hd">
+    <div class=" m-topnav" id="topbar-box">
+        <div class="m-topnavbar">
+            <span id="backbtn" class="u-icn18 backbtn"></span>
+            <span class="tit" id="toptitle">登录</span>
+        </div>
+    </div>
+</header>
+<div class="g-bd">
+<div class="m-form m-form-login">
+<form id="loginform" action="#" autocomplete="off" method="post">
+<div class="fitm">
+<div class="u-suggest">
+<input id="username" class="u-ipt" type="text" name="username" autocomplete="off" data-required="true" placeholder="手机号码"/>
+<i id="namedel" class="u-icn6" style="display:none;">&nbsp;</i>
+<ul id="suglist" class="suglist" style="visibility:hidden;"></ul>
+</div>
+</div>
+<div class="fitm">
+<input id="password" class="u-ipt" type="password" name="password" autocomplete="off" data-required="true" placeholder="密码"/>
+</div>
+<div class="fitm fitm-1">
+<a id="submit" class="u-btn u-btn-1 s-fc5" href="javascript: void(0);">登录</a>
+</div>
+</form>
+<form id="smsloginform" action="#" autocomplete="off" method="post" style="display: none;">
+    <div class="fitm">
+        <div class="u-suggest">
+            <input id="smsphone" class="u-ipt" type="text" name="smsphone" autocomplete="off" data-required="true" placeholder="手机号码"/>
+            <i id="phonedel" class="u-icn6" style="display:none;">&nbsp;</i>
+            <ul id="suglist" class="suglist" style="visibility:hidden;"></ul>
+        </div>
+    </div>
+    <div class="fitm">
+        <input id="smskeyword" class="u-ipt" type="password" name="smskeyword" autocomplete="off" data-required="true" placeholder="动态密码"/>
+        <a id="getKeyWord" class="u-btn u-btn-1 s-fc5" href="javascript: void(0);">
+        获取动态密码
+        </a>
+    </div>
+    <div class="fitm fitm-1">
+        <a id="smsSubmit" class="u-btn u-btn-1 s-fc5" href="javascript: void(0);">登录</a>
+    </div>
+</form>
+<div class="fitm fitm-2">
+    <a class="forgot f-fl" href="/getpwd.html">忘记密码</a>
+    <a class="regis f-fr" href="reg.html">我要注册</a>
+</div>
+    <div class="fitm fitm-1">
+        <a href="javascript: void(0);" class="u-btn u-btn-1 s-fc5" id="switchSms">短信快捷登录</a>
+    </div>
+</div>
+    <div class="m-thirdpart">
+        <p class="tit"><span class="txt">或从以下方式登录</span></p>
+        <div class="lnk">
+        <a class="u-icn4" href="#">&nbsp;</a>
+        <a class="u-icn4 u-icn4-1" href="h#">&nbsp;</a>
+        <a class="u-icn4 u-icn4-2" href="#">&nbsp;</a>
+        </div>
+    </div>
+</div>
+
+<div id="popUp" class="m-toast" style="display: none;">
+    <table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td width="100%" valign="center" align="center">
+                <div class="toast box animated info show zoomIn">密码不正确</div>
+            </td>
+        </tr>
+    </table>
+</div>
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/login.min.js"></script>
+<?py include('mobile/include/cnzz.html') ?>
+</body>
+</html>

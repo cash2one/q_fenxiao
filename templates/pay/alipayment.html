@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>支付</title>
+</head>
+<body>
+<form name="allpayment" id="allinpayment" action="https://mapi.alipay.com/gateway.do" method="post">
+    <?py for key in params.keys():?>
+       <input type="hidden" name="${key}" id="${key}" value="${ params[key]}" />
+    <?py #endfor ?>
+	<div align="center"></div>
+</form>
+<script>
+    document.getElementById("allinpayment").submit();
+</script>
+</body>
+</html>

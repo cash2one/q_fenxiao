@@ -1,0 +1,39 @@
+<div class="pd-20">
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="20">ID</th>
+                <th width="50">缩略图</th>
+                <th width="50">商品序号</th>
+                <th width="50">商品名称</th>
+                <th width="50">品牌</th>
+                <th width="20">购买数量</th>
+                <th width="30">商品单价</th>
+                <th width="30">总金额</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?py for d in data.result: ?>
+                <tr class="text-c">
+                    <td>${d.id}</td>
+                    <td><img width="40" class="product-thumb" src="${d.main_pic and d.main_pic.split(';')[0] or ''}@200w.jpg"></td>
+                    <td>${d.item_no}</td>
+                    <td>${d.name}</td>
+                    <td>${d.brand}</td>
+                    <td>${d.buy_nums}</td>
+                    <td>${d.item_price}</td>
+                    <td>${d.total_amount}</td>
+                </tr>    
+            <?py #endfor?>
+        </tbody>
+    </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".dataTables_length,.dataTables_filter").hide();
+    });
+</script>
+
+

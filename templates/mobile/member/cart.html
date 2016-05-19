@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection"content="telephone=no, email=no" />
+  <meta name="description" content="全球抢购">
+    <title>购物车</title>
+    <link rel="shoctcut icon" href="http://cdn.qqqg.com/microshop/images/qqqg.ico">
+<?py include('mobile/include/css.html') ?>
+    <link href="http://cdn.qqqg.com/microshop/css/list.min.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="http://cdn.qqqg.com/microshop/css/cart.min.css">
+</head>
+<body>
+#{xsrf_form_html}
+<header class="g-hd " id="g-hd">
+  <div class=" m-topnav" id="topbar-box">
+    <div class="m-topnavbar">
+        <span id="backbtn" class="u-icn18 backbtn"></span>
+        <span class="tit" id="toptitle">
+          购物车<span id="cartCount"></span>
+        </span>
+        <span class="u-menu" id="menu">&nbsp;</span>
+    </div>
+<?py include('mobile/include/headermenu.html') ?>
+  </div>
+</header>
+
+<div class="g-bd n-page">
+    <article class="n-bill" id="carts">
+    </article>
+</div>
+
+
+<!--返回顶部
+    <div class="m-gotop-wrap" id="m-gotop-wrap">
+        <div class="ic-gotop">
+            <i class="up"></i>
+            <p class="desc">顶部</p>
+        </div>
+    </div>
+-->
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript" src="http://cdn.qqqg.com/microshop/js/member/cart.min.js"></script>
+<script id="templateOrder" type="text/x-tmpl" >
+      <form action="/member/cart.html" method="POST">
+      #{xsrf_form_html}
+      <input type="hidden" name="from" value="cart" />
+        <section class="m-cart" data-oIndex="{{= orderIndex}}">
+          <p class="ware" style="line-height:35px;border-bottom: 1px solid #ddd;">
+          <span class="u-radiobox">
+            <input checked="checked" class="checkAll" type="checkbox"></span>
+            <input type="hidden" name="is_abroad" value="{{= is_abroad}}" />
+            <input type="hidden" name="house_ware_id" value="{{= ware_house_id}}" />
+
+            <label class="warename" for="selectAll0">{{= name}}</label>
+          </p>
+          <ul class="m-cartgoods">
+            {{tmpl(goods) "#templateGoods"}}
+          </ul>
+          <div class="gather f-cb">
+          <span class="f-fl">
+            已选商品
+            <i class="finalChooseNum">{{= good_counts}}</i>件
+          </span>
+            <div class="rpart f-fr">
+              <p class="tprice">
+                商品总额：
+                <span class="val">¥<span class="total_price">{{= total_price}}</span></span>
+              </p>
+              <p class="tprice">
+                活动优惠：
+                <span class="val">-¥0.00</span>
+              </p>
+
+              <p class="total">
+                总计(不含运费)：
+              <span class="val">
+                ¥
+                <i class="f-fw moneyCount">{{= moneyCount}}</i>
+              </span>
+              </p>
+              <a class="u-btn settlementBtn ">结算</a>
+            </div>
+          </div>
+
+        </section>
+      </form>
+</script>
+<script id="templateGoods" type="text/x-tmpl" >
+  <li class="gitm chosen" data-id={{= id}}  data-oIndex="{{= oIndex}}"  data-pIndex="{{= pIndex}}">
+
+  <div class="itmbox f-cb">
+  <div class="chs f-fl">
+  <span class="u-radiobox">
+  <input type="hidden" value="{{= id}}" name="item_id">
+  <input checked="checked"  class="checkone" type="checkbox"></span>
+  </div>
+  <div class="goodinfo f-fl">
+  <div class="fig f-fl">
+  <a href="/item/detail/{{= show_id}}.html" class="imgwrap">
+  <img src="{{= main_pic}}@60w">
+  </a>
+  </div>
+  <div class="txt">
+  <p class="tlt f-toe">
+  <a href="/item/detail/{{= show_id}}.html">
+  {{= title}}
+  </a>
+  </p>
+  <p class="sku f-toe">
+  </p>
+  <div class="u-setcount ">
+  <span class="countbox">
+  <span class="minus {{if amount == min_limit_quantity}}z-dis{{/if}}"> <i class="u-icn14 u-icn14-1"></i>
+  </span>
+  <input value="{{= amount}}" autocomplete="off" readonly="readonly" class="ipt buyNum" name="tempBuyAmount" type="text">
+  <span class="plus {{if amount == max_limit_quantity}}z-dis{{/if}}"> <i class="u-icn14"></i>
+  </span>
+  </span>
+  <span class="tip"></span>
+  </div>
+  </div>
+  </div>
+  <div class="opt f-fr">
+  <p class="price">
+  ¥
+  <i class="f-fw">{{= price}}</i>
+  </p>
+  <p class="amount">×<span class="goodAmount">{{= amount}}</span></p> <b class="u-remove"></b>
+  </div>
+  </div>
+  </li>
+</script>
+<?py include('mobile/include/cnzz.html') ?>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<div id="topTabBox" class="ht-navigation">
+    <div id="top-navigation">
+        <div class="logo f-dn"><a href="/"></a></div>
+        #{handler.get_site_nav()}
+        <a class="m-shopcartnew" rel="nofollow"  href="${handler.reverse_url('shopping_cart_caculate')}" target="_blank">
+            #{xsrf_form_html}
+            <span class="wrap">购物车<b id="newcartnum" class="num">${handler.get_cart_count()}</b></span>
+        </a>
+    </div>
+
+</div>
+<script>
+$("#category_${handler.parent_category_id}").addClass('active')
+</script>

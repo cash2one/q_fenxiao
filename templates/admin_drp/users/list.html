@@ -1,0 +1,257 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员中心 <span class="c-gray en">&gt;</span>会员列表<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <form>
+        <div> 添加日期：
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;" name="start_date" value="${start_date}" >
+            -
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;" name="end_date" value="${end_date}" >
+            <input type="text" class="input-text" style="width:200px" placeholder="输入手机号" id="" name="phone" value="${phone}" >
+            访问时间：
+                <select class="input-text" style="width:100px" name="reorder">
+
+                    <option value="asc">升序</option>
+                    <option value="desc" selected="selected">降序</option>
+
+            </select>
+            <button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+        </div>
+    </form>
+     <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l">
+                <a href="/drp/users/add.html" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe607;</i>添加客户</a>
+            </span>
+            <span class="r">共有数据：<strong>${count}</strong> 条</span>
+     </div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="20"><input name="" type="checkbox" value=""></th>
+                <th width="30">ID</th>
+                <th width="50">手机号码</th>
+                <th width="50">昵称</th>
+                <th width="50">会员姓名</th>
+                <th width='50'>状态</th>
+                <th width='80'>生成时间</th>
+                <th width='80'>最后访问时间</th>
+                <th width="200">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+<?py for user in data.result: ?>
+    <tr class="text-c">
+        <td><input name="user_id" type="checkbox" value="${user.id}"></td>
+        <td>${user.id}</td>
+        <td>${user.phone}</td>
+        <td>${user.nick}</td>
+        <td>${user.real_name}</td>
+        <td>${user.real_name}</td>
+        <td>${user.gmt_created}</td>
+        <td>${user.last_visit}</td>
+        <td class="td-manage">
+            <a style="text-decoration:none" href="${handler.reverse_url('drp_add_user')}?user_id=${user.id}" title="查看详情">编辑</a>
+            <!--<a style="text-decoration:none" href="${handler.reverse_url('addresses')}?user_id=${user.id}" title="查看会员所有收货地址">地址</a>-->
+            <!--<a style="text-decoration:none" href="javascript:void(0)" onClick="tab_show('${handler.reverse_url('orders')}?user_id=${user.id}','订单详情（${user.id}）')" _href="${handler.reverse_url('orders')}?user_id=${user.id}">订单</a>-->
+        </td>
+    </tr>
+<?py #endfor?>
+        </tbody>
+    </table>
+    #{data.admin_pagination_html()}
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $(".dataTables_length,.dataTables_filter").hide();
+    });
+
+    $(".look-product").on("click",function(){
+        if($(this).attr('_href')){
+            var bStop=false;
+            var bStopIndex=0;
+            var _href=$(this).attr('_href');
+            var _titleName=$(this).html();
+            var topWindow=$(window.parent.document);
+            var show_navLi=topWindow.find("#min_title_list li");
+            show_navLi.each(function() {
+                if($(this).find('span').attr("data-href")==_href){
+                    bStop=true;
+                    bStopIndex=show_navLi.index($(this));
+                    return false;
+                }
+            });
+            if(!bStop){
+                creatIframe(_href,_titleName);
+                min_titleList();
+            }
+            else{
+                show_navLi.removeClass("active").eq(bStopIndex).addClass("active");
+
+                var iframe_box=topWindow.find("#iframe_box");
+                iframe_box.find(".show_iframe").hide().eq(bStopIndex).show().find("iframe").attr("src",_href);
+            }
+        }
+    });
+    
+    function min_titleList(){
+        var topWindow=$(window.parent.document);
+        var show_nav=topWindow.find("#min_title_list");
+        var aLi=show_nav.find("li");
+    };
+
+    function tabNavallwidth(){
+        var taballwidth=0,
+            $tabNav = $(".acrossTab"),
+            $tabNavWp = $(".Hui-tabNav-wp"),
+            $tabNavitem = $(".acrossTab li"),
+            $tabNavmore =$(".Hui-tabNav-more");
+        if (!$tabNav[0]){return}
+        $tabNavitem.each(function(index, element) {
+            taballwidth+=Number(parseFloat($(this).width()+60))});
+        $tabNav.width(taballwidth+25);
+        var w = $tabNavWp.width();
+        if(taballwidth+25>w){
+            $tabNavmore.show()}
+        else{
+            $tabNavmore.hide();
+            $tabNav.css({left:0})}
+    }
+
+    function creatIframe(href,titleName){
+        var topWindow=$(window.parent.document);
+        var show_nav=topWindow.find('#min_title_list');
+        show_nav.find('li').removeClass("active");
+        var iframe_box=topWindow.find('#iframe_box');
+        if(!topWindow.find('#navProductDetail')[0]){
+            show_nav.append('<li class="active" id="navProductDetail"><span data-href="'+href+'">'+titleName+'</span><i></i><em></em></li>');
+        }else{
+            topWindow.find('#navProductDetail').addClass('active').html('<span data-href="'+href+'">'+titleName+'</span><i></i><em></em>');
+        }
+        var iframeBox=iframe_box.find('.show_iframe');
+        iframeBox.hide();
+        iframe_box.append('<div class="show_iframe"><div class="loading"></div><iframe frameborder="0" src='+href+'></iframe></div>');
+        var showBox=iframe_box.find('.show_iframe:visible');
+        showBox.find('iframe').attr("src",href).load(function(){
+            showBox.find('.loading').hide();
+        });
+    }
+
+    /*会员-删除*/
+    function product_del(obj,id){
+	    layer.confirm('确认要删除吗？',function(index){
+
+         $.ajax({
+           url: '${handler.reverse_url('users','')}'+'?id='+ id,
+           type: 'DELETE',
+           success: function(data) {
+                objData = $.parseJSON(data);
+                if(objData.state==200){
+		            $(obj).parents("tr").remove();
+		            layer.msg('已删除！',{icon:1,time:1000});
+		       }else{
+                    $(obj).parents("tr").remove();
+                    layer.msg('删除失败!',{icon:1,time:1000});
+		       }
+           }
+        });
+	});
+}
+
+    function product_renew(obj,id){
+	    layer.confirm('确认要恢复会员为正常状态吗？',function(index){
+
+         $.ajax({
+           url: '${handler.reverse_url('users','renew')}'+'?id='+ id,
+           type: 'DELETE',
+           success: function(data) {
+                objData = $.parseJSON(data);
+                if(objData.state==200){
+		            $(obj).parents("tr").remove();
+		            layer.msg('已恢复！',{icon:1,time:1000});
+		       }else{
+                    $(obj).parents("tr").remove();
+                    layer.msg('恢复失败!',{icon:1,time:1000});
+		       }
+           }
+        });
+	});
+}
+
+    function bussiness(obj,id,is_bussiness){
+        if(is_bussiness == '1'){
+            var confirm_info = '确定设置大客户?';
+        }else{
+            var confirm_info = '确定取消大客户?';
+        }
+        layer.confirm(confirm_info,function(index){
+            $.ajax({
+                type:'post',
+                url:'/admin/batch/business/',
+                data:{
+                    data:id,
+                    is_bussiness:is_bussiness
+                },
+                dataType:"json",
+                success:function(data){
+                    if(data.stat == 'success'){
+                        layer.msg(data.info,{icon: 6,time:1000});
+                        location.href = '';
+                    }else{
+                        layer.msg('上架失败!',{icon: 6,time:1000});
+                        location.href = '';
+                    }
+                }
+            })
+        });
+    }
+
+// function batch_business(title,url,w,h){
+//     layer_show(title,url,w,h);
+// }
+
+
+function batch_business(){
+    var str='';
+    var arr=[];
+    $('input[name=user_id]:checked').each(function(){
+        arr.push($(this).val());
+    });
+    $.ajax({
+        type: 'post',
+        async: false,
+        url: '/admin/batch/business/batch',
+        data: {
+               "data":arr.join(',')
+              },
+        dataType: "json",
+        success: function(data){
+            if (data.stat == 'success') {
+                alert("修改成功");
+                location.href = '';
+            }
+
+        },
+        error: function(error){}
+    });    
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

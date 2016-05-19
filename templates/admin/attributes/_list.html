@@ -1,0 +1,188 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 类目属性管理 <span class="c-gray en">&gt;</span>属性管理<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <form>
+        <div class="text-c"> 
+            <input id="category_name" class="input-text" style="width:100px" placeholder="请选择类目" value="${category_name}" name="category_name" readonly />
+            <a href="#" onclick="showMenu(); return false;">选择</a>&nbsp&nbsp
+            <input type="hidden" id="category_id" name="category_id" value="${category_id}" />
+            <button name="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜属性</button>
+        </div>
+    </form>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+            <a href="javascript:;" onClick="show_layer('添加属性','${handler.reverse_url('attributes','')}','600','550')" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe600;</i> 添加属性及其属性值</a>
+        </span>
+        <span class="r">共有数据：<strong></strong> ${data.result.count()}条</span>
+    </div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="20">ID</th>
+                <th width="30">属性名称</th>
+                <th width="30">类目名称</th>
+                <th width="40">属性描述</th>
+                <th width="25">是否查询属性</th>
+                <th width="25">是否sku属性</th>
+                <th width="25">是否多选</th>
+                <th width="25">状态</th>
+                <th width='20'>排序</th>
+                <th width="80">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?py for d in data.result: ?>
+                <tr class="text-c">
+                    <td>${d.id}</td>
+                    <td>${d.attribute_name}</td>
+                    <?py category_name = handler.get_category_name_list(d.category_id)?>
+                    <td>${category_name}</td>
+                    <td>${d.attribute_desc}</td>
+                    <td>
+                        <?py if d.is_filter == 1: ?>
+                            <span class="label label-success radius">是</span>
+                        <?py else: ?>
+                            <span class="label radius">否</span>
+                        <?py #endif ?>
+                    </td>
+                    <td>
+                        <?py if d.is_sku == 1: ?>
+                            <span class="label label-success radius">是</span>
+                        <?py else: ?>
+                            <span class="label radius">否</span>
+                        <?py #endif ?>
+                    </td>
+                    <td>
+                        <?py if d.is_multi_select == 1: ?>
+                            <span class="label label-success radius">是</span>
+                        <?py else: ?>
+                            <span class="label radius">否</span>
+                        <?py #endif ?>
+                    </td>
+                    <td>
+                        <?py if d.status == 1: ?>
+                            <span class="label label-success radius">开启</span>
+                        <?py else: ?>
+                            <span class="label radius">关闭</span>
+                        <?py #endif ?>
+                    </td>
+                    <td>
+                        ${d.paixu}
+                    </td>
+                    <td>
+                        <a onClick="show_layer('编辑属性','${handler.reverse_url('attributes','')}?attribute_id=${d.id}','600','500')" title="编辑">编辑
+                        </a>
+
+                        <a href="${handler.reverse_url('attribute_values','list')}?attribute_id=${d.id}&attribute_name=${d.attribute_name}&category_name=${category_name}" title="属性值管理">属性值
+                        </a>
+                    </td>
+                </tr>    
+            <?py #endfor ?>
+        </tbody>
+    </table>
+    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+        <ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+    </div>
+    #{data.admin_pagination_html()}
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    function show_layer(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+
+    $(document).ready(function(){
+        $(".dataTables_length,.dataTables_filter").hide();
+    });
+</script>
+<script type="text/javascript">
+    
+    var setting = {
+        async: {
+            enable: true,
+            url:"/admin/category/tree/list",
+            autoParam:["id", "name=n", "level=lv"],
+            otherParam:{"otherParam":"zTreeAsyncTest"},
+            dataFilter: filter
+        },
+        view: {
+            dblClickExpand: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            beforeClick:beforeClick,
+            onClick:onClick
+        }
+    };
+
+
+    function filter(treeId, parentNode, childNodes) {
+        if (!childNodes) return null;
+        for (var i=0, l=childNodes.length; i<l; i++) {
+            childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+        }
+        return childNodes;
+    }
+
+    function onBodyDown(event) {
+        if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+            hideMenu();
+        }
+    }
+
+    function beforeClick(treeId, treeNode) {
+        var check = (treeNode && !treeNode.isParent);
+        if (!check) alert("只能选择子节点...");
+        return check;
+    }
+
+    function onClick(e, treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+        nodes = zTree.getSelectedNodes(),
+        v = "";
+        id = "";
+        nodes.sort(function compare(a,b){return a.id-b.id;});
+        for (var i=0, l=nodes.length; i<l; i++) {
+            v += nodes[i].name + ",";
+            id += nodes[i].id ;
+
+        }
+        if (v.length > 0 ) v = v.substring(0, v.length-1);
+        var cityObj = $("#category_name");
+        cityObj.attr("value", v);
+
+        var category_obj = $("#category_id");
+        category_obj.attr("value", id);
+
+    }
+
+    function showMenu() {
+        var cityObj = $("#category_name");
+        var cityOffset = $("#category_name").offset();
+        $("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+        $("body").bind("mousedown", onBodyDown);
+    }
+
+    function onBodyDown(event) {
+        if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+            hideMenu();
+        }
+    }
+
+    function hideMenu() {
+        $("#menuContent").fadeOut("fast");
+        $("body").unbind("mousedown", onBodyDown);
+    }
+
+    $(document).ready(function(){
+        $.fn.zTree.init($("#treeDemo"), setting);
+    });
+</script>
+
+

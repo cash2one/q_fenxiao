@@ -1,0 +1,112 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+<?py include('mobile/include/header.html') ?>
+  <link href="http://cdn.qqqg.com/mobile/css/index.min.css" type="text/css" rel="stylesheet"/>
+</head>
+
+<body>
+<header class="g-hd " id="g-hd">
+  <div class="m-topnavidx m-topnav" id="topbar-box">
+    <div class="m-topnavbar">
+      <span class="tit" id="toptitle">全球抢购</span>
+      <span class="u-menu" id="menu">&nbsp;</span>
+    </div>
+<?py include('mobile/include/headermenu.html') ?>
+  </div>
+</header>
+<div class="g-bd" id="g-bd">
+  <div class="container">
+    <div id="slides">
+<?py for banner in banners: ?>
+    <a href="${banner.get('ad_link')}">
+    <img src="${banner.get('ad_img')}" class="sliderphoto" alt="">
+    </a>
+<?py #endfor ?>
+    </div>
+</div>
+<!--
+<?py for category in category_banners: ?>
+<a href="${category.get('ad_link')}"  class="m-single-img u-img-wrapper" >
+  <img src="${category.get('ad_img')}" alt="">
+</a>
+<?py #endfor?>
+-->
+    <article class="m-img-banner" >
+        <div class="imglist "   data-type="10">
+            <ul >
+                <li class="itm6" >
+                    <a href="/item/list/3.html">
+                        <img  src="http://cdn.qqqg.com/mobile/images/half/1.jpg"></a>
+                </li>
+                <li class="itm6">
+                    <a href="/item/list/1.html"><img src="http://cdn.qqqg.com/mobile/images/half/2.jpg"></a>
+                </li>
+                <li class="itm6">
+                    <a href="/item/list/2.html"><img  src="http://cdn.qqqg.com/mobile/images/half/3.jpg"></a>
+                </li>
+                <li class="itm6">
+                    <a href="/item/list/4.html"><img src="http://cdn.qqqg.com/mobile/images/half/4.jpg"></a>
+                </li>
+            </ul>
+        </div>
+    </article>
+  <div class="m-globalpick" data-hasmore="1">
+    <div class="list" >
+      <h2 class="u-tit"><i class="u-icn3">&nbsp;</i>全球精选</h2>
+      <div id="dataList" class="onsale-wrap">
+      </div>
+      <div class="m-loading f-tac" id="waterLoading"><img src="http://cdn.qqqg.com/mobile/images/loading.gif"/></div>
+    </div>
+    <div id="waterAllShow" class="nomore-data" style="display:none">已显示全部内容</div>
+  </div>
+  <footer class="m-docfoot">
+<?py include('mobile/include/footer.html') ?>
+<?py include('mobile/include/copy.html') ?>
+  </footer>
+  <article class="m-mask" style="display:none;">
+
+  </article>
+</div>
+
+<div class="m-gotop-wrap" id="m-gotop-wrap">
+  <div class="ic-gotop">
+    <i class="up"></i>
+    <p class="desc">顶部</p>
+  </div>
+</div>
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/index.min.js"></script>
+<script type="text/x-tmpl" id="templateList">
+    <div class="m-onsale f-cb">
+    <a class="first" title="{{= title}}" href="/item/detail/{{= id}}.html">
+    <div class="pic">
+    <img title="{{= title}}" alt="{{= title}}" src="http://cdn.qqqg.com/mobile/images/blank.gif"  data-src="{{= main_pic}}@100w"/>
+    {{if issoldOut==1}}
+     <span class="u-slodout">&nbsp;</span>
+     {{/if}}
+    </div>
+    <div class="proinfo">
+    <div class="u-brand">
+    <img width="15px" src="{{= country_flag}}"><span>{{= ware_house}}发货</span>
+    </div>
+    <h3 class="tit"><strong>{{= title}}</strong></h3>
+    <p class="curprice">
+    <strong>
+    <span class="symbol">¥</span><span><span class="int">{{= price}}</span></span></strong>
+    <!--
+    <span class="discount">折合单件¥20 <i class="l-tri"></i></span>
+    -->
+    </p>
+    <p class="marprice">国内参考价：<span class="symbol">¥</span><del>{{= inner_price}}</del></p>
+    </div>
+    </a>
+    </div>
+</script>
+</body>
+</html>

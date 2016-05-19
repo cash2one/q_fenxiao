@@ -1,0 +1,312 @@
+
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span>品牌管理<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <form>
+        <div class="text-c"> 创建日期：
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;" name="start_date" value="${start_date}" >
+            -
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;" name="end_date" value="${end_date}" >
+            <input type="text" class="input-text" style="width:200px;margin-left:10px;" placeholder="输入品牌名称" id="" name="name" value="${name}" >
+            <input type="text" class="input-text" style="width:200px;margin-left:10px;" placeholder="输入品牌描述关键字" id="" name="description" value="${description}" >
+        </div>
+        <div class="text-c" style="margin-top:20px;margin-bottom:30px;">
+            商品类别：
+             <input type="text" class="input-text" style="width:200px;vertical-align:middle;" placeholder="选择商品类别" name="category_name" value="${category_name}" id="category_name" readonly />
+            <a href="#" onclick="showMenu(); return false;" style="margin-right:24px;"> 类目选择</a>
+            <input type="hidden" id="category_id" name="category_id" value="${category_id}" />
+            状态：
+             <select class="input-text" style="width:100px;vertical-align:middle;margin-right:12px" name="status">
+<?py if status: ?>
+    <!--<option value="">全部</option>-->
+    <option value="${int(status)}" selected="selected">${USER_STATUS[int(status)]}</option>
+    <?py for key in USER_STATUS: ?>
+        <?py if key == int(status): ?>
+            <?py continue?>
+        <?py else: ?>
+            <option value="${key}">${USER_STATUS[key]}</option>
+        <?py #endif ?>
+    <?py #endfor?>
+<?py else: ?>
+    <!--<option value="">全部</option>-->
+    <?py for key in USER_STATUS: ?>
+        <option value="${key}">${USER_STATUS[key]}</option>
+    <?py #endfor?>
+<?py #endif ?>
+            </select>
+            排序：
+                <select class="input-text" style="width:100px;vertical-align:middle;margin-right:10px" name="reorder">
+<?py if reorder=='asc':?>
+<option value="asc" selected="selected">升序</option>
+<?py else:?>
+<option value="asc">升序</option>
+<?py #endif ?>
+
+<?py if reorder=='desc':?>
+<option value="desc" selected="selected">降序</option>
+<?py else:?>
+<option value="desc">降序</option>
+<?py #endif ?>
+
+
+            </select>
+            <button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+        </div>
+    </form>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l">
+                <!--<a href="javascript:;" onclick="" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>-->
+                <a class="btn btn-primary radius"  href="${handler.reverse_url('brand','add')}"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a>
+            </span>
+    </div>
+    </div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <!--<th width="20"><input name="" type="checkbox" value=""></th>-->
+                <th width="30">ID</th>
+                <th width="50">品牌名称</th>
+                <th width="50">所属类别</th>
+                <th width="200">品牌描述</th>
+                <th width="50">排序</th>
+                <th width="50">是否显示</th>
+                <th width='50'>状态</th>
+                <th width='80'>创建日期</th>
+                <th width='80'>修改日期</th>
+                <th width="80">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+<?py for brand in data.result: ?>
+    <tr class="text-c">
+        <!--<td><input name="" type="checkbox" value="${brand.id}"></td>-->
+        <td>${brand.id}</td>
+         <td>${brand.name}</td>
+        <td>${handler.get_category_name_by_id(brand.category_id)}</td>
+        <td>${brand.description}</td>
+        <td>${brand.sort}</td>
+        <td>
+    <?py if brand.is_online:?>
+        <span style="color:green;">不显示</span>
+    <?py else:?>
+        <span style="color:red">显示</span>
+    <?py #endif ?>
+        </td>
+        <td>${USER_STATUS[brand.deleted]}</td>
+        <td>${brand.gmt_created}</td>
+        <td>${brand.gmt_modified}</td>
+        <td class="td-manage">
+    <?py if status=='0':?>
+     <a style="text-decoration:none" href="${handler.reverse_url('brand','edit')}?id=${brand.id}" title="编辑">编辑</a>
+    <a style="text-decoration:none" class="ml-5" onClick="product_del(this,'${brand.id}')" href="javascript:;" title="删除">删除</a>
+    <?py else:?>
+    <a style="text-decoration:none" class="ml-5" onClick="product_renew(this,'${brand.id}')" href="javascript:;" title="重新恢复正常状态">恢复</a>
+    <?py #endif?>
+        </td>
+    </tr>
+<?py #endfor?>
+        </tbody>
+    </table>
+        #{data.admin_pagination_html()}
+    </div>
+    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+        <ul id="treeDemo" class="ztree" style="margin-top:0; width:160px; background-color:#f0f6e4;"></ul>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".dataTables_length,.dataTables_filter").hide();
+    });
+
+    $(".look-product").on("click",function(){
+        if($(this).attr('_href')){
+            var bStop=false;
+            var bStopIndex=0;
+            var _href=$(this).attr('_href');
+            var _titleName=$(this).html();
+            var topWindow=$(window.parent.document);
+            var show_navLi=topWindow.find("#min_title_list li");
+            show_navLi.each(function() {
+                if($(this).find('span').attr("data-href")==_href){
+                    bStop=true;
+                    bStopIndex=show_navLi.index($(this));
+                    return false;
+                }
+            });
+            if(!bStop){
+                creatIframe(_href,_titleName);
+                min_titleList();
+            }
+            else{
+                show_navLi.removeClass("active").eq(bStopIndex).addClass("active");
+
+                var iframe_box=topWindow.find("#iframe_box");
+                iframe_box.find(".show_iframe").hide().eq(bStopIndex).show().find("iframe").attr("src",_href);
+            }
+        }
+    });
+    
+    function min_titleList(){
+        var topWindow=$(window.parent.document);
+        var show_nav=topWindow.find("#min_title_list");
+        var aLi=show_nav.find("li");
+    };
+
+    function tabNavallwidth(){
+        var taballwidth=0,
+            $tabNav = $(".acrossTab"),
+            $tabNavWp = $(".Hui-tabNav-wp"),
+            $tabNavitem = $(".acrossTab li"),
+            $tabNavmore =$(".Hui-tabNav-more");
+        if (!$tabNav[0]){return}
+        $tabNavitem.each(function(index, element) {
+            taballwidth+=Number(parseFloat($(this).width()+60))});
+        $tabNav.width(taballwidth+25);
+        var w = $tabNavWp.width();
+        if(taballwidth+25>w){
+            $tabNavmore.show()}
+        else{
+            $tabNavmore.hide();
+            $tabNav.css({left:0})}
+    }
+
+    function creatIframe(href,titleName){
+        var topWindow=$(window.parent.document);
+        var show_nav=topWindow.find('#min_title_list');
+        show_nav.find('li').removeClass("active");
+        // var iframe_box=topWindow.find('#iframe_box');
+        if(!topWindow.find('#navProductDetail')[0]){
+            show_nav.append('<li class="active" id="navProductDetail"><span data-href="'+href+'">'+titleName+'</span><i></i><em></em></li>');
+        }else{
+            topWindow.find('#navProductDetail').addClass('active').html('<span data-href="'+href+'">'+titleName+'</span><i></i><em></em>');
+        }
+    }
+
+    /*会员-删除*/
+    function product_del(obj,id){
+	    layer.confirm('确认要删除吗？',function(index){
+         $.ajax({
+           url: '${handler.reverse_url('brand','')}'+'?id='+ id,
+           type: 'DELETE',
+           success: function(data) {
+                objData = $.parseJSON(data);
+                if(objData.state==200){
+		            $(obj).parents("tr").remove();
+		            layer.msg('已删除！',{icon:1,time:1000});
+		       }else{
+                    $(obj).parents("tr").remove();
+                    layer.msg('删除失败!',{icon:1,time:1000});
+		       }
+           }
+        });
+	});
+}
+
+    /*会员-删除*/
+    function product_renew(obj,id){
+	    layer.confirm('确认要恢复正常吗？',function(index){
+         $.ajax({
+           url: '${handler.reverse_url('brand','renew')}'+'?id='+ id,
+           type: 'DELETE',
+           success: function(data) {
+                objData = $.parseJSON(data);
+                if(objData.state==200){
+		            $(obj).parents("tr").remove();
+		            layer.msg('已恢复！',{icon:1,time:1000});
+		       }else{
+                    $(obj).parents("tr").remove();
+                    layer.msg('恢复失败!',{icon:1,time:1000});
+		       }
+           }
+        });
+	 });
+    }
+
+</script>
+<!--类目选择js-->
+<script type="text/javascript">
+    var setting = {
+    async: {
+        enable: true,
+        url:"/admin/category/tree/list",
+        autoParam:["id", "name=n", "level=lv"],
+        otherParam:{"otherParam":"zTreeAsyncTest"},
+        dataFilter: filter
+    },
+    view: {
+        dblClickExpand: false
+    },
+    data: {
+        simpleData: {
+            enable: true
+        }
+    },
+    callback: {
+        beforeClick: beforeClick,
+        onClick: onClick
+    }
+};
+
+function filter(treeId, parentNode, childNodes) {
+    if (!childNodes) return null;
+    for (var i=0, l=childNodes.length; i<l; i++) {
+        childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+    }
+    return childNodes;
+}
+function beforeClick(treeId, treeNode) {
+    var check = (treeNode && !treeNode.isParent);
+    if (!check) alert("只能选择子节点...");
+    return check;
+}
+
+function onClick(e, treeId, treeNode) {
+    var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+    nodes = zTree.getSelectedNodes(),
+    v = "";
+    id = "";
+    nodes.sort(function compare(a,b){return a.id-b.id;});
+    for (var i=0, l=nodes.length; i<l; i++) {
+        v += nodes[i].name + ",";
+        id += nodes[i].id ;
+
+    }
+    if (v.length > 0 ) v = v.substring(0, v.length-1);
+    var cityObj = $("#category_name");
+    cityObj.val(v);
+
+    var category_obj = $("#category_id");
+    category_obj.val(id);
+
+}
+
+function showMenu() {
+    var cityObj = $("#category_name");
+    var cityOffset = $("#category_name").offset();
+    $("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+    $("body").bind("mousedown", onBodyDown);
+}
+
+function onBodyDown(event) {
+    if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+        hideMenu();
+    }
+}
+
+function hideMenu() {
+    $("#menuContent").fadeOut("fast");
+    $("body").unbind("mousedown", onBodyDown);
+}
+
+$(document).ready(function(){
+    $('#category_name').keyup(function(){
+       if($(this).val()==''){
+           $("#category_id").val('');
+       }
+    });
+    $.fn.zTree.init($("#treeDemo"), setting);
+    $(".dataTables_length,.dataTables_filter").hide();
+});
+</script>

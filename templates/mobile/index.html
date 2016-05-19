@@ -1,0 +1,130 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+<?py include('mobile/include/header.html') ?>
+	<link href="http://cdn.qqqg.com/microshop/css/list.min.css" type="text/css" rel="stylesheet"/>
+	<style type="text/css">
+		.m-topnavidx {
+			width:100%;
+			height:50px;
+			background:#d71111;
+			position:relative
+		}
+		.m-topnav .tit {
+			color:#fff;
+		}
+		.topTabBoxFixed {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			z-index: 100;
+			background: #fff;
+			border-bottom: 1px solid #ddd;
+		}
+	</style>
+
+</head>
+<body>
+<header class="g-hd " id="g-hd">
+  <div class="m-topnavidx m-topnav" id="topbar-box">
+    <div class="m-topnavbar">
+      <span class="tit" id="toptitle">全球抢购微店</span>
+      <span class="u-menu" id="menu">&nbsp;</span>
+    </div>
+<?py include('mobile/include/headermenu.html') ?>
+  </div>
+</header>
+
+<div class="g-bd" id="box">
+
+	<div class="m-nav-wrap" style="" id="navTop">
+		<article class="m-nav-stickytabs">
+			<div class="navbox js-navbox m-tbl  scroll-navbox" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 120ms; transform: translate(0px, 0px) translateZ(0px);width:100%;padding-right:0px">
+<?py for nav in navs:?>
+	<?py if nav.link:?>
+		<span class="tab">
+			<a href="${nav.link}" target="${nav.open_type==0 and '_self' or '_blank'}" >
+			${nav.name}
+			</a>
+		</span>
+	<?py else:?>
+		<span class="tab ">
+			<a href="${handler.reverse_url('mobile_item_list',nav.show_id)}" target="${nav.open_type==0 and '_self' or '_blank'}" >
+				${nav.name}
+			</a>
+		</span>
+	<?py #endif ?>
+<?py #endfor ?>
+			</div>
+			<span id="auto-id-1445998025145" class="select-btn"><span id="" class="ic"></span></span>
+
+		</article>
+	</div>
+
+	<article class="m-block m-item-block prd-box m-item-nav-lift" style="background-color:#f0f0f0;">
+		<div class="m-prdList  ">
+			<dl id="dataList"  class="m-avg2item-lst"></dl>
+		</div>
+	</article>
+	<div class="m-loading f-tac" style="display: none;" id="waterLoading"><img src="http://cdn.qqqg.com/mobile/images/loadingalpha.gif" style="width:23px;height:23px"></div>
+	<div class="nomore-data" id="waterAllShow" style="display: none;">已显示全部内容</div>
+	<div id="shopNav">
+		<ul>
+			<li><a class="home" href="/">主页</a></li>
+			<li class="nav-item"><a href="/member/cart.html">购物车</a></li>
+			<li class="nav-item"><a href="/order/orders.html">我的</a></li>
+		</ul>
+	</div>
+<footer class="m-docfoot">
+<?py include('mobile/include/footer.html') ?>
+<?py include('mobile/include/copy.html') ?>
+  </footer>
+  <article class="m-mask" style="display:none;">
+
+  </article>
+</div>
+
+<div class="m-gotop-wrap" id="m-gotop-wrap">
+  <div class="ic-gotop">
+    <i class="up"></i>
+    <p class="desc">顶部</p>
+  </div>
+</div>
+<div id="m-dropdown" class="m-dropdown ">
+	<span class="select-btn"><span class="ic"></span></span>
+	<div class="tit">全球抢购微店</div>
+	<ul class="floors">
+
+	</ul>
+</div>
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript" src="http://cdn.qqqg.com/microshop/js/index.list.min.js"></script>
+<script type="text/x-tmpl" id="templateList">
+<dd class="h">
+	<article class="m-2avg-item">
+		<a href="/item/detail/{{= show_id}}.html" class="imgwrap u-img-wrapper">
+			<img src="http://cdn.qqqg.com/mobile/images/blank.gif" alt="{{= title}}" class="j-lazy u-item-img" data-src="{{= main_pic}}@305w">
+			{{if issoldOut==1}}
+			<i class="m-soldout"><span class="txt">售完</span></i>
+			{{/if}}
+		</a>
+		<div class="txtwrap">
+			<p class="tit"><a href="/item/detail/{{= show_id}}.html">{{= title}}</a>
+			</p>
+			<p class="act-price"><span class="symbol"><span class="priceLbl">售价</span>
+¥</span><span class="bold">{{= price}}</span>
+			</p>
+		</div>
+		<div class="lbl-wrap"></div>    <a href="/item/detail/{{= show_id}}.html" style="background-color:#d71111; color: #fff;" class="action">立即疯抢</a>
+	</article>
+</dd>
+</script>
+
+</body>
+</html>

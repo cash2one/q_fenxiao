@@ -1,0 +1,13 @@
+﻿<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    wx.config({debug: false,appId: '${dic_sign.get("appId")}',timestamp: ${dic_sign.get("timestamp")},nonceStr: '${dic_sign.get("nonceStr")}',signature: '${dic_sign.get("signature")}',jsApiList: ['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone','previewImage']});
+    wx.ready(function () {
+        var qqqg_wx={title: '${dic_sign.get("title")}',desc: '${dic_sign.get("desc")}',
+        link: '${dic_sign.get("url")}',imgUrl: '${dic_sign.get("img")}@640w'}
+        wx.checkJsApi({jsApiList:["previewImage","onMenuShareTimeline","onMenuShareAppMessage","onMenuShareQQ","onMenuShareWeibo","onMenuShareQZone"],
+        success:function(a){}});
+        wx.onMenuShareTimeline({title:qqqg_wx.title,link:qqqg_wx.link,imgUrl:qqqg_wx.imgUrl});
+        wx.onMenuShareAppMessage({title:qqqg_wx.title,desc:qqqg_wx.desc,link:qqqg_wx.link,imgUrl:qqqg_wx.imgUrl,type:"",dataUrl:""});wx.onMenuShareQQ({title:qqqg_wx.title,desc:qqqg_wx.desc,link:qqqg_wx.link,imgUrl:qqqg_wx.imgUrl});wx.onMenuShareWeibo({title:qqqg_wx.title,desc:qqqg_wx.desc,link:qqqg_wx.link,imgUrl:qqqg_wx.imgUrl});wx.onMenuShareQZone({title:qqqg_wx.title,desc:qqqg_wx.desc,link:qqqg_wx.link,imgUrl:qqqg_wx.imgUrl});
+    });
+
+</script>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>支付</title>
+</head>
+<body>
+<form name="allpayment" id="allinpayment" action="https://service.allinpay.com/gateway/index.do" method="post">
+    <?py for param in params:?>
+       <input type="hidden" name="${param.keys()[0]}" id="${param.keys()[0]}" value="${ param.values()[0]}" />
+    <?py #endfor ?>
+	<div align="center"></div>
+</form>
+<script>
+    document.getElementById("allinpayment").submit();
+</script>
+</body>
+</html>

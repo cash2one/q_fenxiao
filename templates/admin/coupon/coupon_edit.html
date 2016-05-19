@@ -1,0 +1,145 @@
+<?py from services.item.item_services import ItemService ?>
+<?py item_service = ItemService() ?>
+<?py item_service.set_rdb(handler.rdb) ?>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 优惠券管理 <span class="c-gray en">&gt;</span> 优惠券 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+	<form action="${handler.reverse_url('coupon_handler')}" method="post" class="form form-horizontal" id="form-admin-add">
+		<div class="row cl">
+            <input type="hidden" name="id" value="${coupon and coupon.id or ''}">
+			<label class="form-label col-3"><span class="c-red">*</span>渠道:</label>
+                 <div class="formControls col-5"> <span class="select-box">
+                    <select name="channel" class="select">
+                        <option value="">--选择渠道--</option>
+                        <?py for d in coupon_channels:?>
+                            <option value="${d.id}__${d.name}">${d.name}</option>
+                        <?py #endfor ?>
+                </select>
+				</span> </div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>类型:</label>
+                <div class="formControls col-5"> <span class="select-box">
+                        <select name="coupon_type_id" class="select">
+                            <option value="">--选择类型--</option>
+                            <?py for d in coupon_types:?>
+                            <option value="${d.id}__${d.name}">${d.name}</option>
+                        <?py #endfor ?>
+                    </select>
+                    </span>
+                </div>
+			<div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>单个金额:</label>
+			<div class="formControls col-5">
+				<input type="text" placeholder="优惠券金额" autocomplete="off" value="${coupon and coupon.total_amount or ''}" name="total_amount" class="input-text" datatype="*2-20" nullmsg="优惠券金额">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>张:</label>
+			<div class="formControls col-5">
+				<input type="text" placeholder="发放张数" autocomplete="off" value="${coupon and coupon.count or ''}" name="count" class="input-text" datatype="*2-20" nullmsg="发放优惠券张数">
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>限制使用金额:</label>
+			<div class="formControls col-5">
+				订单>=(大于等于)<input type="number" placeholder="代码" autocomplete="off" value="${coupon and coupon.limit_min_amount or 0}" name="limit_min_amount" class="input-text" nullmsg="使用金额限制">元
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+			<label class="form-label col-3">商品类目:</label>
+			<div class="formControls col-3">
+                <input id="category_name" name="category_name" class="input-text" value="">
+                <input type="hidden" id="category_id" name="category_id" />
+            </div>
+			<div class="col-4"> </div>
+		</div>
+
+        <div class="row cl">
+			<label class="form-label col-3">限制商品:</label>
+			<div class="formControls col-5">
+				<input type="text" placeholder="限制购买的商品" autocomplete="off" value="${coupon and coupon.item_id or ''}" name="item_name" id="item_name" class="input-text" nullmsg="限制特定商品">
+                <input type="hidden" value="${coupon and coupon.item_id or ''}" name="item_id" class="input-text">
+
+			</div>
+			<div class="col-4"> </div>
+		</div>
+
+
+        <div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>有效日期：</label>
+            <div class="formControls col-5">
+                <div class="formControls col-6">
+                    <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name="effective_time" class="input-text Wdate">
+                </div>
+                <div class="formControls col-6">
+                    <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'datemin\')}'})" id="datemax" name="expired_time" class="input-text Wdate">
+                </div>
+            </div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-9 col-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+
+	$("#form-admin-add").Validform({
+		tiptype:2,
+		callback:function(form){
+			$("#form-admin-add").submit();
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+});
+</script>
+<SCRIPT type="text/javascript">
+    $(document).ready(function(){
+
+        $( "#category_name" ).autocomplete({
+          source: "/admin/category/search",
+          minLength: 2,
+          select: function( event, ui ) {
+                $('#category_id').val(ui.item.id+'_'+ui.item.value);
+          }
+        });
+
+        $( "#item_name" ).autocomplete({
+          source: "/admin/items/search/",
+          minLength: 4,
+          select: function( event, ui ) {
+                $('#item_id').val(ui.item.id);
+          }
+        });
+
+    });
+</script>

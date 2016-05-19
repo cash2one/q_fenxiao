@@ -1,0 +1,32 @@
+<style type="text/css">
+    .radio-title {
+        padding-left: 10px;
+        padding-right: 90px;
+    }
+</style>
+<div class="pd-20">
+    <form class="form form-horizontal" action="" id="item_attribute_form" method="post">
+        <?py for key in dict: ?>
+            <?py index = 1?>
+            <div class="row cl filter">
+                <label class="form-label col-3"><span class="c-red">*</span>${key.attribute_name}：</label>
+                <?py for value in dict[key]: ?>
+                    <?py if index == 1: ?>
+                        <input type="radio" name="${key.id}" value="${value.id}" checked="checked"/> ${value.attribute_value}
+                        &nbsp
+                    <?py else: ?>
+                        <input type="radio" name="${key.id}" value="${value.id}" /> ${value.attribute_value}
+                        &nbsp
+                    <?py #endif ?>
+                    <?py index += 1?>
+                <?py #endfor ?>
+            </div>
+        <?py #endfor ?>
+        
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input type="submit" data-loading="稍候..." value="保存" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,31 @@
+<div class="pd-20">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 支付管理 <span class="c-gray en">&gt;</span> 结算列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="r">共有数据：<strong></strong>${count} 条</span>
+        </div>
+		<div class="mt-20 dataTables_wrapper" id="item_data">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th width="15">结算编号</th>
+						<th width="25">金额</th>
+						<th width="35">结算时间</th>
+						<th width="50">备注</th>
+					</tr>
+				</thead>
+				<tbody>
+                    <?py for settlement in data.result: ?>
+                        <tr class="text-c va-m" id="${settlement.id}">
+                            <td>${settlement.settlement_no}</td>
+                            <td>${settlement.settlement_amount}</td>
+                            <td>${settlement.gmt_created}</td>
+                            <td>${settlement.content}</td>
+                        </tr>
+                    <?py #endfor ?>
+				</tbody>
+			</table>
+               #{data.admin_pagination_html()}
+		</div>
+	</div>
+</div>

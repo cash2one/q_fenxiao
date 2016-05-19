@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* 你自己的样式 */
+#preViewList{
+}
+#preViewList .iconitem{
+    width: 100px;
+    height: 100px;
+    float: left;
+    overflow: hidden;
+    border: 1px solid gray;
+    margin: 10px;
+    position: relative;
+}
+#preViewList .iconitem img{
+    width: 100px;
+    height: 100px;
+}
+#preViewList .ui-close{
+    color: #000;
+    font: 24px/1em "宋体";
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    text-decoration: none;
+    background: #fff;
+}
+#preViewList .ui-close:hover{
+    color: #ff0000;
+    background: #eee;
+}
+#preViewList .see{
+    color: #000;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    text-decoration: none;
+    background:#fff url(/admin/images/zoomin.png) no-repeat  0 -24px;
+    width: 24px;
+    height: 24px;
+}
+#preViewList .see:hover{
+    color: #000;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    text-decoration: none;
+    background:#fff url(/admin/images/zoomin.png) no-repeat  0 0;
+
+}
+

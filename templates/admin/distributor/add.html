@@ -1,0 +1,127 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 分销/供应商管理 <span class="c-gray en">&gt;</span> 添加分销商/供应商 <span class="c-gray en">&gt;</span>添加广告<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+</div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="r">
+                <a href="javascript:history.go(-1);" class="btn btn-danger radius">返回上一页</a>
+            </span>
+    </div>
+<form action="" method="post" class="form form-horizontal" id="brand-form-add">
+    <input type="hidden" id="_xsrf" name="_xsrf" value="${xsrf_token}"/>
+    <div class="row cl">
+            <label class="form-label col-2">角色：</label>
+			<div class="formControls col-5 skin-minimal">
+                <div class="radio-box">
+                    <input name="role_type" type="radio" datatype="*" checked="checked" value="1" nullmsg="请选择" errormsg="供应商" placeholder="供应商"/> 供应商
+                </div>
+                <div class="radio-box">
+                    <input name="role_type" type="radio"  value="0" nullmsg="请选择" errormsg="分销商" placeholder="分销商"/> 分销商
+                </div>
+			</div>
+    </div>
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>名称：</label>
+			<div class="formControls col-5">
+            <?py if data: ?>
+                <input type="text" class="input-text" datatype="*1-250" id="real_name" value="${data.real_name}" errormsg="名称长度不能超过250个字符" placeholder="请输入分销商名称" name="real_name" nullmsg="名称不能为空！">
+            <?py else: ?>
+                <input type="text" class="input-text" datatype="*1-250" id="real_name" value="" errormsg="名称长度不能超过250个字符" placeholder="请输入分销商名称" name="real_name" nullmsg="名称不能为空！">
+            <?py #endif ?>
+			</div>
+            <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>昵称：</label>
+			<div class="formControls col-5">
+            <?py if data: ?>
+                <input type="text" class="input-text" datatype="s5-32" id="nick" value="${data.nick}" errormsg="昵称至少5个字符,最多32个字符！" placeholder="请输入昵称" name="nick" nullmsg="昵称不能为空！">
+            <?py else: ?>
+                <input type="text" class="input-text" datatype="s5-32" id="nick" value="" errormsg="昵称至少5个字符,最多32个字符！" placeholder="请输入昵称" name="nick" nullmsg="昵称不能为空！">
+            <?py #endif ?>
+			</div>
+            <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>用户名：</label>
+			<div class="formControls col-5">
+            <?py if data: ?>
+                <input type="text" class="input-text" datatype="*1-250" id="user_name" value="${data.user_name}" errormsg="用户名长度不能超过250个字符" placeholder="请输入分销商用户名" name="user_name" nullmsg="昵称不能为空！">
+            <?py else: ?>
+                <input type="text" class="input-text" datatype="*1-250" id="user_name" value="" errormsg="用户名长度不能超过250个字符" placeholder="请输入分销商用户名" name="user_name" nullmsg="昵称不能为空！">
+            <?py #endif ?>
+			</div>
+            <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>密码：</label>
+			<div class="formControls col-5">
+            <?py if data: ?>
+                <input type="text" class="input-text" datatype="*6-32" id="user_pwd" value="${data.user_pwd}" errormsg="密码长度不能超过32个字符" placeholder="请输入密码" name="user_pwd" nullmsg="密码不能为空！">
+            <?py else: ?>
+                <input type="text" class="input-text" datatype="*6-32" id="user_pwd" value="" errormsg="密码长度不能超过32个字符" placeholder="请输入密码" name="user_pwd" nullmsg="密码不能为空！">
+            <?py #endif ?>
+			</div>
+            <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>手机号码：</label>
+			<div class="formControls col-5">
+            <?py if data:?>
+                <input type="text" class="input-text" datatype="m" id="phone" value="${data.phone}" errormsg="手机号码格式不正确！" placeholder="请填写手机号码" name="phone" >
+            <?py else:?>
+                <input type="text" class="input-text" datatype="m" id="phone" value="" errormsg="手机号码格式不正确！" placeholder="请填写手机号码" name="phone" >
+            <?py #endif?>
+			</div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2">联系邮箱：</label>
+			<div class="formControls col-5">
+            <?py if data:?>
+                <input type="text" class="input-text" id="email" value="${data.email}" errormsg="邮箱地址不正确" placeholder="请输入广告联系人邮箱地址" name="email" >
+            <?py else:?>
+                <input type="text" class="input-text" id="email" value="" errormsg="邮箱地址不正确" placeholder="请输入广告联系人邮箱地址" name="email" >
+            <?py #endif?>
+			</div>
+    </div>
+
+    <div class="row cl">
+            <label class="form-label col-2">备注：</label>
+			<div class="formControls col-5">
+            <?py if data:?>
+                <textarea name="comments" cols="60" rows="5"  placeholder="请输入描述信息">${data.comments} </textarea>
+            <?py else:?>
+                <textarea name="comments" cols="60" rows="5"  placeholder="请输入描述信息"> </textarea>
+            <?py #endif?>
+			</div>
+    </div>
+    <div class="row cl">
+            <div class="col-10 col-offset-2">
+                <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交</button>
+                <button  class="btn btn-default radius" type="reset">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+</form>
+</div>
+<?py include('admin/common/kindeditor.html') ?>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/jquery.blockui.js"></script>
+<script type="text/javascript" src="/static/admin/lib/jquery-list-dragsort.js"></script>
+<script type="text/javascript">
+$(function(){
+        $("#brand-form-add").Validform({
+            datatype:{
+                limit_quantity:function(gets,obj,curform,regxp){
+                    //参数gets是获取到的表单元素值，obj为当前表单元素，curform为当前验证的表单，regxp为内置的一些正则表达式的引用;
+                    if($('#is_limit')[0].checked==true ){
+                        if(!/^\d+$/.test(gets)){
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+        });
+
+    });
+</script>

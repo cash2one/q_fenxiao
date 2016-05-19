@@ -1,0 +1,32 @@
+<ul id="funcTab" class="container2">
+    <li class="item " id="category_" ><a href="/">首页</a></li>
+<?py for nav in navs:?>
+    <li class="item"  id="category_${nav.category_id}" data-cate-id="${nav.category_id}">
+    <?py if nav.link:?>
+        <a href="${nav.link}"  data-id="${nav.show_id}" target="${nav.open_type==0 and '_self' or '_blank'}" >
+            ${nav.name}
+        </a>
+    <?py else:?>
+        <a href="${handler.reverse_url('item_category',nav.show_id)}" data-id="${nav.show_id}" target="${nav.open_type==0 and '_self' or '_blank'}" >
+            ${nav.name}
+        </a>
+    <?py #endif ?>
+    </li>
+<?py #endfor?>
+    <li class="last"></li>
+</ul>
+<script  type="text/x-tmpl" id="templateCates">
+    <div class="item">
+    <p class="title">
+        <a href="/item/category_{{= show_id}}.html" class="cat2" target="_blank">{{= name}}</a>
+    </p>
+    {{if sons}}
+    <div class="ctgnamebox">
+        {{tmpl(sons) "#templateCatesChild"}}
+    </div>
+    {{/if}}
+    </div>
+</script>
+<script  type="text/x-tmpl" id="templateCatesChild">
+       <a href="/item/category_{{= show_id}}.html?catindex={{= attribute_id}}_{{= att_value_id}}" class="f-fcred0" target="_blank">{{= att_value}}</a>
+</script>

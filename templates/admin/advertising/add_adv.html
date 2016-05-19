@@ -1,0 +1,292 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 广告管理 <span class="c-gray en">&gt;</span> 广告列表 <span class="c-gray en">&gt;</span>添加广告<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+</div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="r">
+                <a href="javascript:history.go(-1);" class="btn btn-danger radius">返回上一页</a>
+            </span>
+    </div>
+<form action="" method="post" class="form form-horizontal" id="brand-form-add">
+    <input type="hidden" id="_xsrf" name="_xsrf" value="${xsrf_token}"/>
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>广告名称：</label>
+			<div class="formControls col-5">
+<?py if data: ?>
+    <input type="text" class="input-text" datatype="*1-250" id="name" value="${data.name}" errormsg="名称长度不能超过250个字符" placeholder="请输入广告位名称" name="name" nullmsg="名称不能为空！">
+<?py else: ?>
+    <input type="text" class="input-text" datatype="*1-250" id="name" value="" errormsg="名称长度不能超过250个字符" placeholder="请输入广告位名称" name="name" nullmsg="名称不能为空！">
+<?py #endif ?>
+			</div>
+            <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>媒介类型：</label>
+			<div class="formControls col-2">
+                <select class="input-text" style="width:100px;vertical-align:middle;margin-right:12px" name="media_types">
+<?py if data:?>
+   <option value="${int(data.media_types)}" selected="selected">${MEDIA_TYPES[int(data.media_types)]}</option>
+    <?py for key in MEDIA_TYPES: ?>
+        <?py if key == int(data.media_types): ?>
+            <?py continue?>
+        <?py else: ?>
+            <option value="${key}">${MEDIA_TYPES[key]}</option>
+        <?py #endif ?>
+    <?py #endfor?>
+<?py else: ?>
+    <?py for key in MEDIA_TYPES: ?>
+        <option value="${key}">${MEDIA_TYPES[key]}</option>
+    <?py #endfor?>
+<?py #endif ?>
+                </select>
+			</div>
+            <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>广告位置：</label>
+			<div class="formControls col-2">
+<?py if positions:?>
+<select class="input-text" style="width:250px;vertical-align:middle;margin-right:12px" name="position_id">
+<?py else:?>
+<select class="input-text" style="width:250px;vertical-align:middle;margin-right:12px" name="position_id" datatype="select" nullmsg="广告位置不能为空，请先添加广告位置信息！">
+<?py #endif?>
+<?py if data:?>
+    <?py for position in positions: ?>
+        <?py if position.id == int(data.position_id): ?>
+            <option value="${int(data.position_id)}" data-width="${position.width}" data-height="${position.height}" selected="selected">${position.name}</option>
+            <?py continue?>
+        <?py else: ?>
+            <option value="${position.id}" data-width="${position.width}" data-height="${position.height}">${position.name}</option>
+        <?py #endif ?>
+    <?py #endfor?>
+<?py else:?>
+    <?py for position in positions: ?>
+    <option value="${position.id}" data-width="${position.width}" data-height="${position.height}">${position.name}</option>
+    <?py #endfor?>
+<?py #endif?>
+                </select>
+			</div>
+            <div class="col-4">  </div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>开始时间：</label>
+			<div class="formControls col-5">
+<?py if data:?>
+<input type="text" readonly="readonly" name="start_time" value="${data.start_time}" id="start_time" datatype="*" nullmsg="请填写开始时间！" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemin" class="input-text Wdate" style="width:180px;">
+<?py else:?>
+<input type="text" readonly="readonly" name="start_time" id="start_time" datatype="*" nullmsg="请填写开始时间！" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemin" class="input-text Wdate" style="width:180px;">
+<?py #endif?>
+			</div>
+            <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>结束时间：</label>
+			<div class="formControls col-5">
+<?py if data:?>
+<input type="text" name="end_time" value="${data.end_time}" id="end_time" datatype="*" nullmsg="请填写下架时间！" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemax" class="input-text Wdate" style="width:180px;">
+<?py else:?>
+<input type="text" name="end_time" id="end_time" datatype="*" nullmsg="请填写下架时间！" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemax" class="input-text Wdate" style="width:180px;">
+<?py #endif?>
+			</div>
+            <div class="col-4"> </div>
+
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>广告目标链接：</label>
+			<div class="formControls col-5">
+<?py if data:?>
+    <input type="text" class="input-text" datatype="*" id="ad_link" value="${data.ad_link}" errormsg="格式错误！" placeholder="请输入广告链接地址" name="ad_link" nullmsg="广告链接地址不能为空！">
+<?py else:?>
+    <input type="text" class="input-text" datatype="*" id="ad_link" value="" errormsg="格式错误！" placeholder="请输入广告链接地址" name="ad_link" nullmsg="广告链接地址不能为空！">
+<?py #endif?>
+			</div>
+            <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+    <label class="form-label col-2"><span class="c-red">*</span>上传广告图片：</label>
+    <div class="formControls col-10">
+        <div class="uploader-thum-container">
+            <div id="fileList" class="uploader-list"></div>
+            <label id="item_main_img" class="btn btn-default radius ml-10">开始上传</label>
+        </div>
+        <div style="position: static">
+            <ul id="preViewList" class="dragsort">
+<?py if data: ?>
+    <?py if data.ad_img: ?>
+        <?py for d in data.ad_img.split(';'): ?>
+            <li class="iconitem" data-url="${d}">
+                <div  style="cursor: pointer;">
+                <input type="hidden" name="ad_img" value="${d}" >
+                <a href="javascript:;" class="see showbig" >
+                    <img src="${d}" />
+                </a>
+                <a class="ui-close" href="javascript:;">×</a>
+                </div>
+            </li>
+        <?py #endfor ?>
+    <?py #endif ?>
+<?py #endif ?>
+            </ul>
+        </div>
+        </div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>是否开启：</label>
+			<div class="formControls col-5 skin-minimal">
+<?py if data:?>
+<div class="radio-box">
+    <?py if data.is_open==1: ?>
+    <input name="is_open" type="radio" datatype="*" checked="checked" value="1" nullmsg="请选择"/> 开启
+    <?py else:?>
+    <input name="is_open" type="radio" datatype="*"  value="1" nullmsg="请选择"/> 开启
+    <?py #endif?>
+</div>
+<div class="radio-box">
+    <?py if data.is_open==0: ?>
+    <input name="is_open" type="radio" datatype="*" checked="checked" value="0" nullmsg="请选择"/> 关闭
+    <?py else:?>
+     <input name="is_open" type="radio" datatype="*"   value="0" nullmsg="请选择"/> 关闭
+    <?py #endif?>
+</div>
+<?py else:?>
+<div class="radio-box">
+    <input name="is_open" type="radio" datatype="*" checked="checked" value="1" nullmsg="请选择"/> 开启
+</div>
+<div class="radio-box">
+     <input name="is_open" type="radio" datatype="*"  value="0" nullmsg="请选择"/> 关闭
+</div>
+<?py #endif?>
+			</div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2">广告联系人：</label>
+			<div class="formControls col-5">
+<?py if data:?>
+    <input type="text" class="input-text" datatype="s0-250" id="contact" value="${data.contact}"  placeholder="请填写广告联系人" name="contact">
+<?py else:?>
+    <input type="text" class="input-text" datatype="s0-250" id="contact" value=""  placeholder="请填写广告联系人" name="contact">
+<?py #endif?>
+			</div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2">联系电话：</label>
+			<div class="formControls col-5">
+<?py if data:?>
+    <input type="text" class="input-text" id="phone" value="${data.phone}" errormsg="手机号码格式不正确！" placeholder="请填写手机号码" name="phone">
+<?py else:?>
+    <input type="text" class="input-text" id="phone" value="" errormsg="手机号码格式不正确！" placeholder="请填写手机号码" name="phone">
+<?py #endif?>
+			</div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2">联系邮箱：</label>
+			<div class="formControls col-5">
+<?py if data:?>
+    <input type="text" class="input-text" id="email" value="${data.email}" errormsg="邮箱地址不正确" placeholder="请输入广告联系人邮箱地址" name="email" >
+<?py else:?>
+    <input type="text" class="input-text" id="email" value="" errormsg="邮箱地址不正确" placeholder="请输入广告联系人邮箱地址" name="email" >
+<?py #endif?>
+			</div>
+    </div>
+    <div class="row cl">
+            <label class="form-label col-2">广告描述：</label>
+			<div class="formControls col-5">
+<?py if data:?>
+    <textarea name="description" cols="60" rows="5"  placeholder="请输入描述信息">${data.description} </textarea>
+<?py else:?>
+    <textarea name="description" cols="60" rows="5"  placeholder="请输入描述信息"> </textarea>
+<?py #endif?>
+			</div>
+    </div>
+    <div class="row cl">
+            <div class="col-10 col-offset-2">
+                <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交</button>
+                <button  class="btn btn-default radius" type="reset">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+</form>
+<div id="tomLoading" style="display: none;">
+<div class="modal-scrollable" style="z-index: 1060;">
+    <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal hide fade in" id="myModal" style="margin-top: -99.5px; display: block;">
+    <div class="modal-header">
+    </div>
+    <div class="modal-body">
+        <p>loading…</p>
+    </div>
+</div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: 1050;"></div>
+</div>
+<?py include('admin/common/kindeditor.html') ?>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/jquery.blockui.js"></script>
+<script type="text/javascript" src="/static/admin/lib/jquery-list-dragsort.js"></script>
+<script type="text/javascript">
+    KindEditor.ready(function(K) {
+        var editor = K.editor({
+            allowFileManager : true,
+            allowImageUpload : true,
+            uploadJson:'${handler.reverse_url('img_upload','0')}',
+            imageSizeLimit:'20MB',
+            extraFileUploadParams:{"_xsrf":$("#_xsrf").val()},
+            fieldName : 'imgFile',
+            method:'POST'
+        });
+
+        K('#item_main_img').click(function() {
+            editor.loadPlugin('multiimage', function() {
+                editor.plugin.multiImageDialog({
+                    clickFn : function(urlList) {
+                        var div = K('#J_imageView');
+                        K.each(urlList, function(i, data) {
+                            $('#preViewList').append('<li class="iconitem" data-url="'+data.url+'"><div  style="cursor: pointer;"><input type="hidden" datatype="*" name="imgs_url" value="'+data.url+'" nullmsg="请上传广告图片"  ><img src="'+data.url+'" /><a href="javascript:;" class="see showbig" data-src="'+data.url+'"></a><a class="ui-close" href="javascript:;">×</a></div></li>');
+                        });
+                        editor.hideDialog();
+                    }
+
+                });
+
+            });
+        });
+    });
+$(function(){
+
+        $('#list1,#preViewList').dragsort();
+
+        $('#preViewList').on('click','.showbig',function(){
+            var src=$(this).attr('data-src');
+            console.log(src);
+            $.blockUI({
+                message: '<h1><img src="'+src+'" width="600" /></h1>',
+                css: {
+                    top:  ($(window).height() - 600) /2 + 'px',
+                    left: ($(window).width() - 600) /2 + 'px',
+                    width: '600px'
+                }
+            });
+        });
+        $('#preViewList').on('click','.ui-close',function(){
+            $(this).parent().parent().remove();
+        });
+        $('body').on('click','.blockOverlay',function(){
+            $.unblockUI();
+        });
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+
+$("#brand-form-add").Validform({
+		tiptype:2,
+		callback:function(form){
+			$("#brand-form-add").submit();
+            $('#tomLoading').show();
+            $('#brand-form-add')[0].submit();
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+});
+</script>

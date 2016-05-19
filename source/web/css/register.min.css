@@ -1,0 +1,198 @@
+﻿body {
+    background: #fff;
+    min-height: 800px;
+}
+.footerWrap{
+    position: absolute;
+    top:700px;
+}
+.qqqg-header{
+    background-color: #fff;
+    padding: 10px 0;
+}
+.qqqg-logo {
+    background-image: url("http://cdn.qqqg.com/web/images/logo-180x55.png");
+}
+.content{
+    padding: 50px 0;
+}
+.regbox {
+    margin: 10px auto 0;
+    overflow: hidden;
+    width: 343px;
+    font-size: 14px;
+}
+
+.number {
+    font-size: 20px;
+    margin-bottom: 30px;
+
+    width: 350px;
+}
+.normalInput {
+    border: 1px solid #dadada;
+    color: #474747;
+    display: inline-block;
+    font-size: 16px;
+    height: 50px;
+    line-height: 22px;
+    margin-bottom: 20px;
+    outline: medium none;
+    overflow: hidden;
+    padding: 0 10px;
+    position: relative;
+    width: 320px;
+}
+.usInput{
+    color: #474747;
+    display: inline-block;
+    font-size: 16px;
+    height: 50px;
+    line-height: 22px;
+    margin-bottom: 20px;
+    outline: medium none;
+    position: relative;
+    width: 340px;
+}
+.kapkeywrap{
+    display: inline-block;
+    border: 1px solid #dadada;
+    padding: 0 10px;
+}
+#mainForm input ,.regbox input{
+    height: 22px;
+    line-height: 22px;
+    padding: 14px 0;
+}
+#smskey{
+    width: 200px;
+}
+.normalInput input {
+    font-size: 16px;
+    width: 100%;
+}
+
+ .check_chk i, .check_unchk i {
+    background:  url("http://cdn.qqqg.com/web/images/elements.png") no-repeat scroll 0 0;
+}
+.i_icon {
+    display: inline-block;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+.check_unchk i {
+    background-position: 0 -127px;
+}
+
+.check_chk i {
+    background-position: -31px -127px;
+}
+
+.checkboxPic {
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 25px;
+}
+a.linkABlue:link, a.linkABlue:visited {
+    color: #7f7f7f;
+}
+a.linkABlue:hover{
+    color:#dd2727;
+}
+
+
+.rememberField {
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+a.fullBtnBlue {
+    background-color: #d71111;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 20px;
+    outline: medium none;
+    text-align: center;
+    width: 342px;
+}
+a.fullBtnBlue:hover{
+    background-color: #dd2727;
+}
+.borderline{
+    margin-top: 20px;
+}
+
+.form-line {
+    border-left: 1px solid #dadada;
+    color: #d9d9d9;
+    display: inline-block;
+    height: 40px;
+    position: absolute;
+    right: 100px;
+    top: 5px;
+}
+#getKey {
+    border: medium none;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    outline: medium none;
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    top: 0;
+    width: 104px;
+    background: #ccc;
+}
+.btn_enabled{
+    color:gray;
+}
+a.btn_enabled:hover{
+    color:gray;
+}
+span.error, span.otherError {
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 0;
+    color:red;
+}
+.randomCode{
+    height: 46px;
+    margin-left: 13px;
+    overflow: hidden;
+    position: absolute;
+    right: 60px;
+    top: 4px;
+    width: 92px;
+    cursor: pointer;
+}
+
+.step2,.step3{
+    display: none;
+}
+.step2 .step2_txt {
+    padding-bottom: 10px;
+}
+.end {
+    font-size: 14px;
+    margin: 10px auto 0;
+    overflow: hidden;
+    width: 900px;
+    display: none;
+}
+.success{
+    border: 1px solid #e6e6e6;
+    border-top: 2px solid red;
+    padding: 80px 30px;
+    text-align: center;
+}

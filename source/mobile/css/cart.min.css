@@ -1,0 +1,232 @@
+﻿.g-hd {
+  position: relative;
+  z-index: 2;
+}
+
+.n-page {
+  min-height: 100%;
+  margin-top: -50px;
+  padding-top: 50px;
+  z-index: 1;
+}
+
+.n-bill {
+  height: 100%;
+  background-color: #f2f0f0;
+  margin-top: -15px;
+}
+
+.m-loading {
+  padding: 50% 0;
+  background: #fff;
+}
+
+.m-emtpy {
+  padding: 15% 0;
+  background: #fff;
+}
+
+.m-emtpy .tiptxt {
+  padding: 5px 0 25px;
+  color: #333;
+}
+
+.m-cart {
+  padding: 0 0 15px 15px;
+  margin-top: 15px;
+  background-color: #fff;
+}
+
+.m-cart .ware {
+  line-height: 35px;
+  border-bottom: 1px solid #ddd;
+}
+
+.m-cart .ware * {
+  vertical-align: middle;
+}
+
+.m-cart .u-radiobox input {
+  top: 0;
+}
+
+.m-cart .gather {
+  padding: 10px 15px 0 0;
+}
+
+.m-cart .gather .rpart {
+  text-align: right;
+}
+
+.m-cart .gather .val {
+  width: 60px;
+  display: inline-block;
+}
+
+.m-cart .gather .tprice {
+  color: #b2b2b2;
+}
+
+.m-cart .gather .del {
+ text-decoration: line-through;
+}
+
+.m-cart .gather .total {
+  margin-bottom: 5px;
+}
+
+.m-cart .gather .total .val,.m-cart .gather .total i {
+  color: #d71111;
+}
+
+.m-cart .u-overtip {
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+.m-cart .u-btn {
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 17px;
+}
+
+.m-cartgoods .gitm .itmbox {
+  padding: 10px 15px 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.m-cartgoods .gitm.z-unable {
+  margin-left: -15px;
+  padding-left: 15px;
+}
+
+.m-cartgoods .gitm.z-unable .itmbox {
+  background: #f8f8f8;
+}
+
+.m-cartgoods .gitm.z-unable .tt,.m-cartgoods .gitm.z-unable .txt .tlt a,.m-cartgoods .gitm.z-unable .txt .sku,.m-cartgoods .gitm.z-unable .opt .price,.m-cartgoods .gitm.z-unable .opt .amount {
+  color: #999;
+}
+
+.m-cartgoods .gitm.z-unable .u-setcount .countbox,.m-cartgoods .gitm.z-unable .u-setcount .countbox .ipt {
+  border-color: #ddd;
+  color: #999;
+}
+
+.m-cartgoods .gitm .chs {
+  padding-top: 20px;
+}
+
+.m-cartgoods .gitm .chs span {
+  display: block;
+}
+
+.m-cartgoods .gitm .chs .tt {
+  margin-right: 8px;
+}
+
+.m-cartgoods .gitm .promote {
+  margin-bottom: 10px;
+  padding: 7px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.m-cartgoods .gitm .promote .u-icn25 {
+  color: #fff;
+  line-height: 21px;
+  width: 50px;
+  text-align: center;
+  background-position: -430px -403px;
+}
+
+.m-cartgoods .gitm .promote .z-unfull {
+  color: #d71111;
+}
+
+.m-cartgoods .gitm .promote .z-unfull .u-rtarr {
+  border-color: #d71111 #d71111 transparent transparent;
+}
+
+.m-cartgoods .gitm .goodinfo {
+  max-width: 70%;
+  overflow: hidden;
+}
+
+.m-cartgoods .gitm .status {
+  padding-top: 5px;
+  color: #d71111;
+  line-height: 1.5;
+}
+
+.m-cartgoods .gitm .s-red {
+  color: #d41c44;
+}
+
+.m-cartgoods .gitm .imgwrap {
+  position: relative;
+  display: block;
+  border: 1px solid #ddd;
+  width: 62px;
+  height: 62px;
+}
+
+.m-cartgoods .gitm .imgwrap img {
+  width: 100%;
+}
+
+.m-cartgoods .gitm .imgwrap .tag {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  height: 17px;
+  line-height: 17px;
+  text-align: center;
+  color: #fff;
+  background: rgba(212,28,68,0.8);
+}
+
+.m-cartgoods .gitm .txt {
+  margin-left: 70px;
+}
+
+.m-cartgoods .gitm .txt .tlt {
+  line-height: 17px;
+}
+
+.m-cartgoods .gitm .txt .sku {
+  color: #999;
+  height: 18px;
+}
+
+.m-cartgoods .gitm .opt {
+  text-align: right;
+}
+
+.m-cartgoods .gitm .opt p {
+  line-height: 1.3;
+}
+
+.m-cartgoods .gitm .amount {
+  color: #656565;
+  margin-bottom: 5px;
+  font-family: simsun;
+}
+
+.m-loading img {
+  width: 23px;
+  height: 23px;
+}
+
+.f-fw {
+  font-weight: bold;
+}
+
+.f-toe {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+} 

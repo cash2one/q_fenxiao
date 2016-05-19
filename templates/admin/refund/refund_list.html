@@ -1,0 +1,69 @@
+<?py from conf.orders_conf import REFUND_STATUS ?>
+<div class="pd-20">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 退款管理 <span class="c-gray en">&gt;</span> 申请退款列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+
+		<div class="mt-20 dataTables_wrapper" id="item_data">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th width="15">ID</th>
+                        <th width="25">所属分销商</th>
+						<th width="25">订单编号</th>
+						<th width="35">支付流水号</th>
+						<th width="30">退款状态</th>
+						<th width="20">金额</th>
+                        <th width="40">退款原因</th>
+                        <th width="30">退款备注</th>
+						<th width="30">支付时间</th>
+						<th width="30">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+                    <?py for refund in data.result: ?>
+                        <tr class="text-c va-m" id="${refund.id}">
+                            <td>${refund.id}</td>
+                            <td>${handler.get_distributors_by_id(refund.drp_usere_id)}</td>
+                            <td>${refund.order_no}</td>
+                            <td>${refund.other_payment_id}</td>
+                            <td data-name="status">${REFUND_STATUS[refund.pay_status]}</td>
+                            <td><span class="price">${refund.apply_amount}</span></td>
+                            <td>${refund.content}</td>
+                            <td>${refund.handling_idea}</td>
+                            <td>${refund.payment_time}</td>
+
+                            <td>
+                                <a href="${handler.reverse_url('refund_payment',refund.id)}?operation=detail">查看</a>
+                                <?py if refund.pay_status==0:?>
+                                    <a href="javascript:refund_order(this,${refund.id});">执行退款</a>
+                                <?py #endif ?>
+                            </td>
+                        </tr>
+                    <?py #endfor ?>
+				</tbody>
+			</table>
+               #{data.admin_pagination_html()}
+		</div>
+	</div>
+</div>
+<script>
+   function refund_order(obj,refund_id){
+	    layer.confirm('确认执行退款吗？',function(index){
+         $.ajax({
+           url: '/admin/refund/refund_apply/'+refund_id+'.html',
+           type: 'get',
+           success: function(data) {
+                objData = $.parseJSON(data);
+                if(objData.state==200){
+		            $(obj).parents("td").html('');
+		            layer.msg('已受理退款！',{icon:1,time:1000});
+		       }else{
+                    layer.msg('退款提交失败! 原因:'+objData.info,{icon:1,time:2000});
+		       }
+           }
+        });
+	});
+}
+
+</script>
+

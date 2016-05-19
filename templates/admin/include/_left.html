@@ -1,0 +1,220 @@
+<aside class="Hui-aside">
+	<input runat="server" id="divScrollValue" type="hidden" value="" />
+	<div class="menu_dropdown bk_2">
+		<!--<dl id="menu-ad">-->
+			<!--<dt><i class="Hui-iconfont">&#xe616;</i> 广告管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>-->
+			<!--<dd>-->
+                <!--<ul>-->
+					<!--<li><a _href="${handler.reverse_url('advertising_position','')}" href="javascript:void(0)">广告位置</a></li>-->
+					<!--<li><a _href="${handler.reverse_url('advertising','')}" href="javascript:void(0)">广告列表</a></li>-->
+				<!--</ul>-->
+			<!--</dd>-->
+		<!--</dl>-->
+        <!--<dl id="menu-conpon">-->
+			<!--<dt><i class="Hui-iconfont">&#xe616;</i> 优惠券管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>-->
+			<!--<dd>-->
+                <!--<ul>-->
+					<!--<li><a _href="${handler.reverse_url('coupon_channel')}" href="javascript:void(0)">优惠券渠道</a></li>-->
+					<!--<li><a _href="${handler.reverse_url('coupon_type')}" href="javascript:void(0)">优惠券类型</a></li>-->
+                    <!--<li><a _href="${handler.reverse_url('coupon_handler')}" href="javascript:void(0)">优惠券</a></li>-->
+				<!--</ul>-->
+			<!--</dd>-->
+		<!--</dl>-->
+		<!--<dl id="menu-conpon">-->
+			<!--<dt><i class="Hui-iconfont">&#xe616;</i> 供应商管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>-->
+			<!--<dd>-->
+                <!--<ul>-->
+					<!--<li><a _href="${handler.reverse_url('vendor','list')}" href="javascript:void(0)">供应商列表</a></li>-->
+				<!--</ul>-->
+			<!--</dd>-->
+		<!--</dl>-->
+		<dl id="menu-conpon">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 分销/供应商管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+                <ul>
+					<li><a _href="${handler.reverse_url('distributor_list','list')}" href="javascript:void(0)">分销/供应商列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 商品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+                <ul>
+					<li><a _href="${handler.reverse_url('category','')}" href="javascript:void(0)">类目管理</a></li>
+					<li><a _href="${handler.reverse_url('brand','')}" href="javascript:void(0)">品牌管理</a></li>
+                    <li><a _href="${handler.reverse_url('items','add')}" href="javascript:void(0)">商品上架</a></li>
+					<li><a _href="${handler.reverse_url('items','')}" href="javascript:void(0)">商品列表</a></li>
+                    <li><a _href="${handler.reverse_url('items','')}?is_drp_item=1" href="javascript:void(0)">分销商商品列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 类目属性管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+                <ul>
+					<li><a _href="${handler.reverse_url('attributes','list')}" href="javascript:void(0)">属性管理</a></li>
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-express">
+			<dt><i class="Hui-iconfont">&#xe687;</i> 运单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('express','')}" href="javascript:void(0)">运单列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+        <dl id="menu-order">
+			<dt><i class="Hui-iconfont">&#xe687;</i> 订单中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('orders')}" href="javascript:void(0)">订单列表</a></li>
+					<li><a _href="${handler.reverse_url('sold_items')}" href="javascript:void(0)">售出商品列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+
+        <dl id="menu-payorder">
+			<dt><i class="Hui-iconfont">&#xe603;</i> 支付中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('payment')}" href="javascript:void(0)">支付列表</a></li>
+                    <li><a _href="/admin/system/paydeal.html" href="javascript:void(0)">回调处理</a></li>
+				</ul>
+			</dd>
+		</dl>
+        <dl id="menu-refund">
+			<dt><i class="Hui-iconfont">&#xe63a;</i> 退款中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('refund_list')}" href="javascript:void(0)">申请列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-refund">
+			<dt><i class="Hui-iconfont">&#xe63a;</i> 佣金结算<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<!--<li><a _href="${handler.reverse_url('comm','merchant')}" href="javascript:void(0)">供应商结算</a></li>-->
+					<li><a _href="${handler.reverse_url('comm','distributor')}" href="javascript:void(0)">分销商结算</a></li>
+					<li><a _href="${handler.reverse_url('comm','loglist')}" href="javascript:void(0)">结算日志管理</a></li>
+					<!--<li><a _href="" href="javascript:void(0)">佣金设置</a></li>-->
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-refund">
+			<dt><i class="Hui-iconfont">&#xe63a;</i> 报表统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('member_report')}" href="javascript:void(0)">会员统计</a></li>
+					<li><a _href="${handler.reverse_url('sales_report')}" href="javascript:void(0)">销售排行</a></li>
+					<!--<li><a _href="" href="javascript:void(0)">会员排行</a></li>-->
+					<!--<li><a _href="${handler.reverse_url('drp_report')}" href="javascript:void(0)">分销商排行</a></li>-->
+				</ul>
+			</dd>
+		</dl>
+
+		<dl id="menu-member">
+			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('users','')}" href="javascript:void(0)">会员列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+
+		<dl id="menu-comment">
+			<dt><i class="Hui-iconfont">&#xe687;</i> 评价中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('item_comment')}" href="javascript:void(0)">评价列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+        <dl id="menu-permission">
+			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<!--<li><a _href="${handler.reverse_url('permission','')}" href="javascript:;">权限列表</a></li>-->
+                    <!--<li><a _href="${handler.reverse_url('group','')}" href="javascript:;">分组列表</a></li>-->
+					<!--<li><a _href="${handler.reverse_url('roles','')}" href="javascript:;">角色列表</a></li>-->
+                    <li><a _href="${handler.reverse_url('account','')}" href="javascript:void(0)">管理员列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+		
+		<!--
+        <dl id="menu-comments">
+			<dt><i class="Hui-iconfont">&#xe622;</i> 员工管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+                    <li><a _href="${handler.reverse_url('departments')}" href="javascript:void(0)">部门管理</a></li>
+                    <li><a _href="${handler.reverse_url('employees')}" href="javascript:void(0)">员工</a></li>
+				</ul>
+			</dd>
+		</dl>
+		-->
+
+        <!--<dl id="menu-site">-->
+            <!--<dt><i class="Hui-iconfont">&#xe616;</i> 站点管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>-->
+            <!--<dd>-->
+                <!--<ul>-->
+                    <!--<li><a _href="${handler.reverse_url('site_navigation')}" href="javascript:void(0)">菜单管理</a></li>-->
+                    <!--<li><a _href="${handler.reverse_url('site_conf')}" href="javascript:void(0)">站点配置</a></li>-->
+                <!--</ul>-->
+            <!--</dd>-->
+        <!--</dl>-->
+        <dl id="menu-logs">
+			<dt><i class="Hui-iconfont">&#xe692;</i> 日志管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('api_logs')}" href="javascript:void(0)">All接口日志</a></li>
+                    <!--<li><a _href="${handler.reverse_url('api_logs')}?logs_type=1" href="javascript:void(0)">清关接口日志</a></li>-->
+                    <li><a _href="${handler.reverse_url('api_logs')}?logs_type=2" href="javascript:void(0)">发货接口日志</a></li>
+                    <li><a _href="${handler.reverse_url('api_logs')}?logs_type=3" href="javascript:void(0)">交易接口日志</a></li>
+					<!--<li><a _href="${handler.reverse_url('operation_logs')}" href="javascript:void(0)">操作日志</a></li>-->
+				</ul>
+			</dd>
+		</dl>
+
+        <!--<dl id="menu-task">-->
+			<!--<dt><i class="Hui-iconfont">&#xe65b;</i> 容错工单<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>-->
+			<!--<dd>-->
+				<!--<ul>-->
+					<!--<li><a _href="${handler.reverse_url('tasks')}" href="javascript:;">任务列表</a></li>-->
+				<!--</ul>-->
+			<!--</dd>-->
+		<!--</dl>-->
+		<!--
+        <dl id="menu-shujutongji">
+			<dt><i class="Hui-iconfont">&#xe61e;</i> 报表<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('daily_reports')}" href="javascript:;">日报表</a></li>
+                    <li><a _href="${handler.reverse_url('month_reports')}" href="javascript:;">月报表</a></li>
+				</ul>
+			</dd>
+		</dl>
+
+		<dl id="menu-system">
+			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('apps_list')}" href="javascript:void(0)">程序包</a></li>
+					<!--<li><a _href="system-log.html" href="javascript:void(0)">系统日志</a></li>
+				</ul>
+			</dd>
+		</dl>
+
+		<dl id="menu-docs">
+			<dt><i class="Hui-iconfont">&#xe62e;</i>模拟登录<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="${handler.reverse_url('admin_web_login')}" href="javascript:void(0)">模拟登录</a></li>
+				</ul>
+			</dd>
+		</dl>
+		-->
+	</div>
+</aside>
+<div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

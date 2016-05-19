@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+	<link rel="shortcut icon" href="http://cdn.qqqg.com/mobile/images/qqqg.ico" />
+  <meta name="description" content="全球抢购">
+<?py include('mobile/include/header.html') ?>
+	<link href="http://cdn.qqqg.com/mobile/css/list.min.css" type="text/css" rel="stylesheet"/>
+	<style>
+		.topTabBoxFixed {
+		    position: fixed;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    z-index: 100;
+		    background: #fff;
+		    border-bottom: 1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+#{xsrf_form_html}
+
+<div class="appbanner appbanner-top"></div>
+<div class="g-bd" id="box">
+	<a href="javascript:void(0);"
+		class="m-single-img  m-block   u-img-wrapper"
+		style="padding-top:52.083333%; display: none;">
+		<img src="http://cdn.qqqg.com/mobile/images/menu/1.jpg">
+	</a>
+	<div class="m-nav-wrap" style="" id="navTop">
+		<article class="m-nav-stickytabs" >
+			<div style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 120ms; transform: translate(0px, 0px) translateZ(0px);width:100%;padding-right:0px" class="navbox js-navbox m-tbl  scroll-navbox" >
+<?py for site in nav_sites: ?>
+	<?py site_link = site.link and site.link or '/app/item/list/'+str(site.show_id)+'.html' ?>
+	<?py if int(category_id) == site.category_id: ?>
+		<span style="color:#d71111;width:25%" data-blocks="4" class="tab  curr" ><a href='${site_link}'>${site.name}</a></span>
+	<?py else: ?>
+		<span style="color: rgb(51, 51, 51);width:25%" class="tab "><a href='${site_link}'>${site.name}</a></span>
+	<?py #endif ?>
+<?py #endfor ?>
+			</div>
+			<!--下拉隐藏
+			<span class="select-btn" id="auto-id-1445998025145"><span class="ic" id="auto-id-1445998025151"></span></span>
+			-->
+		</article>
+	</div>
+	<article class="m-block m-item-block prd-box m-item-nav-lift" style="background-color:#f0f0f0;">
+		<a class="head-txt" href="javascript:void(0);"> <b>&nbsp;</b>${category_name}</a>
+		<div class="m-prdList  ">
+			<dl id="list"  class="m-avg2item-lst"></dl>
+		</div>
+	</article>
+    <input type="hidden" value="${category_id}" id="category_id" />
+
+	<div class="m-loading f-tac" style="display: none;" id="waterLoading"><img src="http://cdn.qqqg.com/mobile/images/loadingalpha.gif" style="width:23px;height:23px"></div>
+	<div class="nomore-data" id="waterAllShow" style="display: none;">已显示全部内容</div>
+<!-- 返回主会场
+	<a href="http://m.kaola.com/activity/h5/4819.html?zposition=0&zid=8" class="m-single-img m-img-block-loading m-block   u-img-wrapper" style="padding-top:23.4375%;" data-block="8" data-navid="">
+		<img data-src="http://cdn.qqqg.com/mobile/images/back.jpg" src="/static/mobile/images/blank.gif">
+	</a>
+-->
+	<div class="footPos"></div>
+	<div class="footMenu">
+		<div class="f-cb m-nav-fmenu">
+			<div class="f-fl f-tac nav">
+				<a href="/app/index.html"><i class="app-index icon"></i><br>全球抢购</a>
+			</div>
+			<div class="f-fl f-tac nav">
+				<a href="/app/member/cart.html"><i class="app-cart icon"></i><br>购物车</a>
+			</div>
+			<div class="f-fl f-tac nav">
+				<a href="/app/order/orders.html"><i class="app-order icon"></i><br>我的订单</a>
+			</div>
+			<div class="f-fl f-tac nav">
+				<a href="/app/member/me.html"><i class="app-mcenter icon"></i><br>我</a></div>
+		</div>
+	</div>
+</div>
+<div class="m-gotop-wrap" id="m-gotop-wrap">
+	<div class="ic-gotop">
+		<i class="up"></i>
+		<p class="desc">顶部</p>
+	</div>
+</div>
+
+
+<?py include('mobile/include/js.html') ?>
+<script type="text/javascript" src="http://cdn.qqqg.com/mobile/js/product/list.min.js"></script>
+
+<script type="text/x-tmpl" id="templateList">
+<dd class="h">
+	<article class="m-2avg-item">
+		<a href="/app/item/detail/{{= show_id}}.html" class="imgwrap u-img-wrapper">
+			<img src="http://cdn.qqqg.com/mobile/images/blank.gif" alt="{{= title}}" class="j-lazy u-item-img" data-src="{{= main_pic}}@305w">
+			{{if issoldOut==1}}
+			<i class="m-soldout"><span class="txt">售完</span></i>
+			{{/if}}
+		</a>
+		<div class="txtwrap">
+			<p class="tit"><a href="/app/item/detail/{{= show_id}}.html">{{= title}}</a>
+			</p>
+			<p class="mkt-price">国内价 ¥<del>{{= inner_price}}</del>
+			</p>
+			<p class="act-price"><span class="symbol"><span class="priceLbl">包邮价</span>
+¥</span><span class="bold">{{= price}}</span>
+			</p>
+		</div>
+		<div class="lbl-wrap"></div>    <a href="/app/item/detail/{{= show_id}}.html" style="background-color:#d71111; color: #fff;" class="action">立即疯抢</a>
+	</article>
+</dd>
+</script>				
+</body>
+</html>

@@ -1,0 +1,100 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员中心 <span class="c-gray en">&gt;</span>编辑会员信息<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+</div>
+<div class="pd-20">
+<div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="r">
+                <a href="javascript:history.go(-1);" class="btn btn-danger radius">返回</a>
+            </span>
+    </div>
+<form action="/drp/users/add.html" method="post" class="form form-horizontal" id="user-form-edit">
+
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>手机号码：</label>
+			<div class="formControls col-4">
+                <?py if user: ?>
+                <input type="text" class="input-text" usertype="*" nullmsg="手机号码！" errormsg="手机号码不能唯恐"  value="${user.phone}" placeholder="手机号码" name="phone">
+                <?py #endif ?>
+			</div>
+    </div>
+
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>登录密码：</label>
+			<div class="formControls col-4">
+                <?py if user: ?>
+                <input type="password" class="input-text" usertype="*" nullmsg="登录密码！" errormsg="登录密码不能为空"  value="${user.user_pwd}" placeholder="登录密码" name="user_pwd" id="user_pwd">
+                <?py #endif ?>
+			</div>
+    </div>
+    <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>重复密码：</label>
+			<div class="formControls col-4">
+                <?py if user: ?>
+                <input type="password" class="input-text" usertype="*" nullmsg="重复密码！" errormsg="两次密码必须一致"  value="${user.user_pwd}" placeholder="重复密码" name="re_user_pwd" id="re_user_pwd">
+                <?py #endif ?>
+			</div>
+    </div>
+
+    <div class="row cl">
+        <label class="form-label col-2">真实姓名：</label>
+        <div class="formControls col-4">
+<?py if user: ?>
+<input type="text" class="input-text" usertype="*" nullmsg="真实姓名！" errormsg="真实姓名不能为空"  value="${user.real_name}" placeholder="真实姓名" name="real_name">
+<?py #endif ?>
+        </div>
+    </div>
+
+    <div class="row cl">
+            <label class="form-label col-2">昵称：</label>
+			<div class="formControls col-4">
+<?py if user: ?>
+    <input type="text" class="input-text" usertype="*"   nullmsg="昵称" errormsg="昵称" value="${user.nick}" placeholder="昵称" name="nick">
+<?py #endif ?>
+			</div>
+    </div>
+
+    <div class="row cl">
+        <label class="form-label col-2"><span class="c-red"></span></label>
+        <div class="formControls col-4">
+            <input type="submit" class="btn btn-success radius" value="确  定">
+        </div>
+    </div>
+</form>
+</div>
+
+<script type="text/javascript" src="http://lib.h-ui.net/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="http://lib.h-ui.net/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="http://lib.h-ui.net/jquery.validation/1.14.0/messages_zh.min.js"></script>
+<script type="text/javascript" src="http://lib.h-ui.net/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="http://lib.h-ui.net/Validform/5.3.2/passwordStrength-min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$("#user-form-edit").validate({
+		rules:{
+			phone:{
+				required:true,
+				number:true
+			},
+			user_pwd:{
+				required:true,
+				minlength:6,
+				maxlength:16
+			},
+			re_user_pwd:{
+				required:true,
+				equalTo: "#user_pwd"
+			},
+			real_name:{
+				required:true,
+			},
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			$("#modal-shenqing-success").modal("show");
+			$(form).ajaxSubmit();
+		}
+	});
+});</script>

@@ -1,0 +1,155 @@
+<div class="pd-20">
+	<form action="" method="post" class="form form-horizontal" id="form-attributes-add">
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span> 收货人信息 </label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="accept_name" value="${user_address and user_address.get('user_name') or ''}" datatype="*" nullmsg="请输入收货人信息">
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span> 所在地区 </label>
+            <div class="formControls col-8">
+                <select class="input-text province" style="width:100px;margin-right:20px;vertical-align:middle" name="province" >
+                    <?py for p in provinces: ?>
+                        <?py if p.name == user_address.get('province'): ?>
+                            <option selected='selected' value='${p.id}'>${p.name}</option>        
+                        <?py else: ?>
+                            <option value='${p.id}'>${p.name}</option>        
+                        <?py #endif ?>
+                    <?py #endfor?>
+                </select>
+
+                <select class="input-text city" style="width:100px;margin-right:20px;vertical-align:middle" name="city" >
+                    <?py for c in cities: ?>
+                        <?py if c.name == user_address.get('city'): ?>
+                            <option selected='selected' value='${c.id}'>${c.name}</option>        
+                        <?py else: ?>
+                            <option value='${c.id}'>${c.name}</option>        
+                        <?py #endif ?>
+                    <?py #endfor?>
+                </select>
+
+                <select class="input-text area" style="width:100px;margin-right:20px;vertical-align:middle" name="area" >
+                    <?py for a in areas: ?>
+                        <?py if a.name == user_address.get('area'): ?>
+                            <option selected='selected' value='${a.id}'>${a.name}</option>        
+                        <?py else: ?>
+                            <option value='${a.id}'>${a.name}</option>        
+                        <?py #endif ?>
+                    <?py #endfor?>
+                </select>
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span> 详细地址 </label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" name="address" value="${user_address and user_address.get('address') or ''}" datatype="*" nullmsg="请输入详细地址">
+            </div>
+            <div class="col-4"> </div>
+        </div>
+
+        <!--<div class="row cl">-->
+            <!--<label class="form-label col-3"><span class="c-red">*</span> 收货人身份证号码 </label>-->
+            <!--<div class="formControls col-5">-->
+                <!--<input type="text" class="input-text" id="card_num" name="card_num" value = "${user_address and user_address.get('card_num') or ''}" datatype="*" nullmsg="请输入身份证号码！" errormsg="请输入正确的身份证号码！"/>-->
+            <!--</div>-->
+            <!--<div class="col-4"> </div>-->
+        <!--</div>-->
+
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span> 收货人手机号码 </label>
+            <div class="formControls col-5">
+                <input type="text" class="input-text" id="phone" name="phone" value = "${user_address and user_address.get('phone') or ''}"datatype="*" nullmsg="请输入手机号码！" errormsg="请输入正确的手机号码！" />
+            </div>
+            <div class="col-4"> </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-3"><span class="c-red">*</span> 是否修改前台地址 </label>
+            <div class="radio-box">
+                <input name="cause" type="radio" datatype="*"  value="1" nullmsg="请选择"/>是
+            </div>
+            <div class="radio-box">
+                <input name="cause" type="radio" datatype="*" checked="checked" value="0" nullmsg="请选择"/>否
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-9 col-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+        <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+            <ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+        </div>
+	</form>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/static/admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/static/admin/lib/Validform/5.3.2/Validform.min.js"></script>
+
+<script type="text/javascript">
+
+    $("#form-attributes-add").Validform({
+
+    });
+
+    $('.province').change(function(){
+        var province_id = $(this).val();
+        jQuery.ajax({
+            type:'GET',
+            url:'/common/admin/locations?query_type=city&parent_id='+province_id,
+            data:{},
+            success:function(data){
+                var obj = $.parseJSON(data);
+                if(obj.stat == 200){
+                    loadSelect.addCity(obj.data.city);
+                    loadSelect.addArea(obj.data.area);
+                }
+            },
+            error:function(){
+            }
+        });
+    });
+
+
+    $('.city').change(function(){
+        var city_id = $(this).val();
+        jQuery.ajax({
+            type:'GET',
+            url:'/common/admin/locations?query_type=area&parent_id='+city_id,
+            data:{},
+            success:function(data){
+                var obj = $.parseJSON(data);
+                if(obj.stat == 200){
+                    loadSelect.addArea(obj.data.area);
+                }
+            },
+            error:function(){
+            }
+        });
+    });
+
+
+
+    var loadSelect = {
+        addCity:function(city){
+            $('.city').empty();
+            $.each(city,function(i){
+                var option = '<option value = "'+city[i].id+'">'+city[i].name+'</option>';
+                $('.city').append(option)
+            });
+        },
+        addArea:function(area){
+            $('.area').empty();
+            $.each(area,function(i){
+                var option = '<option value = "'+area[i].id+'">'+area[i].name+'</option>'
+                $('.area').append(option);
+            });
+        }
+    }
+
+</script>

@@ -1,0 +1,68 @@
+<div class="pd-20">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员中心 <span class="c-gray en">&gt;</span>会员列表<a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+            <a href="javascript:;" onclick="nav_add('添加新菜单','${handler.reverse_url('site_navigation')}?operation=add','','50')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加菜单</a></span>
+    </div>
+    <div class="mt-20 dataTables_wrapper">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="30">ID</th>
+                 <th width="50">名称</th>
+                <th width="50">排序</th>
+                <th width="50">打开方式</th>
+                <th width="50">连接</th>
+                <th width="50">最后修改</th>
+                <th width='50'>状态</th>
+                <th width="200">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+<?py for n in navs: ?>
+    <tr class="text-c">
+        <td>${n.id}</td>
+         <td>${n.name}</td>
+        <td>${n.sort}</td>
+        <td>
+            ${n.open_type==0 and '当前页面' or '新页面'}
+        </td>
+        <td>${n.link}</td>
+        <td>${n.gmt_modified}</td>
+        <td>${n.enable}</td>
+        <td class="td-manage">
+           <a href="javascript:;" onclick="nav_add('编辑菜单','${handler.reverse_url('site_navigation')}?operation=edit&nav_id=${n.id}','','60')" class="btn btn-primary radius">编辑</a>
+           <a href="javascript:;" onclick="datadel(this,${n.id})" class="btn btn-danger radius"><i class="Hui-iconfont"></i> 删除</a>
+        </td>
+    </tr>
+<?py #endfor?>
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+
+function nav_add(title,url,w,h){
+	layer_show(title,url,w,450);
+}
+function datadel(obj,nav_id){
+
+    layer.confirm('确认要删除吗？',function(index){
+        $.ajax({
+            url: '${handler.reverse_url('site_navigation')}?nav_id='+nav_id,
+            type: 'DELETE',
+            success: function(result) {
+                content = $.parseJSON(result);
+                if(content.status==200){
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                 }else{
+                    layer.msg('删除失败!',{icon:1,time:1000});
+                 }
+            }
+        });
+	});
+}
+</script>

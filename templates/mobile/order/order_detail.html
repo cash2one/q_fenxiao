@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <link rel="shortcut icon" href="http://cdn.qqqg.com/microshop/images/qqqg.ico" />
+    <meta name="description" content="全球抢购">
+    <title> 我的订单-全球抢购</title>
+<?py include('mobile/include/css.html') ?>
+    <link href="http://cdn.qqqg.com/microshop/css/order-detail.min.css" type="text/css" rel="stylesheet"/>
+</head>
+
+<body id="activity-netease-com">
+<header class="g-hd " id="g-hd">
+  <div class=" m-topnav" id="topbar-box">
+  	<div class="m-topnavbar">
+	    <span id="backbtn" class="u-icn18 backbtn"></span>
+	    <span class="tit" id="toptitle">订单详情</span>
+	    <span class="u-menu" id="menu">&nbsp;</span>
+    </div>
+<?py include('mobile/include/headermenu.html') ?>
+  </div>
+</header>
+<!--订单详情-->
+<div class="g-bd">
+<?py if order.status==1:?>
+  <section class="m-orderStatus m-section">
+    <span class="u-icn u-icn-3"></span>
+    <?py if order.pay_status==0:?>
+    <div class="u-status">订单状态：<span class="order-status">等待买家付款</span></div>
+    <div>订单号：<span class="order-number">${order.order_no}</span></div>
+    <div>
+      您的订单已提交，请在
+      <span class="countDown" id="countDown" lefttime="2456">1小时</span>
+      内完成支付，超时订单将自动取消
+    </div>
+    <?py elif order.pay_status==1:?>
+            <?py if order.delivery_status==0:?>
+            <div class="u-status">订单状态：<span class="order-status">买家已付款,等待发货</span></div>
+            <div>订单号：<span class="order-number">${order.order_no}</span></div>
+            <div>正在备货中,请耐心等待</div>
+            <?py elif order.delivery_status==1:?>
+            <div class="u-status">订单状态：<span class="order-status">商家已发货 | 等待买家确认收货</span></div>
+            <div>订单号：<span class="order-number">${order.order_no}</span></div>
+            <div>等待确认收货</div>
+            <?py elif order.delivery_status==2:?>
+            <div class="u-status">订单状态：<span class="order-status">交易成功</span></div>
+            <div>订单号：<span class="order-number">${order.order_no}</span></div>
+            <div>交易成功</div>
+            <?py #endif?>
+    <?py #endif?>
+  </section>
+<?py elif order.status==2:?>
+    <section class="m-orderStatus m-section">
+    <span class="u-icn u-icn-3"></span>
+    <div class="u-status">订单状态：<span class="order-status">交易成功</span></div>
+    <div>订单号：<span class="order-number">${order.order_no}</span></div>
+    <div>交易成功</div>
+  </section>
+<?py elif order.status==3:?>
+  <section class="m-orderStatus m-section">
+    <span class="u-icn u-icn-3"></span>
+    <div class="u-status">订单状态：<span class="order-status">订单关闭</span></div>
+    <div>订单号：<span class="order-number">${order.order_no}</span></div>
+    <div>关闭原因：取消订单</div>
+  </section>
+<?py elif order.status==4:?>
+    <section class="m-orderStatus m-section">
+    <span class="u-icn u-icn-3"></span>
+    <div class="u-status">订单状态：<span class="order-status">订单关闭</span></div>
+    <div>订单号：<span class="order-number">${order.order_no}</span></div>
+    <div><a href="${handler.reverse_url('mobile_item_detail',items[0].show_id)}" class="u-btn2">再次购买</a></div>
+  </section>
+<?py #endif ?>
+  <section class="m-pay m-section">
+    <span class="u-icn2"></span>
+    <div>
+      支付金额：
+      <span class="payment-amount">¥${order.real_amount}</span>
+    </div>
+  </section>
+  <section class="m-consignee m-section">
+    <span class="u-icn1"></span>
+<?py import ujson ?>
+<?py address = ujson.loads(order.recevie_address) ?>
+    <div>
+      <span class="consignee">${address.get('user_name')}</span>
+      <span class="telephone">${address.get('phone')}</span>
+    </div>
+    <div>
+      <span class="address">${address.get('province')} ${address.get('city')} ${address.get('area')} ${address.get('address')}</span>
+    </div>
+  </section>
+
+
+
+  <section class="m-goods m-section">
+    <div class="goods-list"> 发货</div>
+    <article class="m-commodities p-box" id="j-commodities">
+      <div class="list" id="j-commoditiesList">
+<?py payable_amount,total_price = 0,0 ?>
+<?py for item in items:?>
+          <?py if is_bussiness and item.bussiness_price and item.bussiness_price>0:?>
+                    <?py total_price = int(item.buy_nums)*item.bussiness_price ?>
+          <?py else:?>
+                    <?py total_price = int(item.buy_nums)*item.price?>
+          <?py #endif?>
+          <?py payable_amount += total_price ?>
+        <div class="m-orders f-cb">
+          <div class="pic">
+            <a href="${handler.reverse_url('mobile_item_detail',item.show_id)}"  title="${item.title}">
+              <img src="${item.main_pic and item.main_pic.split(';')[0]+'@100w.jpg' or ''}" alt="${item.title}" title="${item.title}"></a>
+          </div>
+          <div class="proinfo">
+            <div class="tit">
+              <a href="#" title="${item.title}">${item.title}</a>
+            </div>
+            <div class="curprice">
+              <span class="symbol">¥</span>
+              ${item.price}
+              <p class="num">X${item.buy_nums}</p>
+            </div>
+          </div>
+        </div>
+<?py #endfor?>
+      </div>
+    </article>
+  </section>
+  <section class="m-settlement m-section">
+    <div class="settlement">结算</div>
+    <div class="stmt-detail">
+      <div>
+        商品总额
+        <span class="total-price">¥${payable_amount}</span>
+      </div>
+      <div class="chargeAndTime">
+        <div>
+          应付总额：
+          <span class="accrued-charge">¥${order.real_amount}</span>
+        </div>
+        <div class="u-orderTime">
+          下单时间：
+          <span class="order-time">${order.gmt_created}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <section class="m-orderbtn">
+<?py if order.status==1:?>
+    <?py if order.pay_status==0:?>
+    <a id="js-buynow" class="u-btn" href="${handler.reverse_url('pay_order',order.order_no)}">立即付款</a>
+    <?py elif order.pay_status==1 and order.delivery_status==1:?>
+    <a id="js-buynow" class="u-btn" href="#">确认收货</a>
+    <?py #endif?>
+<?py #endif?>
+  </section>
+</div>
+<?py include('mobile/include/js.html') ?>
+<?py include('mobile/include/cnzz.html') ?>
+</body>
+</html>
