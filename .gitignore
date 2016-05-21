@@ -1,0 +1,12 @@
+*.pyc
+*.swp
+*.svn
+.idea
+.application.py
+*.xml
+.idea
+*.TTF
+*.ttf
+*.log
+*.xls
+*.tags
